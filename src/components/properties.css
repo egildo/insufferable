@@ -1,0 +1,59 @@
+/*
+ * properties: an inspector's rows, `<fieldset class="properties">` holding a
+ * `<legend>` and `div.property` rows. A row is its mark, its name as a
+ * `<label>`, the value's control, a unit's `<select>` if it has one, and a
+ * reset button, which keeps the last column; the rows share the fieldset's
+ * columns through a subgrid, so the values line up.
+ *
+ * The mark is a checkbox drawn as a dot: ringed when clear, filled when
+ * checked. A checked row is one the app will write as a declaration. It is a
+ * real checkbox, with its own name (`aria-label="Declare font-size"`), so
+ * the user marks and unmarks it.
+ */
+
+fieldset.properties {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  @apply --ins-properties;
+
+  & > legend {
+    padding: 0;
+    @apply --ins-properties-legend;
+  }
+
+  & > div.property {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: center;
+  }
+
+  & > div.property > label {
+    @apply --ins-properties-name;
+  }
+
+  & > div.property > input[type=checkbox] {
+    appearance: none;
+    margin: 0;
+    border-radius: 50%;
+    outline-style: solid;
+    background-image: radial-gradient(circle closest-side, transparent 40%, currentColor calc(40% + 0.5px) 60%, transparent calc(60% + 0.5px));
+    @apply --ins-properties-mark;
+
+    &:checked {
+      background-image: radial-gradient(circle closest-side, currentColor 60%, transparent calc(60% + 0.5px));
+    }
+  }
+
+  & > div.property > :is(input, select):not([type=checkbox]) {
+    min-inline-size: 0;
+  }
+
+  & > div.property > button {
+    grid-column: -2;
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "ins": {
+    "properties": {
+      "$description": "Property rows: fieldset class=properties, each div.property a mark, a name, its value, a unit and a reset. The rows share one grid.",
+      "rowGap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "columnGap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "legend": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.label}"
+        },
+        "paddingBlockEnd": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        }
+      },
+      "name": {
+        "$description": "The property's name, a label in the monospace.",
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{ins.font.family.mono}"
+        }
+      },
+      "mark": {
+        "$description": "The mark: a checkbox drawn as a dot, ringed when clear and filled when checked. Checked, the row becomes a declaration.",
+        "$extensions": {
+          "com.toghen": {
+            "css": {
+              "parts": {
+                "selection": {
+                  "selected": ":checked"
+                }
+              }
+            }
+          }
+        },
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.lineStrong}"
+        },
+        "inlineSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.box}"
+        },
+        "blockSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.box}"
+        },
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "outlineWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        },
+        "outlineOffset": {
+          "$type": "dimension",
+          "$value": "{ins.border.outset}"
+        },
+        "selected": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        },
+        "focus": {
+          "outlineColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        }
+      }
+    }
+  }
+}

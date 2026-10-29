@@ -1,0 +1,93 @@
+{
+  "ins": {
+    "status": {
+      "$description": "A status: small class=status with ok, warn, danger or off, drawn as a dot whose word is read and not shown. Each status has its own shape as well as its colour.",
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "parts": {
+              "variant": {
+                "ok": ".ok",
+                "warn": ".warn",
+                "danger": ".danger",
+                "off": ".off"
+              }
+            }
+          }
+        }
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.text.2}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.text.2}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.dot}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.dot}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "ok": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.ok}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.ok}"
+        }
+      },
+      "warn": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.warn}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.warn}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.space.0}"
+        }
+      },
+      "danger": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.danger}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.danger}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.space.0}"
+        }
+      },
+      "off": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.lineStrong}"
+        }
+      }
+    }
+  }
+}

@@ -59,6 +59,14 @@
         "$value": "{palette.red.900}",
         "$description": "A ground tinted with the danger: a callout that warns. Every text and link on it keeps 4.5:1"
       },
+      "ok": {
+        "$value": "{palette.green.300}",
+        "$description": "A status that is in order: a file synced, a line that went well. 4.5:1 on the page"
+      },
+      "warn": {
+        "$value": "{palette.amber.300}",
+        "$description": "A status that needs a look: a change not yet saved, a font that was substituted. 4.5:1 on the page"
+      },
       "clear": {
         "$value": {
           "colorSpace": "srgb",

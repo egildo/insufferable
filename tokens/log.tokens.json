@@ -1,0 +1,29 @@
+{
+  "ins": {
+    "log": {
+      "$description": "A log: ol class=log, each line a time, a status and what happened, in the small style.",
+      "rowGap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "columnGap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.small}"
+      },
+      "time": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        },
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{ins.font.family.mono}"
+        }
+      }
+    }
+  }
+}

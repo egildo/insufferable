@@ -2,13 +2,18 @@
 // ins.button in tokens/button.tokens.json, and ins.iconButton beside it for the square.
 // Built as Button is: the root is the outline, the face the button. The face is as wide as it is tall, its padding
 // none, and it holds the glyph in the icon's text style, coloured by the button's group so it follows the variant.
+// The glyph is a property, the icon's character in the font: search by default.
 component IconButton tokens="{ins.button}"
 description "A button that holds only an icon: square, named by its label for assistive technology."
+
+properties {
+    TEXT Glyph default="\u{eb1c}"
+}
 
 FRAME IconButton layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.1}" paddingRight="{ins.space.1}" paddingBottom="{ins.space.1}" paddingLeft="{ins.space.1}" itemSpacing="{ins.space.0}" strokeWeight="{ins.button.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.1}" {
     fills
     strokes "{ins.button.outlineColor}"
     FRAME Face tokens="{ins.button}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.iconButton.inlineSize}" height="{ins.size.control}" paddingLeft="{ins.iconButton.paddingInline}" paddingRight="{ins.iconButton.paddingInline}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER strokeAlign=INSIDE {
-        TEXT Glyph tokens="{ins.button}" textStyle="{ins.icon.font}" characters="" textAutoResize=WIDTH_AND_HEIGHT
+        TEXT Glyph tokens="{ins.button}" textStyle="{ins.icon.font}" characters=(property)Glyph textAutoResize=WIDTH_AND_HEIGHT
     }
 }

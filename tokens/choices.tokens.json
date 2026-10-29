@@ -1,0 +1,101 @@
+{
+  "ins": {
+    "choices": {
+      "$description": "Choice rows: fieldset class=choices holding labels, each a radio button, a title, a description in small and a count. The checked row sits on the accent's tint.",
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "option": {
+        "$description": "One row: a label holding its radio button. Its states are its input's.",
+        "$extensions": {
+          "com.toghen": {
+            "css": {
+              "parts": {
+                "selection": {
+                  "selected": ":has(> input:checked)"
+                },
+                "availability": {
+                  "disabled": ":has(> input:disabled)"
+                }
+              }
+            }
+          }
+        },
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.radius.1}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "columnGap": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.body}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          }
+        },
+        "selected": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentTint}"
+          },
+          "hover": {
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.accentTint}"
+            }
+          },
+          "disabled": {
+            "color": {
+              "$type": "color",
+              "$value": "{ins.color.text.3}"
+            },
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.line}"
+            }
+          }
+        },
+        "disabled": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.3}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        },
+        "description": {
+          "$description": "The row's small: what the choice reaches, often a selector in code.",
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.2}"
+          }
+        }
+      }
+    }
+  }
+}

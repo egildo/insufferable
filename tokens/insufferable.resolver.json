@@ -73,6 +73,18 @@
         },
         {
           "$ref": "chips.tokens.json"
+        },
+        {
+          "$ref": "choices.tokens.json"
+        },
+        {
+          "$ref": "properties.tokens.json"
+        },
+        {
+          "$ref": "status.tokens.json"
+        },
+        {
+          "$ref": "log.tokens.json"
         }
       ]
     }

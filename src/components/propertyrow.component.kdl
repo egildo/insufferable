@@ -1,0 +1,43 @@
+// PropertyRow: one row of an inspector, fieldset class=properties. Source: ins.properties in
+// tokens/properties.tokens.json. Its axis comes from the mark's parts: selection, whether the row is marked.
+// The mark is a checkbox drawn as a dot: a ring when clear, filled when checked. The name is a label; the value and
+// the unit are the field's face; the reset is an IconButton, plain, with Tabler's restore.
+// Not drawn: the name in the monospace, which no text style holds; the rows' shared columns, a subgrid in the
+// stylesheet, so the value's width is the design's here.
+component PropertyRow tokens="{ins.properties.mark}"
+description "One property of an inspector: its mark, its name, its value and unit, and a reset."
+
+properties {
+    TEXT Name default="font-size"
+    TEXT Value default="11"
+    TEXT Unit default="pt"
+}
+
+guard marked { is (input)selection selected }
+
+FRAME PropertyRow layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG itemSpacing="{ins.properties.columnGap}" counterAxisAlignItems=CENTER {
+    FRAME Mark layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.properties.mark.inlineSize}" height="{ins.properties.mark.blockSize}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER {
+        fills
+        FRAME Dot layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.size.dot}" height="{ins.size.dot}" cornerRadius="{ins.radius.round}" strokeWeight="{ins.border.2}" strokeAlign=INSIDE {
+            fills
+            strokes "{ins.properties.mark.color}"
+            when marked { fills "{ins.properties.mark.color}"; }
+        }
+    }
+    TEXT Name characters=(property)Name textStyle="{ins.typography.small}" layoutSizingHorizontal=FIXED width=(literal)96 textAutoResize=HEIGHT {
+        fills "{ins.properties.name.color}"
+    }
+    FRAME ValueFace tokens="{ins.field}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)160 minHeight="{ins.size.control}" counterAxisAlignItems=CENTER strokeAlign=INSIDE {
+        TEXT Value characters=(property)Value textStyle="{ins.field.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.field.color}"
+        }
+    }
+    FRAME UnitFace tokens="{ins.field}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG minHeight="{ins.size.control}" counterAxisAlignItems=CENTER strokeAlign=INSIDE {
+        TEXT Unit characters=(property)Unit textStyle="{ins.field.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.field.color}"
+        }
+    }
+    INSTANCE Reset component=IconButton {
+        set variant=plain Glyph="\u{fafd}"
+    }
+}

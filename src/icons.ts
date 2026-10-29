@@ -6,11 +6,13 @@
 export const icons = [
   'check',
   'chevron-down',
+  'chevron-right',
   'heart',
   'help-circle',
   'home',
   'info-circle',
   'mail',
+  'restore',
   'search',
   'settings',
   'x',

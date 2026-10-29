@@ -1,0 +1,24 @@
+/*
+ * status: `<small class="status ok">Synced</small>`, with `ok`, `warn`,
+ * `danger` or `off`. A dot: its word is read by assistive technology and not
+ * shown, so a page that wants the word seen writes it beside. Each status has
+ * its own shape as well as its colour, since colour alone says nothing to
+ * some readers: a dot for ok, a triangle for warn, a square for danger, a
+ * ring for off.
+ */
+
+small.status {
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-indent: 100%;
+  border-style: solid;
+  @apply --ins-status;
+
+  &.warn {
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+}

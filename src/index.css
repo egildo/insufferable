@@ -36,3 +36,7 @@
 @import './components/count.css' layer(ins.components);
 @import './components/tag.css' layer(ins.components);
 @import './components/chips.css' layer(ins.components);
+@import './components/choices.css' layer(ins.components);
+@import './components/properties.css' layer(ins.components);
+@import './components/status.css' layer(ins.components);
+@import './components/log.css' layer(ins.components);

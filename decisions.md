@@ -565,3 +565,29 @@ The studio file draws an application: a desk of panes, docks, pill tabs with cou
 ### What was checked
 
 `toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, light and dark: the icon buttons 36px square, the pressed one in the accent; the counts at 400 with tabular figures beside 500 labels; the pill tabs with the selected one at 5:1 on its tint in light and in dark, the disabled one grey; the tags in capitals at 12px; the chip list removing a value through `--remove` heard at the root, the focus moving to the next button, the remove icon 4.4:1 on the chip in light and 5.3:1 in dark. The demo page uses all five. In FigCraft, rendered: the pill tab's eight members, the icon button's grid, the tag in capitals, the chip with its ×.
+
+## The rows
+
+> **Ruled 29 October 2026,** as the second batch of the coverage, in two halves: the rows with no script (choice rows, property rows, status, log) built the same day, the tree to follow. Their specs are in specs.md. The references are now a principle: the specifications, MDN and the WAI-ARIA Authoring Practices Guide.
+
+### The ruling
+
+- **Choice rows:** `fieldset.choices`, labels holding radio buttons, as the segmented control is built.
+- **Property rows:** `fieldset.properties` with `div.property` rows on a subgrid. The studio's "marked" dot is a checkbox, since its own words say only the marked rows become declarations: a choice the user makes, with a state the platform already has.
+- **Status:** `small.status` with a kind, a dot whose word is read and not shown.
+- **Log:** `ol.log`, a time, a status and the line.
+- **File rows** are columns, so they are a table, which exists. The group header moved to the shell's batch, as the pane's heading.
+
+### What the build found
+
+- **Two new hues.** The statuses needed a green and an amber, so the palette has five families. gosfuig made both from the hue alone (150 and 70); the grey, the blue and the red are unchanged step for step. Its contract check passes both, and still fails the blue and the red at 700 on 200, as before. The roles: `ok` and `warn`, `500` in light and `300` in dark, each at least 4.5:1 on the page.
+- **Warn needed its own shape.** As proposed, ok and warn were both dots told apart by colour alone, which WCAG's use of colour refuses. Warn is a triangle, a clip path in the stylesheet.
+- **The status is drawn by its own ground and ring tokens,** not by the text colour, so the FigCraft set binds them and its kinds fold into modes.
+- **The status's kinds join the shared variant collection.** `ok`, `warn` and `off` are values of the status's own variant axis, and Toghen folds every variant into one collection, so the button's and the callout's variables gained three modes holding their rest values. Nothing draws differently. A status axis of its own would need its own name for `danger`, since a key cannot be a value of two axes.
+- **Two icons:** Tabler's `restore` for the reset, and `chevron-right` for the tree to come.
+- **The IconButton set gained a glyph property,** so an instance can show any icon; the property row's reset is one.
+- **The stylesheet is 103.7 KB,** 15.7 KB more for the four parts and the two colour roles.
+
+### What was checked
+
+`toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, light and dark: the choice rows with the checked one on the tint (its description 4.8:1 in light, 6:1 in dark), the disabled one grey; the property rows lined up on one grid, the mark a ring at 3.5:1 and a filled dot in the accent, the resets disabled where the value is unchanged; the four statuses as a dot, a triangle, a square and a ring, each above 3:1 in light and in dark; the log's times and dots lined up. In FigCraft, rendered: ChoiceRow's eight members with a radio button instance, PropertyRow marked and clear, Status's five kinds, LogLine. A second sync plans nothing but the standing style updates and the tag's patch. The library's variables were compared before and after the sync: no value changed except the variant collection's three new modes.

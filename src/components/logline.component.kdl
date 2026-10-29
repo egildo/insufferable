@@ -1,0 +1,22 @@
+// LogLine: one line of a log, ol class=log: a time, a status and what happened. Source: ins.log in
+// tokens/log.tokens.json. The status is an instance of Status, ok by default.
+// Not drawn: the time in the monospace, which no text style holds; the lines' shared columns, a subgrid.
+component LogLine tokens="{ins.log}"
+description "One line of a log: when, how it went, and what happened."
+
+properties {
+    TEXT Time default="10:42"
+    TEXT Text default="Printed 2 pages · Caster · 1.3 s"
+}
+
+FRAME LogLine layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG itemSpacing="{ins.log.columnGap}" counterAxisAlignItems=CENTER {
+    TEXT Time characters=(property)Time textStyle="{ins.log.font}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.log.time.color}"
+    }
+    INSTANCE Status component=Status {
+        set variant=ok
+    }
+    TEXT Text characters=(property)Text textStyle="{ins.log.font}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.page.color}"
+    }
+}

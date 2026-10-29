@@ -1,0 +1,40 @@
+/*
+ * choices: a radio group drawn as rows, `<fieldset class="choices">` holding
+ * `<label>`s, each its `<input type="radio">`, a title in a `<span>`, a
+ * description in a `<small>` and, at the end, a count. The platform keeps one
+ * checked, moves it with the arrows and gives the group one tab stop; the
+ * checked row sits on the accent's tint. The legend names the group.
+ */
+
+fieldset.choices {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  @apply --ins-choices;
+
+  & > label {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'mark title count' 'mark description count';
+    align-items: center;
+    @apply --ins-choices-option;
+  }
+
+  & > label > input {
+    grid-area: mark;
+  }
+
+  & > label > span {
+    grid-area: title;
+  }
+
+  & > label > small {
+    grid-area: description;
+    @apply --ins-choices-option-description;
+  }
+
+  & > label > data {
+    grid-area: count;
+  }
+}

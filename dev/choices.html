@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · choices</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+</style>
+
+<h1>Choice rows</h1>
+<p>A radio group drawn as rows, <code>&lt;fieldset class="choices"&gt;</code>. The platform keeps one checked and moves it with the arrows.</p>
+
+<form>
+  <fieldset class="choices">
+    <legend>Amend</legend>
+    <label><input type="radio" name="scope" value="this" checked> <span>This paragraph</span> <small><code>#riepilogo-s1-p2</code></small> <data value="1">1</data></label>
+    <label><input type="radio" name="scope" value="subsection"> <span>Paragraphs in this subsection, by name</span> <small><code>#riepilogo-s1 p</code></small> <data value="4">4</data></label>
+    <label><input type="radio" name="scope" value="place"> <span>Paragraphs in this subsection, by place</span> <small><code>#riepilogo &gt; section:nth-of-type(1) p</code></small> <data value="4">4</data></label>
+    <label><input type="radio" name="scope" value="section"> <span>Paragraphs in this section, by name</span> <small><code>#riepilogo p</code></small> <data value="7">7</data></label>
+    <label><input type="radio" name="scope" value="everywhere" disabled> <span>Paragraphs like this, everywhere</span> <small><code>section &gt; p</code></small> <data value="9">9</data></label>
+    <label><input type="radio" name="scope" value="document"> <span>The whole document</span> <small><code>body</code></small> <data value="2">2</data></label>
+  </fieldset>
+</form>
+</html>

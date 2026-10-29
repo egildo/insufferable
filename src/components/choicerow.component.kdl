@@ -1,0 +1,27 @@
+// ChoiceRow: one row of a choice list, fieldset class=choices, a label holding its radio button. Source:
+// ins.choices.option in tokens/choices.tokens.json. Its axes come from its parts: selection (checked), pointer and
+// availability, read through its input.
+// The radio button is an instance of Checkbox, set to the row's own selection; the title and the count are in the
+// body style, the description in the small style, in the second grey.
+// Not drawn: the description in code, which takes the monospace in the stylesheet.
+component ChoiceRow tokens="{ins.choices.option}"
+description "One choice drawn as a row: a radio button, a title, what it reaches and a count. Checked, the accent's tint."
+
+properties {
+    TEXT Title default="This paragraph"
+    TEXT Description default="#riepilogo-s1-p2"
+    TEXT Count default="1"
+}
+
+FRAME ChoiceRow layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)480 itemSpacing="{ins.choices.option.columnGap}" counterAxisAlignItems=CENTER {
+    INSTANCE Radio component=Checkbox {
+        set type=radio selection=(input)selection
+    }
+    FRAME Text layoutMode=VERTICAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        TEXT Title tokens="{ins.choices.option}" characters=(property)Title textAutoResize=HEIGHT layoutSizingHorizontal=FILL
+        TEXT Description characters=(property)Description textStyle="{ins.typography.small}" textAutoResize=HEIGHT layoutSizingHorizontal=FILL {
+            fills "{ins.choices.option.description.color}"
+        }
+    }
+    TEXT Count tokens="{ins.choices.option}" characters=(property)Count textAutoResize=WIDTH_AND_HEIGHT
+}

@@ -119,6 +119,13 @@
           "unit": "rem"
         },
         "$description": "A readable line: the width of a dialog"
+      },
+      "dot": {
+        "$value": {
+          "value": 0.5,
+          "unit": "rem"
+        },
+        "$description": "A status dot, and the mark of a property row"
       }
     },
     "shadow": {

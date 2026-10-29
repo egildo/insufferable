@@ -1,0 +1,31 @@
+/*
+ * log: `<ol class="log">`, the lines in the order they happened. Each line is
+ * a `<time datetime>`, a status and what happened, on one grid so the times
+ * and the dots line up.
+ */
+
+ol.log {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: baseline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @apply --ins-log;
+
+  & > li {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: baseline;
+  }
+
+  & > li > time {
+    font-variant-numeric: tabular-nums;
+    @apply --ins-log-time;
+  }
+
+  & > li > small.status {
+    align-self: center;
+  }
+}

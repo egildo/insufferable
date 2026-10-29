@@ -1,0 +1,9 @@
+// Status: a status dot, small class=status, in its kinds. Source: ins.status in tokens/status.tokens.json.
+// Its axis comes from its parts: the variant, rest (grey), ok, warn, danger or off. The group binds the dot's fill,
+// its ring, the ring's width and the corner; off is the ring alone, danger square.
+// Not drawn: warn's triangle, a clip path in the stylesheet, so warn draws as a square here; the word, which is read
+// and not shown.
+component Status tokens="{ins.status}"
+description "A status as a dot: ok, warn, danger or off, each its own colour and shape. Its word is read, not shown."
+
+FRAME Status layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.status.inlineSize}" height="{ins.status.blockSize}" strokeAlign=INSIDE

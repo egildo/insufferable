@@ -24,6 +24,7 @@ Fifteen elements are built: tabs, disclosure, icon, link, divider, table, callou
 8. **Light DOM.** An Invoker command's `commandfor` finds its target by id in the same tree, so a control inside a shadow root could not name an element of the app. The cascade reaches every element for the same reason.
 9. **The elements are written in TypeScript,** with no framework.
 10. **The FigCraft datasheets are built with the design system,** from the same tokens and components, as `sibardoc-prototype` builds its library: a library of the tokens and the elements first, then a datasheet per element in the library's own look, its prose the element's section here. Each element has a component file beside it (`*.component.kdl`, Toghen's format), and `pnpm figcraft` syncs them with the tokens into `figcraft/insufferable.figcraft` through `@toghen/figma`, with no app open. The datasheets are not built yet: see [the ruling](./decisions.md#the-figcraft-datasheets).
+11. **The references are the specifications, MDN and the APG.** An element's markup, roles and keyboard follow the WHATWG and W3C specifications (HTML, CSS, WAI-ARIA, the design token format), [MDN](https://developer.mozilla.org/) for how the platform behaves today, and the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) for a widget's pattern. A design system's own habit is prior art, never the reference.
 
 ## The element contract
 
@@ -64,7 +65,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -102,7 +103,7 @@ A group may spell a value its own way, in its own `com.toghen` extension: a labe
 
 ### Colours
 
-The colours are in two tiers. **The palette**, `palette` in `tokens/palette.tokens.json`, is three families of twelve steps, `25` to `950`, written by [gosfuig](https://codeberg.org/Toghen/gosfuig) from `tokens/palette.config.json` with `pnpm palette`, in OKLCH with a hex fallback. It is never edited by hand: change the config and run the command. The grey has no chroma and a curve tuned to land on the greys below; the blue and the red are pinned at `600` to the accent and the danger.
+The colours are in two tiers. **The palette**, `palette` in `tokens/palette.tokens.json`, is five families of twelve steps, `25` to `950`, written by [gosfuig](https://codeberg.org/Toghen/gosfuig) from `tokens/palette.config.json` with `pnpm palette`, in OKLCH with a hex fallback. It is never edited by hand: change the config and run the command. The grey has no chroma and a curve tuned to land on the greys below; the blue and the red are pinned at `600` to the accent and the danger; the green and the amber, for the statuses, are the generator's own.
 
 **The roles**, `ins.color`, are what the elements read. They live in the `theme` modifier, one whole file per context: `tokens/theme.light.tokens.json`, the default, and `tokens/theme.dark.tokens.json`. Each role refers to a step in both:
 
@@ -118,6 +119,7 @@ The colours are in two tiers. **The palette**, `palette` in `tokens/palette.toke
 | `ins.color.onAccent` | white | `gray.950` | Text on the accent |
 | `ins.color.danger` | `red.600` | `red.400` | An invalid field |
 | `ins.color.dangerTint` | `red.25` | `red.900` | A ground tinted with the danger: a callout that warns |
+| `ins.color.ok` · `warn` | `green.500` · `amber.500` | `green.300` · `amber.300` | A status in order, a status that needs a look: 4.5:1 on the page |
 | `ins.color.raised` | white | `gray.900` | What sits above the page: a menu, a dialog |
 | `ins.color.shadow` | black at 12% | clear | A raised surface's shadow: in dark the lighter ground sets it apart |
 | `ins.color.shade` | black at 40% | black at 60% | What a modal dialog lays over the page |
@@ -482,6 +484,67 @@ A list of removable values: `<ul class="chips">`, each item its text and a butto
 - **The chip** is a pill on the fill with the line round it, its text in the small style; the button is a circle the size of the icon, grey, the line's grey under the pointer.
 
 Not built: a chip that is itself a choice, a chip list the keyboard moves through with the arrows.
+
+### Choice rows
+
+A radio group drawn as rows: `<fieldset class="choices">` holding `<label>`s, each its `<input type="radio">`, a title in a `<span>`, what the choice reaches in a `<small>`, and a count. It is the segmented control's pattern, rows instead of segments.
+
+```html
+<fieldset class="choices">
+  <legend>Amend</legend>
+  <label><input type="radio" name="scope" checked> <span>This paragraph</span>
+    <small><code>#riepilogo-s1-p2</code></small> <data value="1">1</data></label>
+</fieldset>
+```
+
+- **The platform does the choice:** one checked, the arrows move it, one tab stop, the form's value.
+- **The row is the label,** so a click anywhere on it chooses. Its states are its input's, read with `:has(> input:checked)` and `:has(> input:disabled)`: checked, the accent's tint (the description on it 4.8:1 in light, 6:1 in dark); disabled, grey; checked and disabled, the line's grey.
+- **The layout** is a grid on the label: the radio button, the title over the description, the count at the end.
+
+### Property rows
+
+An inspector: `<fieldset class="properties">` holding a `<legend>` and `div.property` rows. A row is its mark, its name as a `<label>`, the value's control, a unit's `<select>` if it has one, and a reset button.
+
+```html
+<fieldset class="properties">
+  <legend>Type</legend>
+  <div class="property">
+    <input type="checkbox" aria-label="Declare font-size" checked>
+    <label for="size">font-size</label>
+    <input id="size" inputmode="decimal" value="11">
+    <select aria-label="Unit of font-size"><option>pt</option></select>
+    <button type="button" class="plain" aria-label="Reset font-size"><ins-icon name="restore"></ins-icon></button>
+  </div>
+</fieldset>
+```
+
+- **The mark is a checkbox,** drawn as a dot: a ring when clear, filled in the accent when checked. A checked row is one the app will write as a declaration, so the mark is a choice the user makes and undoes, with its own name. The ring is 3.5:1 against the page.
+- **The rows share one grid** through `subgrid`, so the names, values and units line up; the reset keeps the last column, so a row with no unit leaves its cell empty.
+- **The name is in the monospace,** as a property is written.
+- **The reset is an icon button,** Tabler's `restore`, disabled while the value is the one it would return to. The app enables it.
+- **The value's controls are the fields,** at their own size until the density is set.
+
+### Status
+
+A status: `<small class="status ok">Synced</small>`, with `ok`, `warn`, `danger` or `off`. A dot: its word is read by assistive technology and not shown, so a page that wants the word seen writes it beside.
+
+- **Each status has its own shape as well as its colour,** since colour alone says nothing to some readers (WCAG's use of colour): a dot for `ok`, a triangle for `warn`, a square for `danger`, a ring for `off`. Without a kind, a grey dot.
+- **The colours** are the roles `ok` and `warn`, green and amber, and `danger`; `off` is the strong line's grey. Each is at least 3:1 against the page, in light and in dark, as a graphic must be.
+
+### Log
+
+The lines of something that happened, in order: `<ol class="log">`, each line a `<time datetime>`, a status and what happened, in the small style.
+
+```html
+<ol class="log">
+  <li><time datetime="10:42">10:42</time> <small class="status ok">Done</small> <span>Printed 2 pages</span></li>
+</ol>
+```
+
+- **The lines share one grid,** so the times and the dots line up; the times are in the monospace, with tabular figures.
+- **An ordered list,** since the order is the meaning.
+
+Not built: a log that follows new lines as they come (`role="log"` on a live region), which is the app's to add.
 
 ## Commands
 

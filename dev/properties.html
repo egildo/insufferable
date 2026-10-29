@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · properties</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+</style>
+
+<h1>Property rows</h1>
+<p>An inspector, <code>&lt;fieldset class="properties"&gt;</code>. The dot is a checkbox: a marked row becomes a declaration. A reset is disabled while its value is the inherited one.</p>
+
+<form>
+  <fieldset class="properties">
+    <legend>Type</legend>
+    <div class="property">
+      <input type="checkbox" aria-label="Declare font-family">
+      <label for="family">font-family</label>
+      <select id="family"><option>Source Sans 3</option><option>Archivo</option></select>
+      <button type="button" class="plain" aria-label="Reset font-family" disabled><ins-icon name="restore"></ins-icon></button>
+    </div>
+    <div class="property">
+      <input type="checkbox" aria-label="Declare font-size" checked>
+      <label for="size">font-size</label>
+      <input id="size" inputmode="decimal" value="11">
+      <select aria-label="Unit of font-size"><option>pt</option><option>px</option><option>rem</option></select>
+      <button type="button" class="plain" aria-label="Reset font-size"><ins-icon name="restore"></ins-icon></button>
+    </div>
+    <div class="property">
+      <input type="checkbox" aria-label="Declare line-height">
+      <label for="leading">line-height</label>
+      <input id="leading" inputmode="decimal" value="14.63">
+      <select aria-label="Unit of line-height"><option>pt</option><option>px</option></select>
+      <button type="button" class="plain" aria-label="Reset line-height" disabled><ins-icon name="restore"></ins-icon></button>
+    </div>
+    <div class="property">
+      <input type="checkbox" aria-label="Declare font-weight" checked>
+      <label for="weight">font-weight</label>
+      <select id="weight"><option>400</option><option selected>700</option></select>
+      <button type="button" class="plain" aria-label="Reset font-weight"><ins-icon name="restore"></ins-icon></button>
+    </div>
+  </fieldset>
+</form>
+</html>
