@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · tabs</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/tabs.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  [role='tabpanel'] { padding-block: 1rem; }
+  pre { background: #f4f4f4; padding: 0.5rem; min-height: 4lh; }
+</style>
+
+<h2>Uncontrolled</h2>
+<p>No app state: the element applies its own default.</p>
+<ins-tabs aria-label="Fruit">
+  <button aria-controls="apple">Apple</button>
+  <button aria-controls="pear">Pear</button>
+  <button aria-controls="fig" disabled>Fig</button>
+  <button aria-controls="plum" aria-disabled="true">Plum</button>
+  <button aria-controls="quince">Quince</button>
+</ins-tabs>
+<div id="apple">An apple.</div>
+<div id="pear">A pear.</div>
+<div id="fig">A fig.</div>
+<div id="plum">A plum.</div>
+<div id="quince">A quince.</div>
+
+<h2>Controlled</h2>
+<p>The app owns the state: it cancels the command and writes <code>aria-selected</code> itself, refusing Lichen.</p>
+<ins-tabs id="moss" aria-label="Moss">
+  <button aria-controls="peat" value="peat">Peat</button>
+  <button aria-controls="star" value="star">Star</button>
+  <button aria-controls="lichen" value="lichen">Lichen</button>
+</ins-tabs>
+<div id="peat">Peat moss.</div>
+<div id="star">Star moss.</div>
+<div id="lichen">Not a moss.</div>
+
+<h2>Every command, heard at the root</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  const log = document.getElementById('log');
+  let state = { moss: 'peat' };
+
+  const render = () => {
+    for (const tab of document.querySelectorAll('#moss > button')) {
+      tab.setAttribute('aria-selected', String(tab.value === state.moss));
+    }
+  };
+
+  const update = (state, command, source) =>
+    command === '--select' && source.value !== 'lichen' ? { ...state, moss: source.value } : state;
+
+  document.addEventListener('command', (event) => {
+    log.textContent += `${event.command} from "${event.source.textContent}" to #${event.target.id}\n`;
+    if (event.target.id !== 'moss') return;
+    event.preventDefault();
+    state = update(state, event.command, event.source);
+    render();
+  }, { capture: true });
+
+  render();
+</script>
+</html>

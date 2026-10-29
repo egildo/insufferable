@@ -1,0 +1,22 @@
+// Switch: a checkbox with role=switch, in its states. Source: ins.switch in tokens/choice.tokens.json.
+// Its axes come from the switch's parts: selection (checked), focus and availability.
+// The track's size is the stylesheet's content box, and its border is drawn outside it, as CSS draws a border
+// outside the content. The thumb is 75% of the track's height, as the stylesheet's gradient draws it: 12px, 2px from
+// each edge, which no token names. Checked, it moves to the end.
+// The ring is the outline, as the button's is, and so sits 1px nearer the border than the stylesheet's 2px.
+// Not drawn: right to left, where the stylesheet mirrors it.
+component Switch tokens="{ins.switch}"
+description "A checkbox with role=switch: a thumb that moves to the end of its track when checked."
+
+guard selected
+
+FRAME Switch layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.1}" paddingRight="{ins.space.1}" paddingBottom="{ins.space.1}" paddingLeft="{ins.space.1}" strokeWeight="{ins.switch.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.round}" {
+    fills
+    strokes "{ins.switch.outlineColor}"
+    FRAME Track tokens="{ins.switch}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.size.track}" height="{ins.size.box}" primaryAxisAlignItems=MIN counterAxisAlignItems=CENTER paddingTop=(literal)2 paddingRight=(literal)2 paddingBottom=(literal)2 paddingLeft=(literal)2 strokeAlign=OUTSIDE {
+        when selected primaryAxisAlignItems=MAX
+        FRAME Thumb layoutMode=NONE width=(literal)12 height=(literal)12 cornerRadius="{ins.radius.round}" {
+            fills "{ins.switch.color}"
+        }
+    }
+}

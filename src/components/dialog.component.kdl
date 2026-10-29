@@ -1,0 +1,29 @@
+// Dialog: the native dialog, open. Source: ins.dialog in tokens/dialog.tokens.json.
+// It has no parts, so one member. The group binds the fill, the border, the radius, the padding and the gap; its
+// width is the measure. Its title and text are in the body style: the base layer styles no h2 yet.
+// Not drawn: the shade a modal dialog lays over the page.
+component Dialog tokens="{ins.dialog}"
+description "A native dialog: opened by a button's command, closed by a button or Escape."
+
+properties {
+    TEXT Title default="Discard the draft?"
+    TEXT Text default="The quince recipe you are writing will be lost."
+}
+
+FRAME Dialog layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.size.measure}" strokeAlign=INSIDE {
+    TEXT Title characters=(property)Title textStyle="{ins.page.font}" layoutSizingHorizontal=FILL textAutoResize=HEIGHT {
+        fills "{ins.dialog.color}"
+    }
+    TEXT Text characters=(property)Text textStyle="{ins.page.font}" layoutSizingHorizontal=FILL textAutoResize=HEIGHT {
+        fills "{ins.dialog.color}"
+    }
+    FRAME Actions layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG primaryAxisAlignItems=MAX itemSpacing="{ins.space.2}" {
+        fills
+        INSTANCE Keep component=Button {
+            set variant=plain Label="Keep it"
+        }
+        INSTANCE Discard component=Button {
+            set variant=solid Label="Discard"
+        }
+    }
+}

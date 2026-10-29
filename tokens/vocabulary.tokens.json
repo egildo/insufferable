@@ -1,0 +1,37 @@
+{
+  "ins": {
+    "$description": "insufferable. Primitives and semantic tokens first, then one group per component, keyed by CSS property; a variant or a state of a component is a subgroup named after its value.",
+    "$extensions": {
+      "com.toghen": {
+        "css": {
+          "parts": {
+            "variant": {
+              "solid": "[data-variant=solid]",
+              "plain": "[data-variant=plain]",
+              "danger": "[data-variant=danger]"
+            },
+            "selection": {
+              "selected": ":is([aria-selected=true], :checked)",
+              "pressed": "[aria-pressed=true]"
+            },
+            "disclosure": {
+              "open": "[open]"
+            },
+            "validity": {
+              "invalid": ":is(:user-invalid, [aria-invalid=true])"
+            },
+            "pointer": {
+              "hover": ":hover"
+            },
+            "focus": {
+              "focus": ":focus-visible"
+            },
+            "availability": {
+              "disabled": ":is(:disabled, [aria-disabled=true])"
+            }
+          }
+        }
+      }
+    }
+  }
+}

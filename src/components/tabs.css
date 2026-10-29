@@ -1,0 +1,20 @@
+/*
+ * tabs: `<ins-tabs>` holding `<button>`s. Selected is `aria-selected="true"`;
+ * a tab that cannot be chosen is `disabled` or `aria-disabled="true"`. The
+ * selected tab's line sits on the strip's own line.
+ */
+
+ins-tabs {
+  display: flex;
+  border-bottom-style: solid;
+  @apply --ins-tabs;
+}
+
+ins-tabs > button {
+  margin: 0 0 calc(-1 * t(insufferable.ins.border.1));
+  border: 0;
+  border-bottom-style: solid;
+  outline-style: solid;
+  white-space: nowrap;
+  @apply --ins-tabs-tab;
+}

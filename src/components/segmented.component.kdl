@@ -1,0 +1,18 @@
+// Segmented: a radio group drawn as joined segments, of SegmentedOption instances. Source: ins.segmented in
+// tokens/segmented.tokens.json. Its axis comes from the group's parts: focus, its checked input's, drawn around it.
+// The root is the outline, drawn outside the group as the button's is; the face inside it is the fieldset, which clips
+// the segments to its corners.
+// Not drawn: the legend, which the stylesheet hides.
+component Segmented tokens="{ins.segmented}"
+description "A radio group drawn as joined segments: one choice of a few, the checked one in the accent."
+
+FRAME Segmented layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.1}" paddingRight="{ins.space.1}" paddingBottom="{ins.space.1}" paddingLeft="{ins.space.1}" itemSpacing="{ins.space.0}" strokeWeight="{ins.segmented.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.1}" {
+    fills
+    strokes "{ins.segmented.outlineColor}"
+    FRAME Face tokens="{ins.segmented}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG strokeAlign=INSIDE clipsContent=#true {
+        fills
+        INSTANCE List component=SegmentedOption { set selection=selected Label="List"; }
+        INSTANCE Grid component=SegmentedOption { set Label="Grid"; }
+        INSTANCE Map component=SegmentedOption { set availability=disabled Label="Map"; }
+    }
+}

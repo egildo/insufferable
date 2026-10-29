@@ -1,0 +1,39 @@
+/*
+ * field: the native `<input>` that takes text, `<textarea>` and `<select>`, and
+ * the `<label>` that names them. A label holding its field stacks above it.
+ * Invalid is the platform's `:user-invalid`, which waits until the person has
+ * changed the field, or `aria-invalid="true"` set by the app.
+ *
+ * A select takes the platform's customizable look where the browser has it
+ * (`appearance: base-select`); elsewhere it stays the browser's own.
+ */
+
+:where(input:not([type=checkbox], [type=radio], [type=range], [type=color], [type=file], [type=hidden], [type=button], [type=submit], [type=reset], [type=image])),
+textarea,
+select {
+  box-sizing: border-box;
+  margin: 0;
+  border-style: solid;
+  outline-style: solid;
+  @apply --ins-field;
+}
+
+::placeholder {
+  @apply --ins-field-placeholder;
+}
+
+@supports (appearance: base-select) {
+  select,
+  ::picker(select) {
+    appearance: base-select;
+  }
+}
+
+label {
+  @apply --ins-label;
+}
+
+label:has(> :is(textarea, select, input:not([type=checkbox], [type=radio]))) {
+  display: grid;
+  justify-items: start;
+}

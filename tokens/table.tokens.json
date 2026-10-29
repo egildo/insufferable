@@ -1,0 +1,61 @@
+{
+  "ins": {
+    "table": {
+      "$description": "A native table: rows divided by a line, the header cells quieter, in the label style, over a stronger line.",
+      "cell": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "borderBottomColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        },
+        "borderBottomWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.1}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.body}"
+        }
+      },
+      "header": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        },
+        "borderBottomColor": {
+          "$type": "color",
+          "$value": "{ins.color.lineStrong}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.label}"
+        }
+      },
+      "caption": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.label}"
+        }
+      }
+    }
+  }
+}

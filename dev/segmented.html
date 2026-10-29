@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · segmented control</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  pre { background: color-mix(in srgb, currentColor 6%, transparent); padding: 0.5rem; min-height: 3lh; }
+</style>
+
+<h1>Segmented controls</h1>
+
+<form id="view-form">
+  <fieldset data-variant="segmented">
+    <legend>View</legend>
+    <label><input type="radio" name="view" value="list" checked> List</label>
+    <label><input type="radio" name="view" value="grid"> Grid</label>
+    <label><input type="radio" name="view" value="map" disabled> Map</label>
+  </fieldset>
+</form>
+
+<h2>Right to left</h2>
+<fieldset data-variant="segmented" dir="rtl">
+  <legend>العرض</legend>
+  <label><input type="radio" name="rtl" checked> قائمة</label>
+  <label><input type="radio" name="rtl"> شبكة</label>
+</fieldset>
+
+<h2>What the form holds</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  const form = document.getElementById('view-form');
+  const log = document.getElementById('log');
+  // No element and no command: the platform's own `change`, and the form's own value.
+  form.addEventListener('change', () => (log.textContent += `view = ${new FormData(form).get('view')}\n`));
+</script>
+</html>

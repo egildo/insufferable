@@ -1,0 +1,24 @@
+/*
+ * button: the native `<button>`. Its keyboard, focus and form behaviour are the
+ * platform's. Outlined by default; `data-variant="solid"` for the main action,
+ * `data-variant="plain"` for a quiet one. Disabled is `disabled` or
+ * `aria-disabled="true"`. An icon inside sits beside the words.
+ *
+ * A tab and a menu item are buttons too, styled by their own element:
+ * `@scope … to (ins-tabs, ins-menu)` keeps these rules out of both, so neither
+ * element has to undo the other.
+ */
+
+@scope (:root) to (ins-tabs, ins-menu) {
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding-block: 0;
+    border-style: solid;
+    outline-style: solid;
+    white-space: nowrap;
+    @apply --ins-button;
+  }
+}

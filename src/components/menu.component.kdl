@@ -1,0 +1,21 @@
+// Menu: an open menu of MenuItem instances, on the raised surface. Source: ins.menu in tokens/menu.tokens.json.
+// The group binds the ground, the border, the radius and the padding; the shadow is the raised one, clear in dark.
+// The separator is the divider's line with the menu's room. The menu's width is the design's: in a page it is its
+// widest item's.
+// Not drawn: the button that opens it, and the gap between them.
+component Menu tokens="{ins.menu}"
+description "A menu: a popover of buttons on a raised surface, under the button that opens it."
+
+FRAME Menu layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)200 {
+    effects "{ins.shadow.raised}"
+    INSTANCE Cut component=MenuItem layoutSizingHorizontal=FILL { set Label="Cut"; }
+    INSTANCE Copy component=MenuItem layoutSizingHorizontal=FILL { set Label="Copy"; }
+    FRAME Separator layoutMode=VERTICAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG paddingTop="{ins.menu.separator.marginBlock}" paddingBottom="{ins.menu.separator.marginBlock}" {
+        fills
+        LINE Rule layoutSizingHorizontal=FILL strokeWeight="{ins.divider.borderBlockStartWidth}" {
+            strokes "{ins.divider.borderBlockStartColor}"
+        }
+    }
+    INSTANCE Paste component=MenuItem layoutSizingHorizontal=FILL { set Label="Paste" availability=disabled; }
+    INSTANCE SelectAll component=MenuItem layoutSizingHorizontal=FILL { set Label="Select all"; }
+}

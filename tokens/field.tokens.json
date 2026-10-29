@@ -1,0 +1,102 @@
+{
+  "ins": {
+    "label": {
+      "$description": "The name of a field. Holding its field, it stacks above it.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.label}"
+      }
+    },
+    "field": {
+      "$description": "A native text input, textarea or select. Invalid is the platform's :user-invalid, or aria-invalid set by the app.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.lineStrong}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "minBlockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "invalid": {
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.danger}"
+        }
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "disabled": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.3}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.fill}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        }
+      },
+      "placeholder": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.3}"
+        }
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.body}"
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "ins": {
+    "choice": {
+      "$description": "A label holding a checkbox, a radio button or a switch, beside its words. Its disabled is its input's.",
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "parts": {
+              "availability": {
+                "disabled": ":has(> input:is(:disabled, [aria-disabled=true]))"
+              }
+            }
+          }
+        }
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "disabled": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.3}"
+        }
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.body}"
+      }
+    },
+    "checkbox": {
+      "$description": "A native checkbox or radio button, drawn by the platform in the accent.",
+      "accentColor": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      }
+    },
+    "switch": {
+      "$description": "A checkbox with role=switch: a track, and a thumb in the text colour that moves to the end when checked.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.lineStrong}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.lineStrong}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.track}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "selected": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "disabled": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "ins": {
+    "button": {
+      "$description": "A native button. Outlined by default; solid for the main action, plain for a quiet one.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.lineStrong}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "minBlockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "hover": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.fill}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.lineStrong}"
+        }
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "disabled": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.3}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.surface}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        }
+      },
+      "solid": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.onAccent}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentStrong}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentStrong}"
+          }
+        },
+        "disabled": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.3}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          }
+        }
+      },
+      "plain": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        },
+        "disabled": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        }
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.label}"
+      },
+      "pressed": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.onAccent}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentStrong}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentStrong}"
+          }
+        }
+      }
+    }
+  }
+}

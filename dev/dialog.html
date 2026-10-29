@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · dialog</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  menu { display: flex; justify-content: end; gap: 0.5rem; margin: 0; padding: 0; }
+  dialog > * { margin: 0; }
+  pre { background: #f4f4f4; padding: 0.5rem; min-height: 3lh; }
+</style>
+
+<h1>Dialogs</h1>
+
+<button commandfor="discard" command="show-modal">Discard the draft</button>
+
+<dialog id="discard" aria-labelledby="discard-title">
+  <h2 id="discard-title">Discard the draft?</h2>
+  <p>The quince recipe you are writing will be lost.</p>
+  <form method="dialog">
+    <menu>
+      <button value="keep" data-variant="plain">Keep it</button>
+      <button value="discard" data-variant="solid">Discard</button>
+    </menu>
+  </form>
+</dialog>
+
+<h2>How it closed, heard at the root</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  const log = document.getElementById('log');
+  // `close` does not bubble; the capture phase hears it. The form's button sets the dialog's returnValue.
+  document.addEventListener('close', (event) => {
+    log.textContent += `${event.target.id}: ${event.target.returnValue || 'Escape'}\n`;
+    event.target.returnValue = '';
+  }, { capture: true });
+</script>
+</html>

@@ -1,0 +1,24 @@
+// Tab: one button of a tab list, in its states. Source: ins.tabs.tab in tokens/tabs.tokens.json.
+// Its axes come from the tab's parts: selection, pointer, focus and availability, as the stylesheet's selectors are.
+// The root is the stylesheet's outline, drawn inside the box as outline-offset puts it: always there, clear at rest,
+// so the focus part only changes its colour. The face inside it is the button. The root writes every field the group
+// would bind on it, since the group belongs to the face.
+// Not drawn: the tab's line sitting over the strip's line (a negative margin in the stylesheet).
+component Tab tokens="{ins.tabs.tab}"
+description "One tab of a tab list. Selected, it is the one whose panel shows."
+
+properties {
+    TEXT Label default="Apple"
+}
+
+FRAME Tab layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.0}" paddingRight="{ins.space.0}" paddingBottom="{ins.space.0}" paddingLeft="{ins.space.0}" strokeWeight="{ins.tabs.tab.outlineWidth}" strokeBottomWeight="{ins.tabs.tab.outlineWidth}" strokeAlign=INSIDE {
+    fills
+    strokes "{ins.tabs.tab.outlineColor}"
+    FRAME Face tokens="{ins.tabs.tab}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER {
+        // The group binds the fill, the padding and the line's width; the line's colour is a side's, which it does not bind.
+        strokes "{ins.tabs.tab.borderBottomColor}"
+        TEXT Label characters=(property)Label textStyle="{ins.tabs.tab.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.tabs.tab.color}"
+        }
+    }
+}

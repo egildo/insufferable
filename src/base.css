@@ -1,0 +1,15 @@
+/*
+ * base: the page's own text, by element name. The page reads the body style
+ * and the text colour; a top heading reads the display style. Everything else
+ * inherits. The page takes either colour scheme, as the theme does, so the
+ * platform draws its own controls and scrollbars in the one the system prefers.
+ */
+
+html {
+  color-scheme: light dark;
+  @apply --ins-page;
+}
+
+h1 {
+  @apply --ins-heading;
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · icon</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<script type="module" src="../dist/components/tabs.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; gap: 1rem; align-items: center; }
+</style>
+
+<h1>Icons</h1>
+
+<h2>Glyphs</h2>
+<p class="row">
+  <ins-icon name="home"></ins-icon>
+  <ins-icon name="search"></ins-icon>
+  <ins-icon name="settings"></ins-icon>
+  <ins-icon name="x"></ins-icon>
+  <ins-icon name="heart" id="named" aria-label="Favourite"></ins-icon>
+  <ins-icon name="info-circle" style="color: #0a6fb8"></ins-icon>
+</p>
+
+<h2>Inside the other elements</h2>
+<ins-tabs aria-label="Places">
+  <button aria-controls="home"><ins-icon name="home"></ins-icon> Home</button>
+  <button aria-controls="mail"><ins-icon name="mail"></ins-icon> Mail</button>
+</ins-tabs>
+<div id="home">Home.</div>
+<div id="mail">Mail.</div>
+
+<details>
+  <summary><ins-icon name="help-circle"></ins-icon> What is a quince?</summary>
+  A hard, fragrant fruit, eaten cooked.
+</details>
+</html>

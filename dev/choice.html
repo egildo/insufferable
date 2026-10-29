@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · checkbox, radio, switch</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  fieldset { display: grid; gap: 0.5rem; justify-items: start; border: 0; padding: 0; margin: 0 0 1.5rem; }
+</style>
+
+<h1>Checkboxes, radio buttons, switches</h1>
+
+<fieldset>
+  <legend>Checkboxes</legend>
+  <label><input type="checkbox" checked> Ripe</label>
+  <label><input type="checkbox"> Peeled</label>
+  <label><input type="checkbox" disabled> Sold out</label>
+</fieldset>
+
+<fieldset>
+  <legend>Radio buttons</legend>
+  <label><input type="radio" name="cook" checked> Baked</label>
+  <label><input type="radio" name="cook"> Stewed</label>
+  <label><input type="radio" name="cook" disabled> Raw</label>
+</fieldset>
+
+<fieldset>
+  <legend>Switches</legend>
+  <label><input type="checkbox" role="switch" checked> Notifications</label>
+  <label><input type="checkbox" role="switch"> Sound</label>
+  <label><input type="checkbox" role="switch" disabled> Location</label>
+  <label dir="rtl"><input type="checkbox" role="switch" checked> من اليمين</label>
+</fieldset>
+</html>

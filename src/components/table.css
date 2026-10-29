@@ -1,0 +1,25 @@
+/*
+ * table: the native `<table>`, its cells and its caption, by element name. Rows
+ * are divided by a line; a header cell, `th`, is quieter and in the label style,
+ * over a stronger line. Cells start where the text starts, in either direction.
+ */
+
+table {
+  border-collapse: collapse;
+}
+
+:is(th, td) {
+  border-bottom-style: solid;
+  text-align: start;
+  vertical-align: top;
+  @apply --ins-table-cell;
+}
+
+th {
+  @apply --ins-table-header;
+}
+
+caption {
+  text-align: start;
+  @apply --ins-table-caption;
+}

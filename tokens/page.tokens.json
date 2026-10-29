@@ -1,0 +1,30 @@
+{
+  "ins": {
+    "page": {
+      "$description": "The page itself: its text, in the body style.",
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.body}"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      }
+    },
+    "heading": {
+      "$description": "A top heading, in the display style.",
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.display}"
+      },
+      "marginBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "insufferable",
+  "export": {
+    "prefix": "palette"
+  },
+  "families": [
+    {
+      "name": "gray",
+      "hue": 0,
+      "chroma": {
+        "kind": "constant",
+        "value": 0
+      },
+      "lightness": {
+        "kind": "ramp",
+        "max": 0.97,
+        "min": 0.22,
+        "gamma": 1.4,
+        "sCurve": 0.2
+      }
+    },
+    {
+      "name": "blue",
+      "hue": 250,
+      "locks": {
+        "600": "#0a6fb8"
+      }
+    },
+    {
+      "name": "red",
+      "hue": 28,
+      "locks": {
+        "600": "#c4271b"
+      }
+    }
+  ]
+}

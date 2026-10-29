@@ -1,0 +1,19 @@
+// Link: the native a with an href, in its states. Source: ins.link in tokens/link.tokens.json.
+// Its axes come from the link's parts: pointer and focus.
+// The root is the stylesheet's outline, drawn outside the text as outline-offset puts it, as the button's is. The text
+// binds the group for its colour; its font is the body's, since a link takes the text's around it, written member by
+// member because a text style would also set the underline, and it is underlined.
+// Not drawn: the underline's thickness and offset, which a component file cannot bind, so the hover's thicker line is
+// not drawn either.
+component Link tokens="{ins.link}"
+description "A native link: in the accent, always underlined, its line thicker under the pointer."
+
+properties {
+    TEXT Label default="Cydonia oblonga"
+}
+
+FRAME Link layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.1}" paddingRight="{ins.space.1}" paddingBottom="{ins.space.1}" paddingLeft="{ins.space.1}" strokeWeight="{ins.link.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.1}" {
+    fills
+    strokes "{ins.link.outlineColor}"
+    TEXT Label tokens="{ins.link}" characters=(property)Label fontFamily="{ins.font.family.sans}" fontSize="{ins.font.size.md}" fontWeight="{ins.font.weight.regular}" lineHeight="{ins.font.lineHeight.normal}" textDecoration=UNDERLINE textAutoResize=WIDTH_AND_HEIGHT
+}

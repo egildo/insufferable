@@ -1,0 +1,45 @@
+{
+  "ins": {
+    "dialog": {
+      "$description": "A native dialog. Modal, it lays the shade over the page.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.raised}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.2}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.5}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.measure}"
+      },
+      "backdrop": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.shade}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+/*
+ * The design system's stylesheet, in three layers. The token layer declares; the
+ * base and the components read. The base sets the page's text in the house
+ * fonts, whose faces the build writes in at the top. A component's states are parts of its token group, nested in
+ * the component's own rule by `@apply`. An app's own rules come after this
+ * sheet, unlayered.
+ *
+ * The mixins are written once, at the top level, outside every layer: the
+ * polyfill ignores a layered `@mixin`. The build inlines each `@import` as a
+ * block of its layer.
+ */
+@layer ins.tokens, ins.base, ins.components;
+
+/*HOUSE_FONTS*/
+
+@toghen mixins insufferable;
+
+@import './tokens.css' layer(ins.tokens);
+@import './base.css' layer(ins.base);
+
+@import './components/tabs.css' layer(ins.components);
+@import './components/disclosure.css' layer(ins.components);
+@import './components/icon.css' layer(ins.components);
+@import './components/link.css' layer(ins.components);
+@import './components/divider.css' layer(ins.components);
+@import './components/table.css' layer(ins.components);
+@import './components/callout.css' layer(ins.components);
+@import './components/button.css' layer(ins.components);
+@import './components/field.css' layer(ins.components);
+@import './components/choice.css' layer(ins.components);
+@import './components/segmented.css' layer(ins.components);
+@import './components/dialog.css' layer(ins.components);
+@import './components/menu.css' layer(ins.components);
+@import './components/toolbar.css' layer(ins.components);

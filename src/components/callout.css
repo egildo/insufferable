@@ -1,0 +1,22 @@
+/*
+ * callout: a note set apart from the text around it, styled by its role:
+ * `role="note"`, or `role="alert"` when it appears after an action and must be
+ * announced. A ground tinted with the accent and a bar at the start;
+ * `data-variant="danger"` in the danger. It holds any flow content, and its
+ * first and last child sit flush with its edges.
+ */
+
+:is([role=note], [role=alert]) {
+  display: block;
+  border: 0;
+  border-inline-start-style: solid;
+  @apply --ins-callout;
+
+  & > :first-child {
+    margin-block-start: 0;
+  }
+
+  & > :last-child {
+    margin-block-end: 0;
+  }
+}

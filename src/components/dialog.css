@@ -1,0 +1,19 @@
+/*
+ * dialog: the native `<dialog>`. Whether it is open is the platform's: a button
+ * opens it with `command="show-modal"` and closes it with `command="close"`,
+ * both naming it in `commandfor`, and Escape closes it. Open, it lays out what
+ * it holds in one column; modal, it lays the shade over the page.
+ */
+
+dialog {
+  border-style: solid;
+  @apply --ins-dialog;
+}
+
+dialog[open] {
+  display: grid;
+}
+
+dialog::backdrop {
+  @apply --ins-dialog-backdrop;
+}

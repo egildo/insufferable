@@ -1,0 +1,123 @@
+{
+  "ins": {
+    "color": {
+      "$type": "color",
+      "text": {
+        "1": {
+          "$value": "{palette.gray.950}"
+        },
+        "2": {
+          "$value": "{palette.gray.600}"
+        },
+        "3": {
+          "$value": "{palette.gray.400}"
+        }
+      },
+      "surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hex": "#ffffff"
+        },
+        "$description": "The page, and what sits on it: a field, a dialog"
+      },
+      "raised": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "hex": "#ffffff"
+        },
+        "$description": "What sits above the page: a menu, a dialog. In dark it is lighter than the page, since a shadow does not show there"
+      },
+      "fill": {
+        "$value": "{palette.gray.50}",
+        "$description": "A neutral tint: a control under the pointer, a disabled field"
+      },
+      "line": {
+        "$value": "{palette.gray.100}"
+      },
+      "lineStrong": {
+        "$value": "{palette.gray.500}",
+        "$description": "The edge of a control: at least 3:1 against the surface, as WCAG asks of a control's boundary"
+      },
+      "accent": {
+        "$value": "{palette.blue.600}"
+      },
+      "accentStrong": {
+        "$value": "{palette.blue.700}",
+        "$description": "The accent under the pointer"
+      },
+      "accentTint": {
+        "$value": "{palette.blue.25}",
+        "$description": "A ground tinted with the accent: a callout. Every text and link on it keeps 4.5:1"
+      },
+      "onAccent": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hex": "#ffffff"
+        },
+        "$description": "Text on the accent"
+      },
+      "danger": {
+        "$value": "{palette.red.600}",
+        "$description": "An error: a field whose value is not valid"
+      },
+      "dangerTint": {
+        "$value": "{palette.red.25}",
+        "$description": "A ground tinted with the danger: a callout that warns. Every text and link on it keeps 4.5:1"
+      },
+      "clear": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000",
+          "alpha": 0
+        },
+        "$description": "Nothing: a colour that is not there"
+      },
+      "shade": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "hex": "#000000",
+          "alpha": 0.4
+        },
+        "$description": "What a modal dialog lays over the page"
+      },
+      "shadow": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000",
+          "alpha": 0.12
+        },
+        "$description": "The colour of a raised surface's shadow: clear in dark, where the lighter ground sets it apart"
+      }
+    }
+  }
+}

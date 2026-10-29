@@ -1,0 +1,12 @@
+/*
+ * toolbar: `<ins-toolbar>` holding `<button>`s, in a row. A button with
+ * `aria-pressed` is a toggle: pressed is `aria-pressed="true"`, and its look is
+ * the button's own `pressed` part, as any toggle button's is.
+ */
+
+ins-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  @apply --ins-toolbar;
+}

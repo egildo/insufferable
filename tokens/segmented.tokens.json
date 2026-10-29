@@ -1,0 +1,125 @@
+{
+  "ins": {
+    "segmented": {
+      "$description": "A radio group drawn as joined segments: fieldset data-variant=segmented. Its focus is its checked input's, drawn around the whole group.",
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "parts": {
+              "focus": {
+                "focus": ":has(input:focus-visible)"
+              }
+            }
+          }
+        }
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.0}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.0}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.lineStrong}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "option": {
+        "$description": "One segment: a label holding its radio button, whose circle is hidden. Checked, the accent's ground.",
+        "$extensions": {
+          "com.toghen": {
+            "css": {
+              "parts": {
+                "selection": {
+                  "selected": ":has(> input:checked)"
+                },
+                "availability": {
+                  "disabled": ":has(> input:disabled)"
+                }
+              }
+            }
+          }
+        },
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          }
+        },
+        "selected": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.onAccent}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          },
+          "hover": {
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.accentStrong}"
+            }
+          }
+        },
+        "disabled": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.3}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.label}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+/*
+ * icon: `<ins-icon name="…">`, drawn from Tabler Icons' font. The build
+ * subsets the font to the icons in `src/icons.ts` and writes, in place of the
+ * marker below, the face and one rule per icon, from the icon's name to its
+ * character. A box that clips takes its bottom edge as its baseline, so the
+ * icon is set on the middle of the text around it.
+ */
+
+/*ICONS*/
+
+ins-icon {
+  display: inline-block;
+  inline-size: 1em;
+  block-size: 1em;
+  overflow: hidden;
+  vertical-align: middle;
+  user-select: none;
+  @apply --ins-icon;
+}

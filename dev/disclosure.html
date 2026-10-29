@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · disclosure</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  details + details { margin-block-start: 0.5rem; }
+  pre { background: #f4f4f4; padding: 0.5rem; min-height: 4lh; }
+</style>
+
+<h2>One on its own</h2>
+<details>
+  <summary>What is a quince?</summary>
+  A hard, fragrant fruit, eaten cooked.
+</details>
+
+<h2>An exclusive group</h2>
+<p>The same <code>name</code> on each: the platform keeps one open.</p>
+<details name="moss" open>
+  <summary>Peat</summary>
+  Peat moss.
+</details>
+<details name="moss">
+  <summary>Star</summary>
+  Star moss.
+</details>
+<details name="moss">
+  <summary>Lichen</summary>
+  Not a moss.
+</details>
+
+<h2>Every toggle, heard at the root</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  const log = document.getElementById('log');
+  // `toggle` does not bubble either; the capture phase hears it, as it hears commands.
+  document.addEventListener('toggle', (event) => {
+    log.textContent += `${event.target.querySelector('summary').textContent}: ${event.newState}\n`;
+  }, { capture: true });
+</script>
+</html>

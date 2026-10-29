@@ -1,0 +1,45 @@
+/*
+ * segmented: a radio group drawn as joined segments,
+ * `<fieldset data-variant="segmented">` holding `<label>`s, each holding its
+ * `<input type="radio">`. The platform keeps one checked, moves the choice with
+ * the arrows, and gives the group one tab stop. Each label is a segment and its
+ * circle is hidden, kept focusable; the checked segment takes the accent. The
+ * group's focus is drawn around it, while the checked segment says which; the
+ * group clips the segments to its rounded corners. The
+ * legend names the group and is hidden: a fieldset's border breaks around a
+ * visible one.
+ */
+
+fieldset[data-variant=segmented] {
+  display: inline-flex;
+  margin: 0;
+  overflow: clip;
+  border-style: solid;
+  outline-style: solid;
+  @apply --ins-segmented;
+
+  & > legend {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  & > label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: default;
+    @apply --ins-segmented-option;
+  }
+
+  & > label > input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    appearance: none;
+    opacity: 0;
+  }
+}

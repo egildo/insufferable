@@ -1,0 +1,15 @@
+// MenuItem: one button of a menu, in its states. Source: ins.menu.item in tokens/menu.tokens.json.
+// Its axes come from the item's parts: pointer, focus and availability.
+// The stylesheet's outline is drawn inside the item, as a tab's is, so here it is the item's own stroke: always there,
+// clear at rest, the accent when focused. The text binds the group too, for its colour and its style.
+component MenuItem tokens="{ins.menu.item}"
+description "One item of a menu: a plain button across it. Under the pointer the fill; focused, the accent ring inside."
+
+properties {
+    TEXT Label default="Copy"
+}
+
+FRAME MenuItem layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER strokeWeight="{ins.menu.item.outlineWidth}" strokeAlign=INSIDE {
+    strokes "{ins.menu.item.outlineColor}"
+    TEXT Label tokens="{ins.menu.item}" characters=(property)Label textAutoResize=WIDTH_AND_HEIGHT
+}

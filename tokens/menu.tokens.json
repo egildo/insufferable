@@ -1,0 +1,111 @@
+{
+  "ins": {
+    "menu": {
+      "$description": "A menu: a popover of buttons on a raised surface, under the button that opens it.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.raised}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "marginBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "boxShadow": {
+        "$type": "shadow",
+        "$value": "{ins.shadow.raised}"
+      },
+      "item": {
+        "$description": "One item: a plain button across the menu. Under the pointer the fill; focused, the accent ring inside, as a tab's.",
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.radius.1}"
+        },
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "outlineWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        },
+        "outlineOffset": {
+          "$type": "dimension",
+          "$value": "{ins.border.inset}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          }
+        },
+        "focus": {
+          "outlineColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        },
+        "disabled": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.3}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.label}"
+        }
+      },
+      "separator": {
+        "$description": "An hr between items: the divider's line, with less room.",
+        "marginBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.1}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+/*
+ * divider: the native `<hr>`, a thematic break. A line across in the line
+ * colour, with room above and below; the browser's inset border is cleared.
+ */
+
+hr {
+  border: 0;
+  border-block-start-style: solid;
+  @apply --ins-divider;
+}

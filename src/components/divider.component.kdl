@@ -1,0 +1,12 @@
+// Divider: the native hr. Source: ins.divider in tokens/divider.tokens.json.
+// One member: a line across. The group's keys are logical (border-block-start, margin-block), which a group does not
+// bind, so the line names them itself; the room above and below is the root's padding. Its length is the design's.
+component Divider
+description "A native hr: a thematic break, a line across in the line colour."
+
+FRAME Divider layoutMode=VERTICAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.divider.marginBlock}" paddingBottom="{ins.divider.marginBlock}" {
+    fills
+    LINE Rule width=(literal)320 strokeWeight="{ins.divider.borderBlockStartWidth}" {
+        strokes "{ins.divider.borderBlockStartColor}"
+    }
+}

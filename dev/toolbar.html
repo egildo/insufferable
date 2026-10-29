@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · toolbar</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/toolbar.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  pre { background: color-mix(in srgb, currentColor 6%, transparent); padding: 0.5rem; min-height: 4lh; }
+</style>
+
+<h1>Toolbars</h1>
+
+<h2>Uncontrolled</h2>
+<p>No app state: the element turns each toggle over itself.</p>
+<ins-toolbar aria-label="Format">
+  <button data-variant="plain" aria-pressed="false">Bold</button>
+  <button data-variant="plain" aria-pressed="true">Italic</button>
+  <button data-variant="plain" aria-pressed="false" disabled>Underline</button>
+  <button data-variant="plain">Clear</button>
+</ins-toolbar>
+
+<h2>Controlled</h2>
+<p>The app owns the state: it cancels every <code>--press</code> and refuses to turn Strike on.</p>
+<ins-toolbar id="controlled" aria-label="More">
+  <button data-variant="plain" aria-pressed="false">Code</button>
+  <button data-variant="plain" aria-pressed="false" id="strike">Strike</button>
+</ins-toolbar>
+
+<h2>Every command, heard at the root</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  const log = document.getElementById('log');
+  document.addEventListener('command', (event) => {
+    log.textContent += `${event.command} from ${event.source.textContent}\n`;
+    if (event.target.id !== 'controlled') return;
+    event.preventDefault();
+    if (event.source.id === 'strike') return;
+    const pressed = event.source.getAttribute('aria-pressed') === 'true';
+    event.source.setAttribute('aria-pressed', String(!pressed));
+  }, { capture: true });
+</script>
+</html>

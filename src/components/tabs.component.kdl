@@ -1,0 +1,17 @@
+// Tabs: the tab list, a strip of Tab instances with the first selected. Source: ins.tabs in tokens/tabs.tokens.json.
+// Three tabs, as the demo's first ones. A tab list of another length is built from Tab itself.
+component Tabs
+description "A tab list: tabs on a strip, one selected."
+
+FRAME Tabs tokens="{ins.tabs}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG {
+    strokes "{ins.tabs.borderBottomColor}"
+    INSTANCE First component=Tab {
+        set selection=selected Label="Apple"
+    }
+    INSTANCE Second component=Tab {
+        set Label="Pear"
+    }
+    INSTANCE Third component=Tab {
+        set Label="Quince"
+    }
+}

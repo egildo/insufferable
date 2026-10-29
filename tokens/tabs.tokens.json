@@ -1,0 +1,89 @@
+{
+  "ins": {
+    "tabs": {
+      "$description": "A tab list: the strip and its tabs. The selected tab draws its line over the strip line.",
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "borderBottomColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderBottomWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "tab": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "borderBottomColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "borderBottomWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        },
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "outlineWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        },
+        "outlineOffset": {
+          "$type": "dimension",
+          "$value": "{ins.border.inset}"
+        },
+        "selected": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.1}"
+          },
+          "borderBottomColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        },
+        "hover": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.1}"
+          }
+        },
+        "focus": {
+          "outlineColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        },
+        "disabled": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.3}"
+          }
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.label}"
+        }
+      }
+    }
+  }
+}

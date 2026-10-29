@@ -1,0 +1,18 @@
+// Callout: a note set apart from the text, role=note or role=alert, in its variants. Source: ins.callout in
+// tokens/callout.tokens.json. Its axis comes from the callout's parts: the variant, rest or danger.
+// The bar is the stylesheet's border at the start, drawn on the left: its keys are logical, which a group does not bind,
+// so the root names them itself. Its width is the design's, as a note's measure is the text's around it.
+// Not drawn: right to left, where the bar is on the right.
+component Callout tokens="{ins.callout}"
+description "A note set apart from the text: a tinted ground and a bar at the start, in the accent or the danger."
+
+properties {
+    TEXT Text default="A quince is too hard to eat raw. Cook it first."
+}
+
+FRAME Callout layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)400 strokeLeftWeight="{ins.callout.borderInlineStartWidth}" strokeTopWeight="{ins.space.0}" strokeRightWeight="{ins.space.0}" strokeBottomWeight="{ins.space.0}" strokeAlign=INSIDE {
+    strokes "{ins.callout.borderInlineStartColor}"
+    TEXT Text characters=(property)Text textStyle="{ins.page.font}" layoutSizingHorizontal=FILL textAutoResize=HEIGHT {
+        fills "{ins.callout.color}"
+    }
+}

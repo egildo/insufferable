@@ -1,0 +1,39 @@
+// Checkbox: the native checkbox and radio button. Source: ins.checkbox in tokens/choice.tokens.json.
+// The platform draws the real ones, in the accent; this is their likeness, so the box's corner, the tick and the
+// dot are the design's. The tick is Tabler's check, in the icon style, clipped by the box.
+// Its axes: the input's type and whether it is checked, declared here, since the platform draws them and no token
+// does; focus comes from the parts. The ring is the outline, as the button's is.
+// Not drawn: disabled, which the platform greys.
+component Checkbox tokens="{ins.checkbox}"
+description "A native checkbox or radio button, drawn by the platform in the accent."
+
+properties {
+    VARIANT type checkbox radio
+    VARIANT selection rest selected
+}
+
+guard radio { is (input)type radio }
+guard checked { is (input)selection selected }
+
+FRAME Checkbox layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.1}" paddingRight="{ins.space.1}" paddingBottom="{ins.space.1}" paddingLeft="{ins.space.1}" strokeWeight="{ins.checkbox.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.1}" {
+    fills
+    strokes "{ins.checkbox.outlineColor}"
+    when radio cornerRadius="{ins.radius.round}"
+    FRAME Box layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.size.box}" height="{ins.size.box}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER cornerRadius=(literal)3 strokeWeight="{ins.border.1}" strokeAlign=INSIDE clipsContent=#true {
+        fills "{ins.color.surface}"
+        strokes "{ins.color.lineStrong}"
+        when radio cornerRadius="{ins.radius.round}"
+        when checked { fills "{ins.checkbox.accentColor}"; strokes "{ins.checkbox.accentColor}"; }
+        when checked {
+            TEXT Tick characters="\u{ea5e}" textStyle="{ins.icon.font}" textAutoResize=WIDTH_AND_HEIGHT {
+                fills "{ins.color.onAccent}"
+                when radio visible=#false
+            }
+        }
+        when checked radio {
+            FRAME Dot layoutMode=NONE width=(literal)6 height=(literal)6 cornerRadius="{ins.radius.round}" {
+                fills "{ins.color.onAccent}"
+            }
+        }
+    }
+}

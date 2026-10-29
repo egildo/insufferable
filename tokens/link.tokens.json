@@ -1,0 +1,47 @@
+{
+  "ins": {
+    "link": {
+      "$description": "A native link, an a with an href: in the accent and always underlined, since its colour alone does not set it apart from the text around it. It inherits the font.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      },
+      "textDecorationThickness": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "textUnderlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "hover": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.accentStrong}"
+        },
+        "textDecorationThickness": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        }
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      }
+    }
+  }
+}

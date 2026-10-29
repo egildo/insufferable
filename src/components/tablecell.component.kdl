@@ -1,0 +1,19 @@
+// TableCell: one cell of a native table, a td or a th. Source: ins.table in tokens/table.tokens.json.
+// Its axis, kind, is the cell's element, declared here: no token names it. Both kinds bind the cell's group for the
+// padding and the line's width; the line's colour, the text's colour and its style come from the kind's own group,
+// ins.table.cell or ins.table.header, through the axis.
+component TableCell
+description "One cell of a native table: a data cell, or a header cell, quieter, over a stronger line."
+
+properties {
+    VARIANT kind cell header
+    TEXT Text default="Champion"
+}
+
+FRAME TableCell tokens="{ins.table.cell}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG strokeTopWeight="{ins.space.0}" strokeRightWeight="{ins.space.0}" strokeLeftWeight="{ins.space.0}" strokeAlign=INSIDE {
+    fills
+    strokes "{ins.table.(input)kind.borderBottomColor}"
+    TEXT Text characters=(property)Text textStyle="{ins.table.(input)kind.font}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.table.(input)kind.color}"
+    }
+}

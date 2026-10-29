@@ -1,0 +1,11 @@
+{
+  "ins": {
+    "toolbar": {
+      "$description": "A row of controls with one tab stop: its toggle buttons send --press. Its buttons are buttons, styled as any.",
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      }
+    }
+  }
+}

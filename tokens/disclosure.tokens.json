@@ -1,0 +1,71 @@
+{
+  "ins": {
+    "disclosure": {
+      "$description": "A native details element and its summary. Open, it makes room below its content.",
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "paddingBlockEnd": {
+        "$type": "dimension",
+        "$value": "{ins.space.0}"
+      },
+      "open": {
+        "paddingBlockEnd": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        }
+      },
+      "summary": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "outlineWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        },
+        "outlineOffset": {
+          "$type": "dimension",
+          "$value": "{ins.border.inset}"
+        },
+        "hover": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        },
+        "focus": {
+          "outlineColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.label}"
+        }
+      }
+    }
+  }
+}

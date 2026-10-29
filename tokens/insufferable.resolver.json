@@ -1,0 +1,101 @@
+{
+  "version": "2025-11-01",
+  "name": "insufferable",
+  "description": "insufferable's tokens, one file per concern. The base set holds what no theme changes: the vocabulary, the palette gosfuig writes, the scales, the type, and one file per element, whose states are parts. The theme modifier holds the colour roles, one whole file per context.",
+  "sets": {
+    "base": {
+      "sources": [
+        {
+          "$ref": "vocabulary.tokens.json"
+        },
+        {
+          "$ref": "palette.tokens.json"
+        },
+        {
+          "$ref": "scales.tokens.json"
+        },
+        {
+          "$ref": "type.tokens.json"
+        },
+        {
+          "$ref": "page.tokens.json"
+        },
+        {
+          "$ref": "link.tokens.json"
+        },
+        {
+          "$ref": "divider.tokens.json"
+        },
+        {
+          "$ref": "table.tokens.json"
+        },
+        {
+          "$ref": "callout.tokens.json"
+        },
+        {
+          "$ref": "tabs.tokens.json"
+        },
+        {
+          "$ref": "disclosure.tokens.json"
+        },
+        {
+          "$ref": "icon.tokens.json"
+        },
+        {
+          "$ref": "button.tokens.json"
+        },
+        {
+          "$ref": "field.tokens.json"
+        },
+        {
+          "$ref": "choice.tokens.json"
+        },
+        {
+          "$ref": "segmented.tokens.json"
+        },
+        {
+          "$ref": "dialog.tokens.json"
+        },
+        {
+          "$ref": "menu.tokens.json"
+        },
+        {
+          "$ref": "toolbar.tokens.json"
+        }
+      ]
+    }
+  },
+  "resolutionOrder": [
+    {
+      "$ref": "#/sets/base"
+    },
+    {
+      "$ref": "#/modifiers/theme"
+    }
+  ],
+  "modifiers": {
+    "theme": {
+      "description": "The page's colours, chosen by the system's colour-scheme preference. Light is the default.",
+      "default": "light",
+      "contexts": {
+        "light": [
+          {
+            "$ref": "theme.light.tokens.json"
+          }
+        ],
+        "dark": [
+          {
+            "$ref": "theme.dark.tokens.json"
+          }
+        ]
+      },
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "atRule": "@media (prefers-color-scheme: {context})"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+/*
+ * choice: the native checkbox and radio button, drawn by the platform in the
+ * accent, and the switch: a checkbox with `role="switch"`, which the platform
+ * does not draw. Checked is `:checked`. A label holding one of them sits it
+ * beside its words, and greys with it when it is disabled.
+ *
+ * The switch is the input itself, with no extra markup: its track is the
+ * background, its thumb a circle in the text colour, at the start and, checked,
+ * at the end. Right to left, it is mirrored.
+ */
+
+label:has(> input:is([type=checkbox], [type=radio])) {
+  display: inline-flex;
+  align-items: center;
+  @apply --ins-choice;
+}
+
+input:is([type=checkbox], [type=radio]):not([role=switch]) {
+  margin: 0;
+  outline-style: solid;
+  @apply --ins-checkbox;
+}
+
+input[type=checkbox][role=switch] {
+  appearance: none;
+  flex: none;
+  margin: 0;
+  border-style: solid;
+  outline-style: solid;
+  background-image: radial-gradient(circle closest-side, currentColor 75%, transparent calc(75% + 1px));
+  background-size: t(insufferable.ins.size.box) t(insufferable.ins.size.box);
+  background-repeat: no-repeat;
+  background-position: left center;
+  @apply --ins-switch;
+
+  &:checked {
+    background-position: right center;
+  }
+
+  &:dir(rtl) {
+    scale: -1 1;
+  }
+}

@@ -1,0 +1,29 @@
+// Disclosure: the native details and its summary, closed and open. Source: ins.disclosure in tokens/disclosure.tokens.json.
+// Its one axis comes from the parts: disclosure, closed or open.
+// The marker is the browser's triangle, drawn as a character since no token names it.
+// Not drawn: the summary's hover and focus. They are parts of the summary's group, and a component takes its axes from its own group only.
+component Disclosure tokens="{ins.disclosure}"
+description "A native details element: a summary that opens and closes what it holds."
+
+properties {
+    TEXT Summary default="What is a quince?"
+    TEXT Content default="A hard, fragrant fruit, eaten cooked."
+}
+
+guard open { is (input)disclosure open }
+
+FRAME Disclosure paddingBottom="{ins.disclosure.paddingBlockEnd}" layoutMode=VERTICAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG {
+    FRAME Summary tokens="{ins.disclosure.summary}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER itemSpacing="{ins.space.1}" clipsContent=#false {
+        TEXT Marker characters="▸" textStyle="{ins.disclosure.summary.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.disclosure.summary.color}"
+            when open characters="▾"
+        }
+        TEXT Label characters=(property)Summary textStyle="{ins.disclosure.summary.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.disclosure.summary.color}"
+        }
+    }
+    TEXT Content visible=#false characters=(property)Content textStyle="{ins.page.font}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.page.color}"
+        when open visible=#true
+    }
+}

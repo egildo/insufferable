@@ -1,0 +1,20 @@
+/*
+ * disclosure: the native `<details>` and its `<summary>`. No custom element and
+ * no command: the platform opens and closes it, keeps it working without script,
+ * and closes the others of an exclusive group (`name`). Open is `[open]`. An app
+ * that wants to know listens for the platform's `toggle` event.
+ *
+ * The selectors are the element names, in the components layer, so an app's own
+ * unlayered rules win over them.
+ */
+
+details {
+  display: block;
+  border-style: solid;
+  @apply --ins-disclosure;
+}
+
+details > summary {
+  outline-style: solid;
+  @apply --ins-disclosure-summary;
+}

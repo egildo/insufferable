@@ -1,0 +1,13 @@
+// SegmentedOption: one segment of a segmented control, a label holding its radio button. Source: ins.segmented.option
+// in tokens/segmented.tokens.json. Its axes come from its parts: selection (checked), pointer and availability.
+// The radio button itself is hidden in the stylesheet, so it is not drawn.
+component SegmentedOption tokens="{ins.segmented.option}"
+description "One segment of a segmented control. Checked, the accent's ground."
+
+properties {
+    TEXT Label default="List"
+}
+
+FRAME SegmentedOption layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER {
+    TEXT Label tokens="{ins.segmented.option}" characters=(property)Label textAutoResize=WIDTH_AND_HEIGHT
+}

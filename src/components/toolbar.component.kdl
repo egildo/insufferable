@@ -1,0 +1,12 @@
+// Toolbar: a row of plain Button instances, two toggles pressed and not, one disabled, one plain. Source: ins.toolbar
+// in tokens/toolbar.tokens.json; the buttons are the Button set's, whose selection axis holds pressed.
+component Toolbar tokens="{ins.toolbar}"
+description "A row of buttons with one tab stop. A toggle button sends --press; pressed, it takes the accent."
+
+FRAME Toolbar layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER {
+    fills
+    INSTANCE Bold component=Button { set variant=plain selection=pressed Label="Bold"; }
+    INSTANCE Italic component=Button { set variant=plain Label="Italic"; }
+    INSTANCE Underline component=Button { set variant=plain availability=disabled Label="Underline"; }
+    INSTANCE Clear component=Button { set variant=plain Label="Clear"; }
+}

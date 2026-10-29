@@ -1,0 +1,26 @@
+// Table: a native table of TableCell instances, a header row and two rows. Source: ins.table in tokens/table.tokens.json.
+// The columns' widths are the design's: each row is as wide as the table, and its cells share it.
+component Table
+description "A native table: rows divided by a line, the header cells quieter, over a stronger line."
+
+FRAME Table layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)420 {
+    fills
+    FRAME Head layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE H1 component=TableCell layoutSizingHorizontal=FILL { set kind=header Text="Variety"; }
+        INSTANCE H2 component=TableCell layoutSizingHorizontal=FILL { set kind=header Text="Origin"; }
+        INSTANCE H3 component=TableCell layoutSizingHorizontal=FILL { set kind=header Text="Kilograms"; }
+    }
+    FRAME Row1 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE A1 component=TableCell layoutSizingHorizontal=FILL { set Text="Champion"; }
+        INSTANCE A2 component=TableCell layoutSizingHorizontal=FILL { set Text="United States"; }
+        INSTANCE A3 component=TableCell layoutSizingHorizontal=FILL { set Text="12"; }
+    }
+    FRAME Row2 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE B1 component=TableCell layoutSizingHorizontal=FILL { set Text="Vranja"; }
+        INSTANCE B2 component=TableCell layoutSizingHorizontal=FILL { set Text="Serbia"; }
+        INSTANCE B3 component=TableCell layoutSizingHorizontal=FILL { set Text="8"; }
+    }
+}

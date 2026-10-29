@@ -1,0 +1,41 @@
+{
+  "ins": {
+    "callout": {
+      "$description": "A note set apart from the text: role=note, or role=alert when it must be announced. A tinted ground and a bar at the start in the accent; data-variant=danger in the danger.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.accentTint}"
+      },
+      "borderInlineStartColor": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      },
+      "borderInlineStartWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "danger": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.dangerTint}"
+        },
+        "borderInlineStartColor": {
+          "$type": "color",
+          "$value": "{ins.color.danger}"
+        }
+      }
+    }
+  }
+}

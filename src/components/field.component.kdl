@@ -1,0 +1,28 @@
+// Field: a label above its text input, in the input's states. Source: ins.field and ins.label in tokens/field.tokens.json.
+// Its axes come from the field's parts: validity, focus and availability. Invalid is :user-invalid or aria-invalid.
+// The root is the label's stack, bound to ins.label (its gap). The ring around the face is the stylesheet's outline,
+// drawn outside the input as the button's is. The input's width is the design's, as the browser's default input
+// has one; no token names it.
+// Not drawn: the placeholder, the select and the textarea, which share the face.
+component Field tokens="{ins.field}"
+description "A native text input, named by the label that holds it. Red once its value is not valid."
+
+properties {
+    TEXT Label default="Name"
+    TEXT Value default="Quince"
+}
+
+FRAME Field tokens="{ins.label}" layoutMode=VERTICAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG {
+    TEXT Label characters=(property)Label textStyle="{ins.label.font}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.label.color}"
+    }
+    FRAME Ring layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.1}" paddingRight="{ins.space.1}" paddingBottom="{ins.space.1}" paddingLeft="{ins.space.1}" strokeWeight="{ins.field.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.1}" {
+        fills
+        strokes "{ins.field.outlineColor}"
+        FRAME Face tokens="{ins.field}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)240 minHeight="{ins.size.control}" counterAxisAlignItems=CENTER strokeAlign=INSIDE {
+            TEXT Value characters=(property)Value textStyle="{ins.field.font}" textAutoResize=WIDTH_AND_HEIGHT {
+                fills "{ins.field.color}"
+            }
+        }
+    }
+}

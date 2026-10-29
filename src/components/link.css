@@ -1,0 +1,14 @@
+/*
+ * link: the native `<a>` with an `href`, which `:any-link` matches; an `a`
+ * without one is no link to the platform and stays text. In the accent, and
+ * always underlined: in dark the accent is under 3:1 against the text around
+ * it, so the colour alone would not set it apart. Under the pointer the line
+ * thickens, so that change is not the colour's alone either. Its font is the
+ * text's around it.
+ */
+
+a:any-link {
+  text-decoration-line: underline;
+  outline-style: solid;
+  @apply --ins-link;
+}

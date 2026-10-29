@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · button</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<script type="module" src="../dist/components/tabs.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+</style>
+
+<h1>Buttons</h1>
+
+<h2>The variants</h2>
+<p class="row">
+  <button>Outlined</button>
+  <button data-variant="solid">Solid</button>
+  <button data-variant="plain">Plain</button>
+</p>
+
+<h2>Disabled</h2>
+<p class="row">
+  <button disabled>Outlined</button>
+  <button data-variant="solid" disabled>Solid</button>
+  <button data-variant="plain" aria-disabled="true">Plain</button>
+</p>
+
+<h2>With an icon</h2>
+<p class="row">
+  <button><ins-icon name="search"></ins-icon> Search</button>
+  <button data-variant="solid"><ins-icon name="heart"></ins-icon> Favourite</button>
+  <button data-variant="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
+</p>
+
+<h2>Beside a tab list, untouched by it</h2>
+<ins-tabs aria-label="Fruit">
+  <button aria-controls="apple">Apple</button>
+  <button aria-controls="pear">Pear</button>
+</ins-tabs>
+<div id="apple">An apple.</div>
+<div id="pear">A pear.</div>
+</html>

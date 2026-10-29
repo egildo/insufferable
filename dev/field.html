@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · field</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  form { display: grid; gap: 1rem; justify-items: start; }
+</style>
+
+<h1>Fields</h1>
+
+<form>
+  <label>Name <input name="name" placeholder="Quince"></label>
+  <label>Email <input type="email" name="email" required placeholder="you@example.org"></label>
+  <label>Set by the app <input value="Not a fruit" aria-invalid="true"></label>
+  <label>Disabled <input value="Locked" disabled></label>
+  <label>Season
+    <select name="season">
+      <option>Autumn</option>
+      <option>Winter</option>
+    </select>
+  </label>
+  <label>Notes <textarea name="notes" rows="3"></textarea></label>
+  <p><label for="apart">Named from apart</label> <input id="apart"></p>
+</form>
+<p>The email field turns red only once it has been changed and left wrong: the platform's <code>:user-invalid</code>.</p>
+</html>

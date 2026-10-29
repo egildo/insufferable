@@ -1,0 +1,5 @@
+/*
+ * The token layer: every token, declared once as a custom property. The
+ * directive is replaced at build time from `tokens/insufferable.resolver.json`.
+ */
+@toghen contexts insufferable;

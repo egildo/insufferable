@@ -1,0 +1,22 @@
+// Button: the native button, in its variants and states. Source: ins.button in tokens/button.tokens.json.
+// Its axes come from the button's parts: the variant (rest is the outlined one), pointer, focus and availability.
+// The root is the stylesheet's outline, drawn outside the button as outline-offset puts it: always there, clear at
+// rest, so the focus part only changes its colour. Its padding is the outline's width and its offset, 2px each, which
+// is space.1. The root writes every field the group would bind on it, since the group belongs to the face.
+// So a member is 8px wider and taller than the button it draws; the face is the button's own size.
+component Button tokens="{ins.button}"
+description "A native button. Outlined by default; solid for the main action, plain for a quiet one."
+
+properties {
+    TEXT Label default="Save"
+}
+
+FRAME Button layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.1}" paddingRight="{ins.space.1}" paddingBottom="{ins.space.1}" paddingLeft="{ins.space.1}" itemSpacing="{ins.space.0}" strokeWeight="{ins.button.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.1}" {
+    fills
+    strokes "{ins.button.outlineColor}"
+    // The group binds the fill, the border, the radius, the padding and the gap.
+    FRAME Face tokens="{ins.button}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG minHeight="{ins.size.control}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER strokeAlign=INSIDE {
+        // The label binds the group too: its colour stays in the path under a variant, so a fixed reference would not follow it.
+        TEXT Label tokens="{ins.button}" characters=(property)Label textAutoResize=WIDTH_AND_HEIGHT
+    }
+}

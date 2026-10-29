@@ -1,0 +1,11 @@
+{
+  "ins": {
+    "icon": {
+      "$description": "A glyph of the icon font. Its colour is the text colour around it.",
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.icon}"
+      }
+    }
+  }
+}

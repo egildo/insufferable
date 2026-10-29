@@ -1,0 +1,19 @@
+{
+  "ins": {
+    "divider": {
+      "$description": "A native hr: a line across, in the line colour, with room above and below.",
+      "borderBlockStartColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderBlockStartWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "marginBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.4}"
+      }
+    }
+  }
+}
