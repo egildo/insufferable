@@ -64,7 +64,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -138,12 +138,13 @@ A text style is a W3C `typography` token: font family, size, weight, letter spac
 | `ins.typography.body` | Archivo | 1rem | 400 | 1.5 | the page (`html`) |
 | `ins.typography.label` | Archivo | 0.875rem | 500 | 1.25 | a tab, a summary, a button, a field's label |
 | `ins.typography.small` | Archivo | 0.875rem | 400 | 1.5 | small print and a caption (`small`, `figcaption`) |
+| `ins.typography.tag` | Archivo | 0.75rem | 600 | 1.5 | a tag, in capitals, tracked 0.5px |
 | `ins.typography.heading` | Archivo | 1.25rem | 600 | 1.25 | a heading within a section (`h3`) |
 | `ins.typography.title` | Fraunces | 1.5rem | 600 | 1.25 | a section's heading (`h2`), a dialog's title |
 | `ins.typography.display` | Fraunces | 2rem | 600 | 1.25 | the top heading (`h1`) |
 | `ins.typography.icon` | tabler-icons | 1.25rem | 400 | 1 | an icon |
 
-The sizes are five steps, `ins.font.size.sm` to `xxl`: 0.875, 1, 1.25, 1.5 and 2rem. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
+The sizes are six steps, `ins.font.size.xs` to `xxl`: 0.75, 0.875, 1, 1.25, 1.5 and 2rem; the smallest is a tag's alone. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
 
 ### The house fonts
 
@@ -186,6 +187,15 @@ Everything else inherits, and keeps the browser's own margins: paragraphs, lists
 - **The keyboard:** the arrows move and select (automatic activation), and wrap; Home and End go to the ends; a disabled tab is passed over; right to left, the arrows follow the reading direction. The keyboard's choice is a click on the tab, so it reaches the app as a command like any other.
 - **No tab marked:** the first enabled tab is shown.
 - **Without script:** every panel shows and the buttons do nothing.
+
+**Pill tabs,** `<ins-tabs class="pill">`: the same element, keyboard and commands, drawn without the strip. Each tab is a pill; the selected one sits on the accent's tint, in the accent, 5:1 in light and in dark. Disabled, a tab is grey and clear under the pointer; selected and disabled, it keeps the line's grey ground, so the choice still shows. A count follows a tab's name.
+
+```html
+<ins-tabs class="pill" aria-label="Pane">
+  <button aria-controls="structure">Structure <data value="26">26</data></button>
+  <button aria-controls="log">Print log <data value="2">2</data></button>
+</ins-tabs>
+```
 
 Not built: manual activation, a vertical tab list.
 
@@ -293,8 +303,10 @@ The native `<button>`. Its keyboard, focus and form behaviour are the platform's
 - **A toggle button** has `aria-pressed`; pressed (`"true"`) it takes the accent's ground and the text on it, in any variant, the strong accent under the pointer. The fill would be 1.16:1 against the page, under the 3:1 a state's mark wants. Pressed and disabled, it keeps a grey ground, the line's, with the disabled text, so the state still shows while nothing answers the pointer.
 - **Its size:** 2.25rem tall at least (`ins.size.control`), as a field is, so the two sit on one line.
 - **A tab and a menu item are buttons too.** The rule sits in `@scope (:root) to (ins-tabs, ins-menu)`, so it never reaches either, and each element styles its own without undoing anything.
+- **An icon button** is a button that holds an icon and is named by `aria-label`, which an icon alone needs anyway: `button[aria-label]:has(> ins-icon)`. It is square, as wide as it is tall (`ins.iconButton`), with no padding. Pressed, it takes the accent as any button does: a wash, as other tools draw it, would fall under the 3:1 a state's mark wants.
+- **A count** after its name is a `<data>`: see [Count](#count).
 
-Not built: a pressed state, sizes, a button holding only an icon drawn square.
+Not built: sizes.
 
 ### Field
 
@@ -429,14 +441,57 @@ Not built: checkbox and radio items (`aria-checked`, `--check`), submenus, findi
 - **Its buttons are buttons,** styled as any: the demo writes `class="plain"`. A button without `aria-pressed` is left alone.
 - **Without script** the buttons are ordinary buttons in the tab order, and nothing toggles.
 
+### Count
+
+A number after a control's name: `<data value="26">26</data>` inside a `button`, a tab, a `summary`, a `label` or a `legend`. `data` is the platform's element for a value a machine can read.
+
+```html
+<button>Messages <data value="3">3</data></button>
+```
+
+- **The colour around it.** A count keeps its control's colour, so it keeps that colour's contrast on every ground, the solid button's and the selected tab's included. It is set apart by its weight, regular beside the label's medium (`ins.count`), and its figures are tabular, so a count that changes does not move the name.
+- **Only inside a control.** A `data` in running text is left alone.
+
+### Tag
+
+A kind or a status beside a name: `<small class="tag">`. Small capitals on the fill, in the tag's text style (`ins.typography.tag`: 0.75rem, semibold, tracked 0.5px), 12:1 in light and in dark.
+
+```html
+<code>cliente</code> <small class="tag">String</small>
+```
+
+- **The capitals are the stylesheet's,** `text-transform`, so the text is written as it reads and is spoken as written. The W3C typography type has no member for the case, so it is not a token.
+- **Not a control.** A tag that does something is a button.
+
+### Chips
+
+A list of removable values: `<ul class="chips">`, each item its text and a button that removes it.
+
+```html
+<ul class="chips" id="declarations" aria-label="Declarations">
+  <li><code>hyphens: none</code>
+    <button commandfor="declarations" command="--remove" value="hyphens"
+            aria-label="Remove hyphens: none"><ins-icon name="x"></ins-icon></button></li>
+</ul>
+```
+
+- **It is a list,** so it is announced with its count, and each value with its place.
+- **Each button is named by what it removes,** in `aria-label`, since every one draws the same ×.
+- **It sends `--remove`** to the list, with the value in the button's `value`. The app, hearing it at the root, removes the value, and moves the focus to the next button or the one before, since the one that had it is gone.
+- **No default and no script.** A list that removed its own items would hold state the app owns, and nothing in it needs a keyboard of its own: the buttons are in the tab order.
+- **The chip** is a pill on the fill with the line round it, its text in the small style; the button is a circle the size of the icon, grey, the line's grey under the pointer.
+
+Not built: a chip that is itself a choice, a chip list the keyboard moves through with the arrows.
+
 ## Commands
 
-A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` would give `--expand` (not the menu's: a popover's open state is the platform's, so the question waits for a disclosure that is not a popover), `aria-pressed` `--press`, `aria-checked` `--check`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
+A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` would give `--expand` (not the menu's: a popover's open state is the platform's, so the question waits for a disclosure that is not a popover), `aria-pressed` `--press`, `aria-checked` `--check`. A command that sets no state is named after what it asks for, and has no default: `--remove`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
 
 | Command | Sent by | Sets |
 |---|---|---|
 | `--select` | a tab | `aria-selected="true"` on the tab, `false` on its siblings |
 | `--press` | a toggle button in a toolbar | `aria-pressed` on the button, turned over |
+| `--remove` | a chip's button | nothing: it asks the app to remove the value, and has no default |
 
 `src/commands.ts` exports them as `commands`, so an app reads the names from one place.
 

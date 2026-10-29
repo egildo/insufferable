@@ -35,14 +35,18 @@
   </nav>
 </header>
 
-<ins-tabs aria-label="Notebook">
-  <button aria-controls="recipes">Recipes</button>
-  <button aria-controls="pantry">Pantry</button>
-  <button aria-controls="notes">Notes</button>
+<ins-tabs class="pill" aria-label="Notebook">
+  <button aria-controls="recipes">Recipes <data value="1">1</data></button>
+  <button aria-controls="pantry">Pantry <data value="2">2</data></button>
+  <button aria-controls="notes">Notes <data value="1">1</data></button>
 </ins-tabs>
 
 <article id="recipes">
-  <h2>Quince paste</h2>
+  <h2>Quince paste <small class="tag">Draft</small></h2>
+  <ul class="chips" id="labels" aria-label="Labels">
+    <li>Preserve <button commandfor="labels" command="--remove" value="preserve" aria-label="Remove Preserve"><ins-icon name="x"></ins-icon></button></li>
+    <li>Autumn <button commandfor="labels" command="--remove" value="autumn" aria-label="Remove Autumn"><ins-icon name="x"></ins-icon></button></li>
+  </ul>
   <p>Quinces are hard and sour raw, and turn rose-red and fragrant when cooked long. In Spain the paste is <em>membrillo</em>, eaten with Manchego; in Italy it is <em>cotognata</em>, cut into squares and rolled in sugar.</p>
 
   <div role="note" class="danger"><p>Quince seeds hold amygdalin. Cut out every core before cooking.</p></div>
@@ -96,7 +100,7 @@
   <table>
     <thead><tr><th scope="col">Variety</th><th scope="col">Origin</th><th scope="col">Kilograms</th></tr></thead>
     <tbody>
-      <tr><td>Champion</td><td>United States</td><td>12</td></tr>
+      <tr><td>Champion <small class="tag">Ripe</small></td><td>United States</td><td>12</td></tr>
       <tr><td>Vranja</td><td>Serbia</td><td>8</td></tr>
     </tbody>
   </table>
@@ -132,6 +136,13 @@
     <figcaption>The ratio, for any weight of fruit.</figcaption>
   </figure>
 </section>
+
+<script type="module">
+  // The app: it removes a label the chip list asks it to.
+  document.addEventListener('command', (event) => {
+    if (event.command === '--remove') event.source.closest('li').remove();
+  }, { capture: true });
+</script>
 
 <dialog id="discard" aria-labelledby="discard-title">
   <h2 id="discard-title">Discard the draft?</h2>

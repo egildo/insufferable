@@ -1,0 +1,27 @@
+{
+  "ins": {
+    "tag": {
+      "$description": "A tag: small class=tag, a kind or a status in small capitals on the fill.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.fill}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.tag}"
+      }
+    }
+  }
+}

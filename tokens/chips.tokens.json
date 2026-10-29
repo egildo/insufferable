@@ -1,0 +1,109 @@
+{
+  "ins": {
+    "chips": {
+      "$description": "A list of removable values: ul class=chips, each item its text and a button that sends --remove to the list.",
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "chip": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.fill}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        },
+        "borderWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.1}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.radius.round}"
+        },
+        "paddingInlineStart": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "paddingInlineEnd": {
+          "$type": "dimension",
+          "$value": "{ins.space.1}"
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "{ins.space.1}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.small}"
+        },
+        "remove": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.2}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          },
+          "borderRadius": {
+            "$type": "dimension",
+            "$value": "{ins.radius.round}"
+          },
+          "inlineSize": {
+            "$type": "dimension",
+            "$value": "{ins.font.size.icon}"
+          },
+          "blockSize": {
+            "$type": "dimension",
+            "$value": "{ins.font.size.icon}"
+          },
+          "outlineColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          },
+          "outlineWidth": {
+            "$type": "dimension",
+            "$value": "{ins.border.2}"
+          },
+          "outlineOffset": {
+            "$type": "dimension",
+            "$value": "{ins.border.inset}"
+          },
+          "hover": {
+            "color": {
+              "$type": "color",
+              "$value": "{ins.color.text.1}"
+            },
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.line}"
+            }
+          },
+          "active": {
+            "color": {
+              "$type": "color",
+              "$value": "{ins.color.text.1}"
+            },
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.lineStrong}"
+            }
+          },
+          "focus": {
+            "outlineColor": {
+              "$type": "color",
+              "$value": "{ins.color.accent}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

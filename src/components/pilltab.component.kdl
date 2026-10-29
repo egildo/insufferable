@@ -1,0 +1,22 @@
+// PillTab: one tab of a pill tab list, ins-tabs class=pill, in its states. Source: ins.tabs.pill.tab in
+// tokens/tabs.tokens.json, over the tab's own tokens, ins.tabs.tab, for what the pill does not change.
+// Its axes come from the pill tab's parts: selection, pointer and availability. The root is the outline, as Tab's is.
+// The name is in the tab's text style; the count, a data element in the stylesheet, is in the small style, at the
+// regular weight it takes there.
+// Not drawn: the focus outline's own member, since the pill keeps the tab's focus and adds no part of its own.
+component PillTab tokens="{ins.tabs.pill.tab}"
+description "One tab of a pill tab list, with its count. Selected, it sits on the accent's tint."
+
+properties {
+    TEXT Label default="Structure"
+    TEXT Count default="26"
+}
+
+FRAME PillTab layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG paddingTop="{ins.space.0}" paddingRight="{ins.space.0}" paddingBottom="{ins.space.0}" paddingLeft="{ins.space.0}" strokeWeight="{ins.tabs.tab.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.radius.round}" {
+    fills
+    strokes "{ins.tabs.tab.outlineColor}"
+    FRAME Face tokens="{ins.tabs.pill.tab}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG itemSpacing="{ins.space.1}" counterAxisAlignItems=CENTER {
+        TEXT Label tokens="{ins.tabs.pill.tab}" characters=(property)Label textStyle="{ins.tabs.tab.font}" textAutoResize=WIDTH_AND_HEIGHT
+        TEXT Count tokens="{ins.tabs.pill.tab}" characters=(property)Count textStyle="{ins.typography.small}" textAutoResize=WIDTH_AND_HEIGHT
+    }
+}

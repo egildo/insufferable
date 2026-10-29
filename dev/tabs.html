@@ -26,6 +26,19 @@
 <div id="plum">A plum.</div>
 <div id="quince">A quince.</div>
 
+<h2>Pills</h2>
+<p><code>class="pill"</code>: no strip, the selected tab on the accent's tint. A count follows a tab's name.</p>
+<ins-tabs class="pill" aria-label="Pane">
+  <button aria-controls="structure">Structure <data value="26">26</data></button>
+  <button aria-controls="resources">Resources <data value="6">6</data></button>
+  <button aria-controls="log">Print log <data value="2">2</data></button>
+  <button aria-controls="source" disabled>Source <data value="212">212</data></button>
+</ins-tabs>
+<div id="structure">26 blocks.</div>
+<div id="resources">6 files.</div>
+<div id="log">2 lines.</div>
+<div id="source">212 lines.</div>
+
 <h2>Controlled</h2>
 <p>The app owns the state: it cancels the command and writes <code>aria-selected</code> itself, refusing Lichen.</p>
 <ins-tabs id="moss" aria-label="Moss">

@@ -4,6 +4,10 @@
  * `class="plain"` for a quiet one. Disabled is `disabled` or
  * `aria-disabled="true"`. An icon inside sits beside the words.
  *
+ * A button that holds an icon and is named by `aria-label` is an icon button:
+ * square, as wide as it is tall. Pressed, it takes the accent as any button
+ * does, since a wash would fall under the 3:1 a state's mark wants.
+ *
  * A tab and a menu item are buttons too, styled by their own element:
  * `@scope … to (ins-tabs, ins-menu)` keeps these rules out of both, so neither
  * element has to undo the other.
@@ -20,5 +24,9 @@
     outline-style: solid;
     white-space: nowrap;
     @apply --ins-button;
+  }
+
+  button[aria-label]:has(> ins-icon) {
+    @apply --ins-icon-button;
   }
 }

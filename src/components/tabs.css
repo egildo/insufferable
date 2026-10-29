@@ -2,6 +2,9 @@
  * tabs: `<ins-tabs>` holding `<button>`s. Selected is `aria-selected="true"`;
  * a tab that cannot be chosen is `disabled` or `aria-disabled="true"`. The
  * selected tab's line sits on the strip's own line.
+ *
+ * `class="pill"` drops the strip: each tab is a pill, and the selected one sits
+ * on the accent's tint. A count after a tab's name is a `<data>`.
  */
 
 ins-tabs {
@@ -17,4 +20,15 @@ ins-tabs > button {
   outline-style: solid;
   white-space: nowrap;
   @apply --ins-tabs-tab;
+}
+
+ins-tabs.pill {
+  border-bottom-style: none;
+  @apply --ins-tabs-pill;
+}
+
+ins-tabs.pill > button {
+  margin: 0;
+  border-bottom-style: none;
+  @apply --ins-tabs-pill-tab;
 }

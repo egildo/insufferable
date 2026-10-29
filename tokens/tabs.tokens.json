@@ -83,6 +83,77 @@
           "$type": "typography",
           "$value": "{ins.typography.label}"
         }
+      },
+      "pill": {
+        "$description": "Pill tabs, ins-tabs class=pill: no strip; the selected tab is a pill on the accent's tint.",
+        "gap": {
+          "$type": "dimension",
+          "$value": "{ins.space.1}"
+        },
+        "tab": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.2}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          },
+          "borderRadius": {
+            "$type": "dimension",
+            "$value": "{ins.radius.round}"
+          },
+          "paddingBlock": {
+            "$type": "dimension",
+            "$value": "{ins.space.1}"
+          },
+          "paddingInline": {
+            "$type": "dimension",
+            "$value": "{ins.space.3}"
+          },
+          "selected": {
+            "color": {
+              "$type": "color",
+              "$value": "{ins.color.accent}"
+            },
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.accentTint}"
+            },
+            "hover": {
+              "backgroundColor": {
+                "$type": "color",
+                "$value": "{ins.color.accentTint}"
+              }
+            },
+            "disabled": {
+              "color": {
+                "$type": "color",
+                "$value": "{ins.color.text.3}"
+              },
+              "backgroundColor": {
+                "$type": "color",
+                "$value": "{ins.color.line}"
+              }
+            }
+          },
+          "hover": {
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.fill}"
+            }
+          },
+          "disabled": {
+            "color": {
+              "$type": "color",
+              "$value": "{ins.color.text.3}"
+            },
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.clear}"
+            }
+          }
+        }
       }
     }
   }

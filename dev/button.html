@@ -34,6 +34,23 @@
   <button class="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
 </p>
 
+<h2>Icon buttons</h2>
+<p>A button holding an icon and named by <code>aria-label</code> is square. Pressed, it takes the accent.</p>
+<p class="row">
+  <button aria-label="Search"><ins-icon name="search"></ins-icon></button>
+  <button class="solid" aria-label="Favourite"><ins-icon name="heart"></ins-icon></button>
+  <button class="plain" aria-label="Settings"><ins-icon name="settings"></ins-icon></button>
+  <button class="plain" aria-label="Show help" aria-pressed="true"><ins-icon name="help-circle"></ins-icon></button>
+  <button class="plain" aria-label="Home" disabled><ins-icon name="home"></ins-icon></button>
+</p>
+
+<h2>With a count</h2>
+<p class="row">
+  <button>Messages <data value="3">3</data></button>
+  <button class="solid">Print <data value="2">2</data></button>
+  <button class="plain" aria-pressed="true">Unread <data value="12">12</data></button>
+</p>
+
 <h2>Beside a tab list, untouched by it</h2>
 <ins-tabs aria-label="Fruit">
   <button aria-controls="apple">Apple</button>

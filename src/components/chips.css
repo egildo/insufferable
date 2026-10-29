@@ -1,0 +1,35 @@
+/*
+ * chips: `<ul class="chips">`, a list of removable values. Each item is its
+ * text and a button holding an icon, named by what it removes
+ * (`aria-label="Remove hyphens: none"`). The button sends `--remove` to the
+ * list (`commandfor` its id) with its `value`, and the app, hearing it at the
+ * root, removes the value. There is no default: a list that removes its own
+ * items would hold state the app owns.
+ */
+
+ul.chips {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @apply --ins-chips;
+
+  & > li {
+    display: inline-flex;
+    align-items: center;
+    border-style: solid;
+    @apply --ins-chips-chip;
+  }
+
+  & > li > button {
+    display: inline-grid;
+    place-items: center;
+    min-block-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline-style: solid;
+    @apply --ins-chips-chip-remove;
+  }
+}

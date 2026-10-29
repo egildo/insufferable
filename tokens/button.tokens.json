@@ -226,6 +226,17 @@
           }
         }
       }
+    },
+    "iconButton": {
+      "$description": "A button that holds only an icon and is named by aria-label: square, as wide as it is tall.",
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.0}"
+      }
     }
   }
 }

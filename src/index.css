@@ -33,3 +33,6 @@
 @import './components/dialog.css' layer(ins.components);
 @import './components/menu.css' layer(ins.components);
 @import './components/toolbar.css' layer(ins.components);
+@import './components/count.css' layer(ins.components);
+@import './components/tag.css' layer(ins.components);
+@import './components/chips.css' layer(ins.components);

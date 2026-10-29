@@ -1,0 +1,11 @@
+{
+  "ins": {
+    "count": {
+      "$description": "A count inside a control: data inside a button, a tab, a summary, a label or a legend. In the colour around it, so it keeps that colour's contrast; set apart by its lighter weight and tabular figures.",
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": "{ins.font.weight.regular}"
+      }
+    }
+  }
+}

@@ -34,6 +34,13 @@
         }
       },
       "size": {
+        "xs": {
+          "$value": {
+            "value": 0.75,
+            "unit": "rem"
+          },
+          "$description": "A tag's label"
+        },
         "$type": "dimension",
         "sm": {
           "$value": {
@@ -103,6 +110,13 @@
             "value": 0,
             "unit": "px"
           }
+        },
+        "wide": {
+          "$value": {
+            "value": 0.5,
+            "unit": "px"
+          },
+          "$description": "Capitals set small"
         }
       }
     },
@@ -178,6 +192,16 @@
           "lineHeight": "{ins.font.lineHeight.normal}"
         },
         "$description": "Small print: a note, a caption"
+      },
+      "tag": {
+        "$value": {
+          "fontFamily": "{ins.font.family.sans}",
+          "fontSize": "{ins.font.size.xs}",
+          "fontWeight": "{ins.font.weight.semibold}",
+          "letterSpacing": "{ins.font.letterSpacing.wide}",
+          "lineHeight": "{ins.font.lineHeight.normal}"
+        },
+        "$description": "A tag: a kind or a status, in small capitals"
       }
     }
   }

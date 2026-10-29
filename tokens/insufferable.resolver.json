@@ -64,6 +64,15 @@
         },
         {
           "$ref": "toolbar.tokens.json"
+        },
+        {
+          "$ref": "count.tokens.json"
+        },
+        {
+          "$ref": "tag.tokens.json"
+        },
+        {
+          "$ref": "chips.tokens.json"
         }
       ]
     }

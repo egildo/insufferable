@@ -1,0 +1,11 @@
+/*
+ * tag: `<small class="tag">`, a kind or a status beside a name: "String",
+ * "inherited". Small capitals on the fill. The capitals are the stylesheet's,
+ * so the text is written as it reads and is spoken as written.
+ */
+
+small.tag {
+  display: inline-block;
+  text-transform: uppercase;
+  @apply --ins-tag;
+}

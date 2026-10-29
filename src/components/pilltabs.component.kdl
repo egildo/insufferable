@@ -1,0 +1,16 @@
+// PillTabs: a pill tab list, ins-tabs class=pill, with the first selected. Source: ins.tabs.pill in
+// tokens/tabs.tokens.json. No strip: the tabs sit apart by the pill's gap.
+component PillTabs
+description "A pill tab list: tabs as pills, one selected, each with its count."
+
+FRAME PillTabs tokens="{ins.tabs.pill}" layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG {
+    INSTANCE First component=PillTab {
+        set selection=selected Label="Structure" Count="26"
+    }
+    INSTANCE Second component=PillTab {
+        set Label="Resources" Count="6"
+    }
+    INSTANCE Third component=PillTab {
+        set Label="Print log" Count="2"
+    }
+}

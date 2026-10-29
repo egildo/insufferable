@@ -1,0 +1,19 @@
+// Chip: one removable value of a chip list, ul class=chips. Source: ins.chips.chip in tokens/chips.tokens.json.
+// The value, then the button that removes it: a glyph in a circle, at rest. The chip's paddings are logical in the
+// stylesheet, which a group does not bind, so the root names them itself, start on the left.
+// Not drawn: the remove button's hover, active and focus, which are its own parts; right to left.
+component Chip tokens="{ins.chips.chip}"
+description "A removable value: its text, and a button that sends --remove to the list."
+
+properties {
+    TEXT Value default="hyphens: none"
+}
+
+FRAME Chip layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER paddingLeft="{ins.chips.chip.paddingInlineStart}" paddingRight="{ins.chips.chip.paddingInlineEnd}" strokeAlign=INSIDE {
+    TEXT Value tokens="{ins.chips.chip}" characters=(property)Value textAutoResize=WIDTH_AND_HEIGHT
+    FRAME Remove tokens="{ins.chips.chip.remove}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.chips.chip.remove.inlineSize}" height="{ins.chips.chip.remove.blockSize}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER {
+        TEXT Glyph textStyle="{ins.icon.font}" characters="" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.chips.chip.remove.color}"
+        }
+    }
+}

@@ -533,3 +533,35 @@ The vocabulary spells the variant axis `.solid`, `.plain`, `.danger`; the segmen
 ### What was checked
 
 The built stylesheet holds no `data-variant`, and its variant rules read `:where(.solid)`, `:where(.plain)` and `:where(.danger)` nested under their elements. `toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, on the index: the solid button in the accent, the outlined one clear, the plain one with no border, the danger note in its own tint beside the plain one, the segmented control laid out with its legend hidden. A FigCraft dry run plans no change to the variables or the components, since the sync reads the token names, not the selectors.
+
+## The small parts
+
+> **Ruled 29 October 2026,** as the first batch of the coverage that `beltype-studio-experiment`'s FigCraft file asks for, and built the same day: the icon button, the count, pill tabs, the tag and the chip list. Their specs are in specs.md.
+
+### Where it comes from
+
+The studio file draws an application: a desk of panes, docks, pill tabs with counts, trees, inspector rows, chips, logs. insufferable held the parts of a document. The coverage is built first, in four batches (the small parts; the rows; the shell; the studio screen rebuilt as a benchmark), at today's look; the style is studied after, and changes token values, not markup.
+
+### The ruling
+
+- **Icon button:** the plain button holding only an icon, named by `aria-label`, drawn square. No new markup.
+- **Count:** `<data value>` inside a control.
+- **Pill tabs:** `ins-tabs class="pill"`, the same element.
+- **Tag:** `<small class="tag">`.
+- **Chip list:** `<ul class="chips">`, each item's button sending `--remove` to the list; no script of insufferable's.
+
+### What the build found
+
+- **The icon button keeps the accent when pressed.** The proposal had it pressed as the studio draws it, the ink on a wash. The button's own ruling refused that ground already: the fill is 1.16:1 against the page, under the 3:1 a state's mark wants. So the icon button differs from the button only in its square.
+- **The icon button is found by its markup:** `button[aria-label]:has(> ins-icon)`. An icon alone needs a name, so the selector asks for what the page must write anyway. A button with words and an `aria-label` is already a fault, since its spoken name would not be its visible one.
+- **A count keeps the colour around it.** Studio draws the count in the same ink at 70%; on the solid button and the selected tab that falls under 4.5:1. insufferable's count takes the colour of its control whole and is set apart by its weight, regular beside the label's medium, and by tabular figures.
+- **The tag's text is the strongest grey.** The second grey on the fill measured 4.39:1, under 4.5 for text; the first is 12:1 in light and in dark.
+- **`--remove` sets no state.** The command rule names a command after the ARIA state it sets; removing a value sets none. The rule now says that a command that sets no state is named after what it asks for, and has no default. `src/commands.ts` lists it.
+- **A disabled pill tab needed its own ground.** The pill's hover fill came through on a disabled tab, since the pill's hover outranks the tab's disabled; the pill now says disabled is clear, and selected and disabled keeps the line's grey, as the button's pressed and disabled does.
+- **The stylesheet grew 9.6 KB,** to 88 KB, mostly the chip list's nested remove button with its three states. Its size stays an open item.
+- **FigCraft:** five new sets, IconButton (72 members, the button's), PillTab (8), PillTabs, Tag and Chip; 35 new variables and three text styles (the tag's style, its alias, the size and tracking it needs). The first run's 50 variable updates changed no existing variable's value: a run into a scratch copy, compared variable by variable with the file before, found none changed. A second run plans nothing for the variables.
+- **The tag is patched on every run.** Its label's case is written over its text style, which has none, and each run then rewrites the style and the case. The text draws in capitals all the same. Not traced; it may share a cause with the style plan's standing updates.
+
+### What was checked
+
+`toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, light and dark: the icon buttons 36px square, the pressed one in the accent; the counts at 400 with tabular figures beside 500 labels; the pill tabs with the selected one at 5:1 on its tint in light and in dark, the disabled one grey; the tags in capitals at 12px; the chip list removing a value through `--remove` heard at the root, the focus moving to the next button, the remove icon 4.4:1 on the chip in light and 5.3:1 in dark. The demo page uses all five. In FigCraft, rendered: the pill tab's eight members, the icon button's grid, the tag in capitals, the chip with its ×.

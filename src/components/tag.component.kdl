@@ -1,0 +1,12 @@
+// Tag: a kind or a status beside a name, small class=tag. Source: ins.tag in tokens/tag.tokens.json.
+// The capitals are the text's case, as the stylesheet's text-transform makes them; the text is written as it reads.
+component Tag tokens="{ins.tag}"
+description "A kind or a status beside a name, in small capitals on the fill."
+
+properties {
+    TEXT Label default="String"
+}
+
+FRAME Tag layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG {
+    TEXT Label tokens="{ins.tag}" characters=(property)Label textCase=UPPER textAutoResize=WIDTH_AND_HEIGHT
+}
