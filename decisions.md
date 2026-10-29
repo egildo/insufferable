@@ -466,8 +466,21 @@ Checked first on a copy of the library from Toghen's own checkout, then on the l
 
 - **The sync moved variables between collections.** With the new tokens, the button's disabled colours fold under `selection`, and the segment and the option keep availability in the path: seven breaking moves. The file was copied aside and the sync run with `--allow-breaking`.
 - **A breaking move leaves members looking hand-edited.** Removing the old variables unbound the members that used them, and the next run read the missing bindings as changes made in Figma and left them: the pressed and disabled toggle drew white, the plain one clear, a checked and disabled segment clear. Toghen's notes said so, under the run's other notes. `--overwrite-drift` on the three component files alone rebound them; a rerun then plans nothing for them.
-- **The Checkbox and the Dialog carry the same leftover drift** from earlier breaking moves (14 and 4 notes in the committed library). Not touched here.
+- **The Checkbox and the Dialog carry the same leftover drift** from earlier breaking moves (14 and 4 notes in the committed library). Not touched here; settled with `@toghen/figma` 0.1.15.
 
 ### What was checked
 
 `toghen-query` finds no hole, and `applies` gives the new token for every combination of variant, pointer and focus. In headless Chrome, with the markup added to the overview page and a real mouse: a disabled pressed toggle, a plain pressed one with `aria-disabled`, a checked segment in a disabled fieldset and a chosen disabled option all `#e0e0e0` with `#a1a1a1` text at rest, under the pointer and held (dark `#414141` and `#6e6e6e`); an unpressed disabled toggle and an unchecked disabled segment unchanged. In FigCraft, every disabled member sampled from the renders: pressed, solid and pressed, plain and pressed, and a checked segment `#e0e0e0` in all three pointer states; ListboxOption rendered and looked at.
+
+## `@toghen/figma` 0.1.15
+
+> **Moved 29 October 2026,** from 0.1.14. The issue insufferable reported is fixed in it: a binding lost to a breaking variable move is now written again, not kept as a hand edit, and a set's summary line counts the fields it kept as drift.
+
+A stamp written before 0.1.15 does not record what its fields were bound to, so the drift already in the library stayed, as the release says. Its new count named it: Checkbox 14 fields, Dialog 4. One run with `--overwrite-drift` on those two files settled it.
+
+- **The Checkbox** had lost the bindings of its Box's fill and stroke and its Tick's and Dot's fill, the case the fix covers.
+- **The Dialog was another case.** Its Keep and Discard buttons were instances of two Button members that no longer existed, left over from a rebuild of the Button set, and Toghen read each as a swap made by hand. The fix does not cover an instance whose main the sync deleted. Added to the same issue on Codeberg, Toghen/figma.
+
+### What was checked
+
+The library was copied aside first. After the run, the saved file binds every Box, Tick and Dot fill again, and the two instances use the plain and the solid Button at rest. Rendered: the checkbox and the radio in their eight states, the dialog with a plain Keep it and a solid Discard. A dry run of every file then planned nothing and counted no drift.
