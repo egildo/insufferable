@@ -88,6 +88,9 @@
         },
         {
           "$ref": "tree.tokens.json"
+        },
+        {
+          "$ref": "shell.tokens.json"
         }
       ]
     }

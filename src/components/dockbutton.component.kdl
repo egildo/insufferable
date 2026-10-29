@@ -1,0 +1,24 @@
+// DockButton: one button of a dock, ins-toolbar class=dock, a disclosure button naming its pane. Source:
+// ins.dock.button in tokens/shell.tokens.json. Its axes come from its parts: disclosure (open) and pointer.
+// The icon over its word, square; open, the accent's tint. The news dot is a Status instance, new, at the icon's
+// corner, shown by a property.
+// Not drawn: the focus ring, which is the button's.
+component DockButton tokens="{ins.dock.button}"
+description "A dock button: its pane's icon over its name. Open, the accent's tint; a dot when its closed pane has news."
+
+properties {
+    TEXT Glyph default="\u{fafa}"
+    TEXT Label default="Structure"
+    BOOLEAN News default=#false
+}
+
+FRAME DockButton layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.dock.button.inlineSize}" height="{ins.dock.button.minBlockSize}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER strokeAlign=INSIDE {
+    FRAME Mark layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG clipsContent=#false {
+        fills
+        TEXT Glyph tokens="{ins.dock.button}" textStyle="{ins.icon.font}" characters=(property)Glyph textAutoResize=WIDTH_AND_HEIGHT
+        INSTANCE News component=Status visible=(property)News layoutPositioning=ABSOLUTE x=(literal)14 y=(literal)0 {
+            set variant=new
+        }
+    }
+    TEXT Label tokens="{ins.dock.button}" characters=(property)Label textAutoResize=WIDTH_AND_HEIGHT
+}

@@ -1,0 +1,14 @@
+// GroupHeader: a group's heading inside a pane, an hgroup. Source: ins.pane.group in tokens/shell.tokens.json.
+// The heading in small capitals in the tag's style, a note at the end in the small style, both in the second grey.
+component GroupHeader tokens="{ins.pane.group}"
+description "A group's heading in a pane: its name in small capitals, a note at the end."
+
+properties {
+    TEXT Heading default="Rules"
+    TEXT Note default="3, in the sheet's order"
+}
+
+FRAME GroupHeader layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)320 primaryAxisAlignItems=SPACE_BETWEEN counterAxisAlignItems=BASELINE {
+    TEXT Heading tokens="{ins.pane.group.heading}" characters=(property)Heading textCase=UPPER textAutoResize=WIDTH_AND_HEIGHT
+    TEXT Note tokens="{ins.pane.group.note}" characters=(property)Note textAutoResize=WIDTH_AND_HEIGHT
+}

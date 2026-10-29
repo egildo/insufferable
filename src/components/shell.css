@@ -1,0 +1,99 @@
+/*
+ * shell: an application laid out on a desk. `div.shell` holds, in a row, a
+ * dock, the side panes, the main pane, the side panes and a dock; a hidden
+ * pane takes no room. The panes are landmarks: `aside.pane` at a side,
+ * `main.pane` in the centre, each a rounded surface that scrolls inside.
+ *
+ * A pane's `<header>` is its head: tabs or a title, then its buttons, pushed to
+ * the end. Its heading, at whatever level, is in the label style. An `<hgroup>` in a pane heads a group within it: the heading in
+ * small capitals, a `<p>` at the end in small grey. Outside a pane, an
+ * `hgroup` is the document's and is left alone.
+ *
+ * A dock is `ins-toolbar class="dock" aria-orientation="vertical"`, a narrow
+ * pane of disclosure buttons, each its icon over its word; a status inside a
+ * button sits at the icon's corner.
+ */
+
+div.shell {
+  display: flex;
+  box-sizing: border-box;
+  min-block-size: 100%;
+  @apply --ins-shell;
+
+  & > main.pane {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  & > aside.pane {
+    flex: none;
+    @apply --ins-pane-side;
+  }
+}
+
+:is(aside, main, section).pane {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: auto;
+  border-style: solid;
+  @apply --ins-pane;
+
+  &[hidden] {
+    display: none;
+  }
+
+  & > header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    @apply --ins-pane-head;
+  }
+
+  & > header > :is(h1, h2, h3, h4, h5, h6) {
+    margin: 0;
+    @apply --ins-pane-head-title;
+  }
+
+  & > header > button:first-of-type {
+    margin-inline-start: auto;
+  }
+
+  & hgroup {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    @apply --ins-pane-group;
+  }
+
+  & hgroup > :is(h1, h2, h3, h4, h5, h6) {
+    margin: 0;
+    text-transform: uppercase;
+    @apply --ins-pane-group-heading;
+  }
+
+  & hgroup > p {
+    margin: 0;
+    @apply --ins-pane-group-note;
+  }
+}
+
+ins-toolbar.dock {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-self: start;
+  border-style: solid;
+  @apply --ins-dock;
+
+  & > button {
+    position: relative;
+    flex-direction: column;
+    @apply --ins-dock-button;
+  }
+
+  & > button > small.status {
+    position: absolute;
+    inset-block-start: 25%;
+    inset-inline-end: 25%;
+  }
+}

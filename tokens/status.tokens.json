@@ -1,7 +1,7 @@
 {
   "ins": {
     "status": {
-      "$description": "A status: small class=status with ok, warn, danger or off, drawn as a dot whose word is read and not shown. Each status has its own shape as well as its colour.",
+      "$description": "A status: small class=status with ok, warn, danger, off or new, drawn as a dot whose word is read and not shown. Each status has its own shape as well as its colour; new, the news dot on a dock button, is the danger's dot.",
       "$extensions": {
         "com.toghen": {
           "css": {
@@ -10,7 +10,8 @@
                 "ok": ".ok",
                 "warn": ".warn",
                 "danger": ".danger",
-                "off": ".off"
+                "off": ".off",
+                "new": ".new"
               }
             }
           }
@@ -86,6 +87,16 @@
         "borderColor": {
           "$type": "color",
           "$value": "{ins.color.lineStrong}"
+        }
+      },
+      "new": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.danger}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.danger}"
         }
       }
     }

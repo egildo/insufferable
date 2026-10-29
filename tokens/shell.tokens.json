@@ -1,0 +1,217 @@
+{
+  "ins": {
+    "shell": {
+      "$description": "An application's shell: div class=shell, the docks, the side panes and the main pane in a row on the desk.",
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.desk}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      }
+    },
+    "pane": {
+      "$description": "A pane: aside class=pane at a side, main class=pane in the centre. A rounded surface on the desk, its head on top, scrolling inside.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.2}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "side": {
+        "$description": "A side pane's width at rest.",
+        "inlineSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.side}"
+        }
+      },
+      "head": {
+        "$description": "The pane's head, its header: tabs or a title, then its buttons at the end.",
+        "gap": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "minBlockSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.control}"
+        },
+        "title": {
+          "$description": "The head's heading: the pane's name, in the label style, at whatever level it is.",
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.1}"
+          },
+          "font": {
+            "$type": "typography",
+            "$value": "{ins.typography.label}"
+          }
+        }
+      },
+      "group": {
+        "$description": "A group's heading inside a pane, an hgroup: the heading in small capitals, a line at the end in small grey.",
+        "gap": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "heading": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.2}"
+          },
+          "font": {
+            "$type": "typography",
+            "$value": "{ins.typography.tag}"
+          }
+        },
+        "note": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.2}"
+          },
+          "font": {
+            "$type": "typography",
+            "$value": "{ins.typography.small}"
+          }
+        }
+      }
+    },
+    "dock": {
+      "$description": "A dock: ins-toolbar class=dock, vertical, on the desk as a narrow pane. Its buttons open and close panes, each its icon over its word.",
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.2}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "button": {
+        "$description": "A dock button: a disclosure button, aria-expanded and aria-controls naming its pane. Open, the accent's tint.",
+        "$extensions": {
+          "com.toghen": {
+            "css": {
+              "parts": {
+                "disclosure": {
+                  "open": "[aria-expanded=true]"
+                }
+              }
+            }
+          }
+        },
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.radius.1}"
+        },
+        "inlineSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.dock}"
+        },
+        "minBlockSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.dock}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.0}"
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "{ins.space.0}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.dock}"
+        },
+        "hover": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.1}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        },
+        "open": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentTint}"
+          },
+          "hover": {
+            "color": {
+              "$type": "color",
+              "$value": "{ins.color.accent}"
+            },
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.accentTint}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

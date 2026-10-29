@@ -65,7 +65,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -119,6 +119,7 @@ The colours are in two tiers. **The palette**, `palette` in `tokens/palette.toke
 | `ins.color.onAccent` | white | `gray.950` | Text on the accent |
 | `ins.color.danger` | `red.600` | `red.400` | An invalid field |
 | `ins.color.dangerTint` | `red.25` | `red.900` | A ground tinted with the danger: a callout that warns |
+| `ins.color.desk` | `gray.25` | black | The ground an application's panes sit on |
 | `ins.color.ok` · `warn` | `green.500` · `amber.500` | `green.300` · `amber.300` | A status in order, a status that needs a look: 4.5:1 on the page |
 | `ins.color.raised` | white | `gray.900` | What sits above the page: a menu, a dialog |
 | `ins.color.shadow` | black at 12% | clear | A raised surface's shadow: in dark the lighter ground sets it apart |
@@ -140,13 +141,14 @@ A text style is a W3C `typography` token: font family, size, weight, letter spac
 | `ins.typography.body` | Archivo | 1rem | 400 | 1.5 | the page (`html`) |
 | `ins.typography.label` | Archivo | 0.875rem | 500 | 1.25 | a tab, a summary, a button, a field's label |
 | `ins.typography.small` | Archivo | 0.875rem | 400 | 1.5 | small print and a caption (`small`, `figcaption`) |
-| `ins.typography.tag` | Archivo | 0.75rem | 600 | 1.5 | a tag, in capitals, tracked 0.5px |
+| `ins.typography.tag` | Archivo | 0.75rem | 600 | 1.5 | a tag and a group's heading, in capitals, tracked 0.5px |
+| `ins.typography.dock` | Archivo | 0.75rem | 500 | 1.25 | a word under an icon: a dock button |
 | `ins.typography.heading` | Archivo | 1.25rem | 600 | 1.25 | a heading within a section (`h3`) |
 | `ins.typography.title` | Fraunces | 1.5rem | 600 | 1.25 | a section's heading (`h2`), a dialog's title |
 | `ins.typography.display` | Fraunces | 2rem | 600 | 1.25 | the top heading (`h1`) |
 | `ins.typography.icon` | tabler-icons | 1.25rem | 400 | 1 | an icon |
 
-The sizes are six steps, `ins.font.size.xs` to `xxl`: 0.75, 0.875, 1, 1.25, 1.5 and 2rem; the smallest is a tag's alone. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
+The sizes are six steps, `ins.font.size.xs` to `xxl`: 0.75, 0.875, 1, 1.25, 1.5 and 2rem; the smallest is for a tag and a word under an icon. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
 
 ### The house fonts
 
@@ -435,12 +437,12 @@ Not built: checkbox and radio items (`aria-checked`, `--check`), submenus, findi
 </ins-toolbar>
 ```
 
-- **It writes:** `role="toolbar"`; on each button with `aria-pressed`, `commandfor` naming the toolbar and `command="--press"` unless it names another; the roving `tabindex`, held by the button last focused. It gives itself an id when it has none.
-- **It reads:** `aria-pressed`, `disabled` and `aria-disabled`, and watches them.
-- **It sends:** `--press` from a toggle button, on a click, Enter or Space.
-- **Its default:** turns the button's `aria-pressed` over, unless the app cancels the command.
-- **The keyboard,** after the WAI-ARIA toolbar pattern: the arrows move between the buttons and wrap, following the reading direction, Home and End go to the ends, a disabled button is passed over. Moving presses nothing.
-- **Its buttons are buttons,** styled as any: the demo writes `class="plain"`. A button without `aria-pressed` is left alone.
+- **It writes:** `role="toolbar"`; on each button with `aria-pressed`, `commandfor` naming the toolbar and `command="--press"` unless it names another; on each button with `aria-expanded` and `aria-controls`, a disclosure button after the [APG disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), `commandfor` and `command="--expand"`, and `hidden` on the element it names while it is closed; the roving `tabindex`, held by the button last focused. It gives itself an id when it has none.
+- **It reads:** `aria-pressed`, `aria-expanded`, `disabled` and `aria-disabled` on its buttons, and `aria-orientation` on itself, and watches them.
+- **It sends:** `--press` from a toggle button and `--expand` from a disclosure button, on a click, Enter or Space.
+- **Its default:** turns the button's `aria-pressed` or `aria-expanded` over, unless the app cancels the command, and shows or hides what a disclosure button names.
+- **The keyboard,** after the WAI-ARIA toolbar pattern: the arrows move between the buttons and wrap, following the reading direction, Home and End go to the ends, a disabled button is passed over. With `aria-orientation="vertical"`, the arrows are Up and Down. Moving presses nothing.
+- **Its buttons are buttons,** styled as any: the demo writes `class="plain"`. A button that is neither a toggle nor a disclosure is left alone.
 - **Without script** the buttons are ordinary buttons in the tab order, and nothing toggles.
 
 ### Count
@@ -528,6 +530,7 @@ An inspector: `<fieldset class="properties">` holding a `<legend>` and `div.prop
 
 A status: `<small class="status ok">Synced</small>`, with `ok`, `warn`, `danger` or `off`. A dot: its word is read by assistive technology and not shown, so a page that wants the word seen writes it beside.
 
+- **`new`** is the news dot on a dock button: the danger's colour, a dot. It lives on a dock button, where no other status sits, and its word is read with the button's name, so it shares the dot's shape with `ok`.
 - **Each status has its own shape as well as its colour,** since colour alone says nothing to some readers (WCAG's use of colour): a dot for `ok`, a triangle for `warn`, a square for `danger`, a ring for `off`. Without a kind, a grey dot.
 - **The colours** are the roles `ok` and `warn`, green and amber, and `danger`; `off` is the strong line's grey. Each is at least 3:1 against the page, in light and in dark, as a graphic must be.
 
@@ -574,6 +577,37 @@ A hierarchical list whose nodes open and close: `<ins-tree>` holding a `<ul>`, e
 
 Not built: multi-select, `*` to open every sibling (optional in the pattern), disabled nodes, nodes loaded as they open.
 
+### Shell
+
+An application on a desk: `div.shell` holding, in a row, a dock, the side panes, the main pane, the side panes and a dock.
+
+```html
+<div class="shell">
+  <ins-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
+    <button aria-expanded="true" aria-controls="structure"><ins-icon name="list-tree"></ins-icon> Structure</button>
+    <button aria-expanded="false" aria-controls="log"><ins-icon name="printer"></ins-icon> Print log <small class="status new">new</small></button>
+  </ins-toolbar>
+  <aside class="pane" id="structure" aria-labelledby="structure-title">
+    <header><h2 id="structure-title">Structure <data value="26">26</data></h2></header>
+    …
+  </aside>
+  <aside class="pane" id="log" aria-labelledby="log-title">…</aside>
+  <main class="pane" aria-labelledby="doc-title">
+    <header><h1 id="doc-title">Bolletta della luce</h1> <code>demos/bolletta/index.html</code></header>
+    …
+  </main>
+</div>
+```
+
+- **The desk** is the shell's ground, `ins.color.desk`, a step below the surface: the lightest grey in light, black in dark. The panes take the surface, so every control on them keeps the contrast it has on a page.
+- **The panes are landmarks:** `aside.pane` (complementary) at a side, `main.pane` in the centre, each named by its heading, so a screen reader moves between them. A pane is a rounded surface with a hairline, and scrolls inside. A side pane is `ins.size.side` wide; the main pane takes the rest; a hidden pane takes no room.
+- **The pane's head** is its `<header>`: tabs or a heading, then anything else, and its buttons at the end. Its heading, at whatever level, is in the label style.
+- **A group's heading** in a pane is an `<hgroup>`, the platform's element for a heading with a line beside it: the heading in small capitals, in the tag's style, and a `<p>` at the end in small grey. An `hgroup` outside a pane is the document's and keeps its own look.
+- **The dock** is the toolbar, `class="dock"` and vertical, a narrow pane of disclosure buttons, each naming its pane. Each button is its icon over its word in the dock's style (0.75rem, medium), square (`ins.size.dock`); open, the accent's tint. A status inside a button, `new`, sits at the icon's corner: the dot that says a closed pane has news, read with the button's name.
+- **One pane per side is the app's.** The dock's default opens and closes each pane on its own, as the APG's accordion may; an app that keeps one pane per side hears `--expand` at the root and closes the others.
+
+Not built: the splitter between panes; the narrow layouts, where a side becomes an overlay or a sheet; the colour per pane.
+
 ## Commands
 
 A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` gives `--expand` (a tree node's; not the menu's, since a popover's open state is the platform's), `aria-pressed` `--press`, `aria-checked` `--check`. A command that sets no state is named after what it asks for, and has no default: `--remove`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
@@ -582,7 +616,7 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 |---|---|---|
 | `--select` | a tab, a tree node | `aria-selected="true"` on the tab, `false` on its siblings |
 | `--press` | a toggle button in a toolbar | `aria-pressed` on the button, turned over |
-| `--expand` | a tree node | `aria-expanded` on the node, turned over |
+| `--expand` | a tree node, a disclosure button in a toolbar | `aria-expanded` on the node, turned over |
 | `--remove` | a chip's button | nothing: it asks the app to remove the value, and has no default |
 
 `src/commands.ts` exports them as `commands`, so an app reads the names from one place.

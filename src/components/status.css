@@ -1,10 +1,10 @@
 /*
  * status: `<small class="status ok">Synced</small>`, with `ok`, `warn`,
- * `danger` or `off`. A dot: its word is read by assistive technology and not
+ * `danger`, `off` or `new`. A dot: its word is read by assistive technology and not
  * shown, so a page that wants the word seen writes it beside. Each status has
  * its own shape as well as its colour, since colour alone says nothing to
  * some readers: a dot for ok, a triangle for warn, a square for danger, a
- * ring for off.
+ * ring for off. `new` is a dock button's news dot, in the danger's colour.
  */
 
 small.status {

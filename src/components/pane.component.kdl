@@ -1,0 +1,24 @@
+// Pane: a region of an application, aside class=pane or main class=pane, on the desk. Source: ins.pane in
+// tokens/shell.tokens.json. A rounded surface: its head on top, its name in the label style and an icon button at
+// the end, then a slot for what it holds.
+// Not drawn: the scrolling inside, and the head's tabs, which an instance puts in place of the name.
+component Pane tokens="{ins.pane}"
+description "A pane: a rounded surface on the desk with its head on top, holding a region of the application."
+
+properties {
+    TEXT Title default="Structure"
+    SLOT Content description="What the pane holds." displayEmptyByDefault=#true
+}
+
+FRAME Pane layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.pane.side.inlineSize}" height=(literal)480 strokeAlign=INSIDE {
+    FRAME Head tokens="{ins.pane.head}" layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG counterAxisAlignItems=CENTER {
+        fills
+        TEXT Title tokens="{ins.pane.head.title}" characters=(property)Title layoutSizingHorizontal=FILL textAutoResize=HEIGHT
+        INSTANCE Action component=IconButton {
+            set variant=plain Glyph="\u{eaf8}"
+        }
+    }
+    SLOT Content layoutMode=VERTICAL layoutSizingHorizontal=FILL layoutSizingVertical=FILL {
+        fills
+    }
+}

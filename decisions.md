@@ -616,3 +616,30 @@ The studio file draws an application: a desk of panes, docks, pill tabs with cou
 ### What was checked
 
 The keyboard rules are pure functions, `treeAction` and `typeAhead` in `src/keys.ts`, with five new tests; eleven pass. In the built-in browser, on `dev/tree.html`, by real key presses: down, left to the parent, left to close it, down twice, right to open a closed section, right into it, Enter to select, "i" and later "v" for type-ahead, wrapping; the log heard `--select` and `--expand` at the root for each. A click on a chevron opened a node without selecting it; a click on its row selected it; with the app cancelling `--expand`, a click on the chevron changed nothing. One tab stop throughout; no end node carries `aria-expanded`; each node's name is its row. Light and dark: the focus ring and the selected tint show together on two rows. In FigCraft: TreeRow's 24 members, closed, open and end by selection, pointer and focus, rendered; the library's existing variables unchanged after the sync, and a second run plans nothing new.
+
+## The shell
+
+> **Ruled 29 October 2026,** as the first half of the shell's batch, and built the same day: the desk and its panes, the pane's head, the group header and the dock. The splitter and the narrow layouts are its second half. Their specs are in specs.md.
+
+### The ruling
+
+- **Desk and panes:** `div.shell` on the desk, `aside.pane` and `main.pane` as landmarks.
+- **The pane's head:** its `header`, its buttons at the end.
+- **The group header:** an `hgroup` inside a pane, the platform's element for a heading with a line beside it, styled only there.
+- **The dock:** no new element. The toolbar, vertical, learns disclosure buttons after the APG's disclosure pattern; one pane per side is the app's.
+- **The news dot:** a status of a new kind, `new`.
+
+### What the build found
+
+- **The panes take the surface; only the desk is new.** A pane role beside the surface would have been the same white in light, and in dark the raised grey, which is also the fill a control takes under the pointer, so a hover on a pane would not show. So the panes are the surface, and the desk sits a step below it: `gray.25` in light, black in dark. The warm values wait for the style study.
+- **A pane's display hid nothing.** The pane is a flex column, and `display` outranks the browser's own rule for `hidden`; a closed pane showed. The pane now says `hidden` is `display: none`, as the choice rows had to.
+- **A pane's heading is in the label style.** Its level is the document outline's, so the centre's `h1` would have been the display style; a heading in a pane's head is in the label style at any level.
+- **The dock's icons** are seven more of Tabler's: `list-tree`, `folder`, `printer`, `adjustments-horizontal`, `stack-2`, `code` and `moon`. The shipped list is kept in order.
+- **A text style for the dock,** `ins.typography.dock`: 0.75rem, medium, the word under an icon.
+- **`new` joins the variant collection** as the other statuses did: one more mode on the button's and the callout's variables, holding their rest values.
+- **Two component files re-patch their case on every run,** the tag and now the group header: both write `textCase` over a text style. This is the cause the tag's note left untraced.
+- **The stylesheet is 119.5 KB.**
+
+### What was checked
+
+`toghen-query` finds no hole; typecheck and tests pass. In the built-in browser at 1400 by 860, light and dark, on `dev/shell.html`: the two docks, the structure pane with the tree, the main pane with its head (the title in the label style, the path in code, a status, the theme's icon button at the end), and the styles pane with pill tabs, group headers, a chip and choice rows. A click on Resources in the dock showed its pane and, by the demo app, hid Structure's; a second click hid it, and the main pane took the room. Down in the vertical dock moved the focus; one tab stop per dock. The news dot sits at the printer's corner, and the button reads "Print log new". In FigCraft: Dock, DockButton (four members, open by pointer), Pane with a slot, and GroupHeader, rendered. The news dot is placed at the glyph's corner by hand (`layoutPositioning=ABSOLUTE`, 14 and 0, its mark not clipping), as the stylesheet places it by percentages. After the sync, the library's variables are unchanged except the variant collection's new mode.

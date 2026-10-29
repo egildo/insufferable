@@ -4,16 +4,22 @@
  * (https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/).
  *
  * The markup is native: `<button>`s inside the element. A button with
- * `aria-pressed` is a toggle button; any other is left as it is. Without
- * script, every button is an ordinary button in the tab order, and nothing
- * toggles.
+ * `aria-pressed` is a toggle button; a button with `aria-expanded` and
+ * `aria-controls` is a disclosure button
+ * (https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), which shows and
+ * hides the element it names; any other is left as it is. Without script,
+ * every button is an ordinary button in the tab order, and nothing toggles.
  *
  * Attributes in: `aria-pressed` on a toggle button says whether it is pressed;
- * `disabled` or `aria-disabled="true"` takes a button out of the walk.
+ * `aria-expanded` on a disclosure button whether what it names is shown, and
+ * the element keeps that element's `hidden` in step; `disabled` or
+ * `aria-disabled="true"` takes a button out of the walk; `aria-orientation=
+ * "vertical"` on the element turns the walk to Up and Down.
  *
- * Commands out: each toggle button sends `--press` to the element, unless it
- * names another command. Unless the app cancels it, the element turns the
- * button's `aria-pressed` over.
+ * Commands out: each toggle button sends `--press` to the element, each
+ * disclosure button `--expand`, unless it names another command. Unless the
+ * app cancels it, the element turns the button's `aria-pressed` or
+ * `aria-expanded` over.
  *
  * The keyboard: the arrows move between the buttons and wrap, following the
  * reading direction, and Home and End go to the ends. Moving presses nothing.
@@ -47,7 +53,7 @@ export class InsToolbar extends HTMLElement {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['aria-pressed', 'aria-disabled', 'disabled'],
+      attributeFilter: ['aria-pressed', 'aria-expanded', 'aria-disabled', 'disabled', 'aria-orientation'],
     });
     this.#sync();
   }
@@ -71,26 +77,47 @@ export class InsToolbar extends HTMLElement {
       this.#stop = buttons.find(isEnabled) ?? null;
     }
     for (const button of buttons) {
-      if (button.hasAttribute('aria-pressed')) {
+      const kind = this.#kindOf(button);
+      if (kind) {
         set(button, 'commandfor', this.id);
-        if (!button.hasAttribute('command')) button.setAttribute('command', commands.press);
+        if (!button.hasAttribute('command')) button.setAttribute('command', kind);
+      }
+      if (kind === commands.expand) {
+        const target = this.#targetOf(button);
+        if (target) target.hidden = button.getAttribute('aria-expanded') !== 'true';
       }
       set(button, 'tabindex', button === this.#stop ? '0' : '-1');
     }
   }
 
+  /** The command a button sends by its kind: `--press` for a toggle button, `--expand` for a disclosure button. */
+  #kindOf(button: HTMLButtonElement) {
+    if (button.hasAttribute('aria-pressed')) return commands.press;
+    if (button.hasAttribute('aria-expanded') && button.hasAttribute('aria-controls')) return commands.expand;
+    return null;
+  }
+
+  #targetOf(button: HTMLButtonElement) {
+    const id = button.getAttribute('aria-controls');
+    return id ? (this.getRootNode() as Document | ShadowRoot).getElementById(id) : null;
+  }
+
   #onCommand = (event: Event) => {
     const { command, source } = event as CommandEvent;
-    if (command !== commands.press || event.defaultPrevented) return;
+    if (event.defaultPrevented) return;
     if (!(source instanceof HTMLButtonElement) || !this.#buttons.includes(source) || !isEnabled(source)) return;
-    set(source, 'aria-pressed', String(source.getAttribute('aria-pressed') !== 'true'));
+    const state = command === commands.press ? 'aria-pressed' : command === commands.expand ? 'aria-expanded' : null;
+    if (!state || !source.hasAttribute(state)) return;
+    set(source, state, String(source.getAttribute(state) !== 'true'));
+    this.#sync();
   };
 
   #onKeydown = (event: KeyboardEvent) => {
     const buttons = this.#buttons;
     const current = buttons.indexOf(event.target as HTMLButtonElement);
     if (current < 0) return;
-    const next = nextIndex(event.key, current, buttons.map(isEnabled), this.matches(':dir(rtl)'));
+    const vertical = this.getAttribute('aria-orientation') === 'vertical';
+    const next = nextIndex(event.key, current, buttons.map(isEnabled), this.matches(':dir(rtl)'), vertical);
     if (next < 0) return;
     event.preventDefault();
     buttons[next].focus();

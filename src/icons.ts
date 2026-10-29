@@ -4,17 +4,24 @@
  * so a name missing here draws nothing. Add a name here to ship its icon.
  */
 export const icons = [
+  'adjustments-horizontal',
   'check',
   'chevron-down',
   'chevron-right',
+  'code',
+  'folder',
   'heart',
   'help-circle',
   'home',
   'info-circle',
+  'list-tree',
   'mail',
+  'moon',
+  'printer',
   'restore',
   'search',
   'settings',
+  'stack-2',
   'x',
 ] as const;
 

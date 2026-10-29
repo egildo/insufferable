@@ -126,6 +126,20 @@
           "unit": "rem"
         },
         "$description": "A status dot, and the mark of a property row"
+      },
+      "dock": {
+        "$value": {
+          "value": 3.5,
+          "unit": "rem"
+        },
+        "$description": "A dock button, square"
+      },
+      "side": {
+        "$value": {
+          "value": 20,
+          "unit": "rem"
+        },
+        "$description": "A side pane's width, at rest"
       }
     },
     "shadow": {

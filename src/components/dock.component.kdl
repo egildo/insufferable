@@ -1,0 +1,16 @@
+// Dock: a dock of three panes, the first open and the last with news. Source: ins.dock in tokens/shell.tokens.json.
+// A narrow pane on the desk holding DockButton instances, one above the other.
+component Dock
+description "A dock: the buttons that open and close a side's panes, on a narrow pane."
+
+FRAME Dock tokens="{ins.dock}" layoutMode=VERTICAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG strokeAlign=INSIDE {
+    INSTANCE First component=DockButton {
+        set disclosure=open Glyph="\u{fafa}" Label="Structure"
+    }
+    INSTANCE Second component=DockButton {
+        set Glyph="\u{eaad}" Label="Resources"
+    }
+    INSTANCE Third component=DockButton {
+        set Glyph="\u{eb0e}" Label="Print log" News=#true
+    }
+}

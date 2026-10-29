@@ -37,6 +37,10 @@
         },
         "$description": "What sits above the page: a menu, a dialog. In dark it is lighter than the page, since a shadow does not show there"
       },
+      "desk": {
+        "$value": "{palette.gray.25}",
+        "$description": "The ground an application's panes sit on: a step below the surface, which the panes take"
+      },
       "fill": {
         "$value": "{palette.gray.50}",
         "$description": "A neutral tint: a control under the pointer, a disabled field"
