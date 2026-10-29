@@ -55,6 +55,10 @@
         "$value": "{palette.blue.700}",
         "$description": "The accent under the pointer"
       },
+      "accentDeep": {
+        "$value": "{palette.blue.800}",
+        "$description": "The accent while it is pressed"
+      },
       "accentTint": {
         "$value": "{palette.blue.25}",
         "$description": "A ground tinted with the accent: a callout. Every text and link on it keeps 4.5:1"

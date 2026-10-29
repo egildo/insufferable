@@ -21,7 +21,8 @@
               "invalid": ":is(:user-invalid, [aria-invalid=true])"
             },
             "pointer": {
-              "hover": ":hover"
+              "hover": ":hover",
+              "active": ":active"
             },
             "focus": {
               "focus": ":focus-visible"

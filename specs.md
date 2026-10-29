@@ -92,11 +92,11 @@ A state is a part: a subgroup named after its value, such as `ins.tabs.tab.selec
 | `selection` | `selected`, `pressed` | `:is([aria-selected='true'], :checked)`, `[aria-pressed='true']` |
 | `disclosure` | `open` | `[open]` |
 | `validity` | `invalid` | `:is(:user-invalid, [aria-invalid='true'])` |
-| `pointer` | `hover` | `:hover` |
+| `pointer` | `hover`, `active` | `:hover`, `:active` |
 | `focus` | `focus` | `:focus-visible` |
 | `availability` | `disabled` | `:is(:disabled, [aria-disabled='true'])` |
 
-A later axis wins over an earlier one, so a disabled tab stays grey under the pointer. A variant comes first, and its own states nest under it, as `ins.button.solid.hover`.
+A later axis wins over an earlier one, so a disabled tab stays grey under the pointer. Within an axis a later value wins where both match: a control held down is under the pointer too, and `active` comes after `hover`. A variant comes first, and its own states nest under it, as `ins.button.solid.hover`.
 
 A group may spell a value its own way, in its own `com.toghen` extension: a label holding a checkbox is disabled when its input is, `:has(> input:is(:disabled, [aria-disabled='true']))`.
 
@@ -113,7 +113,7 @@ The colours are in two tiers. **The palette**, `palette` in `tokens/palette.toke
 | `ins.color.fill` | `gray.50` | `gray.900` | A control under the pointer, a disabled field |
 | `ins.color.line` | `gray.100` | `gray.800` | A divider, a disabled edge |
 | `ins.color.lineStrong` | `gray.500` | `gray.500` | A control's edge: at least 3:1 on the surface, as WCAG asks of a control's boundary |
-| `ins.color.accent` · `accentStrong` | `blue.600` · `700` | `blue.400` · `300` | The accent, and under the pointer |
+| `ins.color.accent` · `accentStrong` · `accentDeep` | `blue.600` · `700` · `800` | `blue.400` · `300` · `200` | The accent, under the pointer, and pressed |
 | `ins.color.accentTint` | `blue.25` | `blue.900` | A ground tinted with the accent: a callout |
 | `ins.color.onAccent` | white | `gray.950` | Text on the accent |
 | `ins.color.danger` | `red.600` | `red.400` | An invalid field |
@@ -278,6 +278,7 @@ The native `<button>`. Its keyboard, focus and form behaviour are the platform's
 
 - **Variants:** outlined by default, `solid` for the main action, `plain` for a quiet one, in `data-variant`.
 - **States:** the pointer, focus, and disabled by `disabled` or `aria-disabled="true"`. The focus ring is an outline 2px outside the edge.
+- **Held down** (`:active`), a button goes one step deeper than under the pointer: the line's grey where hover is the fill, the deep accent where hover is the strong one. A menu item and a segment do the same; links, tabs, the disclosure and the listbox's options do not.
 - **A toggle button** has `aria-pressed`; pressed (`"true"`) it takes the accent's ground and the text on it, in any variant, the strong accent under the pointer. The fill would be 1.16:1 against the page, under the 3:1 a state's mark wants.
 - **Its size:** 2.25rem tall at least (`ins.size.control`), as a field is, so the two sit on one line.
 - **A tab and a menu item are buttons too.** The rule sits in `@scope (:root) to (ins-tabs, ins-menu)`, so it never reaches either, and each element styles its own without undoing anything.
@@ -434,5 +435,4 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 - **Tabler's other cuts.** Tabler ships its icons in stroke weights 200 and 300 and filled, each a font of its own. Only the regular cut ships; the others could be faces of the same family at their weights.
 - **The house fonts' other axes.** Archivo's width and Fraunces' softness and wonk are not tokens; the W3C typography type has no member for them.
 - **The base layer.** It sets only the page and a top heading. The other headings take the browser's sizes in the body family; a dialog's title is one of them.
-- **A pressed state.** The pointer axis has `hover` only. `:active` would be its second value.
 - **A theme an app chooses.** The system chooses the theme; `@toghen/postcss` takes one spelling per context, so an app cannot also switch it with an attribute. An app that needs its own switch would change the spelling to `[data-theme='{context}']`.

@@ -89,6 +89,12 @@
             "$value": "{ins.color.fill}"
           }
         },
+        "active": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.line}"
+          }
+        },
         "selected": {
           "color": {
             "$type": "color",
@@ -102,6 +108,12 @@
             "backgroundColor": {
               "$type": "color",
               "$value": "{ins.color.accentStrong}"
+            }
+          },
+          "active": {
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.accentDeep}"
             }
           }
         },

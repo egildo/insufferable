@@ -432,3 +432,24 @@ In FigCraft: SegmentedOption (8 members), Segmented (rest and focus), Toolbar of
 > **Moved 29 October 2026,** from 0.1.11. Two issues insufferable reported are fixed in it: the underline that never reached FigCraft (0.1.13), and a member binding a path-kept part where a folded one outranks it (0.1.14).
 
 Checked first on a copy of the library from Toghen's own checkout, then on the library itself: the check reads the 21 files with no error; the sync redrew the Link's four members with their line, two of the Button's, two of ListboxOption's and one of SegmentedOption's; a second run planned nothing, the Link included.
+
+## The active state
+
+> **Ruled 29 October 2026,** as proposed: a control held down goes one step deeper than under the pointer. The state is `active`, the second value of the pointer axis, spelled `:active`; "pressed" was already the toggle button's `aria-pressed`.
+
+### The ruling
+
+- **Buttons, outlined and plain:** the line's grey (`ins.color.line`) where hover is the fill. Solid, and a pressed toggle in any variant: a new role, `ins.color.accentDeep`, `blue.800` in light and `blue.200` in dark, where hover is the strong accent. Text on it is 11.50:1 in light and 9.46:1 in dark.
+- **A menu item and a segment** do the same: the line's grey, and a checked segment the deep accent.
+- **Left out:** links, tabs and the disclosure answer the pointer with colour, not a ground, and a press adds nothing there; a native select's options do not report `:active` reliably.
+- **No contrast rule for it.** It lasts as long as the press, so the 3:1 a state's mark wants does not apply.
+
+### What the build found
+
+- **The base active needed a border.** The solid and pressed active looks set the border, and the button's own active did not, so Toghen could not fold the variant and the selection: the dry run planned moving every button colour between collections. The base active now names `lineStrong`, as hover does, and plain's active the clear border, as plain's hover does. The fold is then as before, with no breaking move.
+- **A pressed toggle that is also disabled takes the accent under the pointer,** with the disabled grey text on it. `pressed.hover` and now `pressed.active` have two parts and beat `disabled`'s one, in the browser and in FigCraft alike. It predates this ruling; not fixed here.
+- **The style plan always shows four updates,** with or without this change. Rerun noise in the text styles, not looked into.
+
+### What was checked
+
+`toghen-query` finds no hole. In headless Chrome, a real mouse held down on each control in both themes, colours read while held and released away so no click went out: outlined and plain `#eeeeee` under the pointer, `#e0e0e0` held (dark `#2d2d2d`, `#414141`); solid, a pressed toggle and a checked segment `#00548f` then `#073b66` (dark `#76b0e9`, `#9bc4ef`); a menu item and a segment the greys; the disabled button unchanged. In FigCraft: 24 new Button members, 4 MenuItem, 4 SegmentedOption; rendered; a second run planned nothing but the style noise. Not checked in Safari, where a tap has needed a touch listener before it shows `:active`.

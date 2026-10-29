@@ -78,6 +78,12 @@
             "$value": "{ins.color.fill}"
           }
         },
+        "active": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.line}"
+          }
+        },
         "focus": {
           "outlineColor": {
             "$type": "color",

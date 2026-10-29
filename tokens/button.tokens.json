@@ -56,6 +56,16 @@
           "$value": "{ins.color.lineStrong}"
         }
       },
+      "active": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        },
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.lineStrong}"
+        }
+      },
       "focus": {
         "outlineColor": {
           "$type": "color",
@@ -99,6 +109,16 @@
             "$value": "{ins.color.accentStrong}"
           }
         },
+        "active": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentDeep}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentDeep}"
+          }
+        },
         "disabled": {
           "color": {
             "$type": "color",
@@ -127,6 +147,16 @@
           "backgroundColor": {
             "$type": "color",
             "$value": "{ins.color.fill}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        },
+        "active": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.line}"
           },
           "borderColor": {
             "$type": "color",
@@ -169,6 +199,16 @@
           "borderColor": {
             "$type": "color",
             "$value": "{ins.color.accentStrong}"
+          }
+        },
+        "active": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentDeep}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentDeep}"
           }
         }
       }
