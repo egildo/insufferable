@@ -591,3 +591,28 @@ The studio file draws an application: a desk of panes, docks, pill tabs with cou
 ### What was checked
 
 `toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, light and dark: the choice rows with the checked one on the tint (its description 4.8:1 in light, 6:1 in dark), the disabled one grey; the property rows lined up on one grid, the mark a ring at 3.5:1 and a filled dot in the accent, the resets disabled where the value is unchanged; the four statuses as a dot, a triangle, a square and a ring, each above 3:1 in light and in dark; the log's times and dots lined up. In FigCraft, rendered: ChoiceRow's eight members with a radio button instance, PropertyRow marked and clear, Status's five kinds, LogLine. A second sync plans nothing but the standing style updates and the tag's patch. The library's variables were compared before and after the sync: no value changed except the variant collection's three new modes.
+
+## The tree
+
+> **Ruled 29 October 2026,** as the second half of the rows' batch, after reading the APG's tree view pattern and its file directory example, and built the same day. Its spec is in specs.md.
+
+### The ruling
+
+- **The APG's markup:** nested lists, the `li` the node, its row a `span`, its children a `ul`.
+- **Single select, selection apart from focus.** The arrows move; Enter or a click selects. The APG's guidance on selection following focus warns against it where selecting does work; in the studio, selecting a node moves the caret in the document.
+- **The keyboard as the APG lists it,** with type-ahead, which it recommends for every tree. Not built: `*`, which it calls optional, and multi-select.
+- **Two commands:** `--select` sets `aria-selected`; `--expand` turns `aria-expanded` over. The command rule had named `--expand` before any element sent it.
+- **The element sends the command itself.** A node is an `li`, and only a button sends a command through `commandfor`; putting a button in each node would nest a control in a composite. So the element builds `new CommandEvent('command', { command, source })` with the node as the source and sends it to itself. The app hears it at the root in the capture phase, cancels it to own the state, exactly as with a tab.
+
+### What the build found
+
+- **A node is named by its row.** A `treeitem` takes its name from its content, and a parent node's content is its children too; the element points `aria-labelledby` at the row. The APG's example leaves this to the browser, with a row that holds only a word.
+- **Type-ahead looks past the tags.** Matched against the whole row, "i" found nothing, since every row begins with its kind ("Section Informazioni utili"). A node is now found by its row's text without its `small.tag`s.
+- **The chevron is the icon font's,** `chevron-right` from the subset, written as its code point in the stylesheet and turned 90 degrees when open, so FigCraft draws the same glyph (`chevron-down` there, since a component cannot turn a glyph by its state).
+- **A click on the chevron opens and closes, a click on the rest of the row selects.** The chevron is a pseudo-element, which no event targets, so the element measures where the click fell: within the row's start padding and the chevron's width.
+- **The row's states are its node's.** The selected and focused parts are spelled `:is([aria-selected=true] > *)` and `:is(:focus-visible > *)`, so the span reads the state of the `li` it sits in; the focus ring is drawn on the row, since the node holds its children.
+- **A parent the app leaves unmarked is closed,** as in the APG's examples. Without script, every node is open, so a tree drawn before its script loads closes when it arrives.
+
+### What was checked
+
+The keyboard rules are pure functions, `treeAction` and `typeAhead` in `src/keys.ts`, with five new tests; eleven pass. In the built-in browser, on `dev/tree.html`, by real key presses: down, left to the parent, left to close it, down twice, right to open a closed section, right into it, Enter to select, "i" and later "v" for type-ahead, wrapping; the log heard `--select` and `--expand` at the root for each. A click on a chevron opened a node without selecting it; a click on its row selected it; with the app cancelling `--expand`, a click on the chevron changed nothing. One tab stop throughout; no end node carries `aria-expanded`; each node's name is its row. Light and dark: the focus ring and the selected tint show together on two rows. In FigCraft: TreeRow's 24 members, closed, open and end by selection, pointer and focus, rendered; the library's existing variables unchanged after the sync, and a second run plans nothing new.

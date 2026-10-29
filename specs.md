@@ -65,7 +65,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -546,14 +546,43 @@ The lines of something that happened, in order: `<ol class="log">`, each line a 
 
 Not built: a log that follows new lines as they come (`role="log"` on a live region), which is the app's to add.
 
+### Tree
+
+A hierarchical list whose nodes open and close: `<ins-tree>` holding a `<ul>`, each `<li>` its row in a `<span>` and, for a parent node, its children in a `<ul>`. It follows the [APG tree view pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/): vertical, single select, selection apart from focus.
+
+```html
+<ins-tree aria-label="Structure">
+  <ul>
+    <li aria-expanded="true">
+      <span><small class="tag">Section</small> Paola Esempio <code>.envelope</code></span>
+      <ul>
+        <li aria-selected="true"><span><small class="tag">Paragraph</small> Paola Esempio <code>.name</code></span></li>
+      </ul>
+    </li>
+  </ul>
+</ins-tree>
+```
+
+- **It writes:** `role="tree"` on itself and `none` on the outer list; `treeitem` on each `li`, `group` on each inner `ul`; `aria-labelledby` from each node to its row, so a node is named by its row and not by its children's text too; `aria-selected="false"` on every node not selected; `aria-expanded` on parent nodes only, `false` where the app wrote none, since the pattern says an end node must not carry it; the roving `tabindex`. Level, position and set size are the browser's, computed from the nesting, as the APG's own example shows.
+- **It reads:** `aria-expanded` and `aria-selected`, and watches them, so an app that writes them is followed.
+- **It sends:** `--select` when a node is chosen, by a click on its row or Enter, and `--expand` when it is opened or closed, by a click on its chevron or the arrows.
+- **A node is an `li`,** which cannot send a command through `commandfor`. So the element builds the same event, `new CommandEvent('command', { command, source })`, with the node as its source, and sends it to itself: the app hears it at the root, in the capture phase, as it hears a tab's. Unless the app cancels it, the element applies it.
+- **Selection apart from focus.** The arrows move focus and select nothing; the APG warns against selection following focus where selecting does work, as moving a caret does. Focus is a ring on the row, selection the accent's tint, so both show at once.
+- **The keyboard, as the APG lists it:** down and up move without opening or closing, and stop at the ends; right opens a closed node, moves into an open one, and does nothing on an end node; left closes an open node, or moves to the parent; Home and End go to the first and the last visible node; Enter selects. Right to left, left and right change places. Type-ahead: a character, or several in quick succession, moves to the next node whose name starts with them, wrapping. A node is found by its own name, its row without its tags.
+- **The look:** the chevron is the row's `::before`, Tabler's `chevron-right`, turned down when its node is open and mirrored right to left; an end node keeps its room, so the names line up. A group sits in by `ins.tree.indent`. A row's last `<code>` sits at its end.
+- **Without script:** the nested lists, all open, with no chevron.
+
+Not built: multi-select, `*` to open every sibling (optional in the pattern), disabled nodes, nodes loaded as they open.
+
 ## Commands
 
-A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` would give `--expand` (not the menu's: a popover's open state is the platform's, so the question waits for a disclosure that is not a popover), `aria-pressed` `--press`, `aria-checked` `--check`. A command that sets no state is named after what it asks for, and has no default: `--remove`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
+A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` gives `--expand` (a tree node's; not the menu's, since a popover's open state is the platform's), `aria-pressed` `--press`, `aria-checked` `--check`. A command that sets no state is named after what it asks for, and has no default: `--remove`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
 
 | Command | Sent by | Sets |
 |---|---|---|
-| `--select` | a tab | `aria-selected="true"` on the tab, `false` on its siblings |
+| `--select` | a tab, a tree node | `aria-selected="true"` on the tab, `false` on its siblings |
 | `--press` | a toggle button in a toolbar | `aria-pressed` on the button, turned over |
+| `--expand` | a tree node | `aria-expanded` on the node, turned over |
 | `--remove` | a chip's button | nothing: it asks the app to remove the value, and has no default |
 
 `src/commands.ts` exports them as `commands`, so an app reads the names from one place.

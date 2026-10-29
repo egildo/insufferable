@@ -38,3 +38,73 @@ export function nextIndex(key: string, current: number, enabled: boolean[], rtl 
   }
   return -1;
 }
+
+/**
+ * A tree follows the WAI-ARIA Authoring Practices
+ * (https://www.w3.org/WAI/ARIA/apg/patterns/treeview/), vertical, single
+ * select, selection apart from focus. The rows are the visible nodes, in
+ * order: a node inside a closed one is not a row.
+ */
+export interface TreeRow {
+  /** The row of its parent node, or -1 for a root node. */
+  parent: number;
+  /** Open or closed for a parent node; `undefined` for an end node. */
+  expanded?: boolean;
+}
+
+/** What a key asks of a tree: focus a row, open or close one, select one, or nothing. */
+export type TreeAction = { focus: number } | { expand: number } | { select: number } | null;
+
+/**
+ * What a key does on the focused row of a tree.
+ *
+ * @param key a `KeyboardEvent.key`
+ * @param current the row that has focus
+ * @param rows the visible nodes, in order
+ */
+export function treeAction(key: string, current: number, rows: TreeRow[]): TreeAction {
+  const row = rows[current];
+  if (!row) return null;
+  switch (key) {
+    case 'ArrowDown':
+      return current < rows.length - 1 ? { focus: current + 1 } : null;
+    case 'ArrowUp':
+      return current > 0 ? { focus: current - 1 } : null;
+    case 'Home':
+      return { focus: 0 };
+    case 'End':
+      return { focus: rows.length - 1 };
+    case 'ArrowRight':
+      // A closed node opens; an open one hands focus to its first child; an end node does nothing.
+      if (row.expanded === false) return { expand: current };
+      if (row.expanded === true && rows[current + 1]?.parent === current) return { focus: current + 1 };
+      return null;
+    case 'ArrowLeft':
+      // An open node closes; otherwise focus goes to the parent, if there is one.
+      if (row.expanded === true) return { expand: current };
+      return row.parent >= 0 ? { focus: row.parent } : null;
+    case 'Enter':
+      return { select: current };
+    default:
+      return null;
+  }
+}
+
+/**
+ * Type-ahead: the next row after the focused one whose name starts with what was typed, wrapping, or -1.
+ *
+ * @param typed the characters typed in quick succession
+ * @param current the row that has focus
+ * @param names each visible row's name
+ */
+export function typeAhead(typed: string, current: number, names: string[]): number {
+  const wanted = typed.toLocaleLowerCase();
+  const count = names.length;
+  // A single character starts after the focused row; a string keeps the focused row if it still matches.
+  const start = typed.length > 1 ? 0 : 1;
+  for (let i = start; i < count + start; i++) {
+    const at = (current + i) % count;
+    if (names[at].trim().toLocaleLowerCase().startsWith(wanted)) return at;
+  }
+  return -1;
+}

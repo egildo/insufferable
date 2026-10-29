@@ -1,0 +1,102 @@
+{
+  "ins": {
+    "tree": {
+      "$description": "A tree view: ins-tree holding nested lists, each node's row a span. A parent node's chevron points to its end when closed and down when open; the selected row sits on the accent's tint.",
+      "indent": {
+        "$description": "How far a group of child nodes sits in from its parent's row.",
+        "paddingInlineStart": {
+          "$type": "dimension",
+          "$value": "{ins.space.4}"
+        }
+      },
+      "row": {
+        "$description": "A node's row, the span. Its states are its node's, read from the li it sits in; the pointer is its own.",
+        "$extensions": {
+          "com.toghen": {
+            "css": {
+              "parts": {
+                "selection": {
+                  "selected": ":is([aria-selected=true] > *)"
+                },
+                "focus": {
+                  "focus": ":is(:focus-visible > *)"
+                }
+              }
+            }
+          }
+        },
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.radius.1}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.1}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "outlineWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        },
+        "outlineOffset": {
+          "$type": "dimension",
+          "$value": "{ins.border.inset}"
+        },
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.body}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          }
+        },
+        "selected": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentTint}"
+          },
+          "hover": {
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.accentTint}"
+            }
+          }
+        },
+        "focus": {
+          "outlineColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        }
+      },
+      "chevron": {
+        "$description": "The chevron before a parent node's row, a glyph of the icon font; an end node keeps its room empty.",
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        }
+      }
+    }
+  }
+}

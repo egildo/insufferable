@@ -40,3 +40,4 @@
 @import './components/properties.css' layer(ins.components);
 @import './components/status.css' layer(ins.components);
 @import './components/log.css' layer(ins.components);
+@import './components/tree.css' layer(ins.components);

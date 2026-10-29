@@ -1,0 +1,68 @@
+/*
+ * tree: `<ins-tree>` holding a `<ul>` of `<li>`s, each its row in a `<span>`
+ * and, for a parent node, its children in a `<ul>`. The element writes the
+ * roles; the stylesheet reads them, so without script the tree is a nested
+ * list, all open, and draws as one.
+ *
+ * A closed node's group is not drawn. The chevron is the row's ::before, a
+ * glyph of the icon font, turned down when its node is open and mirrored
+ * right to left; an end node keeps its room, so the names line up. The
+ * focus ring is drawn on the row, since the node holds its children too. A
+ * row's last `<code>` sits at its end.
+ */
+
+ins-tree {
+  display: block;
+}
+
+ins-tree ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ins-tree ul ul {
+  @apply --ins-tree-indent;
+}
+
+ins-tree li[role=treeitem] {
+  outline: none;
+
+  &[aria-expanded=false] > ul {
+    display: none;
+  }
+
+  & > span {
+    display: flex;
+    align-items: center;
+    outline-style: solid;
+    cursor: default;
+    @apply --ins-tree-row;
+  }
+
+  & > span::before {
+    content: '';
+    flex: none;
+    inline-size: 1em;
+    font-family: t(insufferable.ins.font.family.icon);
+    line-height: 1;
+    text-align: center;
+    @apply --ins-tree-chevron;
+  }
+
+  &[aria-expanded] > span::before {
+    content: '\ea61';
+  }
+
+  &[aria-expanded=true] > span::before {
+    rotate: 90deg;
+  }
+
+  &:dir(rtl) > span::before {
+    scale: -1 1;
+  }
+
+  & > span > code:last-of-type {
+    margin-inline-start: auto;
+  }
+}

@@ -12,7 +12,8 @@
     "./tabs.js": "./dist/components/tabs.js",
     "./icon.js": "./dist/components/icon.js",
     "./menu.js": "./dist/components/menu.js",
-    "./toolbar.js": "./dist/components/toolbar.js"
+    "./toolbar.js": "./dist/components/toolbar.js",
+    "./tree.js": "./dist/components/tree.js"
   },
   "files": [
     "tokens/",

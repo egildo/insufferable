@@ -1,0 +1,38 @@
+// TreeRow: one node's row of a tree, ins-tree. Source: ins.tree.row in tokens/tree.tokens.json.
+// Its axes: the node, closed, open or an end node, declared here, since the element writes aria-expanded and no
+// token varies with it; selection, pointer and focus come from the row's parts. The root is the row, the span, whose
+// outline is drawn inside it as the button's is.
+// The chevron is a glyph of the icon font, Tabler's chevron-right when closed and chevron-down when open, as the
+// stylesheet turns it; an end node keeps its room empty. The kind is a Tag instance, exposed so an instance of the row sets its label; the class at the end is in the
+// small style, since no text style holds the monospace.
+// Not drawn: the indent, which is the group's and not the row's; right to left.
+component TreeRow tokens="{ins.tree.row}"
+description "One node of a tree: its chevron, its kind, its name and its class. Selected, the accent's tint."
+
+properties {
+    VARIANT node closed open end
+    TEXT Name default="Paola Esempio"
+    TEXT Class default=".name"
+}
+
+guard open { is (input)node open }
+guard end { is (input)node end }
+
+FRAME TreeRow layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)360 counterAxisAlignItems=CENTER strokeWeight="{ins.tree.row.outlineWidth}" strokeAlign=INSIDE {
+    strokes "{ins.tree.row.outlineColor}"
+    FRAME Chevron layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.font.size.md}" primaryAxisAlignItems=CENTER {
+        fills
+        TEXT Glyph characters="\u{ea61}" textStyle="{ins.icon.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.tree.chevron.color}"
+            when open characters="\u{ea5f}"
+            when end visible=#false
+        }
+    }
+    INSTANCE Kind component=Tag isExposedInstance=#true {
+        set Label="Paragraph"
+    }
+    TEXT Name tokens="{ins.tree.row}" characters=(property)Name textAutoResize=HEIGHT layoutSizingHorizontal=FILL
+    TEXT Class characters=(property)Class textStyle="{ins.typography.small}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.tree.row.color}"
+    }
+}

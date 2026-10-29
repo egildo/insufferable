@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · tree</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/tree.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  pre { background: color-mix(in srgb, currentColor 6%, transparent); padding: 0.5rem; min-height: 4lh; }
+</style>
+
+<h1>Tree</h1>
+<p>A document's structure, <code>&lt;ins-tree&gt;</code> over nested lists. The arrows move, open and close; Enter or a click selects; typing finds a node. A click on a chevron opens or closes its node.</p>
+
+<ins-tree aria-label="Structure">
+  <ul>
+    <li aria-expanded="true">
+      <span><small class="tag">Section</small> Energia Esempio S.p.A. <code>#riepilogo</code></span>
+      <ul>
+        <li aria-expanded="true">
+          <span><small class="tag">Header</small> Energia Esempio S.p.A. <code>.brand</code></span>
+          <ul>
+            <li><span><small class="tag">Paragraph</small> Energia Esempio S.p.A.</span></li>
+            <li><span><small class="tag">Paragraph</small> Fattura di energia elettrica</span></li>
+          </ul>
+        </li>
+        <li aria-expanded="true">
+          <span><small class="tag">Section</small> Paola Esempio <code>.envelope</code></span>
+          <ul>
+            <li><span><small class="tag">Paragraph</small> Via del Campione 1</span></li>
+            <li aria-selected="true"><span><small class="tag">Paragraph</small> Paola Esempio <code>.name</code></span></li>
+            <li><span><small class="tag">Paragraph</small> Via Immaginaria 12</span></li>
+          </ul>
+        </li>
+        <li><span><small class="tag">Verbatim</small> Codice cliente, Numero fattura <code>.facts</code></span></li>
+      </ul>
+    </li>
+    <li>
+      <span><small class="tag">Section</small> Come si compone il totale <code>#dettaglio</code> <data value="2">2</data></span>
+      <ul>
+        <li><span><small class="tag">Heading</small> Come si compone il totale</span></li>
+        <li><span><small class="tag">Table</small> Voce, Importo</span></li>
+      </ul>
+    </li>
+    <li><span><small class="tag">Section</small> Informazioni utili <code>#info</code></span></li>
+  </ul>
+</ins-tree>
+
+<h2>Every command, heard at the root</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  const log = document.getElementById('log');
+  document.addEventListener('command', (event) => {
+    const name = event.source.querySelector(':scope > span').textContent.trim().replace(/\s+/g, ' ');
+    log.textContent += `${event.command} from "${name}"\n`;
+  }, { capture: true });
+</script>
+</html>

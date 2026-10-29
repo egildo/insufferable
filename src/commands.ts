@@ -15,6 +15,8 @@ export const commands = {
   select: '--select',
   /** Turns the sending toggle button over: `aria-pressed` from `false` to `true`, or back. */
   press: '--press',
+  /** Opens or closes the sending tree node: `aria-expanded` from `false` to `true`, or back. */
+  expand: '--expand',
   /** Asks the app to remove the value the sending button names, by its `value`, from a chip list. No default. */
   remove: '--remove',
 } as const;
