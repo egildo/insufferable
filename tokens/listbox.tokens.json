@@ -1,0 +1,86 @@
+{
+  "ins": {
+    "listbox": {
+      "$description": "A native select drawn as a list: size above 1, or multiple. The select is a field; its options are rows, the chosen ones in the accent.",
+      "option": {
+        "$description": "One option. Chosen is the platform's :checked. No room above or below: the platform sizes the list from size and its own row height, and a taller row would show fewer than size. Where the platform lets an option take focus (the customizable select), it is ringed inside: in the accent, or on a chosen option in the text on the accent.",
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.1}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{ins.space.0}"
+        },
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{ins.space.2}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.radius.1}"
+        },
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        },
+        "outlineWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.2}"
+        },
+        "outlineOffset": {
+          "$type": "dimension",
+          "$value": "{ins.border.inset}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.fill}"
+          }
+        },
+        "selected": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.onAccent}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          },
+          "hover": {
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.accentStrong}"
+            }
+          },
+          "focus": {
+            "outlineColor": {
+              "$type": "color",
+              "$value": "{ins.color.onAccent}"
+            }
+          }
+        },
+        "focus": {
+          "outlineColor": {
+            "$type": "color",
+            "$value": "{ins.color.accent}"
+          }
+        },
+        "disabled": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.3}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.clear}"
+          }
+        }
+      }
+    }
+  }
+}

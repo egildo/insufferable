@@ -411,3 +411,18 @@ In FigCraft: MenuItem, eight members over pointer, focus and availability, its r
 `toghen-query` finds no hole; under `variant=plain, selection=pressed, pointer=hover` the button takes `pressed.hover`, and a checked segment under the pointer `selected.hover`. In the built-in browser: the segmented control, a click on Grid and Left back to List, the form's value logged each time; the checked segment `#0a6fb8` with white text, the disabled one grey, the ring around the group, the corners clipped; right to left, the first segment at the right. The toolbar: one tab stop, `--press` wired on the three toggles and not on Clear; a click pressed Bold; Right twice from Bold passed over the disabled Underline to Clear; Left and Space turned Italic over; in the controlled toolbar the app's refusal kept Strike unpressed; every `--press` heard at the root. `pnpm typecheck` and `pnpm test` pass.
 
 In FigCraft: SegmentedOption (8 members), Segmented (rest and focus), Toolbar of Button instances, and the Button set rebuilt with its selection axis. Rendered; a second run planned nothing but the Link's underline.
+
+## The listbox
+
+> **Ruled 29 October 2026:** the native `<select>` with `size` above 1 or `multiple`, styled; no element and no command. Rejected for now: `<ins-listbox>` reusing `--select`, whose only gain is options holding more than text.
+
+### What the build found
+
+- **`size` counts the platform's rows.** In Chrome's customizable select the list was 120px for five rows of 24px, and the field's padding and border-box sizing hid the last. An option has no block padding, and the list measures its content box: five rows then end exactly at the list's inner edge.
+- **In the customizable list, options take focus.** Down after a click moved focus from Pear past the disabled Fig to Quince and left the choice on Pear; Space chose Quince. The platform's own behaviour, kept. The focused option had the platform's thin outline; it now takes the house ring inside, in the text on the accent when chosen.
+- **Toghen 0.1.11's new warning caught the ring.** The option's ring named its rest colour outright, which the focused members replace. A stroke cannot bind a group, so the focused members name it through `guard focus`, the one-word guard 0.1.11 supplies; selection folds into its modes, so a chosen option's ring follows.
+- **FigCraft draws a disabled option under the pointer with the hover's fill.** The tokens say the disabled ground applies (`applies` gives `disabled.backgroundColor`), and the browser draws it so. In Figma the pointer stays in the path, so the hover's ground is a variable of its own, and it has no disabled mode for the folded availability to pick. A member then disagrees with CSS where a part left in the path meets a later folded axis that the path's token lacks. Not reported yet.
+
+### What was checked
+
+`toghen-query` finds no hole. In the built-in browser, Chrome's customizable select: five rows exactly for `size="5"`; a chosen option `#0a6fb8` with white text and the platform's tick; Fig grey; a click on Pear logged the form's value; Down moved focus to Quince, ringed `#0a6fb8` 2px inside, and Space chose it; dark drew the list on the dark field. In FigCraft: ListboxOption (16 members), Listbox of five instances. Not checked in Safari or Firefox, where the list is the browser's own.

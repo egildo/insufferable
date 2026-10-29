@@ -1,0 +1,18 @@
+/*
+ * listbox: the native `<select>` drawn as a list, with `size` above 1 or
+ * `multiple`. The platform keeps the choice, walks it with the arrows (and
+ * Shift and the platform's modifier for several), and gives the form its value.
+ * The select is a field, styled by the field's rule; its options are rows, the
+ * chosen ones, `:checked`, in the accent. The platform makes the list `size`
+ * rows tall, so the list measures its content box, where the field measures its
+ * border box: its padding and border then add to the rows instead of hiding one.
+ */
+
+select:is([multiple], [size]:not([size='1'])) {
+  box-sizing: content-box;
+}
+
+select:is([multiple], [size]:not([size='1'])) option {
+  outline-style: solid;
+  @apply --ins-listbox-option;
+}

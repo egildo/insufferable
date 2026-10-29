@@ -10,7 +10,7 @@ insufferable is a lean design system of UI elements, used in Egildo's own tools.
 
 It ships elements, never a store. An app manages its state however it wants. What insufferable removes is the need for a framework.
 
-Fourteen elements are built: tabs, disclosure, icon, link, divider, table, callout, button, field, checkbox and radio and switch, segmented control, dialog, menu, and toolbar.
+Fifteen elements are built: tabs, disclosure, icon, link, divider, table, callout, button, field, listbox, checkbox and radio and switch, segmented control, dialog, menu, and toolbar.
 
 ## Principles
 
@@ -64,7 +64,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, choice, segmented, dialog, menu, toolbar .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -298,6 +298,27 @@ The native `<input>` that takes text, `<textarea>` and `<select>`, each named by
 - **Disabled** is `disabled`: a grey fill and grey text.
 - **A select** takes the platform's customizable look (`appearance: base-select`) where the browser has it, and stays the browser's own elsewhere.
 - **The selector** is every input that takes text, `:where(input:not([type=checkbox], [type=radio], …))`, with no weight of its own.
+
+### Listbox
+
+The native `<select>` drawn as a list: `size` above 1, or `multiple`. No custom element and no command.
+
+```html
+<label>Fruit
+  <select name="fruit" size="5">
+    <option selected>Apple</option>
+    <option>Pear</option>
+    <option disabled>Fig</option>
+  </select>
+</label>
+```
+
+- **The platform does the rest:** the choice, one or several (`multiple`, with Shift and the platform's modifier), the arrows, the form's value, `change`.
+- **The select is a field,** drawn by the field's rule; its options are rows, a chosen one (`:checked`) in the accent, a disabled one grey.
+- **Exactly `size` rows show.** The platform makes the list `size` rows of its own height, so an option has no room above or below, and the list measures its content box where the field measures its border box.
+- **Where the platform lets an option take focus,** as Chrome's customizable select does, the arrows move focus and Space or Enter chooses; the focused option is ringed inside, in the accent, or on a chosen one in the text on the accent. Elsewhere the select takes focus whole, ringed as a field.
+
+Not built: options holding more than text, until the customizable select reaches the list in every browser.
 
 ### Checkbox, radio, switch
 

@@ -48,6 +48,9 @@
           "$ref": "field.tokens.json"
         },
         {
+          "$ref": "listbox.tokens.json"
+        },
+        {
           "$ref": "choice.tokens.json"
         },
         {

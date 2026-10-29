@@ -1,0 +1,20 @@
+// ListboxOption: one option of a native select drawn as a list, in its states. Source: ins.listbox.option in
+// tokens/listbox.tokens.json. Its axes come from its parts: selection (:checked), pointer, focus and availability.
+// The stylesheet's outline is drawn inside the option, so here it is the option's own stroke, as a menu item's is.
+// Its colour is a variable of its own when focused, which a group cannot bind on a stroke, so the focused members name
+// it: the guard is Toghen's, from the part key. Selection folds into its modes, so a chosen option's ring follows.
+// Not drawn: the tick the customizable select puts before a chosen option, which is the platform's.
+component ListboxOption tokens="{ins.listbox.option}"
+description "One option of a list: chosen, the accent's ground; focused, ringed inside."
+
+properties {
+    TEXT Label default="Quince"
+}
+
+guard focus
+
+FRAME ListboxOption layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER strokeWeight="{ins.listbox.option.outlineWidth}" strokeAlign=INSIDE {
+    strokes "{ins.listbox.option.outlineColor}"
+    when focus { strokes "{ins.listbox.option.focus.outlineColor}"; }
+    TEXT Label tokens="{ins.listbox.option}" characters=(property)Label textStyle="{ins.field.font}" textAutoResize=WIDTH_AND_HEIGHT
+}

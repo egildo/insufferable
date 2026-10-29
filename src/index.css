@@ -27,6 +27,7 @@
 @import './components/callout.css' layer(ins.components);
 @import './components/button.css' layer(ins.components);
 @import './components/field.css' layer(ins.components);
+@import './components/listbox.css' layer(ins.components);
 @import './components/choice.css' layer(ins.components);
 @import './components/segmented.css' layer(ins.components);
 @import './components/dialog.css' layer(ins.components);

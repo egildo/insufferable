@@ -1,0 +1,13 @@
+// Listbox: a native select drawn as a list, of ListboxOption instances. Source: ins.field, which draws the select,
+// and ins.listbox in tokens/listbox.tokens.json. One member: the field's states are the Field set's.
+// Its width is the design's; in a page it is its widest option's.
+component Listbox
+description "A native select drawn as a list: size above 1, or multiple. The chosen options in the accent."
+
+FRAME Listbox tokens="{ins.field}" layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)160 strokeAlign=INSIDE {
+    INSTANCE Apple component=ListboxOption layoutSizingHorizontal=FILL { set Label="Apple"; }
+    INSTANCE Pear component=ListboxOption layoutSizingHorizontal=FILL { set selection=selected Label="Pear"; }
+    INSTANCE Fig component=ListboxOption layoutSizingHorizontal=FILL { set availability=disabled Label="Fig"; }
+    INSTANCE Quince component=ListboxOption layoutSizingHorizontal=FILL { set focus=focus Label="Quince"; }
+    INSTANCE Medlar component=ListboxOption layoutSizingHorizontal=FILL { set Label="Medlar"; }
+}

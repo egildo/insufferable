@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · listbox</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  form { display: flex; flex-wrap: wrap; gap: 2rem; align-items: start; }
+  pre { background: color-mix(in srgb, currentColor 6%, transparent); padding: 0.5rem; min-height: 3lh; }
+</style>
+
+<h1>Listboxes</h1>
+
+<form id="fruit">
+  <label>One fruit
+    <select name="one" size="5">
+      <option selected>Apple</option>
+      <option>Pear</option>
+      <option disabled>Fig</option>
+      <option>Quince</option>
+      <option>Medlar</option>
+    </select>
+  </label>
+  <label>Several
+    <select name="several" multiple size="6">
+      <optgroup label="Pome">
+        <option selected>Apple</option>
+        <option selected>Quince</option>
+      </optgroup>
+      <optgroup label="Stone">
+        <option>Plum</option>
+        <option>Cherry</option>
+      </optgroup>
+    </select>
+  </label>
+</form>
+
+<h2>What the form holds</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  const form = document.getElementById('fruit');
+  const log = document.getElementById('log');
+  // No element and no command: the platform's own `change`, and the form's own value.
+  form.addEventListener('change', () => {
+    const data = new FormData(form);
+    log.textContent += `one = ${data.get('one')}; several = ${data.getAll('several').join(', ')}\n`;
+  });
+</script>
+</html>
