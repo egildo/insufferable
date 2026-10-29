@@ -453,3 +453,21 @@ Checked first on a copy of the library from Toghen's own checkout, then on the l
 ### What was checked
 
 `toghen-query` finds no hole. In headless Chrome, a real mouse held down on each control in both themes, colours read while held and released away so no click went out: outlined and plain `#eeeeee` under the pointer, `#e0e0e0` held (dark `#2d2d2d`, `#414141`); solid, a pressed toggle and a checked segment `#00548f` then `#073b66` (dark `#76b0e9`, `#9bc4ef`); a menu item and a segment the greys; the disabled button unchanged. In FigCraft: 24 new Button members, 4 MenuItem, 4 SegmentedOption; rendered; a second run planned nothing but the style noise. Not checked in Safari, where a tap has needed a touch listener before it shows `:active`.
+
+## Selected and disabled
+
+> **Ruled 29 October 2026,** as proposed: a pressed toggle, a checked segment and a chosen listbox option keep a grey ground when disabled: the line's grey (`gray.100` in light, `gray.800` in dark), the disabled text, and on the button the line for its border. Rejected: the disabled solid button's fill, `gray.50`, 1.04:1 against the page, where the selection would vanish again.
+
+### Why
+
+`toghen-query` showed one flaw in three controls. At rest, disabled (one part, on the later axis) beat selected (one part), so a disabled fieldset hid the segmented control's choice, and a pressed toggle or a chosen option looked unselected. Under the pointer, selected and hover (two parts) beat disabled, so they took the strong accent with the disabled text on it. The checkbox and the switch were spared: their tick and knob show the state. The new tokens, `ins.button.pressed.disabled`, `ins.segmented.option.selected.disabled` and `ins.listbox.option.selected.disabled`, have two parts and the later axis, so they win at rest, under the pointer and held down, in any variant.
+
+### What the build found
+
+- **The sync moved variables between collections.** With the new tokens, the button's disabled colours fold under `selection`, and the segment and the option keep availability in the path: seven breaking moves. The file was copied aside and the sync run with `--allow-breaking`.
+- **A breaking move leaves members looking hand-edited.** Removing the old variables unbound the members that used them, and the next run read the missing bindings as changes made in Figma and left them: the pressed and disabled toggle drew white, the plain one clear, a checked and disabled segment clear. Toghen's notes said so, under the run's other notes. `--overwrite-drift` on the three component files alone rebound them; a rerun then plans nothing for them.
+- **The Checkbox and the Dialog carry the same leftover drift** from earlier breaking moves (14 and 4 notes in the committed library). Not touched here.
+
+### What was checked
+
+`toghen-query` finds no hole, and `applies` gives the new token for every combination of variant, pointer and focus. In headless Chrome, with the markup added to the overview page and a real mouse: a disabled pressed toggle, a plain pressed one with `aria-disabled`, a checked segment in a disabled fieldset and a chosen disabled option all `#e0e0e0` with `#a1a1a1` text at rest, under the pointer and held (dark `#414141` and `#6e6e6e`); an unpressed disabled toggle and an unchecked disabled segment unchanged. In FigCraft, every disabled member sampled from the renders: pressed, solid and pressed, plain and pressed, and a checked segment `#e0e0e0` in all three pointer states; ListboxOption rendered and looked at.

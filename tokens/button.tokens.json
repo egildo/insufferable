@@ -210,6 +210,20 @@
             "$type": "color",
             "$value": "{ins.color.accentDeep}"
           }
+        },
+        "disabled": {
+          "color": {
+            "$type": "color",
+            "$value": "{ins.color.text.3}"
+          },
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.line}"
+          },
+          "borderColor": {
+            "$type": "color",
+            "$value": "{ins.color.line}"
+          }
         }
       }
     }

@@ -62,6 +62,16 @@
               "$type": "color",
               "$value": "{ins.color.onAccent}"
             }
+          },
+          "disabled": {
+            "color": {
+              "$type": "color",
+              "$value": "{ins.color.text.3}"
+            },
+            "backgroundColor": {
+              "$type": "color",
+              "$value": "{ins.color.line}"
+            }
           }
         },
         "focus": {

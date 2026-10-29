@@ -279,7 +279,7 @@ The native `<button>`. Its keyboard, focus and form behaviour are the platform's
 - **Variants:** outlined by default, `solid` for the main action, `plain` for a quiet one, in `data-variant`.
 - **States:** the pointer, focus, and disabled by `disabled` or `aria-disabled="true"`. The focus ring is an outline 2px outside the edge.
 - **Held down** (`:active`), a button goes one step deeper than under the pointer: the line's grey where hover is the fill, the deep accent where hover is the strong one. A menu item and a segment do the same; links, tabs, the disclosure and the listbox's options do not.
-- **A toggle button** has `aria-pressed`; pressed (`"true"`) it takes the accent's ground and the text on it, in any variant, the strong accent under the pointer. The fill would be 1.16:1 against the page, under the 3:1 a state's mark wants.
+- **A toggle button** has `aria-pressed`; pressed (`"true"`) it takes the accent's ground and the text on it, in any variant, the strong accent under the pointer. The fill would be 1.16:1 against the page, under the 3:1 a state's mark wants. Pressed and disabled, it keeps a grey ground, the line's, with the disabled text, so the state still shows while nothing answers the pointer.
 - **Its size:** 2.25rem tall at least (`ins.size.control`), as a field is, so the two sit on one line.
 - **A tab and a menu item are buttons too.** The rule sits in `@scope (:root) to (ins-tabs, ins-menu)`, so it never reaches either, and each element styles its own without undoing anything.
 
@@ -315,7 +315,7 @@ The native `<select>` drawn as a list: `size` above 1, or `multiple`. No custom 
 ```
 
 - **The platform does the rest:** the choice, one or several (`multiple`, with Shift and the platform's modifier), the arrows, the form's value, `change`.
-- **The select is a field,** drawn by the field's rule; its options are rows, a chosen one (`:checked`) in the accent, a disabled one grey.
+- **The select is a field,** drawn by the field's rule; its options are rows, a chosen one (`:checked`) in the accent, a disabled one grey, and one both chosen and disabled on the line's grey.
 - **Exactly `size` rows show.** The platform makes the list `size` rows of its own height, so an option has no room above or below, and the list measures its content box where the field measures its border box.
 - **Where the platform lets an option take focus,** as Chrome's customizable select does, the arrows move focus and Space or Enter chooses; the focused option is ringed inside, in the accent, or on a chosen one in the text on the accent. Elsewhere the select takes focus whole, ringed as a field.
 
@@ -348,7 +348,7 @@ A native radio group drawn as joined segments: `<fieldset data-variant="segmente
 ```
 
 - **The platform does the rest:** one choice, the arrows move it, one tab stop, the form's value, and `change` for an app that wants to know.
-- **Each label is a segment;** its circle is hidden and stays focusable. The checked one, `:has(> input:checked)`, takes the accent's ground; a disabled one is grey.
+- **Each label is a segment;** its circle is hidden and stays focusable. The checked one, `:has(> input:checked)`, takes the accent's ground; a disabled one is grey, and a checked one that is disabled, as in a disabled fieldset, keeps the line's grey ground, so the choice still shows.
 - **Focus is drawn around the group,** 2px outside, while the checked segment says which; the group clips the segments to its corners.
 - **The legend names the group and is hidden,** since a fieldset's border breaks around a visible one. A label shown beside the control is the page's.
 - **The selector** is the stylesheet's own; `segmented` is not a value of the variant axis, which would make the token group `ins.segmented` a part of `ins`.
