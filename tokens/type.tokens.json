@@ -24,6 +24,13 @@
             "tabler-icons"
           ],
           "$description": "The icon font: Tabler Icons, subset by the build to the icons in src/icons.ts"
+        },
+        "mono": {
+          "$value": [
+            "ui-monospace",
+            "monospace"
+          ],
+          "$description": "Code: the platform's own monospace, with no font shipped"
         }
       },
       "size": {
@@ -40,7 +47,7 @@
             "unit": "rem"
           }
         },
-        "icon": {
+        "lg": {
           "$value": {
             "value": 1.25,
             "unit": "rem"
@@ -48,7 +55,19 @@
         },
         "xl": {
           "$value": {
+            "value": 1.5,
+            "unit": "rem"
+          }
+        },
+        "xxl": {
+          "$value": {
             "value": 2,
+            "unit": "rem"
+          }
+        },
+        "icon": {
+          "$value": {
+            "value": 1.25,
             "unit": "rem"
           }
         }
@@ -123,12 +142,42 @@
       "display": {
         "$value": {
           "fontFamily": "{ins.font.family.serif}",
-          "fontSize": "{ins.font.size.xl}",
+          "fontSize": "{ins.font.size.xxl}",
           "fontWeight": "{ins.font.weight.semibold}",
           "letterSpacing": "{ins.font.letterSpacing.normal}",
           "lineHeight": "{ins.font.lineHeight.snug}"
         },
         "$description": "A page title, in the house serif"
+      },
+      "title": {
+        "$value": {
+          "fontFamily": "{ins.font.family.serif}",
+          "fontSize": "{ins.font.size.xl}",
+          "fontWeight": "{ins.font.weight.semibold}",
+          "letterSpacing": "{ins.font.letterSpacing.normal}",
+          "lineHeight": "{ins.font.lineHeight.snug}"
+        },
+        "$description": "A section's title, in the house serif"
+      },
+      "heading": {
+        "$value": {
+          "fontFamily": "{ins.font.family.sans}",
+          "fontSize": "{ins.font.size.lg}",
+          "fontWeight": "{ins.font.weight.semibold}",
+          "letterSpacing": "{ins.font.letterSpacing.normal}",
+          "lineHeight": "{ins.font.lineHeight.snug}"
+        },
+        "$description": "A heading within a section"
+      },
+      "small": {
+        "$value": {
+          "fontFamily": "{ins.font.family.sans}",
+          "fontSize": "{ins.font.size.sm}",
+          "fontWeight": "{ins.font.weight.regular}",
+          "letterSpacing": "{ins.font.letterSpacing.normal}",
+          "lineHeight": "{ins.font.lineHeight.normal}"
+        },
+        "$description": "Small print: a note, a caption"
       }
     }
   }

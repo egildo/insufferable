@@ -16,14 +16,57 @@
       }
     },
     "heading": {
-      "$description": "A top heading, in the display style.",
+      "$description": "A heading: the space around it, and the body style in bold from h4 down. h1 to h3 take a style of their own.",
       "font": {
         "$type": "typography",
-        "$value": "{ins.typography.display}"
+        "$value": "{ins.typography.body}"
       },
-      "marginBlock": {
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": "{ins.font.weight.semibold}"
+      },
+      "marginBlockStart": {
         "$type": "dimension",
-        "$value": "{ins.space.3}"
+        "$value": "{ins.space.5}"
+      },
+      "marginBlockEnd": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "h1": {
+        "$description": "The top heading, in the display style.",
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.display}"
+        }
+      },
+      "h2": {
+        "$description": "A section's heading, in the title style.",
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.title}"
+        }
+      },
+      "h3": {
+        "$description": "A heading within a section, in the heading style.",
+        "font": {
+          "$type": "typography",
+          "$value": "{ins.typography.heading}"
+        }
+      }
+    },
+    "small": {
+      "$description": "Small print and a figure's caption, in the small style.",
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.small}"
+      }
+    },
+    "code": {
+      "$description": "Code, in the platform's monospace at the size of the text around it.",
+      "fontFamily": {
+        "$type": "fontFamily",
+        "$value": "{ins.font.family.mono}"
       }
     }
   }

@@ -484,3 +484,25 @@ A stamp written before 0.1.15 does not record what its fields were bound to, so 
 ### What was checked
 
 The library was copied aside first. After the run, the saved file binds every Box, Tick and Dot fill again, and the two instances use the plain and the solid Button at rest. Rendered: the checkbox and the radio in their eight states, the dialog with a plain Keep it and a solid Discard. A dry run of every file then planned nothing and counted no drift.
+
+## The base typography
+
+> **Ruled 29 October 2026,** as proposed: three new text styles, `title` (Fraunces, 1.5rem, 600) for `h2`, `heading` (Archivo, 1.25rem, 600) for `h3` and `small` (Archivo, 0.875rem, 400) for `small` and `figcaption`; `h4` to `h6` in the body style in bold; code in the platform's monospace; 24px above every heading and 8px below; and the type page rebuilt as a specimen. It closes the open question of the base layer, which styled only the page and a top heading.
+
+### The ruling
+
+- **The sizes are five steps,** 0.875, 1, 1.25, 1.5 and 2rem. The new 1.5rem needed a name between `lg` and `xl`, so the 2rem size became `xxl` and `xl` is now 1.5rem. *Rejected:* a name out of order for the new step.
+- **The serif for the top two levels, the sans below.** Fraunces is a display face, at its best large; at 1.25rem and under, a heading reads better in the text's own family.
+- **Code has a family, not a style.** Inline code should keep the size of the text around it, and a W3C dimension has no unit for that (`em` is not in the format). The family is `ui-monospace, monospace`, with no font shipped.
+- **Only headings get margins.** Paragraphs, lists and quotes keep the browser's `1em`. No line length in the base: the page sets its own.
+
+### What the build found
+
+- **The heading group nests by level.** `ins.heading` holds the shared margins and the bold body; `ins.heading.h1` to `h3` hold only their style, applied after it. The base rule writes `font` before `font-weight`, so the bold survives the shorthand.
+- **The dialog's title is an `h2`,** so it now takes the title style in the browser; its component file names the same style, so FigCraft draws it in Fraunces too.
+- **Renaming a size made the display style read as hand-edited.** The display style was bound to `xl`; the variable sync gave `xl` its new value, the style followed it to 1.5rem, and the style sync then found a size it had not written, and left it. One run with `--overwrite-drift` rebound it to `xxl`. The same family as the bug fixed in `@toghen/figma` 0.1.15, on the style side.
+- **FigCraft's text styles are all Regular.** Every style in the library, the label's 500 and the display's 600 included, reads `Regular` in the file, as it did before this change. Not looked into. The style plan, which showed four updates on every run, now shows seven: one per text style. Probably the same cause.
+
+### What was checked
+
+`toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, light and dark, computed on the article: `h1` Fraunces 32px 600 on 40px, `h2` Fraunces 24px 600, `h3` Archivo 20px 600, `h4` Archivo 16px 600, each 24px above and 8px below; `p` 16px 400 on 24px; `small` and `figcaption` 14px on 21px; `code` in the monospace at 16px, with no shrink from the browser's monospace default; `kbd` inside `small` at 14px. Both families loaded, upright and italic. In FigCraft: three new styles and two new size variables, the dialog's title in Fraunces at 1.5rem, and a second run with nothing to write but the style plan's updates.

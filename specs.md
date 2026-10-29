@@ -137,8 +137,13 @@ A text style is a W3C `typography` token: font family, size, weight, letter spac
 |---|---|---|---|---|---|
 | `ins.typography.body` | Archivo | 1rem | 400 | 1.5 | the page (`html`) |
 | `ins.typography.label` | Archivo | 0.875rem | 500 | 1.25 | a tab, a summary, a button, a field's label |
-| `ins.typography.display` | Fraunces | 2rem | 600 | 1.25 | a top heading (`h1`) |
+| `ins.typography.small` | Archivo | 0.875rem | 400 | 1.5 | small print and a caption (`small`, `figcaption`) |
+| `ins.typography.heading` | Archivo | 1.25rem | 600 | 1.25 | a heading within a section (`h3`) |
+| `ins.typography.title` | Fraunces | 1.5rem | 600 | 1.25 | a section's heading (`h2`), a dialog's title |
+| `ins.typography.display` | Fraunces | 2rem | 600 | 1.25 | the top heading (`h1`) |
 | `ins.typography.icon` | tabler-icons | 1.25rem | 400 | 1 | an icon |
+
+The sizes are five steps, `ins.font.size.sm` to `xxl`: 0.875, 1, 1.25, 1.5 and 2rem. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
 
 ### The house fonts
 
@@ -151,7 +156,13 @@ Two variable fonts, installed from npm as Fontsource packages (OFL), with every 
 
 Each ships in normal and italic, split into three character sets (Latin, Latin Extended, Vietnamese), each its own file under a `unicode-range`: a page downloads only the sets its text uses. The build copies Fontsource's own face rules into the stylesheet, renamed to the families' own names, and the files into `dist/fonts/`. Fraunces' optical size follows the text size by itself, through the platform's `font-optical-sizing: auto`.
 
-The base layer sets the page in the body style, the text colour and the surface (`ins.page`), and in either colour scheme, and a top heading in the display style (`ins.heading`). Everything else inherits.
+The base layer sets, by element name:
+
+- **The page** in the body style, the text colour and the surface (`ins.page`), in either colour scheme.
+- **Every heading** with 24px above it and 8px below, in the body style in bold (`ins.heading`); `h1`, `h2` and `h3` then take the display, title and heading styles (`ins.heading.h1` to `h3`).
+- **Small print and a caption** in the small style (`ins.small`), and **code, `kbd`, `samp` and `pre`** in the monospace (`ins.code`).
+
+Everything else inherits, and keeps the browser's own margins: paragraphs, lists, quotes. The base sets no line length; that is the page's. The type page in `dev/` shows the styles, both families across their axes, and an article that uses them all.
 
 ## Elements
 
@@ -434,5 +445,4 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 - **The element prefix.** The tabs element is `ins-tabs`. `ins` is also the HTML element for inserted text, so a reader may stumble on it. Not ruled.
 - **Tabler's other cuts.** Tabler ships its icons in stroke weights 200 and 300 and filled, each a font of its own. Only the regular cut ships; the others could be faces of the same family at their weights.
 - **The house fonts' other axes.** Archivo's width and Fraunces' softness and wonk are not tokens; the W3C typography type has no member for them.
-- **The base layer.** It sets only the page and a top heading. The other headings take the browser's sizes in the body family; a dialog's title is one of them.
 - **A theme an app chooses.** The system chooses the theme; `@toghen/postcss` takes one spelling per context, so an app cannot also switch it with an attribute. An app that needs its own switch would change the spelling to `[data-theme='{context}']`.

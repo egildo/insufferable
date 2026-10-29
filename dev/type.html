@@ -7,10 +7,134 @@
 <style>
   body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
   .serif { font-family: var(--ins-font-family-serif); }
+  .specimen { display: grid; gap: 0.25rem; margin-block: 1rem; }
+  .specimen > * { margin: 0; overflow-wrap: anywhere; }
+  td > :is(h1, h2, h3, h4, p) { margin: 0; }
+  hr { margin-block: 3rem; }
 </style>
 
-<h1>Quinces and other fruit</h1>
-<p>The body style, in Archivo: a hard, fragrant fruit, eaten cooked. <em>Italic Archivo</em>, <strong>bold Archivo</strong>, and <span style="font-stretch: 62%">Archivo at its narrowest</span> and <span style="font-stretch: 125%">at its widest</span>.</p>
-<p class="serif">Fraunces: a hard, fragrant fruit, eaten cooked. <em>Italic Fraunces</em>, <strong>bold Fraunces</strong>, and <span style="font-variation-settings: 'SOFT' 100, 'WONK' 1">soft and wonky</span>.</p>
+<h1>Type</h1>
+<p>Two house fonts, both variable: Archivo for text and Fraunces for titles. Code takes the platform's own monospace. The base layer sets every element below by its name; this page adds no type of its own beyond the specimens.</p>
+
+<h2>The text styles</h2>
+<table>
+  <thead>
+    <tr><th>Element</th><th>Sample</th><th>Style</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>h1</code></td><td><h1>Quinces</h1></td><td>display · Fraunces · 2rem · 600 · 1.25</td></tr>
+    <tr><td><code>h2</code></td><td><h2>Quince paste</h2></td><td>title · Fraunces · 1.5rem · 600 · 1.25</td></tr>
+    <tr><td><code>h3</code></td><td><h3>What you need</h3></td><td>heading · Archivo · 1.25rem · 600 · 1.25</td></tr>
+    <tr><td><code>h4</code>–<code>h6</code></td><td><h4>For the pan</h4></td><td>body, bold · Archivo · 1rem · 600 · 1.5</td></tr>
+    <tr><td><code>p</code></td><td><p>A hard, fragrant fruit, eaten cooked.</p></td><td>body · Archivo · 1rem · 400 · 1.5</td></tr>
+    <tr><td><code>small</code></td><td><small>Keeps for a year, wrapped.</small></td><td>small · Archivo · 0.875rem · 400 · 1.5</td></tr>
+    <tr><td><code>code</code></td><td><code>font-optical-sizing: auto</code></td><td>the platform's monospace, at the text's size</td></tr>
+  </tbody>
+</table>
+
+<h2>Archivo</h2>
+<p>The house sans, for running text, labels and the lower headings. Weight 100 to 900, width 62 to 125%, upright and italic.</p>
+
+<h3>Weight</h3>
+<div class="specimen">
+  <p style="font-weight: 100">100 · A hard, fragrant fruit</p>
+  <p style="font-weight: 200">200 · A hard, fragrant fruit</p>
+  <p style="font-weight: 300">300 · A hard, fragrant fruit</p>
+  <p style="font-weight: 400">400 · A hard, fragrant fruit</p>
+  <p style="font-weight: 500">500 · A hard, fragrant fruit</p>
+  <p style="font-weight: 600">600 · A hard, fragrant fruit</p>
+  <p style="font-weight: 700">700 · A hard, fragrant fruit</p>
+  <p style="font-weight: 800">800 · A hard, fragrant fruit</p>
+  <p style="font-weight: 900">900 · A hard, fragrant fruit</p>
+</div>
+
+<h3>Width</h3>
+<div class="specimen">
+  <p style="font-stretch: 62%">62% · A hard, fragrant fruit, eaten cooked</p>
+  <p style="font-stretch: 75%">75% · A hard, fragrant fruit, eaten cooked</p>
+  <p style="font-stretch: 87.5%">87.5% · A hard, fragrant fruit, eaten cooked</p>
+  <p style="font-stretch: 100%">100% · A hard, fragrant fruit, eaten cooked</p>
+  <p style="font-stretch: 112.5%">112.5% · A hard, fragrant fruit</p>
+  <p style="font-stretch: 125%">125% · A hard, fragrant fruit</p>
+</div>
+
+<h3>Italic</h3>
+<div class="specimen">
+  <p><em>400 italic · A hard, fragrant fruit, eaten cooked</em></p>
+  <p><em style="font-weight: 600">600 italic · A hard, fragrant fruit, eaten cooked</em></p>
+</div>
+
+<h2>Fraunces</h2>
+<p>The house serif, for the top two headings. Weight 100 to 900, optical size, softness and wonk, upright and italic.</p>
+
+<h3>Weight</h3>
+<div class="specimen serif">
+  <p style="font-weight: 100">100 · Quince paste</p>
+  <p style="font-weight: 300">300 · Quince paste</p>
+  <p style="font-weight: 400">400 · Quince paste</p>
+  <p style="font-weight: 600">600 · Quince paste</p>
+  <p style="font-weight: 900">900 · Quince paste</p>
+</div>
+
+<h3>Optical size</h3>
+<p>Fraunces draws itself for the size it is set at: finer and tighter large, sturdier and looser small. The platform picks the cut by itself (<code>font-optical-sizing: auto</code>). Below, the same 2rem forced to the smallest cut and to the largest.</p>
+<div class="specimen serif" style="font-size: 2rem; line-height: 1.25">
+  <p style="font-variation-settings: 'opsz' 9">opsz 9 · Quince paste</p>
+  <p style="font-variation-settings: 'opsz' 144">opsz 144 · Quince paste</p>
+</div>
+
+<h3>Softness and wonk</h3>
+<div class="specimen serif" style="font-size: 1.5rem; line-height: 1.25">
+  <p style="font-variation-settings: 'SOFT' 0">Soft 0 · Quince paste</p>
+  <p style="font-variation-settings: 'SOFT' 100">Soft 100 · Quince paste</p>
+  <p style="font-variation-settings: 'WONK' 1"><em>Wonk 1, italic · Quince paste, by hand</em></p>
+</div>
+
+<h3>Italic</h3>
+<div class="specimen serif">
+  <p><em>400 italic · A hard, fragrant fruit, eaten cooked</em></p>
+  <p><em style="font-weight: 600">600 italic · A hard, fragrant fruit, eaten cooked</em></p>
+</div>
+
+<hr>
+
+<article>
+  <h1>Quince paste</h1>
+  <p>Quinces are hard and sour raw, and turn rose-red and fragrant when cooked long. In Spain the paste is <em>membrillo</em>, eaten with Manchego; in Italy it is <em>cotognata</em>, cut into squares and rolled in sugar. See <a href="#method">the method</a> below.</p>
+
+  <h2>What you need</h2>
+  <ul>
+    <li>1 kg of quinces, ripe and yellow</li>
+    <li>About 800 g of sugar, weighed later</li>
+    <li>One lemon, juiced</li>
+  </ul>
+
+  <h2 id="method">The method</h2>
+  <h3>Cook the fruit</h3>
+  <p>Wipe the down off the quinces, quarter them and cut out the cores. Cover with water and simmer until soft, about forty minutes.</p>
+
+  <h3>Make the paste</h3>
+  <ol>
+    <li>Drain the fruit and push it through a sieve.</li>
+    <li>Weigh the purée, and add four fifths of its weight in sugar.</li>
+    <li>Cook it on a low heat, stirring, until it pulls away from the pan.</li>
+  </ol>
+  <h4>When is it done?</h4>
+  <p>A spoon drawn across the bottom leaves a path that stays open. It takes an hour or more, and the colour deepens all the while.</p>
+  <blockquote>
+    <p>The quince is the most fragrant of fruits, and the least willing to be eaten raw.</p>
+  </blockquote>
+
+  <figure>
+    <pre><code>sugar = purée × 0.8</code></pre>
+    <figcaption>The ratio, for any weight of fruit.</figcaption>
+  </figure>
+
+  <p><small>Wrapped in baking paper, the paste keeps for a year. Press <kbd>Ctrl</kbd>+<kbd>P</kbd> to print the recipe.</small></p>
+</article>
+
+<hr>
+
 <p>Ação, Ñandú, Łódź, Tiếng Việt: the other character sets, loaded only for these letters.</p>
+<p class="serif">Ação, Ñandú, Łódź, Tiếng Việt, in Fraunces.</p>
 </html>

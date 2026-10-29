@@ -1,8 +1,12 @@
 /*
  * base: the page's own text, by element name. The page reads the body style
- * and the text colour; a top heading reads the display style. Everything else
- * inherits. The page takes either colour scheme, as the theme does, so the
- * platform draws its own controls and scrollbars in the one the system prefers.
+ * and the text colour. Every heading takes the same space around it and the
+ * body style in bold; h1 to h3 then take a style of their own. Small print and
+ * a caption read the small style; code reads the platform's monospace at the
+ * size of the text around it. Everything else inherits, and keeps the
+ * browser's own margins. The page takes either colour scheme, as the theme
+ * does, so the platform draws its own controls and scrollbars in the one the
+ * system prefers.
  */
 
 html {
@@ -10,6 +14,26 @@ html {
   @apply --ins-page;
 }
 
-h1 {
+:is(h1, h2, h3, h4, h5, h6) {
   @apply --ins-heading;
+}
+
+h1 {
+  @apply --ins-heading-h1;
+}
+
+h2 {
+  @apply --ins-heading-h2;
+}
+
+h3 {
+  @apply --ins-heading-h3;
+}
+
+:is(small, figcaption) {
+  @apply --ins-small;
+}
+
+:is(code, kbd, samp, pre) {
+  @apply --ins-code;
 }
