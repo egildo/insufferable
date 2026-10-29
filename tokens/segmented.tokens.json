@@ -1,7 +1,7 @@
 {
   "ins": {
     "segmented": {
-      "$description": "A radio group drawn as joined segments: fieldset data-variant=segmented. Its focus is its checked input's, drawn around the whole group.",
+      "$description": "A radio group drawn as joined segments: fieldset class=segmented. Its focus is its checked input's, drawn around the whole group.",
       "$extensions": {
         "com.toghen": {
           "css": {

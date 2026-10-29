@@ -16,7 +16,7 @@
   <p><ins-icon name="info-circle"></ins-icon> A quince is too hard to eat raw. <a href="#cooking">Cook it first</a>.</p>
 </div>
 
-<div role="note" data-variant="danger">
+<div role="note" class="danger">
   <p>Quince seeds hold amygdalin. Do not eat them.</p>
   <p>The flesh is safe once cooked.</p>
 </div>
@@ -29,7 +29,7 @@
 <script type="module">
   // An alert is announced when it is added: the callout that appears after an action.
   document.getElementById('save').addEventListener('click', () => {
-    document.getElementById('out').innerHTML = '<div role="alert" data-variant="danger"><p>The recipe has no title.</p></div>';
+    document.getElementById('out').innerHTML = '<div role="alert" class="danger"><p>The recipe has no title.</p></div>';
   });
 </script>
 </html>

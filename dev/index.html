@@ -62,17 +62,17 @@
 <section>
   <h2>Callouts</h2>
   <div role="note"><p>A quince is too hard to eat raw. <a href="#cooking">Cook it first</a>.</p></div>
-  <div role="note" data-variant="danger"><p>Quince seeds hold amygdalin. Do not eat them.</p></div>
+  <div role="note" class="danger"><p>Quince seeds hold amygdalin. Do not eat them.</p></div>
 </section>
 
 <section>
   <h2>Buttons</h2>
   <p class="row">
     <button>Outlined</button>
-    <button data-variant="solid"><ins-icon name="heart"></ins-icon> Solid</button>
-    <button data-variant="plain">Plain</button>
+    <button class="solid"><ins-icon name="heart"></ins-icon> Solid</button>
+    <button class="plain">Plain</button>
     <button disabled>Disabled</button>
-    <button data-variant="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
+    <button class="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
   </p>
 </section>
 
@@ -102,7 +102,7 @@
 
 <section>
   <h2>Segmented control</h2>
-  <fieldset data-variant="segmented">
+  <fieldset class="segmented">
     <legend>View</legend>
     <label><input type="radio" name="view" checked> List</label>
     <label><input type="radio" name="view"> Grid</label>
@@ -113,9 +113,9 @@
 <section>
   <h2>Toolbar</h2>
   <ins-toolbar aria-label="Format">
-    <button data-variant="plain" aria-pressed="true">Bold</button>
-    <button data-variant="plain" aria-pressed="false">Italic</button>
-    <button data-variant="plain">Clear</button>
+    <button class="plain" aria-pressed="true">Bold</button>
+    <button class="plain" aria-pressed="false">Italic</button>
+    <button class="plain">Clear</button>
   </ins-toolbar>
 </section>
 
@@ -137,8 +137,8 @@
     <h2 id="discard-title">Discard the draft?</h2>
     <p>The quince recipe you are writing will be lost.</p>
     <form method="dialog" class="row">
-      <button value="keep" data-variant="plain">Keep it</button>
-      <button value="discard" data-variant="solid">Discard</button>
+      <button value="keep" class="plain">Keep it</button>
+      <button value="discard" class="solid">Discard</button>
     </form>
   </dialog>
 </section>

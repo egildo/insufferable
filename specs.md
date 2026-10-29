@@ -16,10 +16,10 @@ Fifteen elements are built: tabs, disclosure, icon, link, divider, table, callou
 
 1. **Tokens are W3C design tokens.** They are written in the [Format](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/) and the [Resolver](https://www.w3.org/community/reports/design-tokens/CG-FINAL-resolver-20251028/), and read and resolved by `@toghen/lib`.
 2. **The stylesheet is written with `@toghen/postcss`.** The tokens become custom properties, cascade layers and mixins at build time.
-3. **The selectors are the states themselves.** A state is styled by the ARIA attribute that means it, or by the native pseudo-class where the element is native: `:checked` on a checkbox, `[aria-selected='true']` on a tab. Never a class. One attribute is both the meaning and the look.
+3. **The selectors are the states themselves.** A state is styled by the ARIA attribute that means it, or by the native pseudo-class where the element is native: `:checked` on a checkbox, `[aria-selected='true']` on a tab. Never a class: a class says what kind of thing an element is, not what state it is in. One attribute is both the meaning and the look.
 4. **A native element first.** A custom element only where script is needed, and then it wraps native markup that already works without script. This is the pattern known as HTML Web Components.
 5. **A native element is styled by its element name,** in the components layer: `details`, not a class on it. The page's HTML stays bare, and an app's own unlayered rules win over the layer. A custom element is styled by its own name, as `ins-tabs`.
-6. **Variants and sizes are `data-*` attributes.** A variant has no ARIA meaning, so it does not borrow one.
+6. **A variant is a class.** HTML asks a class to say what the content is, and keeps `data-*` for data no other attribute fits; a kind of button is what `class` is for, and CSS has its own syntax for it. A variant has no ARIA meaning, so it does not borrow one. The stylesheet pairs each class with its element, as `button.solid`, so an app's class of the same name elsewhere is left alone, and `data-*` stays the app's.
 7. **ARIA is written as attributes.** ARIA set through `ElementInternals` creates no attribute, so no selector could read it.
 8. **Light DOM.** An Invoker command's `commandfor` finds its target by id in the same tree, so a control inside a shadow root could not name an element of the app. The cascade reaches every element for the same reason.
 9. **The elements are written in TypeScript,** with no framework.
@@ -31,7 +31,7 @@ Fifteen elements are built: tabs, disclosure, icon, link, divider, table, callou
 
 Every element follows it.
 
-- **In: attributes.** The app sets states as ARIA attributes and variants as `data-*` attributes. The element reads them; it keeps no state of its own beyond what the attributes say.
+- **In: attributes.** The app sets states as ARIA attributes and variants as classes. The element reads them; it keeps no state of its own beyond what the attributes say.
 - **Out: commands,** through the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API). A control names its target with `commandfor` and its intent with `command`. An insufferable command starts with `--`, as the platform requires of a custom command.
 - **The default.** The element listens for `command` on itself. If the event is not cancelled, it applies its default: a tabs element sets `aria-selected` on the tab chosen. A page with no state management works.
 - **Controlled.** An app that owns the state cancels the event and writes the attributes itself.
@@ -88,7 +88,7 @@ A state is a part: a subgroup named after its value, such as `ins.tabs.tab.selec
 
 | Axis | Value | Spelled as |
 |---|---|---|
-| `variant` | `solid`, `plain`, `danger` | `[data-variant='solid']`, `[data-variant='plain']`, `[data-variant='danger']` |
+| `variant` | `solid`, `plain`, `danger` | `.solid`, `.plain`, `.danger` |
 | `selection` | `selected`, `pressed` | `:is([aria-selected='true'], :checked)`, `[aria-pressed='true']` |
 | `disclosure` | `open` | `[open]` |
 | `validity` | `invalid` | `:is(:user-invalid, [aria-invalid='true'])` |
@@ -269,12 +269,12 @@ A note set apart from the text around it, styled by its role. There is no native
 
 ```html
 <div role="note"><p>A quince is too hard to eat raw.</p></div>
-<div role="note" data-variant="danger"><p>Do not eat the seeds.</p></div>
-<div role="alert" data-variant="danger"><p>The recipe has no title.</p></div>
+<div role="note" class="danger"><p>Do not eat the seeds.</p></div>
+<div role="alert" class="danger"><p>The recipe has no title.</p></div>
 ```
 
 - **`role="note"`** for a note that is part of the page; **`role="alert"`** for one that appears after an action and must be announced, as the platform announces an alert when it is added.
-- **A tinted ground and a bar at the start,** in the accent; `data-variant="danger"` in the danger. The tints are pale in light, `blue.25` and `red.25`, because on the next step a link would fall under 4.5:1; every text and link on them keeps it.
+- **A tinted ground and a bar at the start,** in the accent; `class="danger"` in the danger. The tints are pale in light, `blue.25` and `red.25`, because on the next step a link would fall under 4.5:1; every text and link on them keeps it.
 - **It holds any flow content,** paragraphs, lists, an icon; its first and last child sit flush with its edges.
 
 ### Button
@@ -283,11 +283,11 @@ The native `<button>`. Its keyboard, focus and form behaviour are the platform's
 
 ```html
 <button>Keep it</button>
-<button data-variant="solid">Discard</button>
-<button data-variant="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
+<button class="solid">Discard</button>
+<button class="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
 ```
 
-- **Variants:** outlined by default, `solid` for the main action, `plain` for a quiet one, in `data-variant`.
+- **Variants:** outlined by default, `solid` for the main action, `plain` for a quiet one, as its class.
 - **States:** the pointer, focus, and disabled by `disabled` or `aria-disabled="true"`. The focus ring is an outline 2px outside the edge.
 - **Held down** (`:active`), a button goes one step deeper than under the pointer: the line's grey where hover is the fill, the deep accent where hover is the strong one. A menu item and a segment do the same; links, tabs, the disclosure and the listbox's options do not.
 - **A toggle button** has `aria-pressed`; pressed (`"true"`) it takes the accent's ground and the text on it, in any variant, the strong accent under the pointer. The fill would be 1.16:1 against the page, under the 3:1 a state's mark wants. Pressed and disabled, it keeps a grey ground, the line's, with the disabled text, so the state still shows while nothing answers the pointer.
@@ -348,10 +348,10 @@ The native `<input type="checkbox">` and `<input type="radio">`, drawn by the pl
 
 ### Segmented control
 
-A native radio group drawn as joined segments: `<fieldset data-variant="segmented">` holding `<label>`s, each holding its `<input type="radio">`. No custom element and no command.
+A native radio group drawn as joined segments: `<fieldset class="segmented">` holding `<label>`s, each holding its `<input type="radio">`. No custom element and no command.
 
 ```html
-<fieldset data-variant="segmented">
+<fieldset class="segmented">
   <legend>View</legend>
   <label><input type="radio" name="view" value="list" checked> List</label>
   <label><input type="radio" name="view" value="grid"> Grid</label>
@@ -373,8 +373,8 @@ The native `<dialog>`. There is no custom element and no insufferable command: w
 <dialog id="discard" aria-labelledby="discard-title">
   <h2 id="discard-title">Discard the draft?</h2>
   <form method="dialog">
-    <button value="keep" data-variant="plain">Keep it</button>
-    <button value="discard" data-variant="solid">Discard</button>
+    <button value="keep" class="plain">Keep it</button>
+    <button value="discard" class="solid">Discard</button>
   </form>
 </dialog>
 ```
@@ -415,9 +415,9 @@ Not built: checkbox and radio items (`aria-checked`, `--check`), submenus, findi
 
 ```html
 <ins-toolbar aria-label="Format">
-  <button data-variant="plain" aria-pressed="false">Bold</button>
-  <button data-variant="plain" aria-pressed="true">Italic</button>
-  <button data-variant="plain">Clear</button>
+  <button class="plain" aria-pressed="false">Bold</button>
+  <button class="plain" aria-pressed="true">Italic</button>
+  <button class="plain">Clear</button>
 </ins-toolbar>
 ```
 
@@ -426,7 +426,7 @@ Not built: checkbox and radio items (`aria-checked`, `--check`), submenus, findi
 - **It sends:** `--press` from a toggle button, on a click, Enter or Space.
 - **Its default:** turns the button's `aria-pressed` over, unless the app cancels the command.
 - **The keyboard,** after the WAI-ARIA toolbar pattern: the arrows move between the buttons and wrap, following the reading direction, Home and End go to the ends, a disabled button is passed over. Moving presses nothing.
-- **Its buttons are buttons,** styled as any: the demo writes `data-variant="plain"`. A button without `aria-pressed` is left alone.
+- **Its buttons are buttons,** styled as any: the demo writes `class="plain"`. A button without `aria-pressed` is left alone.
 - **Without script** the buttons are ordinary buttons in the tab order, and nothing toggles.
 
 ## Commands

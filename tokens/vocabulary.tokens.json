@@ -6,9 +6,9 @@
         "css": {
           "parts": {
             "variant": {
-              "solid": "[data-variant=solid]",
-              "plain": "[data-variant=plain]",
-              "danger": "[data-variant=danger]"
+              "solid": ".solid",
+              "plain": ".plain",
+              "danger": ".danger"
             },
             "selection": {
               "selected": ":is([aria-selected=true], :checked)",

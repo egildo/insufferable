@@ -506,3 +506,30 @@ The library was copied aside first. After the run, the saved file binds every Bo
 ### What was checked
 
 `toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, light and dark, computed on the article: `h1` Fraunces 32px 600 on 40px, `h2` Fraunces 24px 600, `h3` Archivo 20px 600, `h4` Archivo 16px 600, each 24px above and 8px below; `p` 16px 400 on 24px; `small` and `figcaption` 14px on 21px; `code` in the monospace at 16px, with no shrink from the browser's monospace default; `kbd` inside `small` at 14px. Both families loaded, upright and italic. In FigCraft: three new styles and two new size variables, the dialog's title in Fraunces at 1.5rem, and a second run with nothing to write but the style plan's updates.
+
+## A variant is a class
+
+> **Ruled 29 October 2026,** and made the same day: every variant moved from `data-variant` to a class. The principle is in [specs.md](./specs.md#principles).
+
+### The question
+
+The variants were written `data-variant="solid"`, on the reading that a variant has no ARIA meaning and so belongs in a `data-*` attribute. Egildo asked whether `class` would do, used for what a thing is: CSS has its own syntax for it.
+
+### What the platform says
+
+HTML asks authors to use class values that describe the nature of the content, not its look, and keeps custom data attributes for data private to the page "for which there are no more appropriate attributes or elements". A kind of button, a kind of note, a radio group drawn as segments: each is the nature of its element, which is what `class` is for. So `data-*` was the less fitting attribute, not the more careful one.
+
+### The ruling
+
+- **Each attribute has one job.** The element name says what a thing is; an ARIA attribute or a native pseudo-class says its state; a class says its kind; `data-*` is left to the app.
+- **Never a class for a state.** The earlier principle stands for states: `aria-pressed`, not `.pressed`.
+- **A class is paired with its element.** The stylesheet reads `button.solid`, `fieldset.segmented`, a note's `.danger` under its role, never a bare `.solid`, so an app's own class of the same name elsewhere is left alone. The components layer keeps any rule of the app's above them.
+- **Not a class that names the element.** The ruling on the disclosure stands: a class that says only what the element name says is still rejected.
+
+### What changed
+
+The vocabulary spells the variant axis `.solid`, `.plain`, `.danger`; the segmented control's own selector is `fieldset.segmented`; the stylesheets' comments, two token descriptions, every demo page and specs.md's markup follow. The coming parts are written as classes from the start: pill tabs, the tag, the chip list.
+
+### What was checked
+
+The built stylesheet holds no `data-variant`, and its variant rules read `:where(.solid)`, `:where(.plain)` and `:where(.danger)` nested under their elements. `toghen-query` finds no hole; typecheck and tests pass. In the built-in browser, on the index: the solid button in the accent, the outlined one clear, the plain one with no border, the danger note in its own tint beside the plain one, the segmented control laid out with its legend hidden. A FigCraft dry run plans no change to the variables or the components, since the sync reads the token names, not the selectors.

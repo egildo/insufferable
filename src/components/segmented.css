@@ -1,6 +1,6 @@
 /*
  * segmented: a radio group drawn as joined segments,
- * `<fieldset data-variant="segmented">` holding `<label>`s, each holding its
+ * `<fieldset class="segmented">` holding `<label>`s, each holding its
  * `<input type="radio">`. The platform keeps one checked, moves the choice with
  * the arrows, and gives the group one tab stop. Each label is a segment and its
  * circle is hidden, kept focusable; the checked segment takes the accent. The
@@ -10,7 +10,7 @@
  * visible one.
  */
 
-fieldset[data-variant=segmented] {
+fieldset.segmented {
   display: inline-flex;
   margin: 0;
   overflow: clip;

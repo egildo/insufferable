@@ -15,17 +15,17 @@
 <h2>Uncontrolled</h2>
 <p>No app state: the element turns each toggle over itself.</p>
 <ins-toolbar aria-label="Format">
-  <button data-variant="plain" aria-pressed="false">Bold</button>
-  <button data-variant="plain" aria-pressed="true">Italic</button>
-  <button data-variant="plain" aria-pressed="false" disabled>Underline</button>
-  <button data-variant="plain">Clear</button>
+  <button class="plain" aria-pressed="false">Bold</button>
+  <button class="plain" aria-pressed="true">Italic</button>
+  <button class="plain" aria-pressed="false" disabled>Underline</button>
+  <button class="plain">Clear</button>
 </ins-toolbar>
 
 <h2>Controlled</h2>
 <p>The app owns the state: it cancels every <code>--press</code> and refuses to turn Strike on.</p>
 <ins-toolbar id="controlled" aria-label="More">
-  <button data-variant="plain" aria-pressed="false">Code</button>
-  <button data-variant="plain" aria-pressed="false" id="strike">Strike</button>
+  <button class="plain" aria-pressed="false">Code</button>
+  <button class="plain" aria-pressed="false" id="strike">Strike</button>
 </ins-toolbar>
 
 <h2>Every command, heard at the root</h2>

@@ -1,7 +1,7 @@
 {
   "ins": {
     "callout": {
-      "$description": "A note set apart from the text: role=note, or role=alert when it must be announced. A tinted ground and a bar at the start in the accent; data-variant=danger in the danger.",
+      "$description": "A note set apart from the text: role=note, or role=alert when it must be announced. A tinted ground and a bar at the start in the accent; class=danger in the danger.",
       "color": {
         "$type": "color",
         "$value": "{ins.color.text.1}"

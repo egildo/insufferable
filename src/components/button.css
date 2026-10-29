@@ -1,7 +1,7 @@
 /*
  * button: the native `<button>`. Its keyboard, focus and form behaviour are the
- * platform's. Outlined by default; `data-variant="solid"` for the main action,
- * `data-variant="plain"` for a quiet one. Disabled is `disabled` or
+ * platform's. Outlined by default; `class="solid"` for the main action,
+ * `class="plain"` for a quiet one. Disabled is `disabled` or
  * `aria-disabled="true"`. An icon inside sits beside the words.
  *
  * A tab and a menu item are buttons too, styled by their own element:
