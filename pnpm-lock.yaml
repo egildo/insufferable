@@ -22,8 +22,8 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0
       '@toghen/figma':
-        specifier: ^0.1.11
-        version: 0.1.11
+        specifier: ^0.1.14
+        version: 0.1.14
       '@toghen/lib':
         specifier: ^0.1.0
         version: 0.1.0
@@ -244,8 +244,8 @@ packages:
   '@tabler/icons@3.49.0':
     resolution: {integrity: sha512-l+GnSkFETx0U26icxv1VUFnxxiTqXfCcVRiRAnyMwibupM2S2L/hSaZ9gmSgz01rkrsH/93NvLsxykqdanc6lw==}
 
-  '@toghen/figma@0.1.11':
-    resolution: {integrity: sha512-U+7RBCfQ0p3iG4N4eNKKX9lsJTILetMyGb55oJvXEzxgkaiP8RWg06Cm6w5JFK4QmV143xV4I4GBP5so75drJQ==}
+  '@toghen/figma@0.1.14':
+    resolution: {integrity: sha512-Jim4UnEKO+yKbO2EbgQpt8IULAn4og8GrrglnmbcDWSg/pO0eEagbk4YtReV9HTGQN13qBbLKurdZtKZvRoKdQ==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -598,7 +598,7 @@ snapshots:
 
   '@tabler/icons@3.49.0': {}
 
-  '@toghen/figma@0.1.11':
+  '@toghen/figma@0.1.14':
     dependencies:
       '@bgotink/kdl': 0.4.1
       '@toghen/lib': 0.1.0
