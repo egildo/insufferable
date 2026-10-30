@@ -8,3 +8,7 @@ examples/app/fonts/
 examples/app/components/
 examples/app/*.js
 examples/app/theme/
+.specify/
+.claude/
+CLAUDE.md
+CLAUDE.local.md
