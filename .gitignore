@@ -3,3 +3,5 @@ dist/
 .palette/
 figcraft/out/
 .DS_Store
+examples/app/insufferable.css
+examples/app/fonts/

@@ -31,6 +31,7 @@ pnpm build       # tsc writes dist/*.js and their types, then scripts/build.mjs 
 pnpm typecheck
 pnpm test        # node:test over test/*.test.ts, with Node's own type stripping
 pnpm palette     # gosfuig writes tokens/palette.tokens.json from tokens/palette.config.json
+node scripts/cli.mjs build <resolver.json>   # an app's own stylesheet from its resolver; see examples/app
 pnpm figcraft    # syncs the tokens and the component files into figcraft/insufferable.figcraft, headless; --dry-run to plan
 python3 -m http.server   # then open http://localhost:8000/dev/index.html
 ```

@@ -748,3 +748,28 @@ The layers are `ins.tokens` (with `defaults` and `theme` inside it), `ins.base` 
 - A derived theme, from a hue, a warmth, the fonts and a density, written by gosfuig with its contrast gate: the tool.
 - An app-chosen scheme: `color-scheme` on a container with `light-dark()` is the platform's way; the build writes the roles with `@media`, so the roles themselves do not follow a container yet. The override above does.
 - The density mode.
+
+## Building an app's own stylesheet
+
+> **Ruled 30 October 2026:** an app may rebuild the stylesheet from its own resolver, which extends the system's. Slice one built the same day: the command and an example. The theme generator and the guide are next.
+
+### The ruling
+
+The deeper of the two ways to ship theming. The first, an override file, changes values; this one changes tokens, so an app may change the ladder, the type and the palette, and gets a stylesheet of its own. The cost is Toghen and the build in the app, which was accepted.
+
+### What the build found
+
+- **Extending works by file order.** An app's resolver lists the system's base set by reference, then its own token files; the later wins. A pointer into another resolver's set resolves.
+- **Partial theme files work.** The theme modifier's context lists the system's file, then the app's, which holds only the roles it changes. The risk that an app's theme file replaces ours whole did not hold.
+- **The name is a coupling.** Every `t()` in the stylesheet reads `insufferable.ins.…`, and the two directives name the resolver, so an app's resolver must be named `insufferable`. The build says so and stops. Rewriting the names at build time was tried in thought and left: one rule is plainer than a substitution.
+- **`buildCss` and `writeCss` take a resolver,** the system's own by default, so the system's own build is the same command.
+
+### What was checked
+
+The system's own build is unchanged at 125.4 KB, typecheck and tests pass. `insufferable build examples/app/app.resolver.json` writes 125.2 KB. In the built-in browser the example page, in light and dark: solid button `rgb(154, 61, 18)` with white text in light, `rgb(240, 160, 112)` in dark, radius 0, headings in Georgia.
+
+### Not yet
+
+- **The package.** The build needs `src/` and `scripts/` in `files`, and the build's tools as dependencies, not dev dependencies; `private` is still true. Until then the command runs inside this repository.
+- **A FigCraft library for an app** from its resolver and our component files: the mechanism should work and is not tried.
+- **The theme generator and `guide.md`.**

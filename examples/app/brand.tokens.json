@@ -1,0 +1,13 @@
+{
+  "ins": {
+    "radius": {
+      "1": { "$value": { "value": 0, "unit": "px" } },
+      "2": { "$value": { "value": 0, "unit": "px" } }
+    },
+    "font": {
+      "family": {
+        "serif": { "$value": ["Georgia", "ui-serif", "serif"], "$type": "fontFamily" }
+      }
+    }
+  }
+}

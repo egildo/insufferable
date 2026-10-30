@@ -78,9 +78,10 @@ async function iconFont() {
   return { css, font };
 }
 
-export async function loadSystem() {
-  const { document } = await load(at('tokens/insufferable.resolver.json'), { read: (path) => readFile(path, 'utf8') });
-  return new Resolver(document).resolveContextsToDesignSystem();
+/** The resolved tokens of a resolver document, the system's own by default, and the name the document gives itself. */
+export async function loadSystem(resolver = at('tokens/insufferable.resolver.json')) {
+  const { document } = await load(resolver, { read: (path) => readFile(path, 'utf8') });
+  return { system: new Resolver(document).resolveContextsToDesignSystem(), name: document.name };
 }
 
 /** Inlines `@import './file.css' layer(name);` as `@layer name { …file… }`, indented one step. */
@@ -93,8 +94,13 @@ function inlineImports(entry) {
   );
 }
 
-export async function buildCss() {
-  const system = await loadSystem();
+/**
+ * The stylesheet for a resolver: the system's own, or an app's that extends it. The stylesheet names its tokens by
+ * the resolver's name, `insufferable`, in its directives and in every `t()`, so an app's resolver keeps the name.
+ */
+export async function buildCss(resolver) {
+  const { system, name } = await loadSystem(resolver);
+  if (name !== 'insufferable') throw new Error(`The resolver is named "${name}": an app's resolver keeps the name "insufferable", which the stylesheet refers to its tokens by.`);
   const icon = await iconFont();
   const input = inlineImports(at('src/index.css'))
     .replace('/*HOUSE_FONTS*/', () => houseFonts().css)
@@ -110,13 +116,14 @@ export async function buildCss() {
   return { css, iconFont: icon.font };
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { css, iconFont: font } = await buildCss();
-  mkdirSync(at('dist'), { recursive: true });
-  writeFileSync(at('dist/insufferable.css'), css, 'utf8');
-  // The fonts ship beside the stylesheet, which names it as `./fonts/…`.
-  mkdirSync(at('dist/fonts'), { recursive: true });
-  writeFileSync(at('dist/fonts/tabler-icons.woff2'), font);
-  for (const file of houseFonts().files) copyFileSync(file, at('dist/fonts', basename(file)));
-  console.log(`dist/insufferable.css  ${(Buffer.byteLength(css) / 1024).toFixed(1)} KB`);
+/** Writes the stylesheet and, beside it, the fonts it names as `./fonts/…`. */
+export async function writeCss(resolver, out = at('dist')) {
+  const { css, iconFont: font } = await buildCss(resolver);
+  mkdirSync(resolve(out, 'fonts'), { recursive: true });
+  writeFileSync(resolve(out, 'insufferable.css'), css, 'utf8');
+  writeFileSync(resolve(out, 'fonts/tabler-icons.woff2'), font);
+  for (const file of houseFonts().files) copyFileSync(file, resolve(out, 'fonts', basename(file)));
+  return `${resolve(out, 'insufferable.css')}  ${(Buffer.byteLength(css) / 1024).toFixed(1)} KB`;
 }
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) console.log(await writeCss());

@@ -1,0 +1,36 @@
+{
+  "version": "2025-11-01",
+  "name": "insufferable",
+  "description": "An app's tokens: insufferable's own, then the app's, which win. The roles it changes are partial files after the system's theme files.",
+  "sets": {
+    "base": {
+      "sources": [
+        { "$ref": "../../tokens/insufferable.resolver.json#/sets/base" },
+        { "$ref": "brand.tokens.json" }
+      ]
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/base" },
+    { "$ref": "#/modifiers/theme" }
+  ],
+  "modifiers": {
+    "theme": {
+      "description": "The page's colours, chosen by the system's colour-scheme preference. Light is the default.",
+      "default": "light",
+      "contexts": {
+        "light": [
+          { "$ref": "../../tokens/theme.light.tokens.json" },
+          { "$ref": "brand.light.tokens.json" }
+        ],
+        "dark": [
+          { "$ref": "../../tokens/theme.dark.tokens.json" },
+          { "$ref": "brand.dark.tokens.json" }
+        ]
+      },
+      "$extensions": {
+        "com.toghen": { "css": { "atRule": "@media (prefers-color-scheme: {context})" } }
+      }
+    }
+  }
+}

@@ -165,6 +165,14 @@ An app themes insufferable with its own CSS after the stylesheet. The stylesheet
 
 What an app may set: any role under `ins.color`, `ins.radius`, `ins.space`, `ins.size` and `ins.font`, by its custom property. What it should set together: a role and its companions (the accent with its strong, deep, tint and the text on it), since the system names them apart so that each pair can be measured. This route does not measure for the app, and it does not regenerate a palette: a brand colour is chosen by hand, and its contrast checked by hand. A derived theme, from a hue and a warmth, with the contrast gate, is a tool still to come.
 
+#### Building an app's own stylesheet
+
+The deeper route: the app rebuilds the stylesheet from its own tokens, with `insufferable build app.resolver.json`. The app's resolver is a W3C Resolver document that lists the system's base set, then token files of its own, which win by coming later; and the theme modifier, whose two contexts list the system's theme file, then the app's partial one. A partial file names only the roles it changes, so an app need not restate the rest. It may change anything a role names: the radii, the ladder, the fonts, the palette; the build writes `insufferable.css` and its `fonts/` beside the resolver.
+
+The resolver keeps the name `insufferable`. The stylesheet refers to every token, and its two directives, by that name, and the build stops with a message when an app's resolver has another. `examples/app` is the example: the demo page, square, with a terracotta accent and Georgia for the headings, from one resolver and three small token files.
+
+The component files for FigCraft refer to tokens by the same names, so an app overrides tokens and does not rename them.
+
 ### Typography
 
 A text style is a W3C `typography` token: font family, size, weight, letter spacing and line height, each referring to a primitive under `ins.font`. A component reads a style whole, under the key `font`, and the build writes it as the `font` shorthand and `letter-spacing` (the plugin's `typography: 'font'`).

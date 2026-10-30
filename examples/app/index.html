@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An app on insufferable</title>
+<link rel="stylesheet" href="insufferable.css">
+<script type="module" src="../../dist/components/tabs.js"></script>
+<script type="module" src="../../dist/components/icon.js"></script>
+<script type="module" src="../../dist/components/menu.js"></script>
+<script type="module" src="../../dist/components/toolbar.js"></script>
+<style>
+  /* Layout only: every word on the page takes its type from the base layer. */
+  body { max-width: 44rem; margin: 2rem auto; padding: 0 1rem; }
+  header { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: space-between; }
+  header h1 { margin: 0; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  [role='tabpanel'] { padding-block: 1rem; }
+  :is(#pantry, #notes):not([hidden]) { display: grid; gap: 1rem; justify-items: start; }
+  form.pantry { display: grid; gap: 0.75rem; justify-items: start; }
+  hr { inline-size: 100%; }
+</style>
+
+<header>
+  <h1>Quince notebook</h1>
+  <nav class="row" aria-label="Notebook">
+    <button commandfor="file" command="toggle-popover">File <ins-icon name="chevron-down"></ins-icon></button>
+    <ins-menu id="file" popover>
+      <button>New recipe</button>
+      <button>Open</button>
+      <hr>
+      <button disabled>Save</button>
+    </ins-menu>
+    <button class="plain" aria-label="Search"><ins-icon name="search"></ins-icon></button>
+    <button class="plain" aria-label="Settings"><ins-icon name="settings"></ins-icon></button>
+  </nav>
+</header>
+
+<ins-tabs class="pill" aria-label="Notebook">
+  <button aria-controls="recipes">Recipes <data value="1">1</data></button>
+  <button aria-controls="pantry">Pantry <data value="2">2</data></button>
+  <button aria-controls="notes">Notes <data value="1">1</data></button>
+</ins-tabs>
+
+<article id="recipes">
+  <h2>Quince paste <small class="tag">Draft</small></h2>
+  <ul class="chips" id="labels" aria-label="Labels">
+    <li>Preserve <button commandfor="labels" command="--remove" value="preserve" aria-label="Remove Preserve"><ins-icon name="x"></ins-icon></button></li>
+    <li>Autumn <button commandfor="labels" command="--remove" value="autumn" aria-label="Remove Autumn"><ins-icon name="x"></ins-icon></button></li>
+  </ul>
+  <p>Quinces are hard and sour raw, and turn rose-red and fragrant when cooked long. In Spain the paste is <em>membrillo</em>, eaten with Manchego; in Italy it is <em>cotognata</em>, cut into squares and rolled in sugar.</p>
+
+  <div role="note" class="danger"><p>Quince seeds hold amygdalin. Cut out every core before cooking.</p></div>
+
+  <h3>What you need</h3>
+  <table>
+    <thead><tr><th scope="col">Ingredient</th><th scope="col">Amount</th><th scope="col">Note</th></tr></thead>
+    <tbody>
+      <tr><td>Quinces</td><td>1 kg</td><td>Ripe and yellow</td></tr>
+      <tr><td>Sugar</td><td>About 800 g</td><td>Weighed against the purée</td></tr>
+      <tr><td>Lemon</td><td>One</td><td>Juiced</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The method</h3>
+  <ol>
+    <li>Wipe the down off the quinces, quarter them and cut out the cores.</li>
+    <li>Cover with water and simmer until soft, about forty minutes.</li>
+    <li>Drain, push through a sieve, and add four fifths of the purée's weight in sugar.</li>
+    <li>Cook on a low heat, stirring, until it pulls away from the pan.</li>
+  </ol>
+
+  <details>
+    <summary>When is it done?</summary>
+    <p>A spoon drawn across the bottom leaves a path that stays open. It takes an hour or more.</p>
+  </details>
+
+  <h4>Your draft</h4>
+  <ins-toolbar aria-label="Format">
+    <button class="plain" aria-pressed="false">Bold</button>
+    <button class="plain" aria-pressed="false">Italic</button>
+    <button class="plain">Clear</button>
+  </ins-toolbar>
+  <p>Next time, less sugar and a stick of cinnamon in the water.</p>
+  <p class="row">
+    <button commandfor="discard" command="show-modal">Discard the draft</button>
+    <button class="solid"><ins-icon name="check"></ins-icon> Keep it</button>
+  </p>
+
+  <p><small>From the notebook, last cooked in November. Press <kbd>Ctrl</kbd>+<kbd>P</kbd> to print it.</small></p>
+</article>
+
+<section id="pantry">
+  <h2>Pantry</h2>
+  <fieldset class="segmented">
+    <legend>View</legend>
+    <label><input type="radio" name="view" checked> List</label>
+    <label><input type="radio" name="view"> Grid</label>
+  </fieldset>
+
+  <table>
+    <thead><tr><th scope="col">Variety</th><th scope="col">Origin</th><th scope="col">Kilograms</th></tr></thead>
+    <tbody>
+      <tr><td>Champion <small class="tag">Ripe</small></td><td>United States</td><td>12</td></tr>
+      <tr><td>Vranja</td><td>Serbia</td><td>8</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>Add a variety</h3>
+  <form class="pantry">
+    <label>Name <input placeholder="Portugal"></label>
+    <label>Kilograms <input type="number" value="25" aria-invalid="true" aria-describedby="most"></label>
+    <small id="most">The pantry holds 20 kilograms at most.</small>
+    <label>Season <select><option>Autumn</option><option>Winter</option></select></label>
+    <label><input type="checkbox" checked> Ripe</label>
+    <label><input type="checkbox"> For paste</label>
+    <label><input type="checkbox" role="switch" checked> Remind me to use it</label>
+    <button class="solid">Add</button>
+  </form>
+</section>
+
+<section id="notes">
+  <h2>Notes</h2>
+  <div role="note"><p>The paste sets harder in a cold room. <a href="#recipes">See the recipe</a>.</p></div>
+  <label>Fruit
+    <select size="4">
+      <option selected>Quince</option>
+      <option>Medlar</option>
+      <option disabled>Loquat</option>
+      <option>Pear</option>
+    </select>
+  </label>
+  <figure>
+    <pre><code>sugar = purée × 0.8</code></pre>
+    <figcaption>The ratio, for any weight of fruit.</figcaption>
+  </figure>
+</section>
+
+<script type="module">
+  // The app: it removes a label the chip list asks it to.
+  document.addEventListener('command', (event) => {
+    if (event.command === '--remove') event.source.closest('li').remove();
+  }, { capture: true });
+</script>
+
+<dialog id="discard" aria-labelledby="discard-title">
+  <h2 id="discard-title">Discard the draft?</h2>
+  <p>The note you are writing will be lost.</p>
+  <form method="dialog" class="row">
+    <button value="keep" class="plain">Keep it</button>
+    <button value="discard" class="solid">Discard</button>
+  </form>
+</dialog>
+</html>
