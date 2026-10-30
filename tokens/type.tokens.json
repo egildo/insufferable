@@ -35,18 +35,12 @@
       },
       "size": {
         "xs": {
-          "$value": {
-            "value": 0.75,
-            "unit": "rem"
-          },
+          "$value": "{ins.quanta.lu.11}",
           "$description": "A tag's label"
         },
         "$type": "dimension",
         "sm": {
-          "$value": {
-            "value": 0.875,
-            "unit": "rem"
-          }
+          "$value": "{ins.quanta.fi.13}"
         },
         "md": {
           "$value": {
@@ -55,28 +49,19 @@
           }
         },
         "lg": {
-          "$value": {
-            "value": 1.25,
-            "unit": "rem"
-          }
+          "$value": "{ins.quanta.lu.18}"
         },
         "xl": {
-          "$value": {
-            "value": 1.5,
-            "unit": "rem"
-          }
+          "$value": "{ins.quanta.fi.21}"
         },
         "xxl": {
-          "$value": {
-            "value": 2,
-            "unit": "rem"
-          }
+          "$value": "{ins.quanta.lu.29}"
         },
         "icon": {
-          "$value": {
-            "value": 1.25,
-            "unit": "rem"
-          }
+          "$value": "{ins.quanta.fi.21}"
+        },
+        "display": {
+          "$value": "{ins.quanta.lu.47}"
         }
       },
       "weight": {
@@ -97,10 +82,10 @@
           "$value": 1
         },
         "snug": {
-          "$value": 1.25
+          "$value": 1.17
         },
         "normal": {
-          "$value": 1.5
+          "$value": 1.375
         }
       },
       "letterSpacing": {
@@ -156,7 +141,7 @@
       "display": {
         "$value": {
           "fontFamily": "{ins.font.family.serif}",
-          "fontSize": "{ins.font.size.xxl}",
+          "fontSize": "{ins.font.size.display}",
           "fontWeight": "{ins.font.weight.semibold}",
           "letterSpacing": "{ins.font.letterSpacing.normal}",
           "lineHeight": "{ins.font.lineHeight.snug}"
@@ -166,7 +151,7 @@
       "title": {
         "$value": {
           "fontFamily": "{ins.font.family.serif}",
-          "fontSize": "{ins.font.size.xl}",
+          "fontSize": "{ins.font.size.xxl}",
           "fontWeight": "{ins.font.weight.semibold}",
           "letterSpacing": "{ins.font.letterSpacing.normal}",
           "lineHeight": "{ins.font.lineHeight.snug}"
@@ -176,7 +161,7 @@
       "heading": {
         "$value": {
           "fontFamily": "{ins.font.family.sans}",
-          "fontSize": "{ins.font.size.lg}",
+          "fontSize": "{ins.font.size.xl}",
           "fontWeight": "{ins.font.weight.semibold}",
           "letterSpacing": "{ins.font.letterSpacing.normal}",
           "lineHeight": "{ins.font.lineHeight.snug}"

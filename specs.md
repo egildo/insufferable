@@ -62,7 +62,7 @@ insufferable/
 │   ├── insufferable.resolver.json   one set, its sources in this order, then the theme modifier
 │   ├── vocabulary.tokens.json       the states, and how CSS spells them
 │   ├── palette.tokens.json          the palette, written by gosfuig from palette.config.json
-│   ├── scales.tokens.json           space, border, radius, size
+│   ├── scales.tokens.json           the quanta, then space, border, radius, size, shadow
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
@@ -84,7 +84,7 @@ The shape follows `@toghen/ui`, written in TypeScript. `tsc` writes the modules 
 
 ## Tokens
 
-Three tiers in one group, `ins`: primitives (`ins.space`, `ins.border`, `ins.radius`, `ins.size`, `ins.font`), the semantic tier (the colours under `ins.color`, and the text styles `ins.typography`), and one group per element keyed by CSS property, whose values refer to the tiers above. No component token holds a literal.
+Three tiers in one group, `ins`: primitives (`ins.quanta`, then `ins.space`, `ins.border`, `ins.radius`, `ins.size`, `ins.font`), the semantic tier (the colours under `ins.color`, and the text styles `ins.typography`), and one group per element keyed by CSS property, whose values refer to the tiers above. No component token holds a literal.
 
 A state is a part: a subgroup named after its value, such as `ins.tabs.tab.selected`. The vocabulary in the `com.toghen` extension of `ins` spells each value as the platform does:
 
@@ -102,32 +102,48 @@ A later axis wins over an earlier one, so a disabled tab stays grey under the po
 
 A group may spell a value its own way, in its own `com.toghen` extension: a label holding a checkbox is disabled when its input is, `:has(> input:is(:disabled, [aria-disabled='true']))`.
 
+### Quanta
+
+Every dimension is cut from one ladder, `ins.quanta`, in two rows that interleave: Fibonacci, `ins.quanta.fi`, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987; and Lucas, `ins.quanta.lu`, 4, 7, 11, 18, 29, 47, 76, 123, 199, 322, 521. Both grow by the golden ratio, so any two steps two apart stand in proportion. The key is the number itself, in pixels at the browser's default size; the value is written in rem, so the reader's font size scales every dimension. Hairlines, `ins.border`, stay px. This is sibardoc's ladder.
+
+A quantum is pure: it means nothing on screen until a role names it. A role in `ins.space`, `ins.radius`, `ins.size`, `ins.font.size` or `ins.shadow` refers to one; no element token does, and none holds a literal. A step is chosen for the proportion it keeps with its neighbours, and a near miss is moved to it: the side pane's rest width is 322, once 320.
+
+| Role | Quantum | Role | Quantum |
+|---|---|---|---|
+| `space.1` · `2` · `3` · `4` · `5` | 5 · 8 · 13 · 21 · 34 | `size.control` | 34 |
+| `radius.1` · `2` | 8 · 13 | `size.dock` | 55 |
+| `size.track` | 29 | `size.side` · `sideMin` · `sideMax` | 322 · 233 · 521 |
+| `size.dot` | 8 | `size.measure` | 521 |
+| `size.shellNarrow` · `shellPhone` | 987 · 610 | `size.box` | 1rem, the body's size |
+
+The raised shadow is two layers, offsets 2 and 8 with blurs 5 and 21.
+
 ### Colours
 
-The colours are in two tiers. **The palette**, `palette` in `tokens/palette.tokens.json`, is five families of twelve steps, `25` to `950`, written by [gosfuig](https://codeberg.org/Toghen/gosfuig) from `tokens/palette.config.json` with `pnpm palette`, in OKLCH with a hex fallback. It is never edited by hand: change the config and run the command. The grey has no chroma and a curve tuned to land on the greys below; the blue and the red are pinned at `600` to the accent and the danger; the green and the amber, for the statuses, are the generator's own.
+The colours are in two tiers. **The palette**, `palette` in `tokens/palette.tokens.json`, is five families of twelve steps, `25` to `950`, written by [gosfuig](https://codeberg.org/Toghen/gosfuig) from `tokens/palette.config.json` with `pnpm palette`, in OKLCH with a hex fallback. It is never edited by hand: change the config and run the command. The grey is warm, chroma 0.005 at hue 80, a trace that turns white into paper and black into a deep umber, and its curve is tuned to land on the greys below; the blue and the red are pinned at `600` to the accent and the danger; the green and the amber, for the statuses, are the generator's own.
 
 **The roles**, `ins.color`, are what the elements read. They live in the `theme` modifier, one whole file per context: `tokens/theme.light.tokens.json`, the default, and `tokens/theme.dark.tokens.json`. Each role refers to a step in both:
 
 | Role | Light | Dark | What it is |
 |---|---|---|---|
 | `ins.color.text.1` · `2` · `3` | `gray.950` · `600` · `400` | `gray.50` · `400` · `600` | Text, quieter text, disabled text |
-| `ins.color.surface` | white | `gray.950` | The page, a field, a dialog |
-| `ins.color.fill` | `gray.50` | `gray.900` | A control under the pointer, a disabled field |
+| `ins.color.surface` | `#fdfcfa`, paper | `gray.950` | The page, a field, a dialog |
+| `ins.color.fill` | `gray.25` | `gray.900` | A control under the pointer, a disabled field |
 | `ins.color.line` | `gray.100` | `gray.800` | A divider, a disabled edge |
 | `ins.color.lineStrong` | `gray.500` | `gray.500` | A control's edge: at least 3:1 on the surface, as WCAG asks of a control's boundary |
 | `ins.color.accent` · `accentStrong` · `accentDeep` | `blue.600` · `700` · `800` | `blue.400` · `300` · `200` | The accent, under the pointer, and pressed |
 | `ins.color.accentTint` | `blue.25` | `blue.900` | A ground tinted with the accent: a callout |
 | `ins.color.onAccent` | white | `gray.950` | Text on the accent |
-| `ins.color.danger` | `red.600` | `red.400` | An invalid field |
+| `ins.color.danger` | `red.600` | `red.300` | An invalid field |
 | `ins.color.dangerTint` | `red.25` | `red.900` | A ground tinted with the danger: a callout that warns |
-| `ins.color.desk` | `gray.25` | black | The ground an application's panes sit on |
+| `ins.color.desk` | `gray.50` | `#0f0e0d` | The ground an application's panes sit on |
 | `ins.color.ok` · `warn` | `green.500` · `amber.500` | `green.300` · `amber.300` | A status in order, a status that needs a look: 4.5:1 on the page |
-| `ins.color.raised` | white | `gray.900` | What sits above the page: a menu, a dialog |
-| `ins.color.shadow` | black at 12% | clear | A raised surface's shadow: in dark the lighter ground sets it apart |
+| `ins.color.raised` | `#fffefd` | `gray.900` | What sits above the page: a menu, a dialog |
+| `ins.color.shadow` | black at 9% | clear | A raised surface's shadow: in dark the lighter ground sets it apart |
 | `ins.color.shade` | black at 40% | black at 60% | What a modal dialog lays over the page |
 | `ins.color.clear` | nothing | nothing | A colour that is not there |
 
-White, black and nothing are written as values: white is no step of a family, and a reference cannot change a colour's opacity. In dark the accent is lighter and the text on it dark, so the accent also reads as text on the dark page.
+Paper, white, the dark desk and nothing are written as values: none is a step of a family, and a reference cannot change a colour's opacity. In dark the accent is lighter and the text on it dark, so the accent also reads as text on the dark page.
 
 ### Themes
 
@@ -139,17 +155,17 @@ A text style is a W3C `typography` token: font family, size, weight, letter spac
 
 | Style | Family | Size | Weight | Line height | Read by |
 |---|---|---|---|---|---|
-| `ins.typography.body` | Archivo | 1rem | 400 | 1.5 | the page (`html`) |
-| `ins.typography.label` | Archivo | 0.875rem | 500 | 1.25 | a tab, a summary, a button, a field's label |
-| `ins.typography.small` | Archivo | 0.875rem | 400 | 1.5 | small print and a caption (`small`, `figcaption`) |
-| `ins.typography.tag` | Archivo | 0.75rem | 600 | 1.5 | a tag and a group's heading, in capitals, tracked 0.5px |
-| `ins.typography.dock` | Archivo | 0.75rem | 500 | 1.25 | a word under an icon: a dock button |
-| `ins.typography.heading` | Archivo | 1.25rem | 600 | 1.25 | a heading within a section (`h3`) |
-| `ins.typography.title` | Fraunces | 1.5rem | 600 | 1.25 | a section's heading (`h2`), a dialog's title |
-| `ins.typography.display` | Fraunces | 2rem | 600 | 1.25 | the top heading (`h1`) |
-| `ins.typography.icon` | tabler-icons | 1.25rem | 400 | 1 | an icon |
+| `ins.typography.body` | Archivo | 1rem | 400 | 1.375 | the page (`html`) |
+| `ins.typography.label` | Archivo | 13 | 500 | 1.17 | a tab, a summary, a button, a field's label |
+| `ins.typography.small` | Archivo | 13 | 400 | 1.375 | small print and a caption (`small`, `figcaption`) |
+| `ins.typography.tag` | Archivo | 11 | 600 | 1.375 | a tag and a group's heading, in capitals, tracked 0.5px |
+| `ins.typography.dock` | Archivo | 11 | 500 | 1.17 | a word under an icon: a dock button |
+| `ins.typography.heading` | Archivo | 21 | 600 | 1.17 | a heading within a section (`h3`) |
+| `ins.typography.title` | Fraunces | 29 | 600 | 1.17 | a section's heading (`h2`), a dialog's title |
+| `ins.typography.display` | Fraunces | 47 | 600 | 1.17 | the top heading (`h1`) |
+| `ins.typography.icon` | tabler-icons | 21 | 400 | 1 | an icon |
 
-The sizes are six steps, `ins.font.size.xs` to `xxl`: 0.75, 0.875, 1, 1.25, 1.5 and 2rem; the smallest is for a tag and a word under an icon. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
+The sizes are quanta, in pixels at the default size: `ins.font.size.xs` to `xxl` are 11, 13, 16, 18, 21 and 29, and `display` is 47. Body keeps 1rem, which is on no ladder: it is the browser's own ground, and the user's setting. The smallest is for a tag and a word under an icon; 18 is for a lead and is read by no style yet. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
 
 ### The house fonts
 

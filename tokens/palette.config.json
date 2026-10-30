@@ -6,10 +6,10 @@
   "families": [
     {
       "name": "gray",
-      "hue": 0,
+      "hue": 80,
       "chroma": {
         "kind": "constant",
-        "value": 0
+        "value": 0.005
       },
       "lightness": {
         "kind": "ramp",

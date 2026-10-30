@@ -17,11 +17,11 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            1.0,
-            1.0,
-            1.0
+            0.9922,
+            0.9882,
+            0.9804
           ],
-          "hex": "#ffffff"
+          "hex": "#fdfcfa"
         },
         "$description": "The page, and what sits on it: a field, a dialog"
       },
@@ -29,20 +29,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            1,
-            1,
-            1
+            1.0,
+            0.9961,
+            0.9922
           ],
-          "hex": "#ffffff"
+          "hex": "#fffefd"
         },
         "$description": "What sits above the page: a menu, a dialog. In dark it is lighter than the page, since a shadow does not show there"
       },
       "desk": {
-        "$value": "{palette.gray.25}",
-        "$description": "The ground an application's panes sit on: a step below the surface, which the panes take"
+        "$value": "{palette.gray.50}",
+        "$description": "The ground an application's panes sit on: a step below the paper, which the panes take"
       },
       "fill": {
-        "$value": "{palette.gray.50}",
+        "$value": "{palette.gray.25}",
         "$description": "A neutral tint: a control under the pointer, a disabled field"
       },
       "line": {
@@ -130,7 +130,7 @@
             0
           ],
           "hex": "#000000",
-          "alpha": 0.12
+          "alpha": 0.09
         },
         "$description": "The colour of a raised surface's shadow: clear in dark, where the lighter ground sets it apart"
       }

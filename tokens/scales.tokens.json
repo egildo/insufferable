@@ -1,5 +1,163 @@
 {
   "ins": {
+    "quanta": {
+      "$type": "dimension",
+      "$description": "The raw dimensions every size is cut from: Fibonacci and Lucas numbers, in rem so the reader's font size scales them. A role names a quantum; a component never does",
+      "fi": {
+        "2": {
+          "$value": {
+            "value": 0.125,
+            "unit": "rem"
+          }
+        },
+        "3": {
+          "$value": {
+            "value": 0.1875,
+            "unit": "rem"
+          }
+        },
+        "5": {
+          "$value": {
+            "value": 0.3125,
+            "unit": "rem"
+          }
+        },
+        "8": {
+          "$value": {
+            "value": 0.5,
+            "unit": "rem"
+          }
+        },
+        "13": {
+          "$value": {
+            "value": 0.8125,
+            "unit": "rem"
+          }
+        },
+        "21": {
+          "$value": {
+            "value": 1.3125,
+            "unit": "rem"
+          }
+        },
+        "34": {
+          "$value": {
+            "value": 2.125,
+            "unit": "rem"
+          }
+        },
+        "55": {
+          "$value": {
+            "value": 3.4375,
+            "unit": "rem"
+          }
+        },
+        "89": {
+          "$value": {
+            "value": 5.5625,
+            "unit": "rem"
+          }
+        },
+        "144": {
+          "$value": {
+            "value": 9.0,
+            "unit": "rem"
+          }
+        },
+        "233": {
+          "$value": {
+            "value": 14.5625,
+            "unit": "rem"
+          }
+        },
+        "377": {
+          "$value": {
+            "value": 23.5625,
+            "unit": "rem"
+          }
+        },
+        "610": {
+          "$value": {
+            "value": 38.125,
+            "unit": "rem"
+          }
+        },
+        "987": {
+          "$value": {
+            "value": 61.6875,
+            "unit": "rem"
+          }
+        }
+      },
+      "lu": {
+        "4": {
+          "$value": {
+            "value": 0.25,
+            "unit": "rem"
+          }
+        },
+        "7": {
+          "$value": {
+            "value": 0.4375,
+            "unit": "rem"
+          }
+        },
+        "11": {
+          "$value": {
+            "value": 0.6875,
+            "unit": "rem"
+          }
+        },
+        "18": {
+          "$value": {
+            "value": 1.125,
+            "unit": "rem"
+          }
+        },
+        "29": {
+          "$value": {
+            "value": 1.8125,
+            "unit": "rem"
+          }
+        },
+        "47": {
+          "$value": {
+            "value": 2.9375,
+            "unit": "rem"
+          }
+        },
+        "76": {
+          "$value": {
+            "value": 4.75,
+            "unit": "rem"
+          }
+        },
+        "123": {
+          "$value": {
+            "value": 7.6875,
+            "unit": "rem"
+          }
+        },
+        "199": {
+          "$value": {
+            "value": 12.4375,
+            "unit": "rem"
+          }
+        },
+        "322": {
+          "$value": {
+            "value": 20.125,
+            "unit": "rem"
+          }
+        },
+        "521": {
+          "$value": {
+            "value": 32.5625,
+            "unit": "rem"
+          }
+        }
+      }
+    },
     "space": {
       "0": {
         "$value": {
@@ -8,35 +166,20 @@
         }
       },
       "1": {
-        "$value": {
-          "value": 4,
-          "unit": "px"
-        }
+        "$value": "{ins.quanta.fi.5}"
       },
       "2": {
-        "$value": {
-          "value": 8,
-          "unit": "px"
-        }
+        "$value": "{ins.quanta.fi.8}"
       },
       "3": {
-        "$value": {
-          "value": 12,
-          "unit": "px"
-        }
+        "$value": "{ins.quanta.fi.13}"
       },
       "$type": "dimension",
       "4": {
-        "$value": {
-          "value": 16,
-          "unit": "px"
-        }
+        "$value": "{ins.quanta.fi.21}"
       },
       "5": {
-        "$value": {
-          "value": 24,
-          "unit": "px"
-        }
+        "$value": "{ins.quanta.fi.34}"
       }
     },
     "border": {
@@ -70,17 +213,11 @@
     },
     "radius": {
       "1": {
-        "$value": {
-          "value": 6,
-          "unit": "px"
-        }
+        "$value": "{ins.quanta.fi.8}"
       },
       "$type": "dimension",
       "2": {
-        "$value": {
-          "value": 12,
-          "unit": "px"
-        }
+        "$value": "{ins.quanta.fi.13}"
       },
       "round": {
         "$value": {
@@ -100,98 +237,77 @@
         "$description": "A checkbox, a radio button, the height of a switch"
       },
       "track": {
-        "$value": {
-          "value": 1.75,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.lu.29}",
         "$description": "The width of a switch"
       },
       "control": {
-        "$value": {
-          "value": 2.25,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.fi.34}",
         "$description": "The height of a button or a field"
       },
       "measure": {
-        "$value": {
-          "value": 32,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.lu.521}",
         "$description": "A readable line: the width of a dialog"
       },
       "dot": {
-        "$value": {
-          "value": 0.5,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.fi.8}",
         "$description": "A status dot, and the mark of a property row"
       },
       "dock": {
-        "$value": {
-          "value": 3.5,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.fi.55}",
         "$description": "A dock button, square"
       },
       "side": {
-        "$value": {
-          "value": 20,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.lu.322}",
         "$description": "A side pane's width at rest, and the splitter's middle"
       },
       "sideMin": {
-        "$value": {
-          "value": 14,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.fi.233}",
         "$description": "A side pane at its smallest: where the splitter's value is 0"
       },
       "sideMax": {
-        "$value": {
-          "value": 32,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.lu.521}",
         "$description": "A side pane at its largest: where the splitter's value is 100"
       },
       "shellNarrow": {
-        "$value": {
-          "value": 64,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.fi.987}",
         "$description": "Below this width a shell's side panes open over the main pane, as popovers"
       },
       "shellPhone": {
-        "$value": {
-          "value": 40,
-          "unit": "rem"
-        },
+        "$value": "{ins.quanta.fi.610}",
         "$description": "Below this width a shell's side pane opens as a sheet from the bottom"
       }
     },
     "shadow": {
       "$type": "shadow",
       "raised": {
-        "$value": {
-          "color": "{ins.color.shadow}",
-          "offsetX": {
-            "value": 0,
-            "unit": "px"
+        "$value": [
+          {
+            "color": "{ins.color.shadow}",
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": "{ins.quanta.fi.2}",
+            "blur": "{ins.quanta.fi.5}",
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            }
           },
-          "offsetY": {
-            "value": 4,
-            "unit": "px"
-          },
-          "blur": {
-            "value": 12,
-            "unit": "px"
-          },
-          "spread": {
-            "value": 0,
-            "unit": "px"
+          {
+            "color": "{ins.color.shadow}",
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": "{ins.quanta.fi.8}",
+            "blur": "{ins.quanta.fi.21}",
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            }
           }
-        },
+        ],
         "$description": "A surface raised above the page: a menu"
       }
     }

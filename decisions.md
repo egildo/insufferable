@@ -692,3 +692,41 @@ The shell becomes an element. Below a width it adds `popover` to each side pane,
 ### What was checked
 
 Typecheck and tests pass. In the built-in browser: at 1400 by 860, the row, Structure and Styles open, no popover. At 900 by 700, `:state(narrow)`: all five side panes popovers, closed, every dock button saying so, no splitter. Structure from its dock: open past the dock (90px from the left edge, the dock ending at 78), the full height less the gap, over the shade at 40%; Escape closed it, its button said closed, and focus came back to the button. Styles from the right dock: 90px from the right edge; a click outside closed it. At 375 by 812, `:state(phone)`: Structure as a sheet, edge to edge, against the bottom. Widened back to 1400 after opening Resources as a sheet: Resources open in the row in Structure's place, with its splitter, and Styles as it was. In FigCraft: PaneOverlay, the pane raised with the raised shadow bound to its colour; the render crops the shadow at the frame's edge.
+
+## The aesthetics round
+
+> **Ruled 30 October 2026:** the dimensions come from sibardoc's Fibonacci and Lucas ladder, in rem; the neutrals take a trace of warmth. Built the same day. Its spec is in specs.md, under Quanta, Colours and Typography.
+
+### The ruling
+
+- **A quanta tier,** `ins.quanta.fi` and `ins.quanta.lu`, pure dimensions in rem. Space, radius, sizes, type sizes and the shadow refer to it; nothing else does.
+- **Space and radius re-cut:** space 5, 8, 13, 21, 34 (was 4, 8, 12, 16, 24); radius 8 and 13 (was 6 and 12). The control is 34 and the dock 55; the side pane is 233, 322 and 521; the narrow and phone widths are 987 and 610.
+- **Type on the ladder:** 11, 13, body at 1rem, 18, 21, 29, 47. Line heights 1.375 for text and 1.17 for headings. Body stays at 1rem: the browser's default is the ground, and sibardoc keeps its own body off the ladder too.
+- **Warm neutrals:** the grey has chroma 0.005 at hue 80. Light is paper on a warm desk; dark lifts off black, panes on a desk one step deeper.
+- **The shadow is two layers,** offsets 2 and 8, blurs 5 and 21, at 9% in light.
+
+### What the build found
+
+- **No element token held a literal,** so every dimension moved by editing the scales and the type, and nothing else. Space grows at its top: 16 became 21 and 24 became 34, and the panes breathe more.
+- **Two pairs were already under 4.5:1.** Quieter text on the hover fill measured 4.39 and danger text on a raised surface in dark 4.32. The light fill is now `gray.25` (4.67) and the dark danger is `red.300` (5.71).
+- **The desk needed a step.** With a warm paper surface, `gray.25` on the desk lost the edge between pane and desk; the light desk is now `gray.50`. The dark desk is a written value, `#0f0e0d`, since the ramp has nothing darker than `gray.950`.
+- **The palette contract still fails for blue and red** (700 on 200 at 4.33 and 4.49), as before; this round touched only the grey.
+- **The stylesheet** grew from 123.5 to 125.4 KB, the quanta's variables.
+
+### What was checked
+
+Typecheck and tests pass; the FigCraft library was synced. In the built-in browser, the shell in light and dark at 1345 wide: side panes 322 wide, the narrow width read as 61.6875rem, controls 55 for a dock button; at 900 the panes became popovers as before. Text, edge, accent, danger, ok and warn contrast measured against surface, desk, fill and raised in both themes: every text pair 4.5:1 or more except the quieter text on the desk in light (4.36) and the disabled text, which WCAG exempts.
+
+### Not done
+
+- The quieter text on the light desk, 4.36: no text sits straight on the desk today.
+- The motion durations (89, 144, 233, 377 in sibardoc) and the style study.
+
+### The FigCraft sync
+
+The first sync made 26 variables (the quanta, and the display size) and updated 70, then 40 text and effect styles. Read back from the file, the shadow style is bound to the quanta variables for both layers' offsets and blurs, and the colour variable at 9%. Two things did not land:
+
+- **Three text styles kept old line heights and the display style kept a size from before its variable changed:** the next run called nine styles drifted, since they differed from what the first run wrote. A run with `--overwrite-drift` wrote the document's values: label 13 at 117%, display 47, title 29, heading 21, tag and dock 11, body 16 at 137.5%.
+- **Nine styles are updated on every run,** though the variables are unchanged. The values read back are right, so it costs nothing but noise. A question for Toghen's figma sync, with the textCase and the two open issues.
+
+A render of the library shows the warm ground, the new sizes and the tree, choice and property rows intact.

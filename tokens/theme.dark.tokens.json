@@ -25,11 +25,11 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0,
-            0,
-            0
+            0.0588,
+            0.0549,
+            0.051
           ],
-          "hex": "#000000"
+          "hex": "#0f0e0d"
         },
         "$description": "The ground an application's panes sit on: a step below the surface, which the panes take"
       },
@@ -64,7 +64,7 @@
         "$description": "Text on the accent"
       },
       "danger": {
-        "$value": "{palette.red.400}",
+        "$value": "{palette.red.300}",
         "$description": "An error: a field whose value is not valid"
       },
       "dangerTint": {
