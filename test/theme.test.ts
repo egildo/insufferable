@@ -3,7 +3,7 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
-import { contrast, failures, oklchToHex } from '../scripts/color.ts';
+import { contrast, failures, oklchToHex } from '../src/color.ts';
 import { generateTheme } from '../scripts/theme.mjs';
 
 test('contrast is the WCAG ratio', () => {

@@ -19,14 +19,19 @@
   },
   "files": [
     "tokens/",
-    "dist/"
+    "dist/",
+    "src/",
+    "scripts/build.mjs",
+    "scripts/cli.mjs",
+    "scripts/theme.mjs"
   ],
   "scripts": {
     "build": "tsc && node scripts/build.mjs",
     "palette": "gosfuig tokens/palette.config.json --no-dashboard -o .palette && mv .palette/tokens.json tokens/palette.tokens.json && rmdir .palette",
     "typecheck": "tsc --noEmit",
     "test": "node --test 'test/**/*.test.ts'",
-    "figcraft": "node scripts/figcraft.mjs"
+    "figcraft": "node scripts/figcraft.mjs",
+    "prepack": "pnpm build"
   },
   "license": "MIT",
   "author": "Egildo Tagliareni <egildo@tagliareni.it>",
@@ -35,19 +40,19 @@
   },
   "packageManager": "pnpm@10.29.3",
   "devDependencies": {
+    "@toghen/figma": "^0.1.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
     "@csstools/postcss-mixins": "^1.1.0",
     "@fontsource-variable/archivo": "^5.3.0",
     "@fontsource-variable/fraunces": "^5.3.0",
-    "@toghen/figma": "^0.1.15",
+    "@tabler/icons-webfont": "^3.49.0",
     "@toghen/lib": "^0.1.0",
     "@toghen/postcss": "^0.1.0",
     "gosfuig": "^0.2.0",
     "postcss": "^8.5.32",
-    "subset-font": "^2.9.0",
-    "typescript": "^7.0.2"
-  },
-  "dependencies": {
-    "@tabler/icons-webfont": "^3.49.0"
+    "subset-font": "^2.9.0"
   },
   "bin": {
     "insufferable": "./scripts/cli.mjs"

@@ -826,3 +826,24 @@ Typecheck, 17 tests, and the system's own build unchanged at 125.4 KB. `examples
 - The package: its files and dependencies, so that the commands run outside this repository.
 - Density, and the app-chosen scheme.
 - A FigCraft library for an app.
+
+## The package and the guide
+
+> **Ruled 30 October 2026:** the commands run from an installed package; `guide.md` is the practice. Built the same day. The package is not published: `private` stays.
+
+### What the build found
+
+- **Node does not strip types inside `node_modules`.** The build and the generator imported `.ts` from `src/`, which works in a checkout and stops when installed. They now import the compiled `dist/` files, and the colour helpers moved from `scripts/` to `src/` so that `tsc` compiles them. A consequence: the scripts need `pnpm build` to have run, which `prepack` does.
+- **Paths were the repository's.** The fonts, the icon font and gosfuig were found under the checkout's `node_modules`. They are now found as Node finds a package, which holds when a package manager hoists them: `pkg()` for the packages that export their `package.json`, and `import.meta.resolve` for gosfuig, which exports only its main file.
+- **The build's tools are dependencies,** no longer dev dependencies: postcss and its mixins, Toghen's library and plugin, gosfuig, the subsetter and the two house fonts. The FigCraft sync and the compiler stay dev.
+- **The files:** `tokens/`, `dist/`, `src/` (the stylesheets the build inlines) and the three scripts. The tarball is 1.1 MB, mostly the fonts.
+
+### What was checked
+
+A tarball made by `pnpm pack`, installed into an empty app with `pnpm add`: `insufferable theme` wrote the theme from a green brand and a font, and `insufferable build` wrote a 125.9 KB stylesheet under the prefix `acme` and the scripts, which define `acme-shell`, `acme-tree` and the rest. 21 tests, typecheck and the system's own build as before.
+
+### Not done
+
+- Publication: the name, the version and the licence line are a decision for later.
+- The scripts' copy of `color.js`, `icons.js` and `elements.js` into an app's folder is more than the app needs; harmless.
+- A density mode, an app-chosen scheme, and an app's FigCraft library.

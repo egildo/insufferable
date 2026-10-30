@@ -11,6 +11,7 @@
 
 import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postcssMixins from '@csstools/postcss-mixins';
@@ -18,8 +19,11 @@ import { load, Resolver } from '@toghen/lib';
 import toghenPostcss from '@toghen/postcss';
 import postcss from 'postcss';
 import subsetFont from 'subset-font';
-import { validPrefix, withPrefix } from '../src/elements.ts';
-import { icons } from '../src/icons.ts';
+import { validPrefix, withPrefix } from '../dist/elements.js';
+import { icons } from '../dist/icons.js';
+
+/** The folder of an installed package, found as Node finds it, so the build runs from `node_modules` as well as from a checkout. */
+const pkg = (name) => dirname(createRequire(import.meta.url).resolve(`${name}/package.json`));
 
 const at = (...parts) => resolve(fileURLToPath(new URL('../', import.meta.url)), ...parts);
 
@@ -29,8 +33,8 @@ const at = (...parts) => resolve(fileURLToPath(new URL('../', import.meta.url)),
  * renamed to the families' own names, and their files are named as they will sit beside the stylesheet.
  */
 const HOUSE_FONTS = [
-  { family: 'Archivo', dir: 'node_modules/@fontsource-variable/archivo', sheets: ['standard.css', 'standard-italic.css'] },
-  { family: 'Fraunces', dir: 'node_modules/@fontsource-variable/fraunces', sheets: ['full.css', 'full-italic.css'] },
+  { family: 'Archivo', dir: pkg('@fontsource-variable/archivo'), sheets: ['standard.css', 'standard-italic.css'] },
+  { family: 'Fraunces', dir: pkg('@fontsource-variable/fraunces'), sheets: ['full.css', 'full-italic.css'] },
 ];
 
 /** The house fonts' face rules, and the files they name. */
@@ -49,7 +53,7 @@ function houseFonts() {
   return { css, files };
 }
 
-const TABLER = 'node_modules/@tabler/icons-webfont/dist';
+const TABLER = join(pkg('@tabler/icons-webfont'), 'dist');
 
 /** Each icon in `src/icons.ts` with its character in Tabler's font, as hex, read from Tabler's own stylesheet. */
 export function iconCharacters() {

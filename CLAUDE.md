@@ -10,8 +10,9 @@ The rules are the principles in `specs.md`. Read them before changing anything. 
 |---|---|
 | `specs.md` | Why it is built this way: principles, the element contract, open questions |
 | `decisions.md` | The archive: dated rulings, what was considered and rejected, what was checked, open questions |
+| `guide.md` | How an app uses it, themes it, and builds its own stylesheet |
 
-The demo pages in `dev/` show each element; serve the folder and open `dev/index.html`, which shows them all and links each one's own page. A `guide.md` is still to come.
+The demo pages in `dev/` show each element; serve the folder and open `dev/index.html`, which shows them all and links each one's own page. `guide.md` is how an app uses and themes it.
 
 ## Neighbours
 

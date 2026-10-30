@@ -17,9 +17,11 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { failures, oklchToHex } from './color.ts';
+import { failures, oklchToHex } from '../dist/color.js';
 
 const at = (...parts) => resolve(fileURLToPath(new URL('../', import.meta.url)), ...parts);
+/** gosfuig's command line, found as Node finds the package. */
+const gosfuig = resolve(dirname(fileURLToPath(import.meta.resolve('gosfuig'))), 'bin.js');
 const read = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const write = (path, data) => writeFileSync(path, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 const color = (hex) => ({
@@ -68,7 +70,7 @@ export function generateTheme(configPath, out = resolve(dirname(configPath), 'th
   const work = mkdtempSync(resolve(tmpdir(), 'insufferable-theme-'));
   try {
     write(resolve(work, 'palette.config.json'), paletteConfig(config));
-    const run = spawnSync(at('node_modules/.bin/gosfuig'), [resolve(work, 'palette.config.json'), '--no-dashboard', '-o', resolve(work, 'out')], { encoding: 'utf8' });
+    const run = spawnSync(process.execPath, [gosfuig, resolve(work, 'palette.config.json'), '--no-dashboard', '-o', resolve(work, 'out')], { encoding: 'utf8' });
     if (run.status !== 0 && run.status !== 1) throw new Error(`gosfuig failed:\n${run.stderr || run.stdout}`);
     const palette = read(resolve(work, 'out/tokens.json'));
 
