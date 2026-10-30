@@ -773,3 +773,28 @@ The system's own build is unchanged at 125.4 KB, typecheck and tests pass. `insu
 - **The package.** The build needs `src/` and `scripts/` in `files`, and the build's tools as dependencies, not dev dependencies; `private` is still true. Until then the command runs inside this repository.
 - **A FigCraft library for an app** from its resolver and our component files: the mechanism should work and is not tried.
 - **The theme generator and `guide.md`.**
+
+## The element prefix
+
+> **Ruled 30 October 2026:** an app chooses the prefix of the elements, in its resolver; the tokens keep theirs. Built the same day.
+
+### The ruling
+
+The prefix is set by `$extensions["dev.insufferable"].prefix` in the app's resolver and applied by the build, from a list of the seven elements, to the stylesheet and to the element scripts. The custom properties and the token group are not prefixed: that would rewrite the token files, the mixins and the FigCraft component files, and the one thing it buys, two design systems on one page, is not wanted. The same mechanism can do it later.
+
+### What the build found
+
+- **The scripts have to be built per app.** An element defines itself under its name when its script is imported, so the name is in the script. The build copies the compiled scripts, with their folders, beside the app's stylesheet, renamed; the app imports them as before.
+- **The rename is by list and by whole name.** The pattern is an element from `src/elements.ts` not preceded or followed by a word character or a hyphen, so `--ins-icon-button` and `ins-tabs-extra` stay.
+- **The generated ids keep `ins-`.** An element gives itself an id such as `ins-tabs-1` when it has none. It is not an element name and is left alone.
+- **A test keeps the list honest:** every element the sources define is in it, every `ins-` element name in the sources and stylesheets is in it, and the rename and the validity check are tested.
+- **A build may not write over the system's own `dist/`** with renamed scripts; it says so.
+
+### What was checked
+
+Typecheck, 17 tests, and the system's own build unchanged at 125.4 KB. `examples/app` is built with the prefix `quince`: the stylesheet has `quince-icon`, `quince-tabs` and the rest and no `ins-` element; the scripts define `quince-menu`, `quince-toolbar`, `quince-icon`, `quince-shell`, `quince-splitter`, `quince-tabs` and `quince-tree`. In the built-in browser the page's tabs work (the Pantry tab opened and was marked selected), the icons draw, and `ins-tabs` is not defined.
+
+### Not done
+
+- The theme generator and `guide.md`.
+- The default prefix.

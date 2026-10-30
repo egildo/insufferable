@@ -2,6 +2,7 @@
   "version": "2025-11-01",
   "name": "insufferable",
   "description": "An app's tokens: insufferable's own, then the app's, which win. The roles it changes are partial files after the system's theme files.",
+  "$extensions": { "dev.insufferable": { "prefix": "quince" } },
   "sets": {
     "base": {
       "sources": [

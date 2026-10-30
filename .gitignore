@@ -5,3 +5,5 @@ figcraft/out/
 .DS_Store
 examples/app/insufferable.css
 examples/app/fonts/
+examples/app/components/
+examples/app/*.js

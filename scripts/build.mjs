@@ -9,15 +9,16 @@
  *   node scripts/build.mjs
  */
 
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
-import { basename, dirname, resolve } from 'node:path';
+import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postcssMixins from '@csstools/postcss-mixins';
 import { load, Resolver } from '@toghen/lib';
 import toghenPostcss from '@toghen/postcss';
 import postcss from 'postcss';
 import subsetFont from 'subset-font';
+import { validPrefix, withPrefix } from '../src/elements.ts';
 import { icons } from '../src/icons.ts';
 
 const at = (...parts) => resolve(fileURLToPath(new URL('../', import.meta.url)), ...parts);
@@ -81,7 +82,9 @@ async function iconFont() {
 /** The resolved tokens of a resolver document, the system's own by default, and the name the document gives itself. */
 export async function loadSystem(resolver = at('tokens/insufferable.resolver.json')) {
   const { document } = await load(resolver, { read: (path) => readFile(path, 'utf8') });
-  return { system: new Resolver(document).resolveContextsToDesignSystem(), name: document.name };
+  const prefix = document.$extensions?.['dev.insufferable']?.prefix ?? 'ins';
+  if (!validPrefix(prefix)) throw new Error(`The prefix "${prefix}" cannot start a custom element name: lower case letters and digits, starting with a letter.`);
+  return { system: new Resolver(document).resolveContextsToDesignSystem(), name: document.name, prefix };
 }
 
 /** Inlines `@import './file.css' layer(name);` as `@layer name { …file… }`, indented one step. */
@@ -99,7 +102,7 @@ function inlineImports(entry) {
  * the resolver's name, `insufferable`, in its directives and in every `t()`, so an app's resolver keeps the name.
  */
 export async function buildCss(resolver) {
-  const { system, name } = await loadSystem(resolver);
+  const { system, name, prefix } = await loadSystem(resolver);
   if (name !== 'insufferable') throw new Error(`The resolver is named "${name}": an app's resolver keeps the name "insufferable", which the stylesheet refers to its tokens by.`);
   const icon = await iconFont();
   const input = inlineImports(at('src/index.css'))
@@ -113,13 +116,34 @@ export async function buildCss(resolver) {
   // An `@apply` of a mixin that does not exist is left in place without a word: fail on it instead.
   const left = css.match(/@(apply|toghen)\b[^;]*;/);
   if (left) throw new Error(`The stylesheet still holds ${left[0]}`);
-  return { css, iconFont: icon.font };
+  return { css: withPrefix(css, prefix), iconFont: icon.font, prefix };
+}
+
+/**
+ * The element scripts, compiled by `tsc` into `dist/`, written into `out` with their elements under the app's prefix.
+ * They keep their folders, so the imports between them still resolve.
+ */
+function writeScripts(out, prefix) {
+  const copy = (dir) => {
+    for (const entry of readdirSync(at('dist', dir), { withFileTypes: true })) {
+      if (entry.isDirectory() && entry.name !== 'fonts') copy(join(dir, entry.name));
+      else if (entry.name.endsWith('.js')) {
+        mkdirSync(resolve(out, dir), { recursive: true });
+        writeFileSync(resolve(out, dir, entry.name), withPrefix(readFileSync(at('dist', dir, entry.name), 'utf8'), prefix));
+      }
+    }
+  };
+  copy('.');
 }
 
 /** Writes the stylesheet and, beside it, the fonts it names as `./fonts/…`. */
 export async function writeCss(resolver, out = at('dist')) {
-  const { css, iconFont: font } = await buildCss(resolver);
+  const { css, iconFont: font, prefix } = await buildCss(resolver);
   mkdirSync(resolve(out, 'fonts'), { recursive: true });
+  if (prefix !== 'ins') {
+    if (resolve(out) === at('dist')) throw new Error('The scripts of an app are written beside its stylesheet, not over the system\'s own dist.');
+    writeScripts(out, prefix);
+  }
   writeFileSync(resolve(out, 'insufferable.css'), css, 'utf8');
   writeFileSync(resolve(out, 'fonts/tabler-icons.woff2'), font);
   for (const file of houseFonts().files) copyFileSync(file, resolve(out, 'fonts', basename(file)));
