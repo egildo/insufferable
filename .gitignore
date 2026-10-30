@@ -7,3 +7,4 @@ examples/app/insufferable.css
 examples/app/fonts/
 examples/app/components/
 examples/app/*.js
+examples/app/theme/

@@ -163,7 +163,7 @@ An app themes insufferable with its own CSS after the stylesheet. The stylesheet
 
 `light-dark()` is the platform's way to give one colour for each scheme in one declaration; it reads the page's `color-scheme`, which the base sets to `light dark`. An app's own `light-dark()` colours follow `color-scheme` set on `:root` or on one container; the stock roles do not yet, since the build writes them under the media query. `dev/theme.html` is the demo page restyled this way: a terracotta accent in both schemes, with square corners, in ten lines.
 
-What an app may set: any role under `ins.color`, `ins.radius`, `ins.space`, `ins.size` and `ins.font`, by its custom property. What it should set together: a role and its companions (the accent with its strong, deep, tint and the text on it), since the system names them apart so that each pair can be measured. This route does not measure for the app, and it does not regenerate a palette: a brand colour is chosen by hand, and its contrast checked by hand. A derived theme, from a hue and a warmth, with the contrast gate, is a tool still to come.
+What an app may set: any role under `ins.color`, `ins.radius`, `ins.space`, `ins.size` and `ins.font`, by its custom property. What it should set together: a role and its companions (the accent with its strong, deep, tint and the text on it), since the system names them apart so that each pair can be measured. This route does not measure for the app, and it does not regenerate a palette: a brand colour is chosen by hand, and its contrast checked by hand. A derived theme, from a hue and a warmth, with the contrast gate, is `insufferable theme`, below.
 
 #### Building an app's own stylesheet
 
@@ -172,6 +172,20 @@ The deeper route: the app rebuilds the stylesheet from its own tokens, with `ins
 The resolver keeps the name `insufferable`. The stylesheet refers to every token, and its two directives, by that name, and the build stops with a message when an app's resolver has another. `examples/app` is the example: the demo page, square, with a terracotta accent and Georgia for the headings, from one resolver and three small token files.
 
 An app may also choose the prefix of the elements: `"$extensions": { "dev.insufferable": { "prefix": "quince" } }` in its resolver. The build then writes `quince-tabs` for `ins-tabs`, in the stylesheet and in the element scripts, which it writes into `components/` beside the stylesheet so that the app imports them as before. The rename is made from the list in `src/elements.ts`, the seven elements, and touches only a whole element name: not `--ins-icon-button`, nor the ids the elements generate. A prefix is lower case letters and digits starting with a letter, so that `prefix-name` is a valid custom element name. Custom properties, the token group, commands and classes keep their names; the prefix is for elements.
+
+#### Generating a theme
+
+An app need not write its palette and roles. `insufferable theme theme.config.json` writes them from a small config:
+
+```json
+{ "brand": { "hue": 38, "lock": "#9a3d12" }, "neutral": { "hue": 80, "chroma": 0.005 }, "fonts": { "serif": "Georgia" } }
+```
+
+The brand is a hue, and optionally a colour pinned to the `600` step, as the system pins its own blue. The neutral is the hue and chroma of the grey. The fonts are family names, each with the system's fallbacks after it; the app loads the faces. The command writes four files into `theme/` beside the config, which the app's resolver lists: `palette.tokens.json`, `fonts.tokens.json`, and `light.tokens.json` and `dark.tokens.json`, the partial role files.
+
+The palette is gosfuig's: the system's own families with the neutral changed and a `brand` family in place of the blue. The roles are not a second table. They are the system's own theme files with every reference to the blue pointed at the brand, so a change to the system's roles reaches every generated theme. Three roles are written values tied to the neutral, and are computed from it in OKLCH: the paper and the raised surface in light, and the desk in dark.
+
+**The gate.** The generator measures every pair of roles the elements use, in both themes: text on surface, raised and fill; the edge of a control, 3:1; the accent on surface, fill and its tint; the text on the accent; danger, ok and warn. The pairs and the ratios they owe are in `scripts/color.ts`. A brand role that falls short moves along the ramp, darker in light and lighter in dark, a step at a time, and the generator says how far; a theme that cannot hold is refused, with every pair named, and nothing is written. The stock system passes unmoved.
 
 The component files for FigCraft refer to tokens by the same names, so an app overrides tokens and does not rename them.
 

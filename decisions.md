@@ -798,3 +798,31 @@ Typecheck, 17 tests, and the system's own build unchanged at 125.4 KB. `examples
 
 - The theme generator and `guide.md`.
 - The default prefix.
+
+## The theme generator
+
+> **Ruled 30 October 2026:** a config of a brand hue, the neutral's warmth and the fonts, and a gate on the contrast. Built the same day.
+
+### The ruling
+
+`insufferable theme theme.config.json` writes the app's palette, fonts and partial role files. Its output goes in the app's resolver, after the system's own files, and `insufferable build` does the rest. Density and an app-chosen scheme were left out, as before.
+
+### What the build found
+
+- **The roles come from the system's own files.** Pointing every reference to the blue at a `brand` family gives the accent roles of both themes, and a change to the system's roles reaches the generated ones. This answered the open question of whether the role table would be repeated.
+- **Three roles are values, not references,** the paper, the raised surface and the dark desk, written by hand for the warm neutral. A different neutral needs different ones, so they are computed in OKLCH from its hue and chroma. The paper is a little more tinted than the hand-picked one (`#fefbf8` against `#fdfcfa`), a chroma halved to keep it close.
+- **A hue alone did not hold in dark.** The terracotta's `400` step measured 3.83:1 against the hover fill. The system's steps were chosen for the blue, whose ramp lands differently. So a solid brand role moves along the ramp until its pairs hold, and says so: the example's dark accent moved one step lighter. A pale yellow in light moved two steps darker.
+- **The gate holds only pairs the stock theme passes.** The quieter text on the desk and the disabled text are not in it: the first is not used, the second is exempt. The list is in `scripts/color.ts`, with the ratio each pair owes.
+- **A refusal is hard to reach.** A ramp always ends dark, so a role moving along it nearly always finds a step. The gate is written to refuse and the pair arithmetic is tested; I did not find a config that refuses.
+- **A pinned colour is not always the accent.** The `600` step is the lock, but the light accent may move darker than it. The generator reports the move; the example's own pin held.
+
+### What was checked
+
+21 tests pass, typecheck passes. The stock config, the system's own hues, generates unmoved. `examples/app` is built from a config of a terracotta brand and Georgia: in the built-in browser, light and dark, the selected tab, links and the callout take the accent, the paper and the dark desk are warm, and headings are in Georgia.
+
+### Not done
+
+- `guide.md`.
+- The package: its files and dependencies, so that the commands run outside this repository.
+- Density, and the app-chosen scheme.
+- A FigCraft library for an app.
