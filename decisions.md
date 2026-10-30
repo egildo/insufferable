@@ -643,3 +643,52 @@ The keyboard rules are pure functions, `treeAction` and `typeAhead` in `src/keys
 ### What was checked
 
 `toghen-query` finds no hole; typecheck and tests pass. In the built-in browser at 1400 by 860, light and dark, on `dev/shell.html`: the two docks, the structure pane with the tree, the main pane with its head (the title in the label style, the path in code, a status, the theme's icon button at the end), and the styles pane with pill tabs, group headers, a chip and choice rows. A click on Resources in the dock showed its pane and, by the demo app, hid Structure's; a second click hid it, and the main pane took the room. Down in the vertical dock moved the focus; one tab stop per dock. The news dot sits at the printer's corner, and the button reads "Print log new". In FigCraft: Dock, DockButton (four members, open by pointer), Pane with a slot, and GroupHeader, rendered. The news dot is placed at the glyph's corner by hand (`layoutPositioning=ABSOLUTE`, 14 and 0, its mark not clipping), as the stylesheet places it by percentages. After the sync, the library's variables are unchanged except the variant collection's new mode.
+
+## The splitter
+
+> **Ruled 30 October 2026,** as the second half of the shell's batch, and built the same day. Its spec is in specs.md. The narrow layouts, the other half of the ruling, did not fit as proposed; see the last finding below, and [The narrow shell](#the-narrow-shell).
+
+### The question
+
+The proposal had the splitter send `--resize`, named after what it asks for. Building it showed that a command carries only its name and its source: a tab's or a tree node's needs no more, since its source is the choice, but a splitter's must say how wide, or an app that cancels it cannot decide. Two ways were put to Egildo: speak as the platform's own range control does, with `input`, `change` and `.value`; or keep `--resize` and put the size asked for on a property of the splitter before sending it.
+
+### The ruling
+
+**Like a range input.** The splitter sends `input` while its value moves and `change` once it settles, the value in `.value`; an app that owns the size writes `aria-valuenow`. It is the element contract's one exception, and the contract says so: a value is a number, and a range control is the platform's own model for one.
+
+### What the build found
+
+- **The value is the APG's,** 0 to 100 between the pane's smallest and largest width, which the pane's own stylesheet gives: `ins.size.sideMin` and `sideMax`, 14rem and 32rem. So the splitter reads the range from the pane, not from attributes of its own.
+- **Left and Right move the splitter, not the pane.** Which of them grows the pane depends on which side of the splitter the pane is on screen, so the rule takes that side and holds in either direction of reading. `splitterValue` in `src/keys.ts`, with two tests.
+- **A hidden pane's width is its stylesheet's.** A splitter whose pane started hidden read a width of 0 and shrank the pane to its smallest; it now reads the pane's computed `inline-size`, which a hidden pane still has.
+- **One splitter per pane.** A side holds several panes, one shown at a time; each pane has its own splitter, hidden with it, so each keeps its own size.
+- **The splitter takes over the desk's gap,** with negative margins the gap's width, so panes sit 12px apart with a splitter between them as without.
+- **The narrow layouts do not fit as proposed.** An overlay and a sheet were to be a popover and a modal dialog. But a pane is in the shell's row at a wide width, and an element in the top layer leaves the row whatever its style: one element cannot be both. Put to Egildo with two ways: an element that makes the side panes popovers below a width, or CSS alone, with Escape and a click outside left to the app.
+
+### What was checked
+
+Thirteen tests pass. In the built-in browser at 1400 by 860, on `dev/shell.html`: each splitter a separator, vertical, 0 to 100, named after its pane, starting at 33 from the pane's 20rem; two presses of Right grew Structure from 319 to 348px; Enter collapsed it to 224px (14rem) and Enter restored it; End took it to 512px (32rem); a drag of 200px to the left took it to 313px, with `input` on each move and one `change` at the end; Right on the splitter before the styles pane shrank that pane, to 28; a hidden pane's splitter is hidden, and shows with it. In FigCraft: Splitter's six members, the grip long under the pointer, held and focused, in the accent when held or focused, rendered.
+
+## The narrow shell
+
+> **Ruled 30 October 2026:** an element, `ins-shell`, that makes the side panes popovers below a width. Built the same day. Its spec is in specs.md, under Shell.
+
+### The ruling
+
+The shell becomes an element. Below a width it adds `popover` to each side pane, so its dock opens it over the main pane and the platform gives Escape, a click outside, and the focus back to the dock. At phone width the same popover is drawn as a sheet; it is not modal, since only a `dialog` is.
+
+### What the build found
+
+- **`div.shell` is now `<ins-shell>`.** The element measures its own width with a `ResizeObserver`.
+- **The widths are tokens,** `ins.size.shellNarrow` (64rem) and `ins.size.shellPhone` (40rem). A container query cannot read a custom property, and the build writes a token as one, so the element reads them and shows the answer to CSS as custom states, `:state(narrow)` and `:state(phone)`: the platform's way for a custom element to show a state that is not ARIA's.
+- **The toolbar learns popovers.** A disclosure button whose target is a popover shows and hides it (`showPopover({ source })`, so the platform knows its invoker and hands focus back), and hears its `toggle` to turn `aria-expanded` back when the platform closes it.
+- **The pane's display hid the popover.** As with `hidden`, a pane's flex outranks the browser's rule that hides a closed popover; the pane now says so itself.
+- **The anchor did not take.** The overlay was to sit beside its dock button through anchor positioning, the button being its source; in the built-in browser it fell back. It is placed instead by the dock's own size: the shell's padding, the dock's buttons, padding and hairline, and the gap, all tokens.
+- **A popover is as tall as its content,** by the browser's own style; the overlay stretches to the desk's height.
+- **The splitter steps aside.** A pane that is a popover hides its splitter and drops the width the splitter gave it, so the sheet spans the screen; back in the row, the splitter sizes it again from its value.
+- **Going narrow closes, going wide restores.** Without it, an open pane would cover the main pane the moment the window narrowed. The element remembers the open panes, closes them by writing `aria-expanded="false"` on their dock buttons, and opens them again when the shell widens. A pane open over the others at that moment takes its side's place.
+- **A late `toggle` undid the restore.** Closing a popover by removing its `popover` fires its `toggle` after the element had reopened the pane in the row, and the dock read it as the user's. The toolbar now ignores a `toggle` from an element that is no longer a popover.
+
+### What was checked
+
+Typecheck and tests pass. In the built-in browser: at 1400 by 860, the row, Structure and Styles open, no popover. At 900 by 700, `:state(narrow)`: all five side panes popovers, closed, every dock button saying so, no splitter. Structure from its dock: open past the dock (90px from the left edge, the dock ending at 78), the full height less the gap, over the shade at 40%; Escape closed it, its button said closed, and focus came back to the button. Styles from the right dock: 90px from the right edge; a click outside closed it. At 375 by 812, `:state(phone)`: Structure as a sheet, edge to edge, against the bottom. Widened back to 1400 after opening Resources as a sheet: Resources open in the row in Structure's place, with its splitter, and Styles as it was. In FigCraft: PaneOverlay, the pane raised with the raised shadow bound to its colour; the render crops the shadow at the frame's edge.

@@ -8,13 +8,15 @@
 <script type="module" src="../dist/components/tabs.js"></script>
 <script type="module" src="../dist/components/toolbar.js"></script>
 <script type="module" src="../dist/components/tree.js"></script>
+<script type="module" src="../dist/components/splitter.js"></script>
+<script type="module" src="../dist/components/shell.js"></script>
 <style>
   html, body { block-size: 100%; margin: 0; }
   .page { inline-size: 100%; aspect-ratio: 210 / 297; max-inline-size: 30rem; margin-inline: auto; background: white; color: black; box-shadow: 0 1px 3px rgb(0 0 0 / 0.2); }
   .desk-of-pages { background: var(--ins-color-fill); padding: 1.5rem; border-radius: var(--ins-radius-1); }
 </style>
 
-<div class="shell">
+<ins-shell>
   <ins-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
     <button aria-expanded="true" aria-controls="structure"><ins-icon name="list-tree"></ins-icon> Structure</button>
     <button aria-expanded="false" aria-controls="resources"><ins-icon name="folder"></ins-icon> Resources</button>
@@ -46,6 +48,7 @@
       </ul>
     </ins-tree>
   </aside>
+  <ins-splitter aria-controls="structure"></ins-splitter>
 
   <aside class="pane" id="resources" aria-labelledby="resources-title">
     <header><h2 id="resources-title">Resources <data value="2">2</data></h2></header>
@@ -58,6 +61,7 @@
       </tbody>
     </table>
   </aside>
+  <ins-splitter aria-controls="resources"></ins-splitter>
 
   <aside class="pane" id="print-log" aria-labelledby="print-log-title">
     <header><h2 id="print-log-title">Print log <data value="2">2</data></h2></header>
@@ -66,6 +70,7 @@
       <li><time datetime="10:42">10:42</time> <small class="status ok">Done</small> <span>Printed 2 pages</span></li>
     </ol>
   </aside>
+  <ins-splitter aria-controls="print-log"></ins-splitter>
 
   <main class="pane" aria-labelledby="doc-title">
     <header>
@@ -79,6 +84,7 @@
     </div>
   </main>
 
+  <ins-splitter aria-controls="styles"></ins-splitter>
   <aside class="pane" id="styles" aria-labelledby="styles-title">
     <header>
       <ins-tabs class="pill" aria-label="Styles">
@@ -104,6 +110,7 @@
     </div>
   </aside>
 
+  <ins-splitter aria-controls="source"></ins-splitter>
   <aside class="pane" id="source" aria-labelledby="source-title">
     <header><h2 id="source-title">Source</h2></header>
     <pre><code>&lt;p class="name"&gt;Paola Esempio&lt;/p&gt;</code></pre>
@@ -113,9 +120,14 @@
     <button aria-expanded="true" aria-controls="styles"><ins-icon name="stack-2"></ins-icon> Styles</button>
     <button aria-expanded="false" aria-controls="source"><ins-icon name="code"></ins-icon> Source</button>
   </ins-toolbar>
-</div>
+</ins-shell>
 
 <script type="module">
+  // The app keeps each pane's size: it hears the splitters as it would a range input.
+  document.addEventListener('change', (event) => {
+    if (event.target.matches('ins-splitter')) console.log(`${event.target.getAttribute('aria-controls')} at ${event.target.value}`);
+  });
+
   // The app: one pane per side. Opening a dock's button closes the dock's other open one.
   document.addEventListener('command', (event) => {
     if (event.command !== '--expand' || !event.target.matches('ins-toolbar.dock')) return;

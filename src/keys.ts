@@ -108,3 +108,41 @@ export function typeAhead(typed: string, current: number, names: string[]): numb
   }
   return -1;
 }
+
+/**
+ * A window splitter follows the WAI-ARIA Authoring Practices
+ * (https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/), vertical: its
+ * value, 0 to 100, is the primary pane's size between its smallest and its
+ * largest. Left and Right move the splitter itself, so which of them grows the
+ * pane depends on which side of the splitter the pane is.
+ */
+
+/** How far one arrow press moves a splitter, in its value's units. */
+export const splitterStep = 5;
+
+/**
+ * The value a key moves a splitter to, or `null` for another key.
+ *
+ * @param key a `KeyboardEvent.key`
+ * @param value the splitter's value, 0 to 100
+ * @param paneOnLeft whether the primary pane is to the left of the splitter on screen
+ * @param restore the value Enter restores after a collapse
+ */
+export function splitterValue(key: string, value: number, paneOnLeft: boolean, restore: number): number | null {
+  const clamp = (n: number) => Math.min(100, Math.max(0, n));
+  switch (key) {
+    case 'ArrowLeft':
+      return clamp(value + (paneOnLeft ? -splitterStep : splitterStep));
+    case 'ArrowRight':
+      return clamp(value + (paneOnLeft ? splitterStep : -splitterStep));
+    case 'Home':
+      return 0;
+    case 'End':
+      return 100;
+    case 'Enter':
+      // Collapsed, the pane goes back to where it was; otherwise it collapses.
+      return value === 0 ? restore : 0;
+    default:
+      return null;
+  }
+}

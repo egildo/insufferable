@@ -1,0 +1,16 @@
+// Splitter: the line between two panes that changes their sizes, ins-splitter. Source: ins.splitter in
+// tokens/shell.tokens.json. Its axes come from its parts: pointer (hover, active) and focus.
+// The root is the desk's gap, transparent; the grip is a short line at its middle, longer under the pointer, held
+// or focused, in the splitter's colour.
+component Splitter tokens="{ins.splitter}"
+description "The line between two panes: drag it, or focus it and use the arrows, to change a pane's size."
+
+guard long { any { is (input)pointer hover; is (input)pointer active; is (input)focus focus; } }
+
+FRAME Splitter layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.space.3}" height=(literal)120 primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER {
+    fills
+    FRAME Grip layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.space.1}" height="{ins.size.control}" cornerRadius="{ins.radius.round}" {
+        fills "{ins.splitter.color}"
+        when long height="{ins.size.dock}"
+    }
+}

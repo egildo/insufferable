@@ -1,0 +1,27 @@
+// PaneOverlay: a side pane open over the main pane, a popover, as ins-shell makes it below its narrow width.
+// Source: ins.pane and ins.pane.overlay in tokens/shell.tokens.json. The pane raised, with the raised shadow; its
+// head and slot are the pane's.
+// Not drawn: the shade over the rest of the shell; the sheet at phone width, the same pane against the bottom edge
+// with its lower corners square.
+component PaneOverlay tokens="{ins.pane}"
+description "A side pane over the main pane at a narrow width: raised, with a shadow, over the shade."
+
+properties {
+    TEXT Title default="Structure"
+    SLOT Content description="What the pane holds." displayEmptyByDefault=#true
+}
+
+FRAME PaneOverlay layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.pane.side.inlineSize}" height=(literal)480 strokeAlign=INSIDE {
+    fills "{ins.pane.overlay.backgroundColor}"
+    effects "{ins.pane.overlay.boxShadow}"
+    FRAME Head tokens="{ins.pane.head}" layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG counterAxisAlignItems=CENTER {
+        fills
+        TEXT Title tokens="{ins.pane.head.title}" characters=(property)Title layoutSizingHorizontal=FILL textAutoResize=HEIGHT
+        INSTANCE Action component=IconButton {
+            set variant=plain Glyph="\u{eb55}"
+        }
+    }
+    SLOT Content layoutMode=VERTICAL layoutSizingHorizontal=FILL layoutSizingVertical=FILL {
+        fills
+    }
+}

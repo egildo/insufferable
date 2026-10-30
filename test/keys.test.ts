@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { nextIndex, treeAction, typeAhead } from '../src/keys.ts';
+import { nextIndex, splitterValue, treeAction, typeAhead } from '../src/keys.ts';
 
 const all = [true, true, true];
 
@@ -73,4 +73,18 @@ test('type-ahead finds the next name, wrapping', () => {
   assert.equal(typeAhead('p', 2, names), 1);
   assert.equal(typeAhead('pa', 1, names), 1);
   assert.equal(typeAhead('x', 0, names), -1);
+});
+
+test('a splitter moves where the arrow points, whichever side its pane is', () => {
+  assert.equal(splitterValue('ArrowRight', 50, true, 50), 55);
+  assert.equal(splitterValue('ArrowRight', 50, false, 50), 45);
+  assert.equal(splitterValue('ArrowLeft', 2, true, 50), 0);
+});
+
+test('a splitter goes to its ends, and Enter collapses and restores', () => {
+  assert.equal(splitterValue('Home', 40, true, 40), 0);
+  assert.equal(splitterValue('End', 40, true, 40), 100);
+  assert.equal(splitterValue('Enter', 40, true, 40), 0);
+  assert.equal(splitterValue('Enter', 0, true, 40), 40);
+  assert.equal(splitterValue('a', 40, true, 40), null);
 });

@@ -36,6 +36,7 @@ Every element follows it.
 - **Out: commands,** through the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API). A control names its target with `commandfor` and its intent with `command`. An insufferable command starts with `--`, as the platform requires of a custom command.
 - **The default.** The element listens for `command` on itself. If the event is not cancelled, it applies its default: a tabs element sets `aria-selected` on the tab chosen. A page with no state management works.
 - **Controlled.** An app that owns the state cancels the event and writes the attributes itself.
+- **The one exception: a value.** A command carries only its name and its source, so it cannot say how much. The splitter, whose state is a number, speaks as the platform's own range control does: `input` while its value moves, `change` once it settles, the value in `.value`. An app that owns the value writes `aria-valuenow`, and the element follows.
 
 The `command` event does not bubble, but it passes through the capture phase. One listener at the root hears every command before the element does:
 
@@ -437,7 +438,7 @@ Not built: checkbox and radio items (`aria-checked`, `--check`), submenus, findi
 </ins-toolbar>
 ```
 
-- **It writes:** `role="toolbar"`; on each button with `aria-pressed`, `commandfor` naming the toolbar and `command="--press"` unless it names another; on each button with `aria-expanded` and `aria-controls`, a disclosure button after the [APG disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), `commandfor` and `command="--expand"`, and `hidden` on the element it names while it is closed; the roving `tabindex`, held by the button last focused. It gives itself an id when it has none.
+- **It writes:** `role="toolbar"`; on each button with `aria-pressed`, `commandfor` naming the toolbar and `command="--press"` unless it names another; on each button with `aria-expanded` and `aria-controls`, a disclosure button after the [APG disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), `commandfor` and `command="--expand"`, and `hidden` on the element it names while it is closed, or, for a popover, shows and hides it, and turns `aria-expanded` back when the platform closes it; the roving `tabindex`, held by the button last focused. It gives itself an id when it has none.
 - **It reads:** `aria-pressed`, `aria-expanded`, `disabled` and `aria-disabled` on its buttons, and `aria-orientation` on itself, and watches them.
 - **It sends:** `--press` from a toggle button and `--expand` from a disclosure button, on a click, Enter or Space.
 - **Its default:** turns the button's `aria-pressed` or `aria-expanded` over, unless the app cancels the command, and shows or hides what a disclosure button names.
@@ -579,10 +580,10 @@ Not built: multi-select, `*` to open every sibling (optional in the pattern), di
 
 ### Shell
 
-An application on a desk: `div.shell` holding, in a row, a dock, the side panes, the main pane, the side panes and a dock.
+An application on a desk: `<ins-shell>` holding, in a row, a dock, the side panes, the main pane, the side panes and a dock. Below a width, a side pane opens over the main pane.
 
 ```html
-<div class="shell">
+<ins-shell>
   <ins-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
     <button aria-expanded="true" aria-controls="structure"><ins-icon name="list-tree"></ins-icon> Structure</button>
     <button aria-expanded="false" aria-controls="log"><ins-icon name="printer"></ins-icon> Print log <small class="status new">new</small></button>
@@ -596,7 +597,7 @@ An application on a desk: `div.shell` holding, in a row, a dock, the side panes,
     <header><h1 id="doc-title">Bolletta della luce</h1> <code>demos/bolletta/index.html</code></header>
     …
   </main>
-</div>
+</ins-shell>
 ```
 
 - **The desk** is the shell's ground, `ins.color.desk`, a step below the surface: the lightest grey in light, black in dark. The panes take the surface, so every control on them keeps the contrast it has on a page.
@@ -605,8 +606,33 @@ An application on a desk: `div.shell` holding, in a row, a dock, the side panes,
 - **A group's heading** in a pane is an `<hgroup>`, the platform's element for a heading with a line beside it: the heading in small capitals, in the tag's style, and a `<p>` at the end in small grey. An `hgroup` outside a pane is the document's and keeps its own look.
 - **The dock** is the toolbar, `class="dock"` and vertical, a narrow pane of disclosure buttons, each naming its pane. Each button is its icon over its word in the dock's style (0.75rem, medium), square (`ins.size.dock`); open, the accent's tint. A status inside a button, `new`, sits at the icon's corner: the dot that says a closed pane has news, read with the button's name.
 - **One pane per side is the app's.** The dock's default opens and closes each pane on its own, as the APG's accordion may; an app that keeps one pane per side hears `--expand` at the root and closes the others.
+- **Narrow, a side pane opens over the main pane.** Below `ins.size.shellNarrow` (64rem) the element makes each side pane a popover (`popover="auto"`); its dock opens it, raised, with the raised shadow, between its dock and the far edge, the whole height of the desk, over the shade. The platform closes it on Escape or a click outside, hands focus back to its dock button, and keeps one open at a time; the dock hears it close and says so. Its splitter hides, and the pane takes its own width.
+- **A phone, a sheet.** Below `ins.size.shellPhone` (40rem) the same popover is drawn as a sheet from the bottom, the full width, at most 85% of the height, its lower corners square.
+- **The widths are read from the tokens** and shown to CSS as custom states, `:state(narrow)` and `:state(phone)`, the platform's own way for an element to show a state that is not ARIA's: a container query cannot read a custom property.
+- **Going narrow, the open panes close,** so an overlay does not cover the main pane unasked; going wide, they open as they were, except that a pane open over the others takes its side's place. The element writes `aria-expanded` on their dock buttons for it, and the docks follow.
+- **Without script** it is the row at every width.
 
-Not built: the splitter between panes; the narrow layouts, where a side becomes an overlay or a sheet; the colour per pane.
+Not built: the docks at phone width, which keep their room on both sides; a modal sheet, which only a `dialog` can be, with its focus held inside; the colour per pane.
+
+### Splitter
+
+The line between two panes that changes their sizes: `<ins-splitter>` between them, `aria-controls` naming the primary pane, the one it sizes. It follows the [APG window splitter pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/), vertical and variable.
+
+```html
+<aside class="pane" id="structure" aria-labelledby="structure-title">…</aside>
+<ins-splitter aria-controls="structure"></ins-splitter>
+<main class="pane">…</main>
+```
+
+- **It writes:** `role="separator"`, `aria-orientation="vertical"`, `aria-valuemin="0"`, `aria-valuemax="100"`, `aria-valuenow`, `tabindex="0"`, and `aria-labelledby` naming its pane's heading, so it takes the pane's name; `hidden` while its pane is hidden or a popover; the pane's `inline-size`, from its value.
+- **Its value,** 0 to 100, is the pane's width between its `min-inline-size` and its `max-inline-size` (`ins.size.sideMin` and `sideMax`, 14rem and 32rem): 0 is the pane at its smallest. A splitter given no value starts from the pane's own width.
+- **It reads:** `aria-valuenow`, and watches it, so an app that writes it, or `.value`, is followed; its pane's `hidden`.
+- **It sends** what a range input sends: `input` while the value moves, `change` once it settles, with the value in `.value`. See the contract's exception.
+- **The keyboard, as the APG lists it:** Left and Right move the splitter by 5 on its scale, so which of them grows the pane depends on which side of it the pane is; Home and End go to the pane's smallest and largest; Enter collapses the pane to its smallest and restores it.
+- **The pointer** drags it; the pane follows.
+- **The look:** the splitter takes over the desk's gap, its negative margins giving the gap back, so panes sit as far apart with a splitter as without. The whole gap answers the pointer. Its grip is a short line in the strong line's grey, longer and darker under the pointer, longer and in the accent while held or focused.
+
+Not built: a horizontal splitter, a fixed one (the APG's two-position kind), F6 between panes.
 
 ## Commands
 

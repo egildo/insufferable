@@ -139,7 +139,35 @@
           "value": 20,
           "unit": "rem"
         },
-        "$description": "A side pane's width, at rest"
+        "$description": "A side pane's width at rest, and the splitter's middle"
+      },
+      "sideMin": {
+        "$value": {
+          "value": 14,
+          "unit": "rem"
+        },
+        "$description": "A side pane at its smallest: where the splitter's value is 0"
+      },
+      "sideMax": {
+        "$value": {
+          "value": 32,
+          "unit": "rem"
+        },
+        "$description": "A side pane at its largest: where the splitter's value is 100"
+      },
+      "shellNarrow": {
+        "$value": {
+          "value": 64,
+          "unit": "rem"
+        },
+        "$description": "Below this width a shell's side panes open over the main pane, as popovers"
+      },
+      "shellPhone": {
+        "$value": {
+          "value": 40,
+          "unit": "rem"
+        },
+        "$description": "Below this width a shell's side pane opens as a sheet from the bottom"
       }
     },
     "shadow": {

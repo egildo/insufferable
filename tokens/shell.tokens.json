@@ -1,7 +1,7 @@
 {
   "ins": {
     "shell": {
-      "$description": "An application's shell: div class=shell, the docks, the side panes and the main pane in a row on the desk.",
+      "$description": "An application's shell: ins-shell, the docks, the side panes and the main pane in a row on the desk; below a width, a side pane opens over the main pane.",
       "backgroundColor": {
         "$type": "color",
         "$value": "{ins.color.desk}"
@@ -50,6 +50,14 @@
         "inlineSize": {
           "$type": "dimension",
           "$value": "{ins.size.side}"
+        },
+        "minInlineSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.sideMin}"
+        },
+        "maxInlineSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.sideMax}"
         }
       },
       "head": {
@@ -98,6 +106,23 @@
           "font": {
             "$type": "typography",
             "$value": "{ins.typography.small}"
+          }
+        }
+      },
+      "overlay": {
+        "$description": "A side pane open over the main pane, a popover: raised, with the raised shadow, over the shade, which a click on closes it.",
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.raised}"
+        },
+        "boxShadow": {
+          "$type": "shadow",
+          "$value": "{ins.shadow.raised}"
+        },
+        "backdrop": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.shade}"
           }
         }
       }
@@ -210,6 +235,31 @@
               "$value": "{ins.color.accentTint}"
             }
           }
+        }
+      }
+    },
+    "splitter": {
+      "$description": "A splitter: ins-splitter between two panes, in the desk's gap. Its grip is a short line, longer under the pointer and in the accent while held or focused.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.lineStrong}"
+      },
+      "hover": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.2}"
+        }
+      },
+      "active": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
         }
       }
     }

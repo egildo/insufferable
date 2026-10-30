@@ -12,7 +12,8 @@
  *
  * Attributes in: `aria-pressed` on a toggle button says whether it is pressed;
  * `aria-expanded` on a disclosure button whether what it names is shown, and
- * the element keeps that element's `hidden` in step; `disabled` or
+ * the element keeps that element's `hidden` in step, or, for a popover, shows
+ * and hides it, and hears the platform close it (Escape, a click outside); `disabled` or
  * `aria-disabled="true"` takes a button out of the walk; `aria-orientation=
  * "vertical"` on the element turns the walk to Up and Down.
  *
@@ -82,10 +83,7 @@ export class InsToolbar extends HTMLElement {
         set(button, 'commandfor', this.id);
         if (!button.hasAttribute('command')) button.setAttribute('command', kind);
       }
-      if (kind === commands.expand) {
-        const target = this.#targetOf(button);
-        if (target) target.hidden = button.getAttribute('aria-expanded') !== 'true';
-      }
+      if (kind === commands.expand) this.#show(button);
       set(button, 'tabindex', button === this.#stop ? '0' : '-1');
     }
   }
@@ -95,6 +93,36 @@ export class InsToolbar extends HTMLElement {
     if (button.hasAttribute('aria-pressed')) return commands.press;
     if (button.hasAttribute('aria-expanded') && button.hasAttribute('aria-controls')) return commands.expand;
     return null;
+  }
+
+  /** Popovers this toolbar listens to, so each is heard once. */
+  #heard = new WeakSet<HTMLElement>();
+
+  /** Shows or hides what a disclosure button names, from its `aria-expanded`. */
+  #show(button: HTMLButtonElement) {
+    const target = this.#targetOf(button);
+    if (!target) return;
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    if (!target.hasAttribute('popover')) {
+      target.hidden = !expanded;
+      return;
+    }
+    // A popover: the platform shows it, and may close it, which the button then says.
+    target.hidden = false;
+    if (!this.#heard.has(target)) {
+      this.#heard.add(target);
+      target.addEventListener('toggle', (event) => {
+        // A toggle heard after the pane stopped being a popover is the shell's doing, not the user's.
+        if (!target.hasAttribute('popover')) return;
+        const open = (event as ToggleEvent).newState === 'open';
+        for (const each of this.#buttons) {
+          if (each.getAttribute('aria-controls') === target.id) set(each, 'aria-expanded', String(open));
+        }
+      });
+    }
+    const open = target.matches(':popover-open');
+    if (expanded && !open) target.showPopover({ source: button } as ShowPopoverOptions);
+    if (!expanded && open) target.hidePopover();
   }
 
   #targetOf(button: HTMLButtonElement) {
