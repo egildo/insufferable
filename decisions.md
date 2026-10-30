@@ -730,3 +730,21 @@ The first sync made 26 variables (the quanta, and the display size) and updated 
 - **Nine styles are updated on every run,** though the variables are unchanged. The values read back are right, so it costs nothing but noise. A question for Toghen's figma sync, with the textCase and the two open issues.
 
 A render of the library shows the warm ground, the new sizes and the tree, choice and property rows intact.
+
+## Theming by override
+
+> **Ruled 30 October 2026:** the first way to theme is an app's own unlayered CSS. Built the same day. Its spec is in specs.md, under Theming an app.
+
+### The ruling
+
+An app sets the roles it wants in its own rules after the stylesheet. It is the lightest of three ways: the other two are a theme derived from a config, with gosfuig's contrast gate, and an app-chosen scheme through `color-scheme`, which wait.
+
+### What was checked
+
+The layers are `ins.tokens` (with `defaults` and `theme` inside it), `ins.base` and `ins.components`; an unlayered rule wins over all of them, as the stylesheet's own header says. `dev/theme.html` is the demo page with ten lines of override: accent, strong, deep, tint and on-accent as `light-dark()` pairs, and both radii at 0. In the built-in browser in light, the selected tab, the links and the buttons took the terracotta and the corners went square; in dark the solid button read as the lighter orange with dark text, a radius of 0. Contrast of the sample: accent on the surface 6.71 in light and 8.24 in dark; text on the accent 6.88 and 8.24; text on the tint 15.27 and 11.59. The override does not measure by itself: those numbers were measured by hand.
+
+### Open
+
+- A derived theme, from a hue, a warmth, the fonts and a density, written by gosfuig with its contrast gate: the tool.
+- An app-chosen scheme: `color-scheme` on a container with `light-dark()` is the platform's way; the build writes the roles with `@media`, so the roles themselves do not follow a container yet. The override above does.
+- The density mode.

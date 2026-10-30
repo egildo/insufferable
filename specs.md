@@ -149,6 +149,22 @@ Paper, white, the dark desk and nothing are written as values: none is a step of
 
 The system chooses. The theme modifier's contexts are spelled `@media (prefers-color-scheme: {context})`, so the dark roles apply when the system prefers dark, with no script and no attribute; light is the default, on `:root`. The page says `color-scheme: light dark`, so the platform draws its own controls, the select's list and the scrollbars in the same scheme. A modifier needs two contexts: the W3C Resolver forbids one.
 
+### Theming an app
+
+An app themes insufferable with its own CSS after the stylesheet. The stylesheet's rules are in the layers `ins.tokens`, `ins.base` and `ins.components`, and an unlayered rule beats every layered one, so an app's `:root` rule wins with no `!important` and no knowledge of the order. It sets a role, and everything that reads the role follows, since every element's token refers to a role and never a literal.
+
+```css
+:root {
+  --ins-color-accent: light-dark(#9a3d12, #f0a070);
+  --ins-color-accent-strong: light-dark(#7c2f0b, #f5b88f);
+  --ins-radius-1: 0;
+}
+```
+
+`light-dark()` is the platform's way to give one colour for each scheme in one declaration; it reads the page's `color-scheme`, which the base sets to `light dark`. An app's own `light-dark()` colours follow `color-scheme` set on `:root` or on one container; the stock roles do not yet, since the build writes them under the media query. `dev/theme.html` is the demo page restyled this way: a terracotta accent in both schemes, with square corners, in ten lines.
+
+What an app may set: any role under `ins.color`, `ins.radius`, `ins.space`, `ins.size` and `ins.font`, by its custom property. What it should set together: a role and its companions (the accent with its strong, deep, tint and the text on it), since the system names them apart so that each pair can be measured. This route does not measure for the app, and it does not regenerate a palette: a brand colour is chosen by hand, and its contrast checked by hand. A derived theme, from a hue and a warmth, with the contrast gate, is a tool still to come.
+
 ### Typography
 
 A text style is a W3C `typography` token: font family, size, weight, letter spacing and line height, each referring to a primitive under `ins.font`. A component reads a style whole, under the key `font`, and the build writes it as the `font` shorthand and `letter-spacing` (the plugin's `typography: 'font'`).
