@@ -20,7 +20,7 @@ Link the stylesheet and import the scripts of the elements the page uses.
 
 Most of the system is native markup with a class: `<button class="solid">`, `<div role="note" class="danger">`, `<fieldset class="segmented">`. A custom element, such as `<ins-tabs>`, is only there where script is needed, and wraps native markup that works without it. An element takes attributes in and sends commands out, and it never keeps your state: see the element contract in specs.md.
 
-The page follows the system's colour scheme, light or dark, with no script.
+The page follows the system's colour scheme, light or dark, with no script. To choose the scheme in your app, set `color-scheme` on the page or on any container: `html { color-scheme: dark; }`, or `light`, or `light dark` for the system's. Every role follows it, a subtree included, so `<aside style="color-scheme: dark">` is a dark panel on a light page. A switch is your state: it sets that one property, however you keep the choice.
 
 ## Make it yours, in three steps up
 
@@ -58,7 +58,7 @@ This writes `insufferable.css` and the element scripts, in `components/`, beside
       "light": [{ "$ref": "node_modules/insufferable/tokens/theme.light.tokens.json" }, { "$ref": "my.light.tokens.json" }],
       "dark": [{ "$ref": "node_modules/insufferable/tokens/theme.dark.tokens.json" }, { "$ref": "my.dark.tokens.json" }]
     },
-    "$extensions": { "com.toghen": { "css": { "atRule": "@media (prefers-color-scheme: {context})" } } }
+    "$extensions": { "com.toghen": { "css": { "lightDark": { "light": "light", "dark": "dark" } } } }
   } }
 }
 ```
@@ -103,4 +103,4 @@ What you should keep: a role with its companions (the accent with its strong, de
 
 ## Not yet
 
-A density mode; an app-chosen colour scheme, which needs Toghen to write `light-dark()`; a FigCraft library built from an app's own tokens; publication.
+A density mode; a FigCraft library built from an app's own tokens; publication.

@@ -42,10 +42,15 @@
       <hr>
       <button disabled>Save</button>
     </ins-menu>
+    <label>Scheme <select id="scheme"><option value="light dark">System</option><option>light</option><option>dark</option></select></label>
     <button class="plain" aria-label="Search"><ins-icon name="search"></ins-icon></button>
     <button class="plain" aria-label="Settings"><ins-icon name="settings"></ins-icon></button>
   </nav>
 </header>
+<script>
+  // The app's switch: its choice is one property.
+  scheme.onchange = () => { document.documentElement.style.colorScheme = scheme.value; };
+</script>
 
 <ins-tabs class="pill" aria-label="Notebook">
   <button aria-controls="recipes">Recipes <data value="1">1</data></button>

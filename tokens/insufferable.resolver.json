@@ -105,7 +105,7 @@
   ],
   "modifiers": {
     "theme": {
-      "description": "The page's colours, chosen by the system's colour-scheme preference. Light is the default.",
+      "description": "The page's colours, one per colour scheme. Light is the default. The stylesheet writes each role with light-dark(), so the scheme is the element's color-scheme: the system's by default, or the app's.",
       "default": "light",
       "contexts": {
         "light": [
@@ -122,7 +122,10 @@
       "$extensions": {
         "com.toghen": {
           "css": {
-            "atRule": "@media (prefers-color-scheme: {context})"
+            "lightDark": {
+              "light": "light",
+              "dark": "dark"
+            }
           }
         }
       }

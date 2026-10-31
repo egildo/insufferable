@@ -21,11 +21,11 @@ importers:
         specifier: ^3.49.0
         version: 3.49.0
       '@toghen/lib':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
       '@toghen/postcss':
-        specifier: ^0.1.0
-        version: 0.1.0(@toghen/lib@0.1.0)(postcss@8.5.32)
+        specifier: ^0.1.1
+        version: 0.1.1(@toghen/lib@0.1.1)(postcss@8.5.32)
       gosfuig:
         specifier: ^0.2.0
         version: 0.2.0
@@ -249,15 +249,15 @@ packages:
     engines: {node: '>=24'}
     hasBin: true
 
-  '@toghen/lib@0.1.0':
-    resolution: {integrity: sha512-LO4qN1Le/LyB44k6AIxxOk/hGpjBI94P7xfU6nJpZgAJja4Md7MAB/Iic9SJvLHWzeN4eQG22l/BrizJ2/zPEg==}
+  '@toghen/lib@0.1.1':
+    resolution: {integrity: sha512-hlmAYMQ+edsT+J6bhU4i1AfbvV9vE3+17JswqZo5t2tNdboKKXZcFRIihUeA1EqWOLBNqxHZBcmG1XHwwroKBA==}
     engines: {node: '>=24'}
 
-  '@toghen/postcss@0.1.0':
-    resolution: {integrity: sha512-+OPWq0gX4lZ4I9QsBJji2D8G2WumfPL0X/v3kSF3Q8DLEKpUnx5kGjtJj+c13U0Ieb65PIgpYLMhNSEHUo7Zng==}
+  '@toghen/postcss@0.1.1':
+    resolution: {integrity: sha512-tga1svQ1FijkVpPxkrZvRF+wp1yDfebjpB8eiu704pMjIfzgjp93cykoXxz1yW+Krhjy9oLau6FldpuYvVClNw==}
     engines: {node: '>=24'}
     peerDependencies:
-      '@toghen/lib': ^0.1.0
+      '@toghen/lib': ^0.1.1
       postcss: ^8.0.0
 
   '@typescript/typescript-aix-ppc64@7.0.2':
@@ -601,7 +601,7 @@ snapshots:
   '@toghen/figma@0.1.15':
     dependencies:
       '@bgotink/kdl': 0.4.1
-      '@toghen/lib': 0.1.0
+      '@toghen/lib': 0.1.1
       kdlet: 0.1.1
       kdlet-guards: 0.1.1
       tsx: 4.23.15
@@ -610,13 +610,13 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@toghen/lib@0.1.0':
+  '@toghen/lib@0.1.1':
     dependencies:
       culori: 4.0.2
 
-  '@toghen/postcss@0.1.0(@toghen/lib@0.1.0)(postcss@8.5.32)':
+  '@toghen/postcss@0.1.1(@toghen/lib@0.1.1)(postcss@8.5.32)':
     dependencies:
-      '@toghen/lib': 0.1.0
+      '@toghen/lib': 0.1.1
       mdn-data: 2.37.2
       postcss: 8.5.32
 

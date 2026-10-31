@@ -847,3 +847,23 @@ A tarball made by `pnpm pack`, installed into an empty app with `pnpm add`: `ins
 - Publication: the name, the version and the licence line are a decision for later.
 - The scripts' copy of `color.js`, `icons.js` and `elements.js` into an app's folder is more than the app needs; harmless.
 - A density mode, an app-chosen scheme, and an app's FigCraft library.
+
+## The app-chosen scheme
+
+> **Ruled 31 October 2026:** the theme is written with `light-dark()`, so an app chooses the scheme with `color-scheme`. Built the same day, on Toghen 0.1.1, which added `lightDark` to the resolver.
+
+### What changed
+
+- **The spelling.** The theme modifier carries `css.lightDark: { light: "light", dark: "dark" }` in place of the media query, in the system's resolver and in the example app's. The plugin writes each colour role once, `light-dark(light, dark)`, and leaves out the per-context blocks. The packages moved to 0.1.1.
+- **The stylesheet** is 99.7 KB, from 125.4: the dark blocks are gone.
+- **Nothing else moved.** The 21 tests pass; the page in a dark system is the page as it was.
+
+### What was checked
+
+In the built-in browser, on `dev/demo.html` with a dark system: `color-scheme: light` on the page gave the light text, `dark` the dark one, and `dark` on the tabs alone gave them light text on a light page. The example app builds, and its generated theme still passes the gate.
+
+### Consequences
+
+- The system's own default is unchanged: the page says `color-scheme: light dark`, so the system chooses.
+- Browsers that do not know `light-dark()` (before 2024) get no colours. The principle is the platform's current baseline.
+- The generator needed no change: it writes the roles, and the resolver spells them.

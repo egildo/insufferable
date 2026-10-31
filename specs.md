@@ -147,7 +147,7 @@ Paper, white, the dark desk and nothing are written as values: none is a step of
 
 ### Themes
 
-The system chooses. The theme modifier's contexts are spelled `@media (prefers-color-scheme: {context})`, so the dark roles apply when the system prefers dark, with no script and no attribute; light is the default, on `:root`. The page says `color-scheme: light dark`, so the platform draws its own controls, the select's list and the scrollbars in the same scheme. A modifier needs two contexts: the W3C Resolver forbids one.
+The scheme is the element's `color-scheme`. The theme modifier is written with `light-dark()` (`lightDark` in the resolver, read by Toghen), so every role is one declaration holding both colours, and it takes the used scheme of the element it is read on. The page says `color-scheme: light dark`, so the system chooses with no script and no attribute; an app chooses by setting `color-scheme` to `light` or `dark` on the page or on any container, a subtree included. The platform draws its own controls, the select's list and the scrollbars in the same scheme. Only colours can take part, and the theme files hold nothing else; the raised shadow follows because it reads the shadow colour. A modifier needs two contexts: the W3C Resolver forbids one.
 
 ### Theming an app
 
@@ -161,7 +161,7 @@ An app themes insufferable with its own CSS after the stylesheet. The stylesheet
 }
 ```
 
-`light-dark()` is the platform's way to give one colour for each scheme in one declaration; it reads the page's `color-scheme`, which the base sets to `light dark`. An app's own `light-dark()` colours follow `color-scheme` set on `:root` or on one container; the stock roles do not yet, since the build writes them under the media query. `dev/theme.html` is the demo page restyled this way: a terracotta accent in both schemes, with square corners, in ten lines.
+`light-dark()` is the platform's way to give one colour for each scheme in one declaration; it reads the page's `color-scheme`, which the base sets to `light dark`. An app's own `light-dark()` colours follow `color-scheme` set on `:root` or on one container, as the stock roles do. `dev/theme.html` is the demo page restyled this way: a terracotta accent in both schemes, with square corners, in ten lines.
 
 What an app may set: any role under `ins.color`, `ins.radius`, `ins.space`, `ins.size` and `ins.font`, by its custom property. What it should set together: a role and its companions (the accent with its strong, deep, tint and the text on it), since the system names them apart so that each pair can be measured. This route does not measure for the app, and it does not regenerate a palette: a brand colour is chosen by hand, and its contrast checked by hand. A derived theme, from a hue and a warmth, with the contrast gate, is `insufferable theme`, below.
 
