@@ -1,5 +1,5 @@
 /**
- * `<ins-splitter>`: the line between two panes that changes their sizes. A
+ * `<insufferable-splitter>`: the line between two panes that changes their sizes. A
  * window splitter, as the WAI-ARIA Authoring Practices describe it
  * (https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/), vertical and
  * variable.
@@ -157,4 +157,4 @@ export class InsSplitter extends HTMLElement {
   };
 }
 
-if (!customElements.get('ins-splitter')) customElements.define('ins-splitter', InsSplitter);
+if (!customElements.get('insufferable-splitter')) customElements.define('insufferable-splitter', InsSplitter);

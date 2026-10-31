@@ -1,4 +1,4 @@
-// Splitter: the line between two panes that changes their sizes, ins-splitter. Source: ins.splitter in
+// Splitter: the line between two panes that changes their sizes, insufferable-splitter. Source: ins.splitter in
 // tokens/shell.tokens.json. Its axes come from its parts: pointer (hover, active) and focus.
 // The root is the desk's gap, transparent; the grip is a short line at its middle, longer under the pointer, held
 // or focused, in the splitter's colour.

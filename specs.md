@@ -18,7 +18,7 @@ Fifteen elements are built: tabs, disclosure, icon, link, divider, table, callou
 2. **The stylesheet is written with `@toghen/postcss`.** The tokens become custom properties, cascade layers and mixins at build time.
 3. **The selectors are the states themselves.** A state is styled by the ARIA attribute that means it, or by the native pseudo-class where the element is native: `:checked` on a checkbox, `[aria-selected='true']` on a tab. Never a class: a class says what kind of thing an element is, not what state it is in. One attribute is both the meaning and the look.
 4. **A native element first.** A custom element only where script is needed, and then it wraps native markup that already works without script. This is the pattern known as HTML Web Components.
-5. **A native element is styled by its element name,** in the components layer: `details`, not a class on it. The page's HTML stays bare, and an app's own unlayered rules win over the layer. A custom element is styled by its own name, as `ins-tabs`.
+5. **A native element is styled by its element name,** in the components layer: `details`, not a class on it. The page's HTML stays bare, and an app's own unlayered rules win over the layer. A custom element is styled by its own name, as `insufferable-tabs`.
 6. **A variant is a class.** HTML asks a class to say what the content is, and keeps `data-*` for data no other attribute fits; a kind of button is what `class` is for, and CSS has its own syntax for it. A variant has no ARIA meaning, so it does not borrow one. The stylesheet pairs each class with its element, as `button.solid`, so an app's class of the same name elsewhere is left alone, and `data-*` stays the app's.
 7. **ARIA is written as attributes.** ARIA set through `ElementInternals` creates no attribute, so no selector could read it.
 8. **Light DOM.** An Invoker command's `commandfor` finds its target by id in the same tree, so a control inside a shadow root could not name an element of the app. The cascade reaches every element for the same reason.
@@ -66,7 +66,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell, progress, spinner, meter, slider, breadcrumb, pagination, card .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell, progress, spinner, meter, slider, breadcrumb, pagination, card, tooltip, toast .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -171,7 +171,7 @@ The deeper route: the app rebuilds the stylesheet from its own tokens, with `ins
 
 The resolver keeps the name `insufferable`. The stylesheet refers to every token, and its two directives, by that name, and the build stops with a message when an app's resolver has another. `examples/app` is the example: the demo page, square, with a terracotta accent and Georgia for the headings, from one resolver and three small token files.
 
-An app may also choose the prefix of the elements: `"$extensions": { "dev.insufferable": { "prefix": "quince" } }` in its resolver. The build then writes `quince-tabs` for `ins-tabs`, in the stylesheet and in the element scripts, which it writes into `components/` beside the stylesheet so that the app imports them as before. The rename is made from the list in `src/elements.ts`, the seven elements, and touches only a whole element name: not `--ins-icon-button`, nor the ids the elements generate. A prefix is lower case letters and digits starting with a letter, so that `prefix-name` is a valid custom element name. Custom properties, the token group, commands and classes keep their names; the prefix is for elements.
+An app may also choose the prefix of the elements: `"$extensions": { "dev.insufferable": { "prefix": "quince" } }` in its resolver. The build then writes `quince-tabs` for `insufferable-tabs`, in the stylesheet and in the element scripts, which it writes into `components/` beside the stylesheet so that the app imports them as before. The rename is made from the list in `src/elements.ts`, the eight elements, and touches only a whole element name: not `--ins-icon-button`, nor the ids the elements generate. A prefix is lower case letters and digits starting with a letter, so that `prefix-name` is a valid custom element name. Custom properties, the token group, commands and classes keep their names; the prefix is for elements.
 
 #### Generating a theme
 
@@ -230,13 +230,13 @@ Everything else inherits, and keeps the browser's own margins: paragraphs, lists
 
 ### Tabs
 
-`<ins-tabs>` holding `<button>`s, each naming its panel with `aria-controls`. The panels sit anywhere in the page.
+`<insufferable-tabs>` holding `<button>`s, each naming its panel with `aria-controls`. The panels sit anywhere in the page.
 
 ```html
-<ins-tabs aria-label="Fruit">
+<insufferable-tabs aria-label="Fruit">
   <button aria-controls="apple">Apple</button>
   <button aria-controls="pear">Pear</button>
-</ins-tabs>
+</insufferable-tabs>
 <div id="apple">An apple.</div>
 <div id="pear">A pear.</div>
 ```
@@ -249,24 +249,24 @@ Everything else inherits, and keeps the browser's own margins: paragraphs, lists
 - **No tab marked:** the first enabled tab is shown.
 - **Without script:** every panel shows and the buttons do nothing.
 
-**Pill tabs,** `<ins-tabs class="pill">`: the same element, keyboard and commands, drawn without the strip. Each tab is a pill; the selected one sits on the accent's tint, in the accent, 5:1 in light and in dark. Disabled, a tab is grey and clear under the pointer; selected and disabled, it keeps the line's grey ground, so the choice still shows. A count follows a tab's name.
+**Pill tabs,** `<insufferable-tabs class="pill">`: the same element, keyboard and commands, drawn without the strip. Each tab is a pill; the selected one sits on the accent's tint, in the accent, 5:1 in light and in dark. Disabled, a tab is grey and clear under the pointer; selected and disabled, it keeps the line's grey ground, so the choice still shows. A count follows a tab's name.
 
 ```html
-<ins-tabs class="pill" aria-label="Pane">
+<insufferable-tabs class="pill" aria-label="Pane">
   <button aria-controls="structure">Structure <data value="26">26</data></button>
   <button aria-controls="log">Print log <data value="2">2</data></button>
-</ins-tabs>
+</insufferable-tabs>
 ```
 
 Not built: manual activation, a vertical tab list.
 
 ### Icon
 
-`<ins-icon>` naming a [Tabler icon](https://tabler.io/icons) in its `name` attribute.
+`<insufferable-icon>` naming a [Tabler icon](https://tabler.io/icons) in its `name` attribute.
 
 ```html
-<ins-icon name="x"></ins-icon>
-<ins-icon name="heart" aria-label="Favourite"></ins-icon>
+<insufferable-icon name="x"></insufferable-icon>
+<insufferable-icon name="heart" aria-label="Favourite"></insufferable-icon>
 ```
 
 - **It reads:** `name`, and `aria-label` or `aria-labelledby`. With a label it is an image with that name (`role="img"`); without one it is decoration (`aria-hidden="true"`).
@@ -355,7 +355,7 @@ The native `<button>`. Its keyboard, focus and form behaviour are the platform's
 ```html
 <button>Keep it</button>
 <button class="solid">Discard</button>
-<button class="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
+<button class="plain" aria-label="Close"><insufferable-icon name="x"></insufferable-icon></button>
 ```
 
 - **Variants:** outlined by default, `solid` for the main action, `plain` for a quiet one, as its class.
@@ -363,8 +363,8 @@ The native `<button>`. Its keyboard, focus and form behaviour are the platform's
 - **Held down** (`:active`), a button goes one step deeper than under the pointer: the line's grey where hover is the fill, the deep accent where hover is the strong one. A menu item and a segment do the same; links, tabs, the disclosure and the listbox's options do not.
 - **A toggle button** has `aria-pressed`; pressed (`"true"`) it takes the accent's ground and the text on it, in any variant, the strong accent under the pointer. The fill would be 1.16:1 against the page, under the 3:1 a state's mark wants. Pressed and disabled, it keeps a grey ground, the line's, with the disabled text, so the state still shows while nothing answers the pointer.
 - **Its size:** 2.25rem tall at least (`ins.size.control`), as a field is, so the two sit on one line.
-- **A tab and a menu item are buttons too.** The rule sits in `@scope (:root) to (ins-tabs, ins-menu)`, so it never reaches either, and each element styles its own without undoing anything.
-- **An icon button** is a button that holds an icon and is named by `aria-label`, which an icon alone needs anyway: `button[aria-label]:has(> ins-icon)`. It is square, as wide as it is tall (`ins.iconButton`), with no padding. Pressed, it takes the accent as any button does: a wash, as other tools draw it, would fall under the 3:1 a state's mark wants.
+- **A tab and a menu item are buttons too.** The rule sits in `@scope (:root) to (insufferable-tabs, insufferable-menu)`, so it never reaches either, and each element styles its own without undoing anything.
+- **An icon button** is a button that holds an icon and is named by `aria-label`, which an icon alone needs anyway: `button[aria-label]:has(> insufferable-icon)`. It is square, as wide as it is tall (`ins.iconButton`), with no padding. Pressed, it takes the accent as any button does: a wash, as other tools draw it, would fall under the 3:1 a state's mark wants.
 - **A count** after its name is a `<data>`: see [Count](#count).
 
 Not built: sizes.
@@ -460,16 +460,16 @@ Not built: a row for the actions, which the demo page lays out itself; a drawer.
 
 ### Menu
 
-`<ins-menu popover>` holding `<button>`s, opened by a button whose `commandfor` names it and whose `command` is the platform's `toggle-popover`.
+`<insufferable-menu popover>` holding `<button>`s, opened by a button whose `commandfor` names it and whose `command` is the platform's `toggle-popover`.
 
 ```html
-<button commandfor="edit" command="toggle-popover">Edit <ins-icon name="chevron-down"></ins-icon></button>
-<ins-menu id="edit" popover>
+<button commandfor="edit" command="toggle-popover">Edit <insufferable-icon name="chevron-down"></insufferable-icon></button>
+<insufferable-menu id="edit" popover>
   <button commandfor="editor" command="--cut">Cut</button>
   <button commandfor="editor" command="--copy">Copy</button>
   <hr>
   <button disabled>Paste</button>
-</ins-menu>
+</insufferable-menu>
 ```
 
 - **Open is the platform's.** The popover opens and closes on the platform's commands, closes on Escape or a click outside, and hands focus back to its button; the platform exposes the button as expanded. An app that wants to know listens for `toggle`; one that wants to refuse an opening cancels `beforetoggle`.
@@ -484,14 +484,14 @@ Not built: checkbox and radio items (`aria-checked`, `--check`), submenus, findi
 
 ### Toolbar
 
-`<ins-toolbar>` holding `<button>`s: a row of controls with one tab stop.
+`<insufferable-toolbar>` holding `<button>`s: a row of controls with one tab stop.
 
 ```html
-<ins-toolbar aria-label="Format">
+<insufferable-toolbar aria-label="Format">
   <button class="plain" aria-pressed="false">Bold</button>
   <button class="plain" aria-pressed="true">Italic</button>
   <button class="plain">Clear</button>
-</ins-toolbar>
+</insufferable-toolbar>
 ```
 
 - **It writes:** `role="toolbar"`; on each button with `aria-pressed`, `commandfor` naming the toolbar and `command="--press"` unless it names another; on each button with `aria-expanded` and `aria-controls`, a disclosure button after the [APG disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), `commandfor` and `command="--expand"`, and `hidden` on the element it names while it is closed, or, for a popover, shows and hides it, and turns `aria-expanded` back when the platform closes it; the roving `tabindex`, held by the button last focused. It gives itself an id when it has none.
@@ -532,7 +532,7 @@ A list of removable values: `<ul class="chips">`, each item its text and a butto
 <ul class="chips" id="declarations" aria-label="Declarations">
   <li><code>hyphens: none</code>
     <button commandfor="declarations" command="--remove" value="hyphens"
-            aria-label="Remove hyphens: none"><ins-icon name="x"></ins-icon></button></li>
+            aria-label="Remove hyphens: none"><insufferable-icon name="x"></insufferable-icon></button></li>
 </ul>
 ```
 
@@ -572,7 +572,7 @@ An inspector: `<fieldset class="properties">` holding a `<legend>` and `div.prop
     <label for="size">font-size</label>
     <input id="size" inputmode="decimal" value="11">
     <select aria-label="Unit of font-size"><option>pt</option></select>
-    <button type="button" class="plain" aria-label="Reset font-size"><ins-icon name="restore"></ins-icon></button>
+    <button type="button" class="plain" aria-label="Reset font-size"><insufferable-icon name="restore"></insufferable-icon></button>
   </div>
 </fieldset>
 ```
@@ -608,10 +608,10 @@ Not built: a log that follows new lines as they come (`role="log"` on a live reg
 
 ### Tree
 
-A hierarchical list whose nodes open and close: `<ins-tree>` holding a `<ul>`, each `<li>` its row in a `<span>` and, for a parent node, its children in a `<ul>`. It follows the [APG tree view pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/): vertical, single select, selection apart from focus.
+A hierarchical list whose nodes open and close: `<insufferable-tree>` holding a `<ul>`, each `<li>` its row in a `<span>` and, for a parent node, its children in a `<ul>`. It follows the [APG tree view pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/): vertical, single select, selection apart from focus.
 
 ```html
-<ins-tree aria-label="Structure">
+<insufferable-tree aria-label="Structure">
   <ul>
     <li aria-expanded="true">
       <span><small class="tag">Section</small> Paola Esempio <code>.envelope</code></span>
@@ -620,7 +620,7 @@ A hierarchical list whose nodes open and close: `<ins-tree>` holding a `<ul>`, e
       </ul>
     </li>
   </ul>
-</ins-tree>
+</insufferable-tree>
 ```
 
 - **It writes:** `role="tree"` on itself and `none` on the outer list; `treeitem` on each `li`, `group` on each inner `ul`; `aria-labelledby` from each node to its row, so a node is named by its row and not by its children's text too; `aria-selected="false"` on every node not selected; `aria-expanded` on parent nodes only, `false` where the app wrote none, since the pattern says an end node must not carry it; the roving `tabindex`. Level, position and set size are the browser's, computed from the nesting, as the APG's own example shows.
@@ -636,14 +636,14 @@ Not built: multi-select, `*` to open every sibling (optional in the pattern), di
 
 ### Shell
 
-An application on a desk: `<ins-shell>` holding, in a row, a dock, the side panes, the main pane, the side panes and a dock. Below a width, a side pane opens over the main pane.
+An application on a desk: `<insufferable-shell>` holding, in a row, a dock, the side panes, the main pane, the side panes and a dock. Below a width, a side pane opens over the main pane.
 
 ```html
-<ins-shell>
-  <ins-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
-    <button aria-expanded="true" aria-controls="structure"><ins-icon name="list-tree"></ins-icon> Structure</button>
-    <button aria-expanded="false" aria-controls="log"><ins-icon name="printer"></ins-icon> Print log <small class="status new">new</small></button>
-  </ins-toolbar>
+<insufferable-shell>
+  <insufferable-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
+    <button aria-expanded="true" aria-controls="structure"><insufferable-icon name="list-tree"></insufferable-icon> Structure</button>
+    <button aria-expanded="false" aria-controls="log"><insufferable-icon name="printer"></insufferable-icon> Print log <small class="status new">new</small></button>
+  </insufferable-toolbar>
   <aside class="pane" id="structure" aria-labelledby="structure-title">
     <header><h2 id="structure-title">Structure <data value="26">26</data></h2></header>
     …
@@ -653,7 +653,7 @@ An application on a desk: `<ins-shell>` holding, in a row, a dock, the side pane
     <header><h1 id="doc-title">Bolletta della luce</h1> <code>demos/bolletta/index.html</code></header>
     …
   </main>
-</ins-shell>
+</insufferable-shell>
 ```
 
 - **The desk** is the shell's ground, `ins.color.desk`, a step below the surface: the lightest grey in light, black in dark. The panes take the surface, so every control on them keeps the contrast it has on a page.
@@ -672,11 +672,11 @@ Not built: the docks at phone width, which keep their room on both sides; a moda
 
 ### Splitter
 
-The line between two panes that changes their sizes: `<ins-splitter>` between them, `aria-controls` naming the primary pane, the one it sizes. It follows the [APG window splitter pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/), vertical and variable.
+The line between two panes that changes their sizes: `<insufferable-splitter>` between them, `aria-controls` naming the primary pane, the one it sizes. It follows the [APG window splitter pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/), vertical and variable.
 
 ```html
 <aside class="pane" id="structure" aria-labelledby="structure-title">…</aside>
-<ins-splitter aria-controls="structure"></ins-splitter>
+<insufferable-splitter aria-controls="structure"></insufferable-splitter>
 <main class="pane">…</main>
 ```
 
@@ -744,10 +744,10 @@ Pages of a list: `<nav aria-label="Pagination">` holding a `<ul class="paginatio
 ```html
 <nav aria-label="Pagination">
   <ul class="pagination">
-    <li><a href="?p=1" aria-label="Previous page" aria-disabled="true"><ins-icon name="chevron-left"></ins-icon></a></li>
+    <li><a href="?p=1" aria-label="Previous page" aria-disabled="true"><insufferable-icon name="chevron-left"></insufferable-icon></a></li>
     <li><a href="?p=1" aria-current="page">1</a></li>
     <li><a href="?p=2">2</a></li>
-    <li><a href="?p=2" aria-label="Next page"><ins-icon name="chevron-right"></ins-icon></a></li>
+    <li><a href="?p=2" aria-label="Next page"><insufferable-icon name="chevron-right"></insufferable-icon></a></li>
   </ul>
 </nav>
 ```
@@ -773,9 +773,45 @@ A surface that holds its own content: `<section class="card">`, `<article class=
 - **A card that stands for a region** is named by its heading, `aria-labelledby`.
 - **Not interactive.** A card that is a link or a button is a link or a button that holds a card's content; that is the app's.
 
+### Tooltip
+
+A short hint beside the control that explains it: `<insufferable-tooltip popover="hint">`, named by `interestfor` on the control.
+
+```html
+<button class="plain" aria-label="Search" interestfor="search-hint"><insufferable-icon name="search"></insufferable-icon></button>
+<insufferable-tooltip id="search-hint" popover="hint">Search the notebook</insufferable-tooltip>
+```
+
+- **Never where a person learns something they need.** The control keeps its own name; a tooltip adds to it, and a touch screen may never show it.
+- **Where the platform has hints** (`interestfor` and `popover="hint"`, in Chrome since 142), it shows and hides the tooltip, with the delays of the control's `interest-delay`, which are tokens (`ins.tooltipTrigger`, 377 ms before showing and 144 ms before hiding, written on every control with `interestfor`). The element only writes `role="tooltip"` and `aria-describedby` on each control that names it.
+- **Where it has not,** the element is the fallback: the tooltip becomes a manual popover, and the element shows it, with the same delays, when the pointer rests on the control or focus reaches it, and hides it when either leaves or on Escape. A touch is ignored. This is the only fallback code the kit carries; it stands there until the platform has the feature in every browser, and is then deleted.
+- **The surface** is the inverse of the page: the text colour for the ground and the page's for the text (`ins.tooltip`), small, at most `ins.size.hint` wide. It sits under its control, centred, and flips above when there is no room.
+- **No transition:** a tooltip appears at once.
+
+### Toast
+
+A message that comes and goes without being asked for: a region, `<div class="toasts" role="status">`, and its items, `<div class="toast">`.
+
+```html
+<div class="toasts" role="status"></div>
+<!-- the app puts one in: -->
+<div class="toast" id="saved">
+  <p>Quince paste saved.</p>
+  <button class="plain">Undo</button>
+  <button class="plain" aria-label="Dismiss" commandfor="saved" command="--dismiss"><insufferable-icon name="x"></insufferable-icon></button>
+</div>
+```
+
+- **The region sits in the page from the start, empty,** so that what is put into it is announced, politely. A toast that must interrupt is `role="alert"`, and `class="danger"` makes it an error.
+- **No element, and no state.** The app puts each toast in and takes it out, as it does a chip. The time-out is the app's, and it must stop while the pointer or focus is on the toast (WCAG 2.2.1). The close button sends `--dismiss`, which the app hears at the root.
+- **Placement:** fixed to the end corner of the window (`ins.toasts`), `ins.size.toast` wide, its toasts one above another, and the region lets the pointer through everywhere but on a toast.
+- **The surface** is the card's raised colour with the menu's shadow and a bar at the start, in the accent, or in the danger (`ins.toast`).
+- **Not in the top layer.** A menu open over it covers it, and a modal dialog makes everything outside the dialog inert, a toast included: a toast a dialog raises goes in a region inside that dialog.
+- **Motion:** a toast comes in with a fade and a short rise, `ins.motion.toast` (233 ms), from `@starting-style`. It leaves at once, since the app removes it. Where motion is reduced, it simply appears.
+
 ### Motion
 
-The system's first motion, kept to what a spinner and a busy bar cannot do without: `ins.motion.spin` (987 ms) and `ins.motion.sweep` (1597 ms), Fibonacci numbers in milliseconds, on the same ladder as the dimensions. They are `duration` tokens, which FigCraft has no variable for, so the library skips them. There are no transitions: a state changes at once. Every animation stands still where the person asks for less motion.
+The system's first motion, kept to what a spinner and a busy bar cannot do without: `ins.motion.spin` (987 ms) and `ins.motion.sweep` (1597 ms), then a toast's entrance (`toast`, 233 ms) and a hint's two delays (`hintShow`, 377 ms, and `hintHide`, 144 ms): Fibonacci numbers in milliseconds, on the same ladder as the dimensions. They are `duration` tokens, which FigCraft has no variable for, so the library skips them. There are no other transitions: a state changes at once. Every animation stands still where the person asks for less motion.
 
 ## Commands
 
@@ -792,6 +828,5 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 
 ## Open questions
 
-- **The default element prefix.** The tabs element is `ins-tabs`. `ins` is also the HTML element for inserted text, so a reader may stumble on it. An app may choose its own prefix; the system's default is not ruled.
 - **Tabler's other cuts.** Tabler ships its icons in stroke weights 200 and 300 and filled, each a font of its own. Only the regular cut ships; the others could be faces of the same family at their weights.
 - **The house fonts' other axes.** Archivo's width and Fraunces' softness and wonk are not tokens; the W3C typography type has no member for them.

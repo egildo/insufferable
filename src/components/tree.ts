@@ -1,5 +1,5 @@
 /**
- * `<ins-tree>`: a hierarchical list whose nodes open and close. A tree view,
+ * `<insufferable-tree>`: a hierarchical list whose nodes open and close. A tree view,
  * as the WAI-ARIA Authoring Practices describe it
  * (https://www.w3.org/WAI/ARIA/apg/patterns/treeview/): vertical, single
  * select, selection apart from focus.
@@ -190,4 +190,4 @@ export class InsTree extends HTMLElement {
   };
 }
 
-if (!customElements.get('ins-tree')) customElements.define('ins-tree', InsTree);
+if (!customElements.get('insufferable-tree')) customElements.define('insufferable-tree', InsTree);

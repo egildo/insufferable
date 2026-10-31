@@ -1,5 +1,5 @@
 /**
- * `<ins-shell>`: an application laid out on a desk, its docks, side panes and
+ * `<insufferable-shell>`: an application laid out on a desk, its docks, side panes and
  * main pane in a row. Below a width, a side pane no longer fits beside the
  * main one, so the element makes each side pane a popover: its dock opens it
  * over the main pane, and the platform closes it on Escape or a click outside
@@ -92,4 +92,4 @@ export class InsShell extends HTMLElement {
   }
 }
 
-if (!customElements.get('ins-shell')) customElements.define('ins-shell', InsShell);
+if (!customElements.get('insufferable-shell')) customElements.define('insufferable-shell', InsShell);

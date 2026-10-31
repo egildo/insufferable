@@ -1,5 +1,5 @@
 /**
- * `<ins-menu popover>`: a list of actions under the button that opens it. A
+ * `<insufferable-menu popover>`: a list of actions under the button that opens it. A
  * menu button, as the WAI-ARIA Authoring Practices describe it
  * (https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/).
  *
@@ -133,4 +133,4 @@ export class InsMenu extends HTMLElement {
   };
 }
 
-if (!customElements.get('ins-menu')) customElements.define('ins-menu', InsMenu);
+if (!customElements.get('insufferable-menu')) customElements.define('insufferable-menu', InsMenu);

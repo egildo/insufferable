@@ -1,0 +1,50 @@
+{
+  "ins": {
+    "tooltip": {
+      "$description": "A hint beside the control it explains: a popover on the inverse of the page, small, under its trigger. It never carries what a person needs.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "marginBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "maxInlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.hint}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.small}"
+      }
+    },
+    "tooltipTrigger": {
+      "$description": "What a control with a hint waits before showing it and before hiding it, read by the platform and, where it has none, by the element.",
+      "interestDelayStart": {
+        "$type": "duration",
+        "$value": "{ins.motion.hintShow}"
+      },
+      "interestDelayEnd": {
+        "$type": "duration",
+        "$value": "{ins.motion.hintHide}"
+      }
+    }
+  }
+}

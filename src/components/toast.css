@@ -1,0 +1,52 @@
+/*
+ * toast: a message that comes and goes without being asked for. `<div class="toasts"
+ * role="status">` is the region: it sits in the page from the start, empty, so
+ * that what is put into it is announced, politely; a toast that must interrupt
+ * is `role="alert"`. It is fixed to a corner of the window, its toasts one
+ * above another, and lets the pointer through everywhere but on a toast.
+ * A toast is a `<div class="toast">` holding its words and, where it can be
+ * undone or closed, buttons; `class="danger"` is an error. The app puts
+ * each toast in, and takes it out when its time is up, or when its close
+ * button sends `--dismiss`: the stylesheet keeps no state, and a time-out must
+ * stop while the pointer or the focus is on the toast. A toast comes in with a
+ * short fade and rise, which stands still where motion is reduced.
+ *
+ * Fixed to the window, the region is not in the top layer: a menu open over it
+ * covers it, and a modal dialog makes it inert, so a toast a dialog raises
+ * goes in a region of the dialog's own.
+ */
+
+.toasts {
+  position: fixed;
+  display: grid;
+  box-sizing: border-box;
+  max-inline-size: calc(100vw - 2 * t(insufferable.ins.toasts.insetInlineEnd));
+  pointer-events: none;
+  @apply --ins-toasts;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-style: solid;
+  pointer-events: auto;
+  transition-property: opacity, translate;
+  @apply --ins-toast;
+
+  & > p {
+    flex: 1;
+    margin: 0;
+  }
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 t(insufferable.ins.space.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: none;
+  }
+}

@@ -16,18 +16,18 @@
   .desk-of-pages { background: var(--ins-color-fill); padding: 1.5rem; border-radius: var(--ins-radius-1); }
 </style>
 
-<ins-shell>
-  <ins-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
-    <button aria-expanded="true" aria-controls="structure"><ins-icon name="list-tree"></ins-icon> Structure</button>
-    <button aria-expanded="false" aria-controls="resources"><ins-icon name="folder"></ins-icon> Resources</button>
-    <button aria-expanded="false" aria-controls="print-log"><ins-icon name="printer"></ins-icon> Print log <small class="status new">new</small></button>
-  </ins-toolbar>
+<insufferable-shell>
+  <insufferable-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
+    <button aria-expanded="true" aria-controls="structure"><insufferable-icon name="list-tree"></insufferable-icon> Structure</button>
+    <button aria-expanded="false" aria-controls="resources"><insufferable-icon name="folder"></insufferable-icon> Resources</button>
+    <button aria-expanded="false" aria-controls="print-log"><insufferable-icon name="printer"></insufferable-icon> Print log <small class="status new">new</small></button>
+  </insufferable-toolbar>
 
   <aside class="pane" id="structure" aria-labelledby="structure-title">
     <header>
       <h2 id="structure-title">Structure <data value="26">26</data></h2>
     </header>
-    <ins-tree aria-labelledby="structure-title">
+    <insufferable-tree aria-labelledby="structure-title">
       <ul>
         <li aria-expanded="true">
           <span><small class="tag">Section</small> Energia Esempio S.p.A. <code>#riepilogo</code></span>
@@ -46,9 +46,9 @@
           <ul><li><span><small class="tag">Table</small> Voce, Importo</span></li></ul>
         </li>
       </ul>
-    </ins-tree>
+    </insufferable-tree>
   </aside>
-  <ins-splitter aria-controls="structure"></ins-splitter>
+  <insufferable-splitter aria-controls="structure"></insufferable-splitter>
 
   <aside class="pane" id="resources" aria-labelledby="resources-title">
     <header><h2 id="resources-title">Resources <data value="2">2</data></h2></header>
@@ -61,7 +61,7 @@
       </tbody>
     </table>
   </aside>
-  <ins-splitter aria-controls="resources"></ins-splitter>
+  <insufferable-splitter aria-controls="resources"></insufferable-splitter>
 
   <aside class="pane" id="print-log" aria-labelledby="print-log-title">
     <header><h2 id="print-log-title">Print log <data value="2">2</data></h2></header>
@@ -70,33 +70,33 @@
       <li><time datetime="10:42">10:42</time> <small class="status ok">Done</small> <span>Printed 2 pages</span></li>
     </ol>
   </aside>
-  <ins-splitter aria-controls="print-log"></ins-splitter>
+  <insufferable-splitter aria-controls="print-log"></insufferable-splitter>
 
   <main class="pane" aria-labelledby="doc-title">
     <header>
       <h1 id="doc-title">Bolletta della luce</h1>
       <code>demos/bolletta/index.html</code>
       <small>1/2 · <small class="status ok">Synced</small> v12</small>
-      <button class="plain" aria-label="Dark theme" aria-pressed="false"><ins-icon name="moon"></ins-icon></button>
+      <button class="plain" aria-label="Dark theme" aria-pressed="false"><insufferable-icon name="moon"></insufferable-icon></button>
     </header>
     <div class="desk-of-pages">
       <div class="page"></div>
     </div>
   </main>
 
-  <ins-splitter aria-controls="styles"></ins-splitter>
+  <insufferable-splitter aria-controls="styles"></insufferable-splitter>
   <aside class="pane" id="styles" aria-labelledby="styles-title">
     <header>
-      <ins-tabs class="pill" aria-label="Styles">
+      <insufferable-tabs class="pill" aria-label="Styles">
         <button aria-controls="rules">Local Styles <data value="3">3</data></button>
         <button aria-controls="values">Values <data value="6">6</data></button>
-      </ins-tabs>
+      </insufferable-tabs>
     </header>
     <div id="rules">
       <hgroup><h3>Rules</h3><p>3, in the sheet's order</p></hgroup>
       <p><code>#riepilogo p</code> <small class="tag">By name</small></p>
       <ul class="chips" id="decls" aria-label="Declarations of #riepilogo p">
-        <li><code>hyphens: none</code> <button commandfor="decls" command="--remove" value="hyphens" aria-label="Remove hyphens: none"><ins-icon name="x"></ins-icon></button></li>
+        <li><code>hyphens: none</code> <button commandfor="decls" command="--remove" value="hyphens" aria-label="Remove hyphens: none"><insufferable-icon name="x"></insufferable-icon></button></li>
       </ul>
       <hgroup><h3>Amend</h3><p>the caret's block</p></hgroup>
       <fieldset class="choices">
@@ -110,27 +110,27 @@
     </div>
   </aside>
 
-  <ins-splitter aria-controls="source"></ins-splitter>
+  <insufferable-splitter aria-controls="source"></insufferable-splitter>
   <aside class="pane" id="source" aria-labelledby="source-title">
     <header><h2 id="source-title">Source</h2></header>
     <pre><code>&lt;p class="name"&gt;Paola Esempio&lt;/p&gt;</code></pre>
   </aside>
 
-  <ins-toolbar class="dock" aria-orientation="vertical" aria-label="Right panes">
-    <button aria-expanded="true" aria-controls="styles"><ins-icon name="stack-2"></ins-icon> Styles</button>
-    <button aria-expanded="false" aria-controls="source"><ins-icon name="code"></ins-icon> Source</button>
-  </ins-toolbar>
-</ins-shell>
+  <insufferable-toolbar class="dock" aria-orientation="vertical" aria-label="Right panes">
+    <button aria-expanded="true" aria-controls="styles"><insufferable-icon name="stack-2"></insufferable-icon> Styles</button>
+    <button aria-expanded="false" aria-controls="source"><insufferable-icon name="code"></insufferable-icon> Source</button>
+  </insufferable-toolbar>
+</insufferable-shell>
 
 <script type="module">
   // The app keeps each pane's size: it hears the splitters as it would a range input.
   document.addEventListener('change', (event) => {
-    if (event.target.matches('ins-splitter')) console.log(`${event.target.getAttribute('aria-controls')} at ${event.target.value}`);
+    if (event.target.matches('insufferable-splitter')) console.log(`${event.target.getAttribute('aria-controls')} at ${event.target.value}`);
   });
 
   // The app: one pane per side. Opening a dock's button closes the dock's other open one.
   document.addEventListener('command', (event) => {
-    if (event.command !== '--expand' || !event.target.matches('ins-toolbar.dock')) return;
+    if (event.command !== '--expand' || !event.target.matches('insufferable-toolbar.dock')) return;
     if (event.source.getAttribute('aria-expanded') === 'true') return;
     for (const other of event.target.querySelectorAll('button[aria-expanded="true"]')) {
       other.setAttribute('aria-expanded', 'false');

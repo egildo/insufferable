@@ -1,5 +1,5 @@
 /*
- * tabs: `<ins-tabs>` holding `<button>`s. Selected is `aria-selected="true"`;
+ * tabs: `<insufferable-tabs>` holding `<button>`s. Selected is `aria-selected="true"`;
  * a tab that cannot be chosen is `disabled` or `aria-disabled="true"`. The
  * selected tab's line sits on the strip's own line.
  *
@@ -7,13 +7,13 @@
  * on the accent's tint. A count after a tab's name is a `<data>`.
  */
 
-ins-tabs {
+insufferable-tabs {
   display: flex;
   border-bottom-style: solid;
   @apply --ins-tabs;
 }
 
-ins-tabs > button {
+insufferable-tabs > button {
   margin: 0 0 calc(-1 * t(insufferable.ins.border.1));
   border: 0;
   border-bottom-style: solid;
@@ -22,12 +22,12 @@ ins-tabs > button {
   @apply --ins-tabs-tab;
 }
 
-ins-tabs.pill {
+insufferable-tabs.pill {
   border-bottom-style: none;
   @apply --ins-tabs-pill;
 }
 
-ins-tabs.pill > button {
+insufferable-tabs.pill > button {
   margin: 0;
   border-bottom-style: none;
   @apply --ins-tabs-pill-tab;

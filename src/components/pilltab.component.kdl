@@ -1,4 +1,4 @@
-// PillTab: one tab of a pill tab list, ins-tabs class=pill, in its states. Source: ins.tabs.pill.tab in
+// PillTab: one tab of a pill tab list, insufferable-tabs class=pill, in its states. Source: ins.tabs.pill.tab in
 // tokens/tabs.tokens.json, over the tab's own tokens, ins.tabs.tab, for what the pill does not change.
 // Its axes come from the pill tab's parts: selection, pointer and availability. The root is the outline, as Tab's is.
 // The name is in the tab's text style; the count, a data element in the stylesheet, is in the small style, at the

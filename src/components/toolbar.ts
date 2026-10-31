@@ -1,5 +1,5 @@
 /**
- * `<ins-toolbar>`: a row of buttons with one tab stop. A toolbar, as the
+ * `<insufferable-toolbar>`: a row of buttons with one tab stop. A toolbar, as the
  * WAI-ARIA Authoring Practices describe it
  * (https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/).
  *
@@ -159,4 +159,4 @@ export class InsToolbar extends HTMLElement {
   };
 }
 
-if (!customElements.get('ins-toolbar')) customElements.define('ins-toolbar', InsToolbar);
+if (!customElements.get('insufferable-toolbar')) customElements.define('insufferable-toolbar', InsToolbar);

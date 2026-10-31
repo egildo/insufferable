@@ -1,0 +1,29 @@
+/*
+ * tooltip: `<insufferable-tooltip popover="hint">`, a short hint beside the control that
+ * names it with `interestfor`. It is the inverse of the page: the text colour for the
+ * ground, the page's for the text, so it keeps the page's contrast whichever
+ * scheme it is in. It sits under its control, centred, and flips above when
+ * there is no room. The control's two delays, before showing and before
+ * hiding, are tokens, written on every control that has a hint; the platform
+ * reads them as `interest-delay`, and the element, where the platform has no
+ * hints, reads the same values.
+ */
+
+insufferable-tooltip {
+  margin: 0;
+  border: 0;
+  @apply --ins-tooltip;
+}
+
+@supports (position-area: block-end) {
+  insufferable-tooltip {
+    inset: auto;
+    position-area: block-end;
+    position-try-fallbacks: flip-block;
+    margin-inline: 0;
+  }
+}
+
+:where([interestfor]) {
+  @apply --ins-tooltip-trigger;
+}

@@ -85,7 +85,7 @@
         }
       },
       "pill": {
-        "$description": "Pill tabs, ins-tabs class=pill: no strip; the selected tab is a pill on the accent's tint.",
+        "$description": "Pill tabs, insufferable-tabs class=pill: no strip; the selected tab is a pill on the accent's tint.",
         "gap": {
           "$type": "dimension",
           "$value": "{ins.space.1}"

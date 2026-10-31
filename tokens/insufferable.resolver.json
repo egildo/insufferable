@@ -112,6 +112,12 @@
         },
         {
           "$ref": "card.tokens.json"
+        },
+        {
+          "$ref": "tooltip.tokens.json"
+        },
+        {
+          "$ref": "toast.tokens.json"
         }
       ]
     }
@@ -150,6 +156,11 @@
           }
         }
       }
+    }
+  },
+  "$extensions": {
+    "dev.insufferable": {
+      "prefix": "insufferable"
     }
   }
 }

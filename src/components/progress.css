@@ -35,7 +35,7 @@ progress:not(.spinner) {
     background-image: linear-gradient(90deg, transparent, currentColor, transparent);
     background-size: 40% 100%;
     background-repeat: no-repeat;
-    animation-name: insufferable-sweep;
+    animation-name: ins-sweep;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     @apply --ins-progress-busy;
@@ -49,7 +49,7 @@ progress.spinner {
   vertical-align: text-bottom;
   border-style: solid;
   background: none;
-  animation-name: insufferable-spin;
+  animation-name: ins-spin;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   @apply --ins-spinner;
@@ -64,12 +64,12 @@ progress.spinner {
   }
 }
 
-@keyframes insufferable-sweep {
+@keyframes ins-sweep {
   from { background-position: -67% 0; }
   to { background-position: 167% 0; }
 }
 
-@keyframes insufferable-spin {
+@keyframes ins-spin {
   to { rotate: 1turn; }
 }
 

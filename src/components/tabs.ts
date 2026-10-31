@@ -1,5 +1,5 @@
 /**
- * `<ins-tabs>`: which panel is in front. A tab list, as the WAI-ARIA Authoring
+ * `<insufferable-tabs>`: which panel is in front. A tab list, as the WAI-ARIA Authoring
  * Practices describe it (https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
  *
  * The markup is native: `<button>`s inside the element, each naming its panel
@@ -112,4 +112,4 @@ export class InsTabs extends HTMLElement {
   };
 }
 
-if (!customElements.get('ins-tabs')) customElements.define('ins-tabs', InsTabs);
+if (!customElements.get('insufferable-tabs')) customElements.define('insufferable-tabs', InsTabs);

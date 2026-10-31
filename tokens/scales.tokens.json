@@ -275,6 +275,14 @@
       "shellPhone": {
         "$value": "{ins.quanta.fi.610}",
         "$description": "Below this width a shell's side pane opens as a sheet from the bottom"
+      },
+      "hint": {
+        "$type": "dimension",
+        "$value": "{ins.quanta.lu.199}"
+      },
+      "toast": {
+        "$type": "dimension",
+        "$value": "{ins.quanta.lu.322}"
       }
     },
     "shadow": {
@@ -324,6 +332,27 @@
         "$type": "duration",
         "$value": {
           "value": 1597,
+          "unit": "ms"
+        }
+      },
+      "hintShow": {
+        "$type": "duration",
+        "$value": {
+          "value": 377,
+          "unit": "ms"
+        }
+      },
+      "hintHide": {
+        "$type": "duration",
+        "$value": {
+          "value": 144,
+          "unit": "ms"
+        }
+      },
+      "toast": {
+        "$type": "duration",
+        "$value": {
+          "value": 233,
           "unit": "ms"
         }
       }

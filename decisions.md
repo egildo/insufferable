@@ -899,3 +899,33 @@ In the built-in browser, light and dark: the seven demo pages; the slider moved 
 - **FigCraft.** No component files for these elements yet, and the library is not synced. A dry run plans 59 new variables and skips the four `duration` tokens, which Figma has no variable for.
 - **The second slice:** tooltip and toast. Then a proposal for the combobox.
 - **A fill on the slider's track,** and a vertical slider.
+
+## The element prefix declared once, and the second slice
+
+> **Ruled 31 October 2026:** the system's element prefix is `insufferable`, declared once in its resolver; the tooltip as an element with a fallback; the toast as markup and a stylesheet. Built the same day.
+
+### The prefix
+
+- **The complaint:** `ins` is also HTML's inserted-text element, and it was spelled out in every source, so it could not be changed in one place. The earlier decision about the app's own prefix (see *The element prefix*) kept `ins` as the system's, hard-coded.
+- **What changed.** The system's resolver declares it, `$extensions["dev.insufferable"].prefix: "insufferable"`. The build, the generated icon rules, and the rename for an app read it from there; an app that says nothing gets it, and one that names another is renamed from it. The sources, the demo pages and the docs were renamed from `ins-` to `insufferable-` by the same whole-name rule the app rename uses, so neither the custom properties (`--ins-…`) nor the ids the elements generate (`ins-tabs-1`) were touched. The tests read the prefix from the resolver.
+- **What did not change, on purpose.** The token group is still `ins`, so every custom property keeps its name, and so do the FigCraft variables, which are made from them. The rename is of elements only. The keyframes are `ins-spin` and `ins-sweep`, in the property namespace, so the prefix rename and its test never take them for elements. Renaming the group would rename every token in the library and every app's overrides; it is a separate decision, not made.
+- **Older text** in this file keeps `ins-` as it was written.
+
+### The tooltip
+
+- **Checked first.** In Chrome 152, by feature detection: `popover="hint"`, `interestfor` and `interest-delay`, anchor positioning with fallbacks, `@starting-style` and discrete transitions all exist. Firefox has `popover="hint"` planned for 149 and no `interestfor` found; Safari's status was a page of unknown date saying no, and WebKit was reported to object to the tooltip use. Not confirmed, and not tested here.
+- **An element with a fallback,** as proposed: where the platform has both features it does the showing and the element writes the roles; where it has not, the element shows and hides a manual popover on the pointer resting, focus and Escape, with the same delays. The delays are tokens on `interestfor` controls (`ins.tooltipTrigger`), which the platform reads as `interest-delay` and the element reads as a custom property, so the two never disagree.
+- **Checked:** in Chrome, hover showed it under the button, centred, with 377 ms (`interest-delay` reads 0.377 s); and with `interestForElement` removed before the script loaded, the fallback showed it on hover and hid it on leaving. The keyboard in the fallback, Escape and touch were not exercised.
+
+### The toast, and where it differs from the proposal
+
+- **Proposed:** a region element, a manual popover, shown while it has items. **Built:** no element, a class on a `div`. A hidden popover is `display: none`, which takes it out of the accessibility tree, so a toast put into it while it opens may not be announced; a live region has to be in the page before its content. The region is therefore always there, fixed to the corner, empty, and the app puts toasts in. This is also the kit's rule: no element where the platform and a class do it.
+- **The cost:** it is not in the top layer. A menu open over it covers it, and a modal dialog makes it inert; a toast a dialog raises goes in a region of its own inside the dialog. Written in the specs.
+- **Entrance:** a fade and rise from `@starting-style`, `ins.motion.toast` (233 ms), stilled where motion is reduced. The third motion token, as ruled.
+- **Checked:** two toasts stacked at the corner in dark, the error with the danger bar; the close button removed one; the entrance had finished by the time the DOM was read. The live announcement was not heard with a screen reader.
+
+### Not done
+
+- FigCraft: no component files and no sync for any of the nine new elements' groups; `duration` tokens are skipped there.
+- Firefox and Safari, for the tooltip and the toast alike.
+- The combobox: a proposal of its own.

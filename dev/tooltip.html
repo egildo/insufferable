@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · tooltip</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<script type="module" src="../dist/components/tooltip.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+</style>
+
+<h1>Tooltip</h1>
+<p>A short hint beside the control that names it with <code>interestfor</code>. Rest the pointer on a button, or reach it with Tab. A tooltip is never where a person learns something they need: the control already has its name.</p>
+
+<p class="row">
+  <button class="plain" aria-label="Search" interestfor="search-hint"><insufferable-icon name="search"></insufferable-icon></button>
+  <insufferable-tooltip id="search-hint" popover="hint">Search the notebook</insufferable-tooltip>
+
+  <button class="plain" aria-label="Settings" interestfor="settings-hint"><insufferable-icon name="settings"></insufferable-icon></button>
+  <insufferable-tooltip id="settings-hint" popover="hint">Settings</insufferable-tooltip>
+
+  <button interestfor="print-hint"><insufferable-icon name="printer"></insufferable-icon> Print</button>
+  <insufferable-tooltip id="print-hint" popover="hint">Print the recipe on one page, with the notes</insufferable-tooltip>
+</p>
+
+<h2>Near the edge</h2>
+<p style="margin-block-start: 60vh"><button class="plain" aria-label="Help" interestfor="help-hint"><insufferable-icon name="help-circle"></insufferable-icon></button>
+  <insufferable-tooltip id="help-hint" popover="hint">Flips above when there is no room below</insufferable-tooltip></p>
+</html>

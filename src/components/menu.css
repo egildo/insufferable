@@ -1,5 +1,5 @@
 /*
- * menu: `<ins-menu popover>` holding `<button>`s, opened by a button with
+ * menu: `<insufferable-menu popover>` holding `<button>`s, opened by a button with
  * `command="toggle-popover"`. Open is `:popover-open`, the platform's. The menu
  * sits on a raised surface, under the button that opens it: anchor positioning
  * takes that button as its anchor, and flips the menu above when there is no
@@ -7,18 +7,18 @@
  * popover. An `hr` between items is the divider's line, with less room.
  */
 
-ins-menu {
+insufferable-menu {
   margin: 0;
   border-style: solid;
   @apply --ins-menu;
 }
 
-ins-menu:popover-open {
+insufferable-menu:popover-open {
   display: grid;
 }
 
 @supports (position-area: block-end) {
-  ins-menu {
+  insufferable-menu {
     inset: auto;
     position-area: block-end span-inline-end;
     position-try-fallbacks: flip-block;
@@ -26,7 +26,7 @@ ins-menu:popover-open {
   }
 }
 
-ins-menu > button {
+insufferable-menu > button {
   display: flex;
   align-items: center;
   margin: 0;
@@ -37,6 +37,6 @@ ins-menu > button {
   @apply --ins-menu-item;
 }
 
-ins-menu > hr {
+insufferable-menu > hr {
   @apply --ins-menu-separator;
 }

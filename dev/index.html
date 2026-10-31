@@ -17,15 +17,15 @@
 </style>
 
 <h1>insufferable</h1>
-<p>Every element, in the theme the system prefers; <a href="demo.html">the demo</a> puts them together on one page, and <a href="theme.html">the same page, themed</a> by ten lines of an app's own CSS. Each has its own page: <a href="tabs.html">tabs</a>, <a href="disclosure.html">disclosure</a>, <a href="icon.html">icon</a>, <a href="link.html">link</a>, <a href="divider.html">divider</a>, <a href="table.html">table</a>, <a href="callout.html">callout</a>, <a href="button.html">button</a>, <a href="field.html">field</a>, <a href="listbox.html">listbox</a>, <a href="choice.html">checkbox, radio, switch</a>, <a href="segmented.html">segmented control</a>, <a href="toolbar.html">toolbar</a>, <a href="dialog.html">dialog</a>, <a href="menu.html">menu</a>, <a href="tag.html">tag</a>, <a href="chips.html">chips</a>, <a href="choices.html">choice rows</a>, <a href="properties.html">property rows</a>, <a href="status.html">status and log</a>, <a href="tree.html">tree</a>, <a href="shell.html">shell</a>, <a href="progress.html">progress, spinner, meter</a>, <a href="slider.html">slider</a>, <a href="breadcrumb.html">breadcrumb</a>, <a href="pagination.html">pagination</a>, <a href="card.html">card</a>, <a href="type.html">type</a>.</p>
+<p>Every element, in the theme the system prefers; <a href="demo.html">the demo</a> puts them together on one page, and <a href="theme.html">the same page, themed</a> by ten lines of an app's own CSS. Each has its own page: <a href="tabs.html">tabs</a>, <a href="disclosure.html">disclosure</a>, <a href="icon.html">icon</a>, <a href="link.html">link</a>, <a href="divider.html">divider</a>, <a href="table.html">table</a>, <a href="callout.html">callout</a>, <a href="button.html">button</a>, <a href="field.html">field</a>, <a href="listbox.html">listbox</a>, <a href="choice.html">checkbox, radio, switch</a>, <a href="segmented.html">segmented control</a>, <a href="toolbar.html">toolbar</a>, <a href="dialog.html">dialog</a>, <a href="menu.html">menu</a>, <a href="tag.html">tag</a>, <a href="chips.html">chips</a>, <a href="choices.html">choice rows</a>, <a href="properties.html">property rows</a>, <a href="status.html">status and log</a>, <a href="tree.html">tree</a>, <a href="shell.html">shell</a>, <a href="progress.html">progress, spinner, meter</a>, <a href="slider.html">slider</a>, <a href="breadcrumb.html">breadcrumb</a>, <a href="pagination.html">pagination</a>, <a href="card.html">card</a>, <a href="tooltip.html">tooltip</a>, <a href="toast.html">toast</a>, <a href="type.html">type</a>.</p>
 
 <section>
   <h2>Tabs</h2>
-  <ins-tabs aria-label="Fruit">
+  <insufferable-tabs aria-label="Fruit">
     <button aria-controls="apple">Apple</button>
     <button aria-controls="pear">Pear</button>
     <button aria-controls="fig" disabled>Fig</button>
-  </ins-tabs>
+  </insufferable-tabs>
   <div id="apple">An apple.</div>
   <div id="pear">A pear.</div>
   <div id="fig">A fig.</div>
@@ -33,11 +33,11 @@
 
 <section>
   <h2>Pill tabs</h2>
-  <ins-tabs class="pill" aria-label="Pane">
+  <insufferable-tabs class="pill" aria-label="Pane">
     <button aria-controls="structure">Structure <data value="26">26</data></button>
     <button aria-controls="resources">Resources <data value="6">6</data></button>
     <button aria-controls="log">Print log <data value="2">2</data></button>
-  </ins-tabs>
+  </insufferable-tabs>
   <div id="structure">26 blocks.</div>
   <div id="resources">6 files.</div>
   <div id="log">2 lines.</div>
@@ -82,15 +82,15 @@
   <h2>Buttons</h2>
   <p class="row">
     <button>Outlined</button>
-    <button class="solid"><ins-icon name="heart"></ins-icon> Solid</button>
+    <button class="solid"><insufferable-icon name="heart"></insufferable-icon> Solid</button>
     <button class="plain">Plain</button>
     <button disabled>Disabled</button>
-    <button class="plain" aria-label="Close"><ins-icon name="x"></ins-icon></button>
+    <button class="plain" aria-label="Close"><insufferable-icon name="x"></insufferable-icon></button>
   </p>
   <p class="row">
-    <button aria-label="Search"><ins-icon name="search"></ins-icon></button>
-    <button class="plain" aria-label="Settings"><ins-icon name="settings"></ins-icon></button>
-    <button class="plain" aria-label="Show help" aria-pressed="true"><ins-icon name="help-circle"></ins-icon></button>
+    <button aria-label="Search"><insufferable-icon name="search"></insufferable-icon></button>
+    <button class="plain" aria-label="Settings"><insufferable-icon name="settings"></insufferable-icon></button>
+    <button class="plain" aria-label="Show help" aria-pressed="true"><insufferable-icon name="help-circle"></insufferable-icon></button>
     <button>Messages <data value="3">3</data></button>
   </p>
 </section>
@@ -103,8 +103,8 @@
 <section>
   <h2>Chips</h2>
   <ul class="chips" id="declarations" aria-label="Declarations">
-    <li><code>hyphens: none</code> <button commandfor="declarations" command="--remove" value="hyphens" aria-label="Remove hyphens: none"><ins-icon name="x"></ins-icon></button></li>
-    <li><code>color: #2a58c5</code> <button commandfor="declarations" command="--remove" value="color" aria-label="Remove color: #2a58c5"><ins-icon name="x"></ins-icon></button></li>
+    <li><code>hyphens: none</code> <button commandfor="declarations" command="--remove" value="hyphens" aria-label="Remove hyphens: none"><insufferable-icon name="x"></insufferable-icon></button></li>
+    <li><code>color: #2a58c5</code> <button commandfor="declarations" command="--remove" value="color" aria-label="Remove color: #2a58c5"><insufferable-icon name="x"></insufferable-icon></button></li>
   </ul>
 </section>
 
@@ -150,13 +150,13 @@
       <label for="size">font-size</label>
       <input id="size" inputmode="decimal" value="11">
       <select aria-label="Unit of font-size"><option>pt</option><option>px</option></select>
-      <button type="button" class="plain" aria-label="Reset font-size"><ins-icon name="restore"></ins-icon></button>
+      <button type="button" class="plain" aria-label="Reset font-size"><insufferable-icon name="restore"></insufferable-icon></button>
     </div>
     <div class="property">
       <input type="checkbox" aria-label="Declare font-weight">
       <label for="weight">font-weight</label>
       <select id="weight"><option>400</option><option>700</option></select>
-      <button type="button" class="plain" aria-label="Reset font-weight" disabled><ins-icon name="restore"></ins-icon></button>
+      <button type="button" class="plain" aria-label="Reset font-weight" disabled><insufferable-icon name="restore"></insufferable-icon></button>
     </div>
   </fieldset>
 </section>
@@ -171,7 +171,7 @@
 
 <section>
   <h2>Tree</h2>
-  <ins-tree aria-label="Structure">
+  <insufferable-tree aria-label="Structure">
     <ul>
       <li aria-expanded="true">
         <span><small class="tag">Section</small> Paola Esempio <code>.envelope</code></span>
@@ -187,7 +187,7 @@
         </ul>
       </li>
     </ul>
-  </ins-tree>
+  </insufferable-tree>
 </section>
 
 <section>
@@ -202,22 +202,22 @@
 
 <section>
   <h2>Toolbar</h2>
-  <ins-toolbar aria-label="Format">
+  <insufferable-toolbar aria-label="Format">
     <button class="plain" aria-pressed="true">Bold</button>
     <button class="plain" aria-pressed="false">Italic</button>
     <button class="plain">Clear</button>
-  </ins-toolbar>
+  </insufferable-toolbar>
 </section>
 
 <section>
   <h2>Menu</h2>
-  <button commandfor="file" command="toggle-popover">File <ins-icon name="chevron-down"></ins-icon></button>
-  <ins-menu id="file" popover>
+  <button commandfor="file" command="toggle-popover">File <insufferable-icon name="chevron-down"></insufferable-icon></button>
+  <insufferable-menu id="file" popover>
     <button>New</button>
     <button>Open</button>
     <hr>
     <button disabled>Save</button>
-  </ins-menu>
+  </insufferable-menu>
 </section>
 
 <section>

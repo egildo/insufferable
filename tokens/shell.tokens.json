@@ -1,7 +1,7 @@
 {
   "ins": {
     "shell": {
-      "$description": "An application's shell: ins-shell, the docks, the side panes and the main pane in a row on the desk; below a width, a side pane opens over the main pane.",
+      "$description": "An application's shell: insufferable-shell, the docks, the side panes and the main pane in a row on the desk; below a width, a side pane opens over the main pane.",
       "backgroundColor": {
         "$type": "color",
         "$value": "{ins.color.desk}"
@@ -128,7 +128,7 @@
       }
     },
     "dock": {
-      "$description": "A dock: ins-toolbar class=dock, vertical, on the desk as a narrow pane. Its buttons open and close panes, each its icon over its word.",
+      "$description": "A dock: insufferable-toolbar class=dock, vertical, on the desk as a narrow pane. Its buttons open and close panes, each its icon over its word.",
       "backgroundColor": {
         "$type": "color",
         "$value": "{ins.color.surface}"
@@ -239,7 +239,7 @@
       }
     },
     "splitter": {
-      "$description": "A splitter: ins-splitter between two panes, in the desk's gap. Its grip is a short line, longer under the pointer and in the accent while held or focused.",
+      "$description": "A splitter: insufferable-splitter between two panes, in the desk's gap. Its grip is a short line, longer under the pointer and in the accent while held or focused.",
       "color": {
         "$type": "color",
         "$value": "{ins.color.lineStrong}"

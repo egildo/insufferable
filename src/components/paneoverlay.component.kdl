@@ -1,4 +1,4 @@
-// PaneOverlay: a side pane open over the main pane, a popover, as ins-shell makes it below its narrow width.
+// PaneOverlay: a side pane open over the main pane, a popover, as insufferable-shell makes it below its narrow width.
 // Source: ins.pane and ins.pane.overlay in tokens/shell.tokens.json. The pane raised, with the raised shadow; its
 // head and slot are the pane's.
 // Not drawn: the shade over the rest of the shell; the sheet at phone width, the same pane against the bottom edge

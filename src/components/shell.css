@@ -1,5 +1,5 @@
 /*
- * shell: an application laid out on a desk. `<ins-shell>` holds, in a row, a
+ * shell: an application laid out on a desk. `<insufferable-shell>` holds, in a row, a
  * dock, the side panes, the main pane, the side panes and a dock; a hidden
  * pane takes no room. Below `ins.size.shellNarrow` the element makes each side
  * pane a popover (`:state(narrow)`), opened by its dock over the main pane,
@@ -12,12 +12,12 @@
  * small capitals, a `<p>` at the end in small grey. Outside a pane, an
  * `hgroup` is the document's and is left alone.
  *
- * A dock is `ins-toolbar class="dock" aria-orientation="vertical"`, a narrow
+ * A dock is `insufferable-toolbar class="dock" aria-orientation="vertical"`, a narrow
  * pane of disclosure buttons, each its icon over its word; a status inside a
  * button sits at the icon's corner.
  */
 
-ins-shell {
+insufferable-shell {
   display: flex;
   box-sizing: border-box;
   min-block-size: 100%;
@@ -82,7 +82,7 @@ ins-shell {
   }
 }
 
-ins-toolbar.dock {
+insufferable-toolbar.dock {
   flex-direction: column;
   flex-wrap: nowrap;
   align-self: start;
@@ -103,7 +103,7 @@ ins-toolbar.dock {
 }
 
 /*
- * splitter: `<ins-splitter>` between two panes, in the desk's gap, which it
+ * splitter: `<insufferable-splitter>` between two panes, in the desk's gap, which it
  * takes over: its negative margins give the gap back, so two panes with a
  * splitter between them sit as far apart as two without. The whole gap,
  * top to bottom, answers the pointer; the grip, its ::before, is a short line
@@ -111,7 +111,7 @@ ins-toolbar.dock {
  * focused.
  */
 
-ins-splitter {
+insufferable-splitter {
   position: relative;
   flex: none;
   align-self: stretch;
@@ -148,7 +148,7 @@ ins-splitter {
  * the viewport: past the shell's padding, the dock (its buttons, its padding
  * and its hairline) and the gap. */
 
-ins-shell > aside.pane:popover-open {
+insufferable-shell > aside.pane:popover-open {
   position: fixed;
   inset: t(insufferable.ins.space.3);
   inset-inline-start: calc(2 * t(insufferable.ins.space.3) + t(insufferable.ins.size.dock) + 2 * t(insufferable.ins.space.1) + 2 * t(insufferable.ins.border.1));
@@ -163,12 +163,12 @@ ins-shell > aside.pane:popover-open {
   }
 }
 
-ins-shell > main.pane ~ aside.pane:popover-open {
+insufferable-shell > main.pane ~ aside.pane:popover-open {
   inset-inline-start: auto;
   inset-inline-end: calc(2 * t(insufferable.ins.space.3) + t(insufferable.ins.size.dock) + 2 * t(insufferable.ins.space.1) + 2 * t(insufferable.ins.border.1));
 }
 
-ins-shell:state(phone) > aside.pane:popover-open {
+insufferable-shell:state(phone) > aside.pane:popover-open {
   inset: auto 0 0;
   inline-size: auto;
   max-block-size: 85dvh;

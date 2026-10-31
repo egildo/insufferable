@@ -1,4 +1,4 @@
-// TreeRow: one node's row of a tree, ins-tree. Source: ins.tree.row in tokens/tree.tokens.json.
+// TreeRow: one node's row of a tree, insufferable-tree. Source: ins.tree.row in tokens/tree.tokens.json.
 // Its axes: the node, closed, open or an end node, declared here, since the element writes aria-expanded and no
 // token varies with it; selection, pointer and focus come from the row's parts. The root is the row, the span, whose
 // outline is drawn inside it as the button's is.

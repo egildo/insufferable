@@ -1,5 +1,5 @@
 /**
- * `<ins-icon name="home">`: a glyph of the icon font, Tabler Icons. The name
+ * `<insufferable-icon name="home">`: a glyph of the icon font, Tabler Icons. The name
  * is Tabler's; the stylesheet draws it, so the icon draws without script.
  * The script only says what it means.
  *
@@ -29,7 +29,7 @@ export class InsIcon extends HTMLElement {
     const name = this.getAttribute('name');
     // The font holds only the shipped icons, so any other name draws an empty box.
     if (name && !(icons as readonly string[]).includes(name)) {
-      console.warn(`<ins-icon name="${name}">: not one of the icons insufferable ships (src/icons.ts)`);
+      console.warn(`<insufferable-icon name="${name}">: not one of the icons insufferable ships (src/icons.ts)`);
     }
     if (LABELS.some((label) => this.hasAttribute(label))) {
       this.setAttribute('role', 'img');
@@ -41,4 +41,4 @@ export class InsIcon extends HTMLElement {
   }
 }
 
-if (!customElements.get('ins-icon')) customElements.define('ins-icon', InsIcon);
+if (!customElements.get('insufferable-icon')) customElements.define('insufferable-icon', InsIcon);

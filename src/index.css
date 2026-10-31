@@ -48,3 +48,5 @@
 @import './components/breadcrumb.css' layer(ins.components);
 @import './components/pagination.css' layer(ins.components);
 @import './components/card.css' layer(ins.components);
+@import './components/tooltip.css' layer(ins.components);
+@import './components/toast.css' layer(ins.components);

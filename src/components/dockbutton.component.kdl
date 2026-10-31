@@ -1,4 +1,4 @@
-// DockButton: one button of a dock, ins-toolbar class=dock, a disclosure button naming its pane. Source:
+// DockButton: one button of a dock, insufferable-toolbar class=dock, a disclosure button naming its pane. Source:
 // ins.dock.button in tokens/shell.tokens.json. Its axes come from its parts: disclosure (open) and pointer.
 // The icon over its word, square; open, the accent's tint. The news dot is a Status instance, new, at the icon's
 // corner, shown by a property.

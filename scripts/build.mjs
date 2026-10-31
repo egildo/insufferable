@@ -53,6 +53,9 @@ function houseFonts() {
   return { css, files };
 }
 
+/** The prefix of the system's own elements, declared once in its resolver. */
+const SYSTEM_PREFIX = JSON.parse(readFileSync(at('tokens/insufferable.resolver.json'), 'utf8')).$extensions['dev.insufferable'].prefix;
+
 const TABLER = join(pkg('@tabler/icons-webfont'), 'dist');
 
 /** Each icon in `src/icons.ts` with its character in Tabler's font, as hex, read from Tabler's own stylesheet. */
@@ -78,7 +81,7 @@ async function iconFont() {
   );
   const css = [
     `@font-face {\n  font-family: "tabler-icons";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url("./fonts/tabler-icons.woff2") format("woff2");\n}`,
-    ...characters.map(({ name, code }) => `ins-icon[name='${name}']::before { content: "\\${code}"; }`),
+    ...characters.map(({ name, code }) => `${SYSTEM_PREFIX}-icon[name='${name}']::before { content: "\\${code}"; }`),
   ].join('\n');
   return { css, font };
 }
@@ -86,7 +89,7 @@ async function iconFont() {
 /** The resolved tokens of a resolver document, the system's own by default, and the name the document gives itself. */
 export async function loadSystem(resolver = at('tokens/insufferable.resolver.json')) {
   const { document } = await load(resolver, { read: (path) => readFile(path, 'utf8') });
-  const prefix = document.$extensions?.['dev.insufferable']?.prefix ?? 'ins';
+  const prefix = document.$extensions?.['dev.insufferable']?.prefix ?? SYSTEM_PREFIX;
   if (!validPrefix(prefix)) throw new Error(`The prefix "${prefix}" cannot start a custom element name: lower case letters and digits, starting with a letter.`);
   return { system: new Resolver(document).resolveContextsToDesignSystem(), name: document.name, prefix };
 }
@@ -120,7 +123,7 @@ export async function buildCss(resolver) {
   // An `@apply` of a mixin that does not exist is left in place without a word: fail on it instead.
   const left = css.match(/@(apply|toghen)\b[^;]*;/);
   if (left) throw new Error(`The stylesheet still holds ${left[0]}`);
-  return { css: withPrefix(css, prefix), iconFont: icon.font, prefix };
+  return { css: withPrefix(css, prefix, SYSTEM_PREFIX), iconFont: icon.font, prefix };
 }
 
 /**
@@ -133,7 +136,7 @@ function writeScripts(out, prefix) {
       if (entry.isDirectory() && entry.name !== 'fonts') copy(join(dir, entry.name));
       else if (entry.name.endsWith('.js')) {
         mkdirSync(resolve(out, dir), { recursive: true });
-        writeFileSync(resolve(out, dir, entry.name), withPrefix(readFileSync(at('dist', dir, entry.name), 'utf8'), prefix));
+        writeFileSync(resolve(out, dir, entry.name), withPrefix(readFileSync(at('dist', dir, entry.name), 'utf8'), prefix, SYSTEM_PREFIX));
       }
     }
   };
@@ -144,7 +147,7 @@ function writeScripts(out, prefix) {
 export async function writeCss(resolver, out = at('dist')) {
   const { css, iconFont: font, prefix } = await buildCss(resolver);
   mkdirSync(resolve(out, 'fonts'), { recursive: true });
-  if (prefix !== 'ins') {
+  if (prefix !== SYSTEM_PREFIX) {
     if (resolve(out) === at('dist')) throw new Error('The scripts of an app are written beside its stylesheet, not over the system\'s own dist.');
     writeScripts(out, prefix);
   }

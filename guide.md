@@ -18,7 +18,7 @@ Link the stylesheet and import the scripts of the elements the page uses.
 <script type="module" src="node_modules/insufferable/dist/components/tabs.js"></script>
 ```
 
-Most of the system is native markup with a class: `<button class="solid">`, `<div role="note" class="danger">`, `<fieldset class="segmented">`. A custom element, such as `<ins-tabs>`, is only there where script is needed, and wraps native markup that works without it. An element takes attributes in and sends commands out, and it never keeps your state: see the element contract in specs.md.
+Most of the system is native markup with a class: `<button class="solid">`, `<div role="note" class="danger">`, `<fieldset class="segmented">`. A custom element, such as `<insufferable-tabs>`, is only there where script is needed, and wraps native markup that works without it. An element takes attributes in and sends commands out, and it never keeps your state: see the element contract in specs.md.
 
 The page follows the system's colour scheme, light or dark, with no script. To choose the scheme in your app, set `color-scheme` on the page or on any container: `html { color-scheme: dark; }`, or `light`, or `light dark` for the system's. Every role follows it, a subtree included, so `<aside style="color-scheme: dark">` is a dark panel on a light page. A switch is your state: it sets that one property, however you keep the choice.
 
@@ -85,7 +85,7 @@ The command checks every pair of colours the elements use, in light and dark: 4.
 
 ## Choose your own prefix
 
-The elements are `ins-tabs`, `ins-menu` and so on. To give them your own prefix, say so in the resolver:
+The elements are `insufferable-tabs`, `insufferable-menu` and so on; the system declares that prefix once, in its own resolver. To give them your own prefix, say so in yours:
 
 ```json
 "$extensions": { "dev.insufferable": { "prefix": "acme" } }

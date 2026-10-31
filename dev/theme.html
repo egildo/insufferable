@@ -35,16 +35,16 @@
 <header>
   <h1>Quince notebook</h1>
   <nav class="row" aria-label="Notebook">
-    <button commandfor="file" command="toggle-popover">File <ins-icon name="chevron-down"></ins-icon></button>
-    <ins-menu id="file" popover>
+    <button commandfor="file" command="toggle-popover">File <insufferable-icon name="chevron-down"></insufferable-icon></button>
+    <insufferable-menu id="file" popover>
       <button>New recipe</button>
       <button>Open</button>
       <hr>
       <button disabled>Save</button>
-    </ins-menu>
+    </insufferable-menu>
     <label>Scheme <select id="scheme"><option value="light dark">System</option><option>light</option><option>dark</option></select></label>
-    <button class="plain" aria-label="Search"><ins-icon name="search"></ins-icon></button>
-    <button class="plain" aria-label="Settings"><ins-icon name="settings"></ins-icon></button>
+    <button class="plain" aria-label="Search"><insufferable-icon name="search"></insufferable-icon></button>
+    <button class="plain" aria-label="Settings"><insufferable-icon name="settings"></insufferable-icon></button>
   </nav>
 </header>
 <script>
@@ -52,17 +52,17 @@
   scheme.onchange = () => { document.documentElement.style.colorScheme = scheme.value; };
 </script>
 
-<ins-tabs class="pill" aria-label="Notebook">
+<insufferable-tabs class="pill" aria-label="Notebook">
   <button aria-controls="recipes">Recipes <data value="1">1</data></button>
   <button aria-controls="pantry">Pantry <data value="2">2</data></button>
   <button aria-controls="notes">Notes <data value="1">1</data></button>
-</ins-tabs>
+</insufferable-tabs>
 
 <article id="recipes">
   <h2>Quince paste <small class="tag">Draft</small></h2>
   <ul class="chips" id="labels" aria-label="Labels">
-    <li>Preserve <button commandfor="labels" command="--remove" value="preserve" aria-label="Remove Preserve"><ins-icon name="x"></ins-icon></button></li>
-    <li>Autumn <button commandfor="labels" command="--remove" value="autumn" aria-label="Remove Autumn"><ins-icon name="x"></ins-icon></button></li>
+    <li>Preserve <button commandfor="labels" command="--remove" value="preserve" aria-label="Remove Preserve"><insufferable-icon name="x"></insufferable-icon></button></li>
+    <li>Autumn <button commandfor="labels" command="--remove" value="autumn" aria-label="Remove Autumn"><insufferable-icon name="x"></insufferable-icon></button></li>
   </ul>
   <p>Quinces are hard and sour raw, and turn rose-red and fragrant when cooked long. In Spain the paste is <em>membrillo</em>, eaten with Manchego; in Italy it is <em>cotognata</em>, cut into squares and rolled in sugar.</p>
 
@@ -92,15 +92,15 @@
   </details>
 
   <h4>Your draft</h4>
-  <ins-toolbar aria-label="Format">
+  <insufferable-toolbar aria-label="Format">
     <button class="plain" aria-pressed="false">Bold</button>
     <button class="plain" aria-pressed="false">Italic</button>
     <button class="plain">Clear</button>
-  </ins-toolbar>
+  </insufferable-toolbar>
   <p>Next time, less sugar and a stick of cinnamon in the water.</p>
   <p class="row">
     <button commandfor="discard" command="show-modal">Discard the draft</button>
-    <button class="solid"><ins-icon name="check"></ins-icon> Keep it</button>
+    <button class="solid"><insufferable-icon name="check"></insufferable-icon> Keep it</button>
   </p>
 
   <p><small>From the notebook, last cooked in November. Press <kbd>Ctrl</kbd>+<kbd>P</kbd> to print it.</small></p>

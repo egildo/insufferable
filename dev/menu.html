@@ -14,16 +14,16 @@
 <h1>Menus</h1>
 
 <p>
-  <button commandfor="edit" command="toggle-popover">Edit <ins-icon name="chevron-down"></ins-icon></button>
+  <button commandfor="edit" command="toggle-popover">Edit <insufferable-icon name="chevron-down"></insufferable-icon></button>
   <button>After the menu</button>
 </p>
-<ins-menu id="edit" popover>
+<insufferable-menu id="edit" popover>
   <button commandfor="editor" command="--cut">Cut</button>
   <button commandfor="editor" command="--copy">Copy</button>
   <hr>
   <button disabled>Paste</button>
   <button commandfor="editor" command="--select-all">Select all</button>
-</ins-menu>
+</insufferable-menu>
 
 <div id="editor" tabindex="-1">An editor the menu's items speak to.</div>
 
@@ -35,6 +35,6 @@
   const say = (line) => (log.textContent += line + '\n');
   // The items' commands and the menu's own opening and closing, all heard at the root in the capture phase.
   document.addEventListener('command', (event) => say(`command ${event.command} to ${event.target.id}`), { capture: true });
-  document.addEventListener('toggle', (event) => event.target.localName === 'ins-menu' && say(`menu ${event.newState}`), { capture: true });
+  document.addEventListener('toggle', (event) => event.target.localName === 'insufferable-menu' && say(`menu ${event.newState}`), { capture: true });
 </script>
 </html>

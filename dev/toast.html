@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · toast</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+</style>
+
+<h1>Toast</h1>
+<p>A message that comes and goes without being asked for. The region is in the page from the start, empty, so that what is put into it is announced. The app puts each toast in and takes it out: here, a few lines of script after the markup.</p>
+
+<p class="row">
+  <button id="saved">Save the recipe</button>
+  <button id="failed">Fail to save</button>
+</p>
+
+<div class="toasts" role="status"></div>
+
+<script type="module">
+  // The app: it owns the list and the time-out, and stops the time-out while the pointer or the focus is on the toast.
+  const region = document.querySelector('.toasts');
+  let count = 0;
+  function toast(text, { danger = false, undo = false } = {}) {
+    const item = document.createElement('div');
+    item.className = danger ? 'toast danger' : 'toast';
+    item.id = `toast-${++count}`;
+    if (danger) item.setAttribute('role', 'alert');
+    item.innerHTML = `<p></p>${undo ? '<button class="plain">Undo</button>' : ''}<button class="plain" aria-label="Dismiss" commandfor="${item.id}" command="--dismiss"><insufferable-icon name="x"></insufferable-icon></button>`;
+    item.querySelector('p').textContent = text;
+    region.append(item);
+    let timer = setTimeout(() => item.remove(), danger ? 12000 : 6000);
+    const stop = () => clearTimeout(timer);
+    const start = () => (timer = setTimeout(() => item.remove(), 3000));
+    item.addEventListener('pointerenter', stop); item.addEventListener('focusin', stop);
+    item.addEventListener('pointerleave', start); item.addEventListener('focusout', start);
+  }
+  document.addEventListener('command', (event) => {
+    if (event.command === '--dismiss') event.source.closest('.toast').remove();
+  }, { capture: true });
+  saved.onclick = () => toast('Quince paste saved.', { undo: true });
+  failed.onclick = () => toast('The recipe could not be saved. The notebook is full.', { danger: true });
+</script>
+</html>

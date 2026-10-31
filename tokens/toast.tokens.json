@@ -1,0 +1,80 @@
+{
+  "ins": {
+    "toasts": {
+      "$description": "The region toasts appear in: fixed to a corner of the window, one above another, as wide as a side pane. It is a live region, polite, and does not catch the pointer outside its toasts.",
+      "insetBlockEnd": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "insetInlineEnd": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.toast}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      }
+    },
+    "toast": {
+      "$description": "A message that comes and goes without being asked for: the raised surface, a bar at the start in the accent, the words and, when it can be undone or closed, buttons. class=danger for an error.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.raised}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderInlineStartColor": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      },
+      "borderInlineStartWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.2}"
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "boxShadow": {
+        "$type": "shadow",
+        "$value": "{ins.shadow.raised}"
+      },
+      "transitionDuration": {
+        "$type": "duration",
+        "$value": "{ins.motion.toast}"
+      },
+      "danger": {
+        "borderInlineStartColor": {
+          "$type": "color",
+          "$value": "{ins.color.danger}"
+        }
+      }
+    }
+  }
+}
