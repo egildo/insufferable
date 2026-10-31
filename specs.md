@@ -66,7 +66,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell, progress, spinner, meter, slider, breadcrumb, pagination, card, tooltip, toast .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell, progress, spinner, meter, slider, breadcrumb, pagination, card, tooltip, toast, combobox .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -171,7 +171,7 @@ The deeper route: the app rebuilds the stylesheet from its own tokens, with `ins
 
 The resolver keeps the name `insufferable`. The stylesheet refers to every token, and its two directives, by that name, and the build stops with a message when an app's resolver has another. `examples/app` is the example: the demo page, square, with a terracotta accent and Georgia for the headings, from one resolver and three small token files.
 
-An app may also choose the prefix of the elements: `"$extensions": { "dev.insufferable": { "prefix": "quince" } }` in its resolver. The build then writes `quince-tabs` for `insufferable-tabs`, in the stylesheet and in the element scripts, which it writes into `components/` beside the stylesheet so that the app imports them as before. The rename is made from the list in `src/elements.ts`, the eight elements, and touches only a whole element name: not `--ins-icon-button`, nor the ids the elements generate. A prefix is lower case letters and digits starting with a letter, so that `prefix-name` is a valid custom element name. Custom properties, the token group, commands and classes keep their names; the prefix is for elements.
+An app may also choose the prefix of the elements: `"$extensions": { "dev.insufferable": { "prefix": "quince" } }` in its resolver. The build then writes `quince-tabs` for `insufferable-tabs`, in the stylesheet and in the element scripts, which it writes into `components/` beside the stylesheet so that the app imports them as before. The rename is made from the list in `src/elements.ts`, the nine elements, and touches only a whole element name: not `--ins-icon-button`, nor the ids the elements generate. A prefix is lower case letters and digits starting with a letter, so that `prefix-name` is a valid custom element name. Custom properties, the token group, commands and classes keep their names; the prefix is for elements.
 
 #### Generating a theme
 
@@ -808,6 +808,26 @@ A message that comes and goes without being asked for: a region, `<div class="to
 - **The surface** is the card's raised colour with the menu's shadow and a bar at the start, in the accent, or in the danger (`ins.toast`).
 - **Not in the top layer.** A menu open over it covers it, and a modal dialog makes everything outside the dialog inert, a toast included: a toast a dialog raises goes in a region inside that dialog.
 - **Motion:** a toast comes in with a fade and a short rise, `ins.motion.toast` (233 ms), from `@starting-style`. It leaves at once, since the app removes it. Where motion is reduced, it simply appears.
+
+### Combobox
+
+A text field with suggestions under it, for a value the person may also write themselves: `<insufferable-combobox>` holding an `<input>` that names a `<datalist>`. An editable combobox with list autocomplete, as the WAI-ARIA Authoring Practices describe it (https://www.w3.org/WAI/ARIA/apg/patterns/combobox/).
+
+```html
+<insufferable-combobox results="{n} results" empty="No matches">
+  <label>Variety <input list="variety" name="variety"></label>
+  <datalist id="variety"><option value="Champion"><option value="Vranja"></datalist>
+</insufferable-combobox>
+```
+
+- **To pick one from a fixed list, use a `<select>`:** the platform draws and keeps it, and the field's customizable look (`appearance: base-select`) already styles it. The combobox is for the other case, a value that is free.
+- **Without script it is the platform's own datalist.** With script, the element reads the options, takes the `list` attribute off the field, and draws its own list: a popover under the field, as wide as the field, on the menu's raised surface (`ins.combobox`), flipping above when there is no room. It puts the attribute back if the element is removed.
+- **Focus stays in the field.** The option a key has reached is `aria-selected` and the field's `aria-activedescendant`; it takes the accent (`ins.comboboxOption`), and the option under the pointer the fill. The element writes `role="combobox"`, `aria-autocomplete="list"`, `aria-expanded`, `aria-controls`, `aria-activedescendant`, and `autocomplete="off"` so the browser's own list does not cover this one.
+- **The keyboard.** Down and Up open the list and move the active option, wrapping and passing over a disabled one; Alt with an arrow opens or closes it without moving; Enter chooses the active option, and is the form's when there is none; Escape closes the list, then empties the field; Tab closes it and moves on; Home, End and the caret are the field's. The rules are pure functions in `keys.ts`, tested.
+- **Filtering.** The element narrows the datalist by what is typed, in any case and with or without accents (`matches`, tested), over the option's text and its value. An app that narrows the options itself, from a server, says `filter="none"` and rewrites the datalist; the element follows, also while the list is open.
+- **Events out are the platform's.** `input` while the person types; when an option is chosen, `input` then `change`, with the value in the field's `.value`. The element keeps no state: the field's value is the value, and the app owns the rest. It speaks as an input does, as the splitter does, since a command could not carry a value.
+- **The words are the app's.** `results` is the phrase announced as the list changes, `{n}` for the number; `empty` is the line shown when nothing matches. The element ships no words, so an app in another language is never half in English. With none, nothing is announced and an empty list is not shown, which is a gap an app should not leave. One phrase has one form: a language with plural forms sets the attribute as the count changes.
+- **Not in this version:** option groups and rich options (a datalist cannot hold them), multi-select and a tag input (compose chips beside the field, in the app), creating an option, a strict mode that refuses a value that is not listed, and virtual scrolling. Whether the platform will grow an editable combobox of its own is open (Open UI's explainer, https://open-ui.org/components/combobox.explainer); when it does, this element becomes a stylesheet.
 
 ### Motion
 

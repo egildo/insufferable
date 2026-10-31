@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · combobox</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/combobox.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .stack { display: grid; gap: 1.5rem; }
+  .log { margin: 0; }
+</style>
+
+<h1>Combobox</h1>
+<p>A text field with suggestions under it, for a value the person may also write themselves: the platform's own <code>&lt;input list&gt;</code> and <code>&lt;datalist&gt;</code>, drawn by the element. To pick one from a fixed list, use a <code>&lt;select&gt;</code>. Type <kbd>pe</kbd>, or press <kbd>↓</kbd>.</p>
+
+<div class="stack">
+  <insufferable-combobox results="{n} results" empty="No matches">
+    <label>Variety <input list="variety" name="variety" placeholder="Champion"></label>
+    <datalist id="variety">
+      <option value="Champion">
+      <option value="Vranja">
+      <option value="Portugal">
+      <option value="Pineapple">
+      <option value="Bereczki">
+      <option value="Smyrna" disabled>
+      <option value="Ekmek">
+    </datalist>
+  </insufferable-combobox>
+
+  <insufferable-combobox results="{n} risultati" empty="Nessun risultato" lang="it">
+    <label>Frutto, accents ignored <input list="frutto" name="frutto"></label>
+    <datalist id="frutto">
+      <option value="Mela cotogna">
+      <option value="Pèsca">
+      <option value="Pera">
+      <option value="Ciliegia">
+      <option value="Albicocca">
+    </datalist>
+  </insufferable-combobox>
+
+  <insufferable-combobox filter="none" results="{n} results" empty="No matches">
+    <label>City, narrowed by the app <input list="city" name="city"></label>
+    <datalist id="city"></datalist>
+  </insufferable-combobox>
+
+  <insufferable-combobox dir="rtl" lang="ar" results="{n} نتائج" empty="لا نتائج">
+    <label>النوع <input list="naw" name="naw"></label>
+    <datalist id="naw"><option value="سفرجل"><option value="تفاح"><option value="كمثرى"></datalist>
+  </insufferable-combobox>
+</div>
+
+<p class="log"><small id="log">Chosen: nothing yet.</small></p>
+
+<script type="module">
+  // The app: it hears what the field sends, and, for the third combobox, narrows its own list.
+  const log = document.getElementById('log');
+  document.addEventListener('change', (event) => { log.textContent = `Chosen: ${event.target.name} = ${event.target.value}`; });
+  const cities = ['Torino', 'Tortona', 'Trento', 'Treviso', 'Trieste', 'Taranto', 'Terni', 'Firenze', 'Foggia', 'Forlì'];
+  const city = document.getElementById('city');
+  document.querySelector('input[name=city]').addEventListener('input', (event) => {
+    const typed = event.target.value.toLowerCase();
+    // As if from a server: it answers a moment later.
+    setTimeout(() => city.replaceChildren(...cities.filter((name) => name.toLowerCase().startsWith(typed) && typed).map((name) => new Option(name))), 150);
+  });
+</script>
+</html>

@@ -1,0 +1,53 @@
+/*
+ * combobox: `<insufferable-combobox>` holding a text field that names a
+ * `<datalist>`, and the list the element draws in its place. Without script it is the
+ * platform's own datalist and nothing here applies. With it, the list is a popover under
+ * the field, as wide as the field, on the menu's raised surface; it flips above
+ * when there is no room. Focus stays in the field, so an option is never
+ * focused: the active one, which a key has reached, is `aria-selected` and takes the accent,
+ * and the one under the pointer the fill. The line for "nothing matches" and
+ * the count the element announces are the app's words, from the
+ * `empty` and `results` attributes.
+ */
+
+insufferable-combobox {
+  display: block;
+}
+
+insufferable-combobox > ul[role=listbox] {
+  box-sizing: border-box;
+  margin: 0;
+  list-style: none;
+  overflow-y: auto;
+  border-style: solid;
+  @apply --ins-combobox;
+
+  & > li {
+    cursor: default;
+    @apply --ins-combobox-option;
+  }
+
+  & > li.empty {
+    @apply --ins-combobox-empty;
+  }
+}
+
+@supports (position-area: block-end) {
+  insufferable-combobox > ul[role=listbox] {
+    inset: auto;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block;
+    min-inline-size: anchor-size(inline);
+    margin-inline: 0;
+  }
+}
+
+/* The count is for assistive technology: present, and not drawn. */
+insufferable-combobox > [role=status] {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

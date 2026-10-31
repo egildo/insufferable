@@ -283,6 +283,10 @@
       "toast": {
         "$type": "dimension",
         "$value": "{ins.quanta.lu.322}"
+      },
+      "list": {
+        "$type": "dimension",
+        "$value": "{ins.quanta.lu.322}"
       }
     },
     "shadow": {

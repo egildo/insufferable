@@ -1,0 +1,113 @@
+{
+  "ins": {
+    "combobox": {
+      "$description": "The list of a combobox: a popover on a raised surface under the text field, as wide as the field, scrolling past ins.size.list.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.raised}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "marginBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "maxBlockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.list}"
+      },
+      "boxShadow": {
+        "$type": "shadow",
+        "$value": "{ins.shadow.raised}"
+      }
+    },
+    "comboboxOption": {
+      "$description": "One option. The active one, which a key has reached and focus has not, is aria-selected and takes the accent; under the pointer the fill.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "hover": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.fill}"
+        }
+      },
+      "selected": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.onAccent}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentStrong}"
+          }
+        }
+      },
+      "disabled": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.3}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        }
+      }
+    },
+    "comboboxEmpty": {
+      "$description": "The line shown when nothing matches what was typed.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.2}"
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      }
+    }
+  }
+}

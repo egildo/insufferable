@@ -50,3 +50,4 @@
 @import './components/card.css' layer(ins.components);
 @import './components/tooltip.css' layer(ins.components);
 @import './components/toast.css' layer(ins.components);
+@import './components/combobox.css' layer(ins.components);

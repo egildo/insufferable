@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { nextIndex, splitterValue, treeAction, typeAhead } from '../src/keys.ts';
+import { comboboxAction, matches, nextIndex, splitterValue, treeAction, typeAhead } from '../src/keys.ts';
 
 const all = [true, true, true];
 
@@ -87,4 +87,53 @@ test('a splitter goes to its ends, and Enter collapses and restores', () => {
   assert.equal(splitterValue('Enter', 40, true, 40), 0);
   assert.equal(splitterValue('Enter', 0, true, 40), 40);
   assert.equal(splitterValue('a', 40, true, 40), null);
+});
+
+const closed = { open: false, active: -1, enabled: [true, false, true], hasText: false };
+const showing = { ...closed, open: true };
+
+test('a combobox opens on Down at the first option and on Up at the last, passing over a disabled one', () => {
+  assert.deepEqual(comboboxAction('ArrowDown', false, closed), { open: true, active: 0 });
+  assert.deepEqual(comboboxAction('ArrowUp', false, closed), { open: true, active: 2 });
+  assert.deepEqual(comboboxAction('ArrowDown', false, { ...showing, active: 0 }), { active: 2 });
+  assert.deepEqual(comboboxAction('ArrowDown', false, { ...showing, active: 2 }), { active: 0 });
+  assert.deepEqual(comboboxAction('ArrowUp', false, { ...showing, active: 0 }), { active: 2 });
+});
+
+test('Alt with an arrow opens or closes the list without moving the active option', () => {
+  assert.deepEqual(comboboxAction('ArrowDown', true, closed), { open: true });
+  assert.equal(comboboxAction('ArrowDown', true, showing), null);
+  assert.deepEqual(comboboxAction('ArrowUp', true, showing), { open: false, active: -1 });
+});
+
+test('Enter chooses the active option, and is the form\'s when there is none', () => {
+  assert.deepEqual(comboboxAction('Enter', false, { ...showing, active: 2 }), { accept: 2, open: false, active: -1 });
+  assert.equal(comboboxAction('Enter', false, showing), null);
+  assert.equal(comboboxAction('Enter', false, closed), null);
+});
+
+test('Escape closes the list, then empties the field', () => {
+  assert.deepEqual(comboboxAction('Escape', false, { ...showing, hasText: true }), { open: false, active: -1 });
+  assert.deepEqual(comboboxAction('Escape', false, { ...closed, hasText: true }), { clear: true });
+  assert.equal(comboboxAction('Escape', false, closed), null);
+});
+
+test('Tab closes an open list, and typing, Home and End are the field\'s', () => {
+  assert.deepEqual(comboboxAction('Tab', false, showing), { open: false, active: -1 });
+  assert.equal(comboboxAction('Tab', false, closed), null);
+  for (const key of ['a', 'Home', 'End', 'ArrowLeft']) assert.equal(comboboxAction(key, false, showing), null);
+});
+
+test('a combobox with nothing to choose does not open', () => {
+  assert.equal(comboboxAction('ArrowDown', false, { ...closed, enabled: [] }), null);
+  assert.equal(comboboxAction('ArrowUp', false, { ...closed, enabled: [false] }), null);
+});
+
+test('typing narrows the options, in any case and without accents', () => {
+  const texts = ['Mela', 'Pera', 'Pèsca', 'Ananas'];
+  assert.deepEqual(matches('pe', texts), [1, 2]);
+  assert.deepEqual(matches('PESCA', texts), [2]);
+  assert.deepEqual(matches('an', texts), [3]);
+  assert.deepEqual(matches('  ', texts), [0, 1, 2, 3]);
+  assert.deepEqual(matches('zz', texts), []);
 });

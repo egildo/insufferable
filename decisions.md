@@ -929,3 +929,32 @@ In the built-in browser, light and dark: the seven demo pages; the slider moved 
 - FigCraft: no component files and no sync for any of the nine new elements' groups; `duration` tokens are skipped there.
 - Firefox and Safari, for the tooltip and the toast alike.
 - The combobox: a proposal of its own.
+
+## The combobox
+
+> **Ruled 31 October 2026,** as proposed: an element over the platform's `<input list>` and `<datalist>`, free-form values, and no words of its own. Built the same day.
+
+### What was considered
+
+- **Select-only needs nothing:** the customizable `<select>` is the platform's, and the field already uses it. The combobox is for a free value with suggestions.
+- **Options from a datalist, or the app's own list markup.** A datalist gives the no-script fallback for nothing and keeps the markup the platform's own; the cost is that an option holds only text. Chosen.
+- **Free-form or strict.** A datalist accepts what is typed, and so does the element. A strict mode is an app's validation and can be added later. Chosen: free-form.
+- **Words.** The count announced as the list changes ("5 results") and the "no matches" line are words, and the kit has shipped none. Chosen: attributes `results` and `empty`, no English default. The cost is that forgetting them leaves a gap, which the specs say. One phrase has one form, so plural languages set the attribute as the count changes ("1 risultati" shows it).
+- **Filtering in the element or the app.** In the element by default, over text and value, ignoring case and accents; `filter="none"` for an app that does it itself, with the datalist rewritten as the person types.
+- **A listbox popover that is `manual`.** An `auto` popover would close on a click in the field, which is outside it. The element closes the list itself: on Escape, Tab, a choice, and focus leaving.
+
+### What was built
+
+The element, its keyboard rules and its filter as pure functions in `keys.ts` with seven new tests (30 pass), three token groups (the list, an option, the empty line), one size role (`ins.size.list`), a stylesheet, and `dev/combobox.html` with four comboboxes: English, Italian with accents, an app-filtered one answering after a delay, and a right-to-left one. The index page has a section.
+
+### What was checked
+
+In the built-in browser: typing narrowed the list with the count announced in the status line; Down and Up moved the active option and passed over a disabled one, wrapping; Enter chose it and sent `change`; Escape closed the list and, again, emptied the field; Alt+Down opened it; Tab closed it and moved on; a click on an option chose it; an unaccented query found an accented option; "no matches" showed the app's line; the app-filtered list followed a datalist rewritten while it was open; a real click outside closed it. Light and dark; right to left, the list aligned with its field. The list is as wide as the field after one fix (the border box).
+
+### Not checked
+
+Firefox and Safari. A screen reader, so the announcements are written and not heard. Touch. The browser's own datalist after the element is removed.
+
+### Not done
+
+Groups and rich options, multi-select, strict mode, virtual scrolling. FigCraft: no component file for the list.

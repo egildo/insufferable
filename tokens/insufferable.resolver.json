@@ -118,6 +118,9 @@
         },
         {
           "$ref": "toast.tokens.json"
+        },
+        {
+          "$ref": "combobox.tokens.json"
         }
       ]
     }

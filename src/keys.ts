@@ -146,3 +146,94 @@ export function splitterValue(key: string, value: number, paneOnLeft: boolean, r
       return null;
   }
 }
+
+/**
+ * An editable combobox follows the WAI-ARIA Authoring Practices
+ * (https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), with list
+ * autocomplete: focus stays in the text field, and the option a key has
+ * reached is the field's active descendant. Nothing is chosen until Enter or a
+ * click.
+ */
+export interface ComboboxState {
+  /** Whether the list is showing. */
+  open: boolean;
+  /** The option that is active, or -1 for none. */
+  active: number;
+  /** For each option shown, whether it can be chosen. */
+  enabled: boolean[];
+  /** Whether the field holds any text. */
+  hasText: boolean;
+}
+
+/**
+ * What a key asks of a combobox: show or hide the list (`open`), move the active option (`active`), choose an
+ * option (`accept`), or empty the field (`clear`). Only what changes is present.
+ */
+export interface ComboboxAction {
+  open?: boolean;
+  active?: number;
+  accept?: number;
+  clear?: boolean;
+}
+
+/** The enabled option a step of `direction` from `active` reaches, wrapping, or -1 when none is enabled. */
+function stepEnabled(enabled: boolean[], active: number, direction: 1 | -1): number {
+  const count = enabled.length;
+  const from = active < 0 ? (direction > 0 ? -1 : 0) : active;
+  for (let i = 1; i <= count; i++) {
+    const at = (((from + direction * i) % count) + count) % count;
+    if (enabled[at]) return at;
+  }
+  return -1;
+}
+
+/**
+ * What a key does in a combobox's text field, or `null` when it is the field's own (typing, Home, End, the
+ * caret). Alt with an arrow opens or closes the list without moving the active option.
+ *
+ * @param key a `KeyboardEvent.key`
+ * @param alt whether Alt is held
+ */
+export function comboboxAction(key: string, alt: boolean, state: ComboboxState): ComboboxAction | null {
+  const { open, active, enabled, hasText } = state;
+  switch (key) {
+    case 'ArrowDown': {
+      if (open && alt) return null;
+      if (!open) return alt ? { open: true } : stepEnabled(enabled, -1, 1) < 0 ? null : { open: true, active: stepEnabled(enabled, -1, 1) };
+      const next = stepEnabled(enabled, active, 1);
+      return next < 0 ? null : { active: next };
+    }
+    case 'ArrowUp': {
+      if (open && alt) return { open: false, active: -1 };
+      if (!open) return stepEnabled(enabled, 0, -1) < 0 ? null : { open: true, active: stepEnabled(enabled, 0, -1) };
+      const previous = stepEnabled(enabled, active, -1);
+      return previous < 0 ? null : { active: previous };
+    }
+    case 'Enter':
+      return open && active >= 0 ? { accept: active, open: false, active: -1 } : null;
+    case 'Escape':
+      // Once to close the list, again to empty the field.
+      if (open) return { open: false, active: -1 };
+      return hasText ? { clear: true } : null;
+    case 'Tab':
+      return open ? { open: false, active: -1 } : null;
+    default:
+      return null;
+  }
+}
+
+/** A text as a person compares it: no accents, no case. */
+const plain = (text: string) => text.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase();
+
+/**
+ * The options that match what was typed, as their indexes in order: those whose text holds it, in any case and
+ * with or without accents. Nothing typed matches every option.
+ *
+ * @param typed what the field holds
+ * @param texts each option's text
+ */
+export function matches(typed: string, texts: string[]): number[] {
+  const wanted = plain(typed.trim());
+  const all = texts.map((_, index) => index);
+  return wanted ? all.filter((index) => plain(texts[index]).includes(wanted)) : all;
+}
