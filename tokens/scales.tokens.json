@@ -310,6 +310,23 @@
         ],
         "$description": "A surface raised above the page: a menu"
       }
+    },
+    "motion": {
+      "$description": "Durations, on the same ladder as the dimensions: Fibonacci numbers, in milliseconds.",
+      "spin": {
+        "$type": "duration",
+        "$value": {
+          "value": 987,
+          "unit": "ms"
+        }
+      },
+      "sweep": {
+        "$type": "duration",
+        "$value": {
+          "value": 1597,
+          "unit": "ms"
+        }
+      }
     }
   }
 }

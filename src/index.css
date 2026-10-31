@@ -42,3 +42,9 @@
 @import './components/log.css' layer(ins.components);
 @import './components/tree.css' layer(ins.components);
 @import './components/shell.css' layer(ins.components);
+@import './components/progress.css' layer(ins.components);
+@import './components/meter.css' layer(ins.components);
+@import './components/slider.css' layer(ins.components);
+@import './components/breadcrumb.css' layer(ins.components);
+@import './components/pagination.css' layer(ins.components);
+@import './components/card.css' layer(ins.components);

@@ -7,6 +7,7 @@ export const icons = [
   'adjustments-horizontal',
   'check',
   'chevron-down',
+  'chevron-left',
   'chevron-right',
   'code',
   'folder',

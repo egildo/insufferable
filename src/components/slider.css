@@ -1,0 +1,40 @@
+/*
+ * slider: the native `<input type="range">`, its keyboard, value and form
+ * behaviour the platform's. A track and a round thumb. The thumb takes the
+ * input's colour, so the hover and the disabled are the input's; it is not an
+ * element, so the focus ring is drawn round the input. The track is not
+ * filled: the engines do not all draw a filled part, and a bar that fills in
+ * one and not in another says two things. Horizontal only.
+ */
+
+input[type=range] {
+  appearance: none;
+  box-sizing: border-box;
+  inline-size: 100%;
+  margin: 0;
+  background: none;
+  outline-style: solid;
+  @apply --ins-slider;
+
+  &::-webkit-slider-runnable-track {
+    @apply --ins-slider-track;
+  }
+
+  &::-moz-range-track {
+    @apply --ins-slider-track;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    border: 0;
+    background-color: currentColor;
+    margin-block-start: calc((t(insufferable.ins.size.dot) - t(insufferable.ins.size.box)) / 2);
+    @apply --ins-slider-thumb;
+  }
+
+  &::-moz-range-thumb {
+    border: 0;
+    background-color: currentColor;
+    @apply --ins-slider-thumb;
+  }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · progress, spinner and meter</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .stack { display: grid; gap: 1rem; }
+</style>
+
+<h1>Progress</h1>
+<p>The native <code>&lt;progress&gt;</code>: a track and the done part. Without a <code>value</code> it is busy, and a light travels along it; with motion reduced, it stands still.</p>
+<div class="stack">
+  <label>Upload, 40% <progress value="40" max="100"></progress></label>
+  <label>Upload, done <progress value="100" max="100"></progress></label>
+  <label>Waiting for the server <progress></progress></label>
+</div>
+
+<h2>Spinner</h2>
+<p><code>&lt;progress class="spinner"&gt;</code>: the same element as a ring, for something with no end to show.</p>
+<p class="row"><progress class="spinner" aria-label="Loading"></progress> Loading the pantry</p>
+<p class="row"><button disabled><progress class="spinner" aria-label="Saving"></progress> Saving</button></p>
+
+<h2>Meter</h2>
+<p>The native <code>&lt;meter&gt;</code>: a measure in a known range. <code>low</code>, <code>high</code> and <code>optimum</code> sort the value into the best part, the middle and the worst.</p>
+<div class="stack">
+  <label>Disk used, 24 of 100 GB <meter min="0" max="100" low="60" high="85" optimum="0" value="24"></meter></label>
+  <label>Disk used, 72 of 100 GB <meter min="0" max="100" low="60" high="85" optimum="0" value="72"></meter></label>
+  <label>Disk used, 93 of 100 GB <meter min="0" max="100" low="60" high="85" optimum="0" value="93"></meter></label>
+  <label>Score, 8 of 10 <meter min="0" max="10" low="4" high="7" optimum="10" value="8"></meter></label>
+</div>
+</html>

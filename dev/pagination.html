@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · pagination</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .stack { display: grid; gap: 1rem; }
+</style>
+
+<h1>Pagination</h1>
+<p><code>&lt;nav aria-label="Pagination"&gt;</code> holding a <code>&lt;ul class="pagination"&gt;</code>. An item is a link, or a button where the app swaps the page itself. The current page has <code>aria-current="page"</code>.</p>
+<nav aria-label="Pagination">
+  <ul class="pagination">
+    <li><a href="#" aria-label="Previous page" aria-disabled="true"><ins-icon name="chevron-left"></ins-icon></a></li>
+    <li><a href="#" aria-current="page">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#" aria-label="Next page"><ins-icon name="chevron-right"></ins-icon></a></li>
+  </ul>
+</nav>
+
+<h2>Buttons</h2>
+<nav aria-label="Pagination, as buttons">
+  <ul class="pagination">
+    <li><button aria-label="Previous page"><ins-icon name="chevron-left"></ins-icon></button></li>
+    <li><button>1</button></li>
+    <li><button aria-current="page">2</button></li>
+    <li><button>3</button></li>
+    <li><button aria-label="Next page"><ins-icon name="chevron-right"></ins-icon></button></li>
+  </ul>
+</nav>
+</html>

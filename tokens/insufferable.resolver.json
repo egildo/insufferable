@@ -91,6 +91,27 @@
         },
         {
           "$ref": "shell.tokens.json"
+        },
+        {
+          "$ref": "progress.tokens.json"
+        },
+        {
+          "$ref": "spinner.tokens.json"
+        },
+        {
+          "$ref": "meter.tokens.json"
+        },
+        {
+          "$ref": "slider.tokens.json"
+        },
+        {
+          "$ref": "breadcrumb.tokens.json"
+        },
+        {
+          "$ref": "pagination.tokens.json"
+        },
+        {
+          "$ref": "card.tokens.json"
         }
       ]
     }

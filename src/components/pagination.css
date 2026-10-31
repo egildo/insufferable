@@ -1,0 +1,33 @@
+/*
+ * pagination: `<nav aria-label="Pagination">` holding a `<ul class="pagination">`
+ * with an item for each page: a link where each page is an address, a button
+ * where the app swaps the page itself. The current page has
+ * `aria-current="page"` and takes the accent; a page out of reach has
+ * `aria-disabled="true"`. The previous and next items hold an icon and are named
+ * by `aria-label`. The element keeps no state: it is the app that says which
+ * page is current.
+ */
+
+ul.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @apply --ins-pagination;
+
+  & > li > :is(a, button) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding-block: 0;
+    border: 0;
+    outline-style: solid;
+    font: inherit;
+    text-decoration: none;
+    @apply --ins-pagination-item;
+  }
+}

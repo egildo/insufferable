@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · slider</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .stack { display: grid; gap: 1rem; }
+</style>
+
+<h1>Slider</h1>
+<p>The native <code>&lt;input type="range"&gt;</code>: a track and a round thumb, its keyboard and value the platform's. Try the arrows.</p>
+<div class="stack">
+  <label>Volume <input type="range" min="0" max="100" value="40"></label>
+  <label>Sugar, in grams <input type="range" min="0" max="1000" step="50" value="800" list="marks"></label>
+  <datalist id="marks"><option value="0"></option><option value="500"></option><option value="1000"></option></datalist>
+  <label>Disabled <input type="range" value="60" disabled></label>
+</div>
+</html>

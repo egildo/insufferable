@@ -1,0 +1,35 @@
+{
+  "ins": {
+    "card": {
+      "$description": "A surface that holds its own content: section or article class=card, on the raised colour, with a hairline.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.raised}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.2}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      }
+    }
+  }
+}

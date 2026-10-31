@@ -12,7 +12,8 @@
             },
             "selection": {
               "selected": ":is([aria-selected=true], :checked)",
-              "pressed": "[aria-pressed=true]"
+              "pressed": "[aria-pressed=true]",
+              "current": "[aria-current=page]"
             },
             "disclosure": {
               "open": "[open]"

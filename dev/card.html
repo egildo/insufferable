@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · card</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .stack { display: grid; gap: 1rem; }
+</style>
+
+<h1>Card</h1>
+<p><code>&lt;section class="card"&gt;</code>: a surface that holds its own content, the raised colour with a hairline. Its children are spaced by the card, and keep no margin of their own.</p>
+<div class="stack">
+  <article class="card" aria-labelledby="quince">
+    <h2 id="quince">Quince paste</h2>
+    <p>Quinces are hard and sour raw, and turn rose-red and fragrant when cooked long.</p>
+    <p class="row"><small class="tag">Preserve</small> <small class="tag">Autumn</small></p>
+    <p class="row"><button class="solid">Open</button> <button>Share</button></p>
+  </article>
+  <section class="card" aria-labelledby="pantry">
+    <h2 id="pantry">Pantry</h2>
+    <meter min="0" max="20" low="12" high="18" optimum="0" value="14" aria-label="Pantry used, 14 of 20 kilograms"></meter>
+    <small>14 of 20 kilograms</small>
+  </section>
+</div>
+</html>

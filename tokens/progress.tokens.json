@@ -1,0 +1,41 @@
+{
+  "ins": {
+    "progress": {
+      "$description": "A native progress bar: a track and, inside it, the value in the accent. Without a value it is busy, and a light travels along the track.",
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.dot}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      }
+    },
+    "progressValue": {
+      "$description": "The part of a progress bar that is done.",
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      }
+    },
+    "progressBusy": {
+      "$description": "A progress bar without a value: a light travels along the track, once in this long.",
+      "animationDuration": {
+        "$type": "duration",
+        "$value": "{ins.motion.sweep}"
+      }
+    }
+  }
+}

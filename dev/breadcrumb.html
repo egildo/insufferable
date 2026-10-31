@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · breadcrumb</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .stack { display: grid; gap: 1rem; }
+</style>
+
+<h1>Breadcrumb</h1>
+<p><code>&lt;nav aria-label="Breadcrumb"&gt;</code> holding an <code>&lt;ol class="breadcrumb"&gt;</code>. The page itself is last, with <code>aria-current="page"</code>.</p>
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb">
+    <li><a href="#">Notebook</a></li>
+    <li><a href="#">Recipes</a></li>
+    <li><a href="#">Preserves</a></li>
+    <li><a href="#" aria-current="page">Quince paste</a></li>
+  </ol>
+</nav>
+
+<h2>Right to left</h2>
+<nav aria-label="Breadcrumb" dir="rtl" lang="ar">
+  <ol class="breadcrumb">
+    <li><a href="#">الدفتر</a></li>
+    <li><a href="#">الوصفات</a></li>
+    <li><a href="#" aria-current="page">معجون السفرجل</a></li>
+  </ol>
+</nav>
+
+<h2>Narrow</h2>
+<nav aria-label="Breadcrumb" style="max-inline-size: 14rem">
+  <ol class="breadcrumb">
+    <li><a href="#">Notebook</a></li>
+    <li><a href="#">Recipes</a></li>
+    <li><a href="#">Preserves</a></li>
+    <li><a href="#" aria-current="page">Quince paste</a></li>
+  </ol>
+</nav>
+</html>

@@ -1,0 +1,41 @@
+{
+  "ins": {
+    "breadcrumb": {
+      "$description": "Where the page sits in its parents: nav holding an ol class=breadcrumb, links, and the page itself last with aria-current=page.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.body}"
+      }
+    },
+    "breadcrumbSeparator": {
+      "$description": "The mark between two steps, a chevron of the icon font; it only separates, so it is left unspoken.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.2}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.icon}"
+      }
+    },
+    "breadcrumbCurrent": {
+      "$description": "The page itself, last: set apart from the links by the text colour and a heavier weight.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": "{ins.font.weight.medium}"
+      }
+    }
+  }
+}

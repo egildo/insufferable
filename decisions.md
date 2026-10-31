@@ -867,3 +867,35 @@ In the built-in browser, on `dev/demo.html` with a dark system: `color-scheme: l
 - The system's own default is unchanged: the page says `color-scheme: light dark`, so the system chooses.
 - Browsers that do not know `light-dark()` (before 2024) get no colours. The principle is the platform's current baseline.
 - The generator needed no change: it writes the roles, and the resolver spells them.
+
+## The missing common components, first slice
+
+> **Ruled 31 October 2026:** go with the ranked list, the cheap set first. Built the same day: progress, spinner, meter, slider, breadcrumb, pagination and card, each with its own token group.
+
+### What was missing
+
+Measured against Open UI's component list and the WAI-ARIA Authoring Practices patterns, the kit lacked, in the order an app needs them: progress, meter and spinner; a tooltip; a toast; a slider; breadcrumb and pagination; a card; a generic popover; avatar, skeleton and empty state; a drawer. Harder: a combobox, a calendar, a data grid. This slice is the cheap set. The tooltip and the toast are the second slice, since both need a check of what the platform has settled. The combobox needs a proposal of its own.
+
+### What was built
+
+- **Native first.** Progress, meter and slider are the platform's own elements, restyled; the spinner is a progress without a value, so it is announced as busy; breadcrumb and pagination are a `nav` holding a list, as the Authoring Practices say; the card is a class on a section. No new custom element, so the element list and the prefix are unchanged.
+- **Tokens.** One group per element, and a group for each part a stylesheet reaches by a pseudo-element: `progressValue`, `meterOptimum`, `meterSuboptimum`, `meterWorst`, `sliderTrack`, `sliderThumb`, `breadcrumbSeparator`, `breadcrumbCurrent`, `paginationItem`. Every size reuses an existing role (`dot` for a track, `box` for a thumb and a ring, `control` for a page), so the scales gained nothing.
+- **The vocabulary** gained `current` on the selection axis, `[aria-current='page']`, for the current page; a link cannot take `aria-selected`.
+- **The first motion.** `ins.motion.spin` and `ins.motion.sweep`, Fibonacci numbers in milliseconds, as `duration` tokens. Each animation stands still where motion is reduced. The keyframes are named `insufferable-spin` and `insufferable-sweep`, since a name starting `ins-` would read as an element to the prefix rename and to its test.
+- **The icon** `chevron-left` ships for pagination.
+
+### What was checked
+
+In the built-in browser, light and dark: the seven demo pages; the slider moved and ringed by the keyboard; the breadcrumb mirrored and wrapped; the animations running with the durations the tokens give. Contrast of every pair is measured and written in the specs. 23 tests pass, with two new ones: every token file is in the resolver, and every component stylesheet is imported.
+
+### What the platform taught
+
+- **Chrome's meter parts take no percentage height.** The value drew at half the track until the parts were given the track's height from its token.
+- **A slider thumb is not an element.** Its states cannot be selected the way a button's are, so it takes the input's colour and the ring goes round the input.
+- **Firefox was not run.** Its meter and progress pseudo-elements (`::-moz-meter-bar`, `::-moz-progress-bar`, `::-moz-range-thumb`) are written from the documentation and not seen.
+
+### Not done
+
+- **FigCraft.** No component files for these elements yet, and the library is not synced. A dry run plans 59 new variables and skips the four `duration` tokens, which Figma has no variable for.
+- **The second slice:** tooltip and toast. Then a proposal for the combobox.
+- **A fill on the slider's track,** and a vertical slider.

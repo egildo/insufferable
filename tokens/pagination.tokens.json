@@ -1,0 +1,92 @@
+{
+  "ins": {
+    "pagination": {
+      "$description": "Pages of a list: nav holding a ul class=pagination, a link or button for each page, the current one with aria-current=page.",
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.body}"
+      }
+    },
+    "paginationItem": {
+      "$description": "One page: a link or a button, square like an icon button, a wash under the pointer; the current page takes the accent.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "minInlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "minBlockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "hover": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.fill}"
+        }
+      },
+      "active": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        }
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "current": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.onAccent}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "disabled": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.3}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        }
+      }
+    }
+  }
+}

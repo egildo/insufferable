@@ -1,0 +1,40 @@
+/*
+ * breadcrumb: `<nav aria-label="Breadcrumb">` holding an `<ol class="breadcrumb">`
+ * of links, the page itself last with `aria-current="page"`, as the
+ * WAI-ARIA Authoring Practices describe it
+ * (https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/). The mark between
+ * two steps is a chevron of the icon font, drawn by the stylesheet and spoken
+ * by nobody, turned for right to left. It sits at the end of its step, so a
+ * trail that wraps never starts a line with one.
+ */
+
+ol.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @apply --ins-breadcrumb;
+
+  & > li {
+    display: inline-flex;
+    align-items: center;
+    gap: inherit;
+  }
+
+  & > li:not(:last-child)::after {
+    content: '\ea61' / '';
+    line-height: 1;
+    @apply --ins-breadcrumb-separator;
+  }
+
+  & > li:not(:last-child):dir(rtl)::after {
+    scale: -1 1;
+  }
+
+  & [aria-current=page] {
+    text-decoration: none;
+    @apply --ins-breadcrumb-current;
+  }
+}

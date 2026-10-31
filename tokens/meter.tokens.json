@@ -1,0 +1,52 @@
+{
+  "ins": {
+    "meter": {
+      "$description": "A native meter: a measure within a known range, such as disk used. A track, and the value inside it, drawn by the three groups below.",
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.dot}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      }
+    },
+    "meterOptimum": {
+      "$description": "The value of a meter in the best part of its range.",
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.ok}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      }
+    },
+    "meterSuboptimum": {
+      "$description": "The value of a meter in the middle part of its range.",
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.warn}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      }
+    },
+    "meterWorst": {
+      "$description": "The value of a meter in the worst part of its range.",
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.danger}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "ins": {
+    "spinner": {
+      "$description": "Something is happening and its end is unknown: a native progress without a value, class=spinner, drawn as a ring with one arc in the accent. It turns; where motion is reduced it stands still.",
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderTopColor": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "animationDuration": {
+        "$type": "duration",
+        "$value": "{ins.motion.spin}"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+/*
+ * card: `<section class="card">`, `<article class="card">` or a `<div class="card">`,
+ * a surface that holds its own content: the raised colour with a hairline, no
+ * shadow, since the shadow belongs to what floats. Its children are spaced by
+ * the card's gap and keep no margin of their own. A card that stands for a
+ * region of the page is named by its heading, `aria-labelledby`.
+ */
+
+:is(section, article, aside, div).card {
+  display: grid;
+  box-sizing: border-box;
+  border-style: solid;
+  @apply --ins-card;
+
+  & > * {
+    margin: 0;
+  }
+}

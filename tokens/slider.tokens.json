@@ -1,0 +1,79 @@
+{
+  "ins": {
+    "slider": {
+      "$description": "A native range input. Its colour is the thumb's, through currentColor; the ring is drawn round the input, since the thumb is not an element.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.accent}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.outset}"
+      },
+      "hover": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.accentStrong}"
+        }
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "disabled": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.lineStrong}"
+        }
+      }
+    },
+    "sliderTrack": {
+      "$description": "The line the thumb of a slider moves along.",
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.dot}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      }
+    },
+    "sliderThumb": {
+      "$description": "The thumb of a slider, a disc in the slider's colour.",
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      }
+    }
+  }
+}

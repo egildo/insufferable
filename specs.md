@@ -66,7 +66,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell, progress, spinner, meter, slider, breadcrumb, pagination, card .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -84,14 +84,14 @@ The shape follows `@toghen/ui`, written in TypeScript. `tsc` writes the modules 
 
 ## Tokens
 
-Three tiers in one group, `ins`: primitives (`ins.quanta`, then `ins.space`, `ins.border`, `ins.radius`, `ins.size`, `ins.font`), the semantic tier (the colours under `ins.color`, and the text styles `ins.typography`), and one group per element keyed by CSS property, whose values refer to the tiers above. No component token holds a literal.
+Three tiers in one group, `ins`: primitives (`ins.quanta`, then `ins.space`, `ins.border`, `ins.radius`, `ins.size`, `ins.font`, `ins.motion`), the semantic tier (the colours under `ins.color`, and the text styles `ins.typography`), and one group per element keyed by CSS property, whose values refer to the tiers above. No component token holds a literal.
 
 A state is a part: a subgroup named after its value, such as `ins.tabs.tab.selected`. The vocabulary in the `com.toghen` extension of `ins` spells each value as the platform does:
 
 | Axis | Value | Spelled as |
 |---|---|---|
 | `variant` | `solid`, `plain`, `danger` | `.solid`, `.plain`, `.danger` |
-| `selection` | `selected`, `pressed` | `:is([aria-selected='true'], :checked)`, `[aria-pressed='true']` |
+| `selection` | `selected`, `pressed`, `current` | `:is([aria-selected='true'], :checked)`, `[aria-pressed='true']`, `[aria-current='page']` |
 | `disclosure` | `open` | `[open]` |
 | `validity` | `invalid` | `:is(:user-invalid, [aria-invalid='true'])` |
 | `pointer` | `hover`, `active` | `:hover`, `:active` |
@@ -690,6 +690,93 @@ The line between two panes that changes their sizes: `<ins-splitter>` between th
 
 Not built: a horizontal splitter, a fixed one (the APG's two-position kind), F6 between panes.
 
+### Progress, spinner, meter
+
+The native `<progress>`, `<progress class="spinner">` and `<meter>`, each drawn by the stylesheet, none needing script.
+
+```html
+<label>Upload <progress value="40" max="100"></progress></label>
+<progress class="spinner" aria-label="Loading"></progress>
+<label>Disk used <meter min="0" max="100" low="60" high="85" optimum="0" value="72"></meter></label>
+```
+
+- **Progress** is a track (`ins.progress`) and its done part (`ins.progressValue`) in the accent, as wide as its container. Without a `value` it is busy (`:indeterminate`) and a light travels along the track once in `ins.motion.sweep`.
+- **The spinner** is the same element without a value, drawn as a ring (`ins.spinner`) with one arc in the accent, a `box` across, and turning once in `ins.motion.spin`. A progress without a value is what the platform means by "busy", so it is announced as such; it takes its name from `aria-label` or from the words beside it.
+- **Reduced motion.** Where the person asks for less, the light and the ring stand still (`prefers-reduced-motion`). The ring still shows its arc, and the words beside it say what is happening.
+- **Meter** is a measure in a known range. The platform's own `low`, `high` and `optimum` sort the value into the best part (`ins.meterOptimum`, `ok`), the middle (`ins.meterSuboptimum`, `warn`) and the worst (`ins.meterWorst`, `danger`). The length says how much and the colour only which part, so the number is written beside it. Each engine names the parts its own way, so each has its own rule; Chrome cannot resolve a percentage height for them, so they take the track's height from its token.
+- **Contrast.** The value against the track is 3.5:1 or more in light and in dark (progress 4.0 and 3.5, the three meter parts from 3.6 up). The track against the page is about 1.3 to 1.7: it frames the value and carries nothing the value does not.
+
+### Slider
+
+The native `<input type="range">`: a track (`ins.sliderTrack`) and a round thumb (`ins.sliderThumb`) in the accent. Horizontal only.
+
+```html
+<label>Volume <input type="range" min="0" max="100" value="40"></label>
+```
+
+- **The platform does the rest:** the value, the arrows, Home and End, Page Up and Down, `step`, `input` and `change`, the form's value.
+- **The thumb takes the input's colour** (`currentColor`), so the hover (`accentStrong`) and the disabled (`lineStrong`) are the input's own states. The thumb against the page is 5.1:1 in light and 5.8:1 in dark.
+- **The focus ring is round the input,** not the thumb, since a thumb is not an element a stylesheet can ring in every engine.
+- **The track is not filled.** The engines do not all draw a filled part, and a bar filled in one and not in another would say two things.
+
+### Breadcrumb
+
+A trail of where the page sits: `<nav aria-label="Breadcrumb">` holding an `<ol class="breadcrumb">`, as the WAI-ARIA Authoring Practices describe it (https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/).
+
+```html
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb">
+    <li><a href="/notebook">Notebook</a></li>
+    <li><a href="/notebook/recipes">Recipes</a></li>
+    <li><a href="#" aria-current="page">Quince paste</a></li>
+  </ol>
+</nav>
+```
+
+- **The page itself is last,** `aria-current="page"`, in the text colour and a medium weight (`ins.breadcrumbCurrent`), with no underline.
+- **The mark between two steps** is the tree's chevron (a glyph of the icon font, `ins.breadcrumbSeparator`), drawn by the stylesheet with empty alternative text so nobody hears it, and mirrored right to left. It sits at the end of its step, so a trail that wraps never starts a line with one.
+- **No script.**
+
+### Pagination
+
+Pages of a list: `<nav aria-label="Pagination">` holding a `<ul class="pagination">`, an item for each page.
+
+```html
+<nav aria-label="Pagination">
+  <ul class="pagination">
+    <li><a href="?p=1" aria-label="Previous page" aria-disabled="true"><ins-icon name="chevron-left"></ins-icon></a></li>
+    <li><a href="?p=1" aria-current="page">1</a></li>
+    <li><a href="?p=2">2</a></li>
+    <li><a href="?p=2" aria-label="Next page"><ins-icon name="chevron-right"></ins-icon></a></li>
+  </ul>
+</nav>
+```
+
+- **A link or a button** per page: a link where each page is an address, a button where the app swaps the page itself. Both are drawn alike (`ins.paginationItem`), square at `control`, a wash under the pointer.
+- **The current page** has `aria-current="page"` and takes the accent, with the text on it 5.3:1 in light and 5.8:1 in dark. It is the app that says which page is current: the element keeps no state, and which pages to show, ellipsis included, is the app's.
+- **A page out of reach** is `aria-disabled="true"` and goes grey.
+- **Right to left.** The previous and next icons are the app's to choose; the stylesheet does not turn them.
+
+### Card
+
+A surface that holds its own content: `<section class="card">`, `<article class="card">`, or a `<div>`.
+
+```html
+<article class="card" aria-labelledby="quince">
+  <h2 id="quince">Quince paste</h2>
+  <p>Hard and sour raw, rose-red cooked.</p>
+</article>
+```
+
+- **The raised colour with a hairline** (`ins.card`), no shadow: the shadow belongs to what floats, the menu and the dialog.
+- **Its children are spaced by the card's gap** and keep no margin of their own, so a heading, a paragraph and a row of buttons sit the same way in any card.
+- **A card that stands for a region** is named by its heading, `aria-labelledby`.
+- **Not interactive.** A card that is a link or a button is a link or a button that holds a card's content; that is the app's.
+
+### Motion
+
+The system's first motion, kept to what a spinner and a busy bar cannot do without: `ins.motion.spin` (987 ms) and `ins.motion.sweep` (1597 ms), Fibonacci numbers in milliseconds, on the same ladder as the dimensions. They are `duration` tokens, which FigCraft has no variable for, so the library skips them. There are no transitions: a state changes at once. Every animation stands still where the person asks for less motion.
+
 ## Commands
 
 A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` gives `--expand` (a tree node's; not the menu's, since a popover's open state is the platform's), `aria-pressed` `--press`, `aria-checked` `--check`. A command that sets no state is named after what it asks for, and has no default: `--remove`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
@@ -708,4 +795,3 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 - **The default element prefix.** The tabs element is `ins-tabs`. `ins` is also the HTML element for inserted text, so a reader may stumble on it. An app may choose its own prefix; the system's default is not ruled.
 - **Tabler's other cuts.** Tabler ships its icons in stroke weights 200 and 300 and filled, each a font of its own. Only the regular cut ships; the others could be faces of the same family at their weights.
 - **The house fonts' other axes.** Archivo's width and Fraunces' softness and wonk are not tokens; the W3C typography type has no member for them.
-- **A theme an app chooses.** The system chooses the theme; `@toghen/postcss` takes one spelling per context, so an app cannot also switch it with an attribute. An app that needs its own switch would change the spelling to `[data-theme='{context}']`.

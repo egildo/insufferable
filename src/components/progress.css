@@ -1,0 +1,81 @@
+/*
+ * progress: the native `<progress>`, a bar for something with an end: a track,
+ * and the done part in the accent. Without a `value` it is busy, and a light
+ * travels along the track; where the person has asked for less motion the
+ * light stands still. The bar fills the width it is given.
+ *
+ * `class="spinner"` is the same element drawn as a ring, for something that
+ * has no end to show or no room for a bar: a native progress without a value,
+ * so it is announced as busy. It takes its name from `aria-label` or from the
+ * words beside it, and it turns, or stands still where motion is reduced.
+ */
+
+progress:not(.spinner) {
+  appearance: none;
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  overflow: hidden;
+  border: 0;
+  @apply --ins-progress;
+
+  &::-webkit-progress-bar {
+    background: none;
+  }
+
+  &::-webkit-progress-value {
+    @apply --ins-progress-value;
+  }
+
+  &::-moz-progress-bar {
+    @apply --ins-progress-value;
+  }
+
+  &:indeterminate {
+    background-image: linear-gradient(90deg, transparent, currentColor, transparent);
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    animation-name: insufferable-sweep;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    @apply --ins-progress-busy;
+  }
+}
+
+progress.spinner {
+  appearance: none;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: text-bottom;
+  border-style: solid;
+  background: none;
+  animation-name: insufferable-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  @apply --ins-spinner;
+
+  &::-webkit-progress-bar,
+  &::-webkit-progress-value {
+    background: none;
+  }
+
+  &::-moz-progress-bar {
+    background: none;
+  }
+}
+
+@keyframes insufferable-sweep {
+  from { background-position: -67% 0; }
+  to { background-position: 167% 0; }
+}
+
+@keyframes insufferable-spin {
+  to { rotate: 1turn; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  progress:indeterminate {
+    animation: none;
+    background-position: 50% 0;
+  }
+}

@@ -1,0 +1,58 @@
+/*
+ * meter: the native `<meter>`, a measure within a known range: disk used,
+ * a score. A track, and the value inside it, which the platform's own `low`,
+ * `high` and `optimum` sort into three parts: the best in `ok`, the middle in
+ * `warn`, the worst in `danger`. The length says how much; the colour says
+ * which part, and is only a help, so the number is written beside it.
+ * Each engine names its parts its own way, so each has a rule of its own.
+ * Chrome cannot resolve a percentage height for its parts, so they take the
+ * track's height from its token.
+ */
+
+meter {
+  appearance: none;
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  overflow: hidden;
+  border: 0;
+  @apply --ins-meter;
+
+  &::-webkit-meter-bar {
+    block-size: t(insufferable.ins.meter.blockSize);
+    border: 0;
+    background: none;
+  }
+
+  &::-webkit-meter-optimum-value,
+  &::-webkit-meter-suboptimum-value,
+  &::-webkit-meter-even-less-good-value {
+    block-size: t(insufferable.ins.meter.blockSize);
+    background-image: none;
+    box-shadow: none;
+  }
+
+  &::-webkit-meter-optimum-value {
+    @apply --ins-meter-optimum;
+  }
+
+  &::-webkit-meter-suboptimum-value {
+    @apply --ins-meter-suboptimum;
+  }
+
+  &::-webkit-meter-even-less-good-value {
+    @apply --ins-meter-worst;
+  }
+
+  &:-moz-meter-optimum::-moz-meter-bar {
+    @apply --ins-meter-optimum;
+  }
+
+  &:-moz-meter-sub-optimum::-moz-meter-bar {
+    @apply --ins-meter-suboptimum;
+  }
+
+  &:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+    @apply --ins-meter-worst;
+  }
+}
