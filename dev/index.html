@@ -9,11 +9,13 @@
 <script type="module" src="../dist/components/menu.js"></script>
 <script type="module" src="../dist/components/toolbar.js"></script>
 <script type="module" src="../dist/components/tree.js"></script>
+<script type="module" src="../dist/components/tooltip.js"></script>
 <style>
   body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
   section { display: grid; gap: 0.75rem; justify-items: start; margin-block: 2rem; }
   .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
   h2 { margin: 0; }
+  section > :is(progress, meter, label:has(> :is(progress, meter, input[type=range]))) { inline-size: 100%; }
 </style>
 
 <h1>insufferable</h1>
@@ -232,4 +234,98 @@
     </form>
   </dialog>
 </section>
+
+<section>
+  <h2>Progress, spinner, meter</h2>
+  <label>Upload, 40% <progress value="40" max="100"></progress></label>
+  <label>Waiting for the server <progress></progress></label>
+  <p class="row"><progress class="spinner" aria-label="Loading"></progress> Loading the pantry</p>
+  <label>Disk used, 72 of 100 GB <meter min="0" max="100" low="60" high="85" optimum="0" value="72"></meter></label>
+  <label>Disk used, 93 of 100 GB <meter min="0" max="100" low="60" high="85" optimum="0" value="93"></meter></label>
+</section>
+
+<section>
+  <h2>Slider</h2>
+  <label>Sugar, in grams <input type="range" min="0" max="1000" step="50" value="800"></label>
+  <label>Disabled <input type="range" value="60" disabled></label>
+</section>
+
+<section>
+  <h2>Breadcrumb</h2>
+  <nav aria-label="Breadcrumb">
+    <ol class="breadcrumb">
+      <li><a href="#">Notebook</a></li>
+      <li><a href="#">Recipes</a></li>
+      <li><a href="#" aria-current="page">Quince paste</a></li>
+    </ol>
+  </nav>
+</section>
+
+<section>
+  <h2>Pagination</h2>
+  <nav aria-label="Pagination">
+    <ul class="pagination">
+      <li><a href="#" aria-label="Previous page" aria-disabled="true"><insufferable-icon name="chevron-left"></insufferable-icon></a></li>
+      <li><a href="#" aria-current="page">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#" aria-label="Next page"><insufferable-icon name="chevron-right"></insufferable-icon></a></li>
+    </ul>
+  </nav>
+</section>
+
+<section>
+  <h2>Card</h2>
+  <article class="card" aria-labelledby="card-quince">
+    <h3 id="card-quince">Quince paste</h3>
+    <p>Quinces are hard and sour raw, and turn rose-red and fragrant when cooked long.</p>
+    <p class="row"><small class="tag">Preserve</small> <small class="tag">Autumn</small></p>
+    <p class="row"><button class="solid">Open</button> <button>Share</button></p>
+  </article>
+</section>
+
+<section>
+  <h2>Tooltip</h2>
+  <p class="row">
+    <button class="plain" aria-label="Search" interestfor="search-hint"><insufferable-icon name="search"></insufferable-icon></button>
+    <insufferable-tooltip id="search-hint" popover="hint">Search the notebook</insufferable-tooltip>
+    <button interestfor="print-hint"><insufferable-icon name="printer"></insufferable-icon> Print</button>
+    <insufferable-tooltip id="print-hint" popover="hint">Print the recipe on one page, with the notes</insufferable-tooltip>
+  </p>
+</section>
+
+<section>
+  <h2>Toast</h2>
+  <p class="row">
+    <button id="toast-saved">Save the recipe</button>
+    <button id="toast-failed">Fail to save</button>
+  </p>
+</section>
+
+<div class="toasts" role="status"></div>
+
+<script type="module">
+  // The app: it puts each toast in, and takes it out when its time is up or its close button asks.
+  const region = document.querySelector('.toasts');
+  let count = 0;
+  function toast(text, { danger = false, undo = false } = {}) {
+    const item = document.createElement('div');
+    item.className = danger ? 'toast danger' : 'toast';
+    item.id = `toast-${++count}`;
+    if (danger) item.setAttribute('role', 'alert');
+    item.innerHTML = `<p></p>${undo ? '<button class="plain">Undo</button>' : ''}<button class="plain" aria-label="Dismiss" commandfor="${item.id}" command="--dismiss"><insufferable-icon name="x"></insufferable-icon></button>`;
+    item.querySelector('p').textContent = text;
+    region.append(item);
+    let timer = setTimeout(() => item.remove(), danger ? 12000 : 6000);
+    const stop = () => clearTimeout(timer);
+    const start = () => (timer = setTimeout(() => item.remove(), 3000));
+    item.addEventListener('pointerenter', stop); item.addEventListener('focusin', stop);
+    item.addEventListener('pointerleave', start); item.addEventListener('focusout', start);
+  }
+  document.addEventListener('command', (event) => {
+    if (event.command === '--dismiss') event.source.closest('.toast').remove();
+  }, { capture: true });
+  document.getElementById('toast-saved').onclick = () => toast('Quince paste saved.', { undo: true });
+  document.getElementById('toast-failed').onclick = () => toast('The recipe could not be saved. The notebook is full.', { danger: true });
+</script>
 </html>
