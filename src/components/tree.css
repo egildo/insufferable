@@ -8,7 +8,8 @@
  * glyph of the icon font, turned down when its node is open and mirrored
  * right to left; an end node keeps its room, so the names line up. The
  * focus ring is drawn on the row, since the node holds its children too. A
- * row's last `<code>` sits at its end. A row is one line; a label held in an
+ * row's last `<code>` sits at its end, and a `<data>` count after it only while the
+ * node is closed. A group has a hairline down its parent's chevron. A row is one line; a label held in an
  * element of its own is cut short with an ellipsis, where bare text is clipped.
  */
 
@@ -23,6 +24,9 @@ insufferable-tree ul {
 }
 
 insufferable-tree ul ul {
+  /* The guide runs down the parent's chevron: the row's padding and half the chevron's width. */
+  margin-inline-start: calc(t(insufferable.ins.space.2) + 0.5em);
+  border-inline-start-style: solid;
   @apply --ins-tree-indent;
 }
 
@@ -74,5 +78,14 @@ insufferable-tree li[role=treeitem] {
 
   & > span > code:last-of-type {
     margin-inline-start: auto;
+  }
+
+  /* A count of the node's children, shown while it is closed; it takes the end when there is no code before it. */
+  & > span > data:not(code ~ data) {
+    margin-inline-start: auto;
+  }
+
+  &[aria-expanded=true] > span > data {
+    display: none;
   }
 }

@@ -1,0 +1,16 @@
+// Card: a surface that holds its own content. Source: ins.card in tokens/card.tokens.json. The raised colour with a
+// hairline and no shadow; its children are spaced by its gap. A slot holds the content.
+component Card tokens="{ins.card}"
+description "A raised surface with a hairline: a heading and whatever the card holds."
+
+properties {
+    TEXT Heading default="Quince paste"
+    SLOT Content description="What the card holds." minChildren=0
+}
+
+FRAME Card layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)320 strokeAlign=INSIDE {
+    TEXT Heading characters=(property)Heading textStyle="{ins.typography.heading}" textAutoResize=HEIGHT layoutSizingHorizontal=FILL {
+        fills "{ins.card.color}"
+    }
+    SLOT Content layoutMode=VERTICAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG itemSpacing="{ins.card.gap}"
+}

@@ -1,12 +1,12 @@
 /*
  * count: a number inside a control, `<data value="26">26</data>` after a
- * button's, a tab's, a summary's, a label's or a legend's name. It keeps the
+ * button's, a tab's, a summary's, a label's, a legend's or a tree row's name. It keeps the
  * colour around it, so it keeps that colour's contrast on every ground; it is
  * set apart by a lighter weight, and its figures are tabular so a count that
  * changes does not move the name. A `data` in running text is left alone.
  */
 
-:is(button, summary, label, legend) > data {
+:is(button, summary, label, legend, insufferable-tree li > span) > data {
   font-variant-numeric: tabular-nums;
   @apply --ins-count;
 }

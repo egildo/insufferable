@@ -981,7 +981,7 @@ Groups and rich options, multi-select, strict mode, virtual scrolling. FigCraft:
 At 1600 by 960, the screen assembles from the parts: the docks, the three panes, the tree, the pill tabs with counts, the rule cards with chips, the property rows with the conflict, the log, the status and the sheets. What the studio draws that the parts do not yet:
 
 - **A tree row did not stay on one line,** and is now fixed: the row is one line, 32px, and a label written in an element of its own, `<span>Paola Esempio</span>`, is cut short with an ellipsis while the tag and the code keep their room, the code at the end. Bare text is clipped, not ellipsised: an ellipsis cannot be drawn on a text node inside a flex row, and a grid did not draw it either. The element does not wrap the text itself, so an app's own rendering is not fought; the demos now write the label in a span.
-- **The tree has no indent guides** (the studio's hairline down each open node) **and no count on a closed node.**
+- **The tree's indent guides and closed-node count** are built since: a hairline in the line colour down each group, at the parent's chevron, and a `<data>` in the row shown only while the node is closed. The indent between levels went from 34px to 8px beside the guide, so a level now steps 17px, as the studio's does.
 - **Heights differ a little:** the pane head is 34px and the tab 25px where the studio has 40 and 28. This is for the style study, since it changes token values, not markup.
 - **The extension list's items are plain options,** where the studio's hold a tag beside the name: the rich options the listbox does not build.
 
@@ -989,3 +989,8 @@ At 1600 by 960, the screen assembles from the parts: the docks, the three panes,
 
 Typecheck and tests pass; the stylesheet is 127.3 KB. In the built-in browser, on `dev/properties.html` and `dev/studio.html`: the notice under its row, in the warning's tint; **Take theirs** wrote the value and removed the notice, and **Keep mine** removed it and kept the value; focus returned to the field. Not checked: the light scheme in the browser (the contrast was read from the resolved colours), FigCraft (the callout's component file has no warn variant yet), a screen reader.
 
+### The FigCraft library
+
+Component files now exist for the elements built since the library was last synced: BreadcrumbItem, Card, Combobox and ComboboxOption, Meter (by zone), PaginationItem (24 members), Progress, Slider (8), Toast (rest and danger), Tooltip. TreeRow gained the count. The callout's warn variant is drawn, by the axis its tokens now declare. The sync was run into a scratch copy first and compared variable by variable: three existing variables changed, all intended (the callout's warn mode, bound where it held a placeholder, and the tree's indent), and the rest only gained modes (current, warn). Read back in a render: the options, the pagination states, the slider's thumb on its track, the breadcrumb's current page in the medium weight.
+
+Not drawn: the spinner and the progress sweep, which are animations; the property row's notice, which is a Callout instance inside the row and is not yet placed there. nothing of the toast now: its bar is a frame of its own on the edge, in the accent or the danger, since a stroke is one colour; its first form, per-side strokes, drew a full outline.

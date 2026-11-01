@@ -1,0 +1,12 @@
+// Combobox: the open list of a combobox, popover=manual, under its input. Source: ins.combobox in
+// tokens/combobox.tokens.json, on the raised surface with the raised shadow. Options are ComboboxOption instances;
+// the status line under the list is the count. Not drawn: the input, which is a field; the list's scroll.
+component Combobox tokens="{ins.combobox}"
+description "A combobox's list: options on a raised surface, the active one in the accent."
+
+FRAME Combobox layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)240 strokeAlign=INSIDE {
+    effects "{ins.shadow.raised}"
+    INSTANCE One component=ComboboxOption layoutSizingHorizontal=FILL { set Label="Champion" selection=selected; }
+    INSTANCE Two component=ComboboxOption layoutSizingHorizontal=FILL { set Label="Smyrna"; }
+    INSTANCE Three component=ComboboxOption layoutSizingHorizontal=FILL { set Label="Vranja" availability=disabled; }
+}

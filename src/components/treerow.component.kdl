@@ -5,7 +5,8 @@
 // The chevron is a glyph of the icon font, Tabler's chevron-right when closed and chevron-down when open, as the
 // stylesheet turns it; an end node keeps its room empty. The kind is a Tag instance, exposed so an instance of the row sets its label; the class at the end is in the
 // small style, since no text style holds the monospace.
-// Not drawn: the indent, which is the group's and not the row's; right to left.
+// The count of the node's children shows while it is closed. Not drawn: the indent and its guide, which are the group's
+// and not the row's; right to left.
 component TreeRow tokens="{ins.tree.row}"
 description "One node of a tree: its chevron, its kind, its name and its class. Selected, the accent's tint."
 
@@ -13,6 +14,7 @@ properties {
     VARIANT node closed open end
     TEXT Name default="Paola Esempio"
     TEXT Class default=".name"
+    TEXT Count default="3"
 }
 
 guard open { is (input)node open }
@@ -34,5 +36,10 @@ FRAME TreeRow layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVer
     TEXT Name tokens="{ins.tree.row}" characters=(property)Name textAutoResize=HEIGHT layoutSizingHorizontal=FILL
     TEXT Class characters=(property)Class textStyle="{ins.typography.small}" textAutoResize=WIDTH_AND_HEIGHT {
         fills "{ins.tree.row.color}"
+    }
+    TEXT Count characters=(property)Count textStyle="{ins.typography.small}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.tree.row.color}"
+        when open visible=#false
+        when end visible=#false
     }
 }

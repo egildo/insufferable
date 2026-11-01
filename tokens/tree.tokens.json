@@ -3,10 +3,18 @@
     "tree": {
       "$description": "A tree view: insufferable-tree holding nested lists, each node's row a span. A parent node's chevron points to its end when closed and down when open; the selected row sits on the accent's tint.",
       "indent": {
-        "$description": "How far a group of child nodes sits in from its parent's row.",
+        "$description": "How far a group of child nodes sits in from the guide, and the guide: a hairline down the parent's chevron.",
         "paddingInlineStart": {
           "$type": "dimension",
-          "$value": "{ins.space.4}"
+          "$value": "{ins.space.2}"
+        },
+        "borderInlineStartColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        },
+        "borderInlineStartWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.1}"
         }
       },
       "row": {

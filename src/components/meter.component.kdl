@@ -1,0 +1,24 @@
+// Meter: the native meter, a gauge in a range, in its zones. Source: ins.meter and its three zones in
+// tokens/meter.tokens.json. Its axis is the zone the value falls in, declared here, since the browser picks the
+// zone and no part of a token names it. The value is a share of the track, 60% here.
+component Meter tokens="{ins.meter}"
+description "A native meter: a track and a value, green in the optimum zone, amber short of it, red in the worst."
+
+properties {
+    VARIANT zone optimum suboptimum worst
+}
+
+guard optimum { is (input)zone optimum }
+guard suboptimum { is (input)zone suboptimum }
+guard worst { is (input)zone worst }
+
+FRAME Meter layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width=(literal)240 height="{ins.meter.blockSize}" clipsContent=#true {
+    FRAME Value tokens="{ins.meterOptimum}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FILL width=(literal)144 {
+        when suboptimum {
+            fills "{ins.meterSuboptimum.backgroundColor}"
+        }
+        when worst {
+            fills "{ins.meterWorst.backgroundColor}"
+        }
+    }
+}

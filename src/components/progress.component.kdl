@@ -1,0 +1,9 @@
+// Progress: the native progress, a bar and its value. Source: ins.progress and ins.progressValue in
+// tokens/progress.tokens.json. One member: the value is the fill's share of the track, 60% here; the stylesheet's
+// indeterminate sweep is an animation, which a component file does not draw.
+component Progress tokens="{ins.progress}"
+description "A native progress: a track in the line colour and a value in the accent, as high as a dot."
+
+FRAME Progress layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width=(literal)240 height="{ins.progress.blockSize}" clipsContent=#true {
+    FRAME Value tokens="{ins.progressValue}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FILL width=(literal)144
+}

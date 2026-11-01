@@ -1,0 +1,16 @@
+// Slider: the native range input, a track and a thumb. Source: ins.slider, ins.sliderTrack and ins.sliderThumb in
+// tokens/slider.tokens.json. Its axes come from the slider's parts: pointer, focus and availability. The thumb takes
+// the slider's colour, as the stylesheet makes it; the focus ring is the root's outline.
+// Not drawn: the thumb's own pressed state; a fill on the track, which the stylesheet does not draw either.
+component Slider tokens="{ins.slider}"
+description "A native range input: a thin track and a round thumb in the accent. Focused, a ring round it."
+
+FRAME Slider clipsContent=#false layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width=(literal)240 height="{ins.slider.blockSize}" counterAxisAlignItems=CENTER strokeWeight="{ins.slider.outlineWidth}" strokeAlign=INSIDE cornerRadius="{ins.slider.borderRadius}" {
+    fills
+    strokes "{ins.slider.outlineColor}"
+    FRAME Track tokens="{ins.sliderTrack}" clipsContent=#false layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=FIXED height="{ins.sliderTrack.blockSize}" counterAxisAlignItems=CENTER {
+        FRAME Thumb tokens="{ins.sliderThumb}" layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.sliderThumb.inlineSize}" height="{ins.sliderThumb.blockSize}" layoutPositioning=ABSOLUTE x=(literal)110 y=(literal)-8 {
+            fills "{ins.slider.color}"
+        }
+    }
+}

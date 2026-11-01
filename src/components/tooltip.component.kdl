@@ -1,0 +1,13 @@
+// Tooltip: a hint over its trigger, insufferable-tooltip popover=hint. Source: ins.tooltip in
+// tokens/tooltip.tokens.json. The inverse of the page: the text colour for the ground, the surface for the words.
+// Not drawn: the delays, which are the trigger's.
+component Tooltip tokens="{ins.tooltip}"
+description "A short hint over a control: the page's inverse, small, at most a hint's width."
+
+properties {
+    TEXT Label default="Reset to the inherited value"
+}
+
+FRAME Tooltip layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG maxWidth="{ins.tooltip.maxInlineSize}" {
+    TEXT Label tokens="{ins.tooltip}" characters=(property)Label textAutoResize=WIDTH_AND_HEIGHT
+}

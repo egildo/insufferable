@@ -1,0 +1,24 @@
+// BreadcrumbItem: one item of a breadcrumb, nav with an ol, and the separator after it. Source: ins.breadcrumb,
+// ins.breadcrumbSeparator and ins.breadcrumbCurrent in tokens/breadcrumb.tokens.json. The current page is the last
+// item, medium, with no separator after it. The separator is a glyph of the icon font, chevron-right, drawn by the
+// stylesheet as the item's ::after.
+component BreadcrumbItem tokens="{ins.breadcrumb}"
+description "One step of a breadcrumb trail and its separator; the current page is in the medium weight with none."
+
+properties {
+    VARIANT position inner current
+    TEXT Label default="Quinces"
+}
+
+guard current { is (input)position current }
+
+FRAME BreadcrumbItem layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER itemSpacing="{ins.breadcrumb.gap}" {
+    fills
+    TEXT Label tokens="{ins.breadcrumb}" characters=(property)Label textAutoResize=WIDTH_AND_HEIGHT {
+        when current fontWeight="{ins.breadcrumbCurrent.fontWeight}"
+    }
+    TEXT Separator textStyle="{ins.icon.font}" characters="\u{ea61}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.breadcrumbSeparator.color}"
+        when current visible=#false
+    }
+}

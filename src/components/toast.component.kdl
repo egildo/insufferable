@@ -1,0 +1,25 @@
+// Toast: a message that comes and goes, div class=toast in the toasts region. Source: ins.toast in
+// tokens/toast.tokens.json. Its axis comes from the toast's parts: the variant, rest or danger. The bar at the
+// start is the stylesheet's border at the start: a frame of its own at the start, since a stroke is one colour and
+// the hairline round the rest is the group's; the padding is the body's, so the bar sits on the edge.
+// Not drawn: the region's place, and the time-out, which are the app's; right to left.
+component Toast tokens="{ins.toast}"
+description "A message in a raised card with a bar at the start, in the accent or the danger; it has a close button."
+
+properties {
+    TEXT Message default="Saved"
+}
+
+FRAME Toast layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.size.toast}" counterAxisAlignItems=CENTER paddingTop="{ins.space.0}" paddingRight="{ins.space.0}" paddingBottom="{ins.space.0}" paddingLeft="{ins.space.0}" itemSpacing="{ins.space.0}" strokeAlign=INSIDE clipsContent=#true {
+    effects "{ins.shadow.raised}"
+    FRAME Bar layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FILL width="{ins.toast.borderInlineStartWidth}" {
+        fills "{ins.toast.borderInlineStartColor}"
+    }
+    FRAME Body layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG counterAxisAlignItems=CENTER paddingTop="{ins.toast.paddingBlock}" paddingBottom="{ins.toast.paddingBlock}" paddingLeft="{ins.toast.paddingInline}" paddingRight="{ins.toast.paddingInline}" itemSpacing="{ins.toast.gap}" {
+        fills
+        TEXT Message tokens="{ins.toast}" characters=(property)Message textStyle="{ins.page.font}" textAutoResize=HEIGHT layoutSizingHorizontal=FILL
+        TEXT Close textStyle="{ins.icon.font}" characters="" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.toast.color}"
+        }
+    }
+}

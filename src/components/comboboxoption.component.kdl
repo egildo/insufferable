@@ -1,0 +1,13 @@
+// ComboboxOption: one option of a combobox's list, in its states. Source: ins.comboboxOption in
+// tokens/combobox.tokens.json. Its axes come from the option's parts: pointer, selection (the active option, which
+// carries aria-selected) and availability.
+component ComboboxOption tokens="{ins.comboboxOption}"
+description "One suggestion in a combobox: under the pointer the fill; active, the accent."
+
+properties {
+    TEXT Label default="Champion"
+}
+
+FRAME ComboboxOption layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG counterAxisAlignItems=CENTER {
+    TEXT Label tokens="{ins.comboboxOption}" characters=(property)Label textStyle="{ins.page.font}" textAutoResize=WIDTH_AND_HEIGHT
+}

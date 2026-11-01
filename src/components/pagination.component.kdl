@@ -1,0 +1,14 @@
+// PaginationItem: one link or button of a pagination, nav with a ul, in its states. Source: ins.paginationItem in
+// tokens/pagination.tokens.json. Its axes come from the item's parts: pointer, focus, current page and availability.
+// The outline is the item's own stroke, as a tab's is: clear at rest, the accent when focused.
+component PaginationItem tokens="{ins.paginationItem}"
+description "One page of a pagination: a square control; the current page sits on the accent."
+
+properties {
+    TEXT Label default="3"
+}
+
+FRAME PaginationItem layoutMode=HORIZONTAL layoutSizingHorizontal=HUG layoutSizingVertical=HUG primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER minWidth="{ins.paginationItem.minInlineSize}" minHeight="{ins.paginationItem.minBlockSize}" strokeWeight="{ins.paginationItem.outlineWidth}" strokeAlign=INSIDE {
+    strokes "{ins.paginationItem.outlineColor}"
+    TEXT Label tokens="{ins.paginationItem}" characters=(property)Label textStyle="{ins.pagination.font}" textAutoResize=WIDTH_AND_HEIGHT
+}
