@@ -9,6 +9,9 @@
  * checked. A checked row is one the app will write as a declaration. It is a
  * real checkbox, with its own name (`aria-label="Declare font-size"`), so
  * the user marks and unmarks it.
+ *
+ * A notice in a row, a conflict, is a callout across the row's columns: its
+ * words, and its buttons at the end.
  */
 
 fieldset.properties {
@@ -55,5 +58,25 @@ fieldset.properties {
 
   & > div.property > button {
     grid-column: -2;
+  }
+
+  /* A notice, such as a conflict, is a callout under the row's controls, across every column. */
+  & > div.property > :is([role=note], [role=alert]) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    grid-column: 1 / -1;
+    @apply --ins-properties-notice;
+
+    & > p {
+      margin: 0;
+    }
+
+    & > div {
+      display: flex;
+      flex-wrap: wrap;
+      @apply --ins-properties-notice;
+    }
   }
 }

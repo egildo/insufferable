@@ -84,6 +84,17 @@
             "$value": "{ins.color.accent}"
           }
         }
+      },
+      "notice": {
+        "$description": "A notice in a row, such as a conflict: a callout under the row's controls, its words and its buttons side by side.",
+        "columnGap": {
+          "$type": "dimension",
+          "$value": "{ins.space.3}"
+        },
+        "rowGap": {
+          "$type": "dimension",
+          "$value": "{ins.space.1}"
+        }
       }
     }
   }

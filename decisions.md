@@ -958,3 +958,34 @@ Firefox and Safari. A screen reader, so the announcements are written and not he
 ### Not done
 
 Groups and rich options, multi-select, strict mode, virtual scrolling. FigCraft: no component file for the list.
+
+## The conflict notice and the studio benchmark
+
+> **Ruled 1 November 2026,** as the fourth batch of the studio coverage, and built the same day. Its specs are in specs.md, under Callout, Property rows and Commands.
+
+### The ruling
+
+- **The conflict notice is a callout in the property row,** across its columns: the other writer's value, and two buttons, **Take theirs** and **Keep mine**. No new element.
+- **Two commands:** `--accept` for taking the other value, and `--dismiss`, already the toast's, for keeping one's own. Neither sets a state, so neither has a default; the app owns the value.
+- **The studio screen is rebuilt as `dev/studio.html`,** from insufferable's parts alone, as the benchmark of the coverage.
+
+### What the build found
+
+- **The callout needed a warning.** It had the accent and the danger. A conflict is neither an error nor a note, so it is `class="warn"`, on a new colour role, `warnTint` (`amber.25` in light, `amber.900` in dark). Text on it is 14:1 or more in both schemes and the bar 4.9:1 or more.
+- **`role="alert"`, not `status`.** The proposal said `status`, the polite one. The callout's rule is `note` or `alert`, and `status` is already the toast's and the combobox's own role, so styling it would have reached them. Another writer's change is announced, as an alert is.
+- **`--dismiss` was in use but not in the vocabulary:** the toast sent it and `src/commands.ts` and the table did not list it. Both do now.
+- **A light sheet in a dark app needs only `color-scheme: light`** on the sheet: every part resolves its colours from it. No part had to learn it.
+
+### What the benchmark found: the gaps
+
+At 1600 by 960, the screen assembles from the parts: the docks, the three panes, the tree, the pill tabs with counts, the rule cards with chips, the property rows with the conflict, the log, the status and the sheets. What the studio draws that the parts do not yet:
+
+- **A tree row did not stay on one line,** and is now fixed: the row is one line, 32px, and a label written in an element of its own, `<span>Paola Esempio</span>`, is cut short with an ellipsis while the tag and the code keep their room, the code at the end. Bare text is clipped, not ellipsised: an ellipsis cannot be drawn on a text node inside a flex row, and a grid did not draw it either. The element does not wrap the text itself, so an app's own rendering is not fought; the demos now write the label in a span.
+- **The tree has no indent guides** (the studio's hairline down each open node) **and no count on a closed node.**
+- **Heights differ a little:** the pane head is 34px and the tab 25px where the studio has 40 and 28. This is for the style study, since it changes token values, not markup.
+- **The extension list's items are plain options,** where the studio's hold a tag beside the name: the rich options the listbox does not build.
+
+### What was checked
+
+Typecheck and tests pass; the stylesheet is 127.3 KB. In the built-in browser, on `dev/properties.html` and `dev/studio.html`: the notice under its row, in the warning's tint; **Take theirs** wrote the value and removed the notice, and **Keep mine** removed it and kept the value; focus returned to the field. Not checked: the light scheme in the browser (the contrast was read from the resolved colours), FigCraft (the callout's component file has no warn variant yet), a screen reader.
+

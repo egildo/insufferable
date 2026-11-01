@@ -346,6 +346,7 @@ A note set apart from the text around it, styled by its role. There is no native
 
 - **`role="note"`** for a note that is part of the page; **`role="alert"`** for one that appears after an action and must be announced, as the platform announces an alert when it is added.
 - **A tinted ground and a bar at the start,** in the accent; `class="danger"` in the danger. The tints are pale in light, `blue.25` and `red.25`, because on the next step a link would fall under 4.5:1; every text and link on them keeps it.
+- **`class="warn"`** is the warning's tint, `warnTint` (`amber.25` in light, `amber.900` in dark) with a bar in `ins.color.warn`. Text on it is 14:1 or more in both schemes, the bar 4.9:1 or more.
 - **It holds any flow content,** paragraphs, lists, an icon; its first and last child sit flush with its edges.
 
 ### Button
@@ -582,6 +583,7 @@ An inspector: `<fieldset class="properties">` holding a `<legend>` and `div.prop
 - **The name is in the monospace,** as a property is written.
 - **The reset is an icon button,** Tabler's `restore`, disabled while the value is the one it would return to. The app enables it.
 - **The value's controls are the fields,** at their own size until the density is set.
+- **A notice in a row** is a callout, the last child of `div.property`, across every column, with its words in a `<p>` and its buttons in a `<div>` at the end. A conflict, another writer's value, is `<div role="alert" class="warn">`: "Changed elsewhere to" and the other value in `<data value>`, then **Take theirs**, which sends `--accept`, and **Keep mine**, which sends `--dismiss`. The buttons name the value's control in `commandfor`; the app owns the value, takes or keeps it, removes the notice and drops the control's `aria-describedby`, which names the notice while it shows. The row is in conflict because it holds the notice: nothing else marks it.
 
 ### Status
 
@@ -614,9 +616,9 @@ A hierarchical list whose nodes open and close: `<insufferable-tree>` holding a 
 <insufferable-tree aria-label="Structure">
   <ul>
     <li aria-expanded="true">
-      <span><small class="tag">Section</small> Paola Esempio <code>.envelope</code></span>
+      <span><small class="tag">Section</small> <span>Paola Esempio</span> <code>.envelope</code></span>
       <ul>
-        <li aria-selected="true"><span><small class="tag">Paragraph</small> Paola Esempio <code>.name</code></span></li>
+        <li aria-selected="true"><span><small class="tag">Paragraph</small> <span>Paola Esempio</span> <code>.name</code></span></li>
       </ul>
     </li>
   </ul>
@@ -629,7 +631,7 @@ A hierarchical list whose nodes open and close: `<insufferable-tree>` holding a 
 - **A node is an `li`,** which cannot send a command through `commandfor`. So the element builds the same event, `new CommandEvent('command', { command, source })`, with the node as its source, and sends it to itself: the app hears it at the root, in the capture phase, as it hears a tab's. Unless the app cancels it, the element applies it.
 - **Selection apart from focus.** The arrows move focus and select nothing; the APG warns against selection following focus where selecting does work, as moving a caret does. Focus is a ring on the row, selection the accent's tint, so both show at once.
 - **The keyboard, as the APG lists it:** down and up move without opening or closing, and stop at the ends; right opens a closed node, moves into an open one, and does nothing on an end node; left closes an open node, or moves to the parent; Home and End go to the first and the last visible node; Enter selects. Right to left, left and right change places. Type-ahead: a character, or several in quick succession, moves to the next node whose name starts with them, wrapping. A node is found by its own name, its row without its tags.
-- **The look:** the chevron is the row's `::before`, Tabler's `chevron-right`, turned down when its node is open and mirrored right to left; an end node keeps its room, so the names line up. A group sits in by `ins.tree.indent`. A row's last `<code>` sits at its end.
+- **The look:** the chevron is the row's `::before`, Tabler's `chevron-right`, turned down when its node is open and mirrored right to left; an end node keeps its room, so the names line up. A group sits in by `ins.tree.indent`. A row's last `<code>` sits at its end. A row is one line: a label written in an element of its own, `<span>Paola Esempio</span>`, is cut short with an ellipsis and leaves the tag and the code their room; bare text is clipped, since an ellipsis cannot be drawn on text that is not in an element.
 - **Without script:** the nested lists, all open, with no chevron.
 
 Not built: multi-select, `*` to open every sibling (optional in the pattern), disabled nodes, nodes loaded as they open.
@@ -843,6 +845,8 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 | `--press` | a toggle button in a toolbar | `aria-pressed` on the button, turned over |
 | `--expand` | a tree node, a disclosure button in a toolbar | `aria-expanded` on the node, turned over |
 | `--remove` | a chip's button | nothing: it asks the app to remove the value, and has no default |
+| `--dismiss` | a toast's close button, a conflict's "Keep mine" | nothing: it asks the app to put the notice away, and has no default |
+| `--accept` | a notice's button, a conflict's "Take theirs" | nothing: it asks the app to take the value the notice offers, and has no default |
 
 `src/commands.ts` exports them as `commands`, so an app reads the names from one place.
 

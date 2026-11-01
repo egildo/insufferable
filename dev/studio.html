@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · studio</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<script type="module" src="../dist/components/tabs.js"></script>
+<script type="module" src="../dist/components/toolbar.js"></script>
+<script type="module" src="../dist/components/tree.js"></script>
+<script type="module" src="../dist/components/splitter.js"></script>
+<script type="module" src="../dist/components/shell.js"></script>
+<style>
+  /* The benchmark: the studio screen, from insufferable's parts alone. This block is what the parts could not do. */
+  html, body { block-size: 100%; margin: 0; }
+  insufferable-shell { block-size: 100vh; }
+  /* The document is the app's own, not the system's: a sheet on the pane. */
+  .sheet { inline-size: 100%; max-inline-size: 35rem; margin: 0 auto 1.5rem; padding: 2rem; box-sizing: border-box; color-scheme: light; background: white; color: black; box-shadow: 0 1px 3px rgb(0 0 0 / 0.2); font-family: "Source Sans 3", Archivo, sans-serif; font-size: 0.8125rem; }
+  .sheet h3 { margin-block: 1rem 0.5rem; font-size: 1rem; }
+  .sheet .amount { font-size: 2rem; font-weight: 600; margin: 0; }
+  .sheet td:last-child, .sheet th:last-child { text-align: end; }
+  .desk-of-pages { overflow: auto; padding: 1.5rem; }
+</style>
+
+<insufferable-shell>
+  <insufferable-toolbar class="dock" aria-orientation="vertical" aria-label="Left panes">
+    <button aria-expanded="true" aria-controls="structure"><insufferable-icon name="list-tree"></insufferable-icon> Structure</button>
+    <button aria-expanded="false" aria-controls="resources"><insufferable-icon name="folder"></insufferable-icon> Resources</button>
+    <button aria-expanded="false" aria-controls="print-log"><insufferable-icon name="printer"></insufferable-icon> Print log <small class="status new">new</small></button>
+  </insufferable-toolbar>
+
+  <aside class="pane" id="structure" aria-labelledby="structure-title">
+    <header><h2 id="structure-title">Structure <data value="26">26</data></h2></header>
+    <insufferable-tree aria-labelledby="structure-title">
+      <ul>
+        <li aria-expanded="true">
+          <span><small class="tag">Section</small> <span>Energia Esempio S.p.A.</span> <code>#riepilogo</code></span>
+          <ul>
+            <li><span><small class="tag">Paragraph</small> <span>Energia Esempio S.p.A.</span></span></li>
+            <li aria-expanded="true">
+              <span><small class="tag">Section</small> <span>Paola Esempio</span> <code>.envelope</code></span>
+              <ul>
+                <li aria-selected="true"><span><small class="tag">Paragraph</small> <span>Paola Esempio</span> <code>.name</code></span></li>
+                <li><span><small class="tag">Paragraph</small> <span>Via Immaginaria 12</span></span></li>
+                <li><span><small class="tag">Paragraph</small> <span>00000 Borgo Esempio (XX)</span></span></li>
+              </ul>
+            </li>
+            <li><span><small class="tag">Section</small> <span>Importo da pagare</span> <code>.amount</code></span></li>
+          </ul>
+        </li>
+        <li><span><small class="tag">Section</small> <span>Come si compone il totale</span> <code>#dettaglio</code></span>
+          <ul><li><span><small class="tag">Table</small> <span>Voce, Importo</span></span></li></ul>
+        </li>
+        <li><span><small class="tag">Section</small> <span>Letture e consumi</span> <code>#letture</code></span>
+          <ul><li><span><small class="tag">Table</small> <span>Mese, Lettura, kWh</span></span></li></ul>
+        </li>
+        <li><span><small class="tag">Section</small> <span>Informazioni utili</span> <code>#info</code></span>
+          <ul><li><span><small class="tag">Paragraph</small> <span>Puoi pagare con bonifico</span></span></li></ul>
+        </li>
+      </ul>
+    </insufferable-tree>
+  </aside>
+  <insufferable-splitter aria-controls="structure"></insufferable-splitter>
+
+  <aside class="pane" id="resources" aria-labelledby="resources-title">
+    <header><h2 id="resources-title">Resources <data value="6">6</data></h2></header>
+    <table>
+      <thead><tr><th scope="col">File</th><th scope="col">Size</th></tr></thead>
+      <tbody>
+        <tr><td><small class="status ok">Synced</small> <code>tokens.css</code></td><td>0.4 kB</td></tr>
+        <tr><td><small class="status off">Not used</small> <code>page.css</code></td><td>1.2 kB</td></tr>
+      </tbody>
+    </table>
+  </aside>
+  <insufferable-splitter aria-controls="resources"></insufferable-splitter>
+
+  <aside class="pane" id="print-log" aria-labelledby="print-log-title">
+    <header><h2 id="print-log-title">Print log <data value="2">2</data></h2></header>
+    <ol class="log">
+      <li><time datetime="10:38">10:38</time> <small class="status warn">Warning</small> <span>Source Sans 3 not embedded</span></li>
+      <li><time datetime="10:42">10:42</time> <small class="status ok">Done</small> <span>Printed 2 pages</span></li>
+    </ol>
+  </aside>
+  <insufferable-splitter aria-controls="print-log"></insufferable-splitter>
+
+  <main class="pane" aria-labelledby="doc-title">
+    <header>
+      <h1 id="doc-title">Bolletta della luce</h1>
+      <code>demos/bolletta/index.html</code>
+      <small>1 / 2 · <small class="status ok">Synced</small> v12</small>
+      <button class="plain" aria-label="Dark theme" aria-pressed="false"><insufferable-icon name="moon"></insufferable-icon></button>
+    </header>
+    <div class="desk-of-pages">
+      <article class="sheet" aria-label="Page 1">
+        <h2 style="margin:0">Energia Esempio S.p.A.</h2>
+        <p>Fattura di energia elettrica · uso domestico · Servizio di maggior tutela</p>
+        <p>Paola Esempio<br>Via Immaginaria 12<br>00000 Borgo Esempio (XX)</p>
+        <p>Importo da pagare</p>
+        <p class="amount">130,72 €</p>
+        <p>Entro il 24/10/2026 paga 130,72 € con bonifico.</p>
+      </article>
+      <article class="sheet" aria-label="Page 2">
+        <h3>Come si compone il totale</h3>
+        <table>
+          <thead><tr><th scope="col">Voce</th><th scope="col">Importo</th></tr></thead>
+          <tbody>
+            <tr><td>Spesa per la materia energia</td><td>74,98 €</td></tr>
+            <tr><td>Trasporto e gestione del contatore</td><td>19,80 €</td></tr>
+            <tr><td>Oneri di sistema</td><td>14,88 €</td></tr>
+            <tr><td>Imposte (accise)</td><td>9,18 €</td></tr>
+            <tr><td>IVA 10%</td><td>11,88 €</td></tr>
+            <tr><td>Totale fattura</td><td>130,72 €</td></tr>
+          </tbody>
+        </table>
+        <h3>Letture e consumi</h3>
+        <table>
+          <thead><tr><th scope="col">Mese</th><th scope="col">Lettura</th><th scope="col">kWh</th></tr></thead>
+          <tbody>
+            <tr><td>Agosto 2026</td><td>14 602</td><td>182</td></tr>
+            <tr><td>Settembre 2026</td><td>14 761</td><td>159</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </div>
+  </main>
+
+  <insufferable-splitter aria-controls="styles"></insufferable-splitter>
+  <aside class="pane" id="styles" aria-labelledby="styles-title">
+    <header>
+      <insufferable-tabs class="pill" aria-label="Styles">
+        <button aria-controls="rules">Local Styles <data value="3">3</data></button>
+        <button aria-controls="values">Values <data value="6">6</data></button>
+      </insufferable-tabs>
+      <button class="plain" aria-label="Close Styles"><insufferable-icon name="x"></insufferable-icon></button>
+    </header>
+    <div id="rules">
+      <hgroup><h3>Rules</h3><p>3, in the sheet’s order</p></hgroup>
+      <article class="card" aria-label="Rule #riepilogo p">
+        <p><code>#riepilogo p</code> <small class="tag">By name</small></p>
+        <ul class="chips" id="decls" aria-label="Declarations of #riepilogo p">
+          <li><code>hyphens: none</code> <button commandfor="decls" command="--remove" value="hyphens" aria-label="Remove hyphens: none"><insufferable-icon name="x"></insufferable-icon></button></li>
+        </ul>
+      </article>
+      <article class="card" aria-label="Rule .envelope .name">
+        <p><code>.envelope .name</code> <small class="status warn">Orphan</small></p>
+        <ul class="chips" id="decls2" aria-label="Declarations of .envelope .name">
+          <li><code>font-weight: 700</code> <button commandfor="decls2" command="--remove" value="weight" aria-label="Remove font-weight: 700"><insufferable-icon name="x"></insufferable-icon></button></li>
+        </ul>
+      </article>
+
+      <hgroup><h3>Amend</h3><p>the caret’s block</p></hgroup>
+      <p><small>#riepilogo › section.envelope › p.name</small></p>
+      <label>Extend with
+        <select size="3">
+          <option selected>By name · .name</option>
+          <option>By tag · p</option>
+          <option>By position · section p:nth-child(1)</option>
+        </select>
+      </label>
+
+      <fieldset class="properties">
+        <legend>Type</legend>
+        <div class="property">
+          <input type="checkbox" aria-label="Declare importo" checked>
+          <label for="amount">importo</label>
+          <input id="amount" inputmode="decimal" value="130,72 €" aria-describedby="amount-conflict">
+          <button type="button" class="plain" aria-label="Reset importo"><insufferable-icon name="restore"></insufferable-icon></button>
+          <div role="alert" class="warn" id="amount-conflict">
+            <p>Changed elsewhere to <data value="131.04">131,04 €</data></p>
+            <div>
+              <button type="button" class="plain" commandfor="amount" command="--accept">Take theirs</button>
+              <button type="button" class="plain" commandfor="amount" command="--dismiss">Keep mine</button>
+            </div>
+          </div>
+        </div>
+        <div class="property">
+          <input type="checkbox" aria-label="Declare font-size" checked>
+          <label for="size">font-size</label>
+          <input id="size" inputmode="decimal" value="11">
+          <select aria-label="Unit of font-size"><option>pt</option><option>px</option></select>
+          <button type="button" class="plain" aria-label="Reset font-size"><insufferable-icon name="restore"></insufferable-icon></button>
+        </div>
+        <div class="property">
+          <input type="checkbox" aria-label="Declare font-weight">
+          <label for="weight">font-weight</label>
+          <select id="weight"><option>400</option><option selected>700</option></select>
+          <button type="button" class="plain" aria-label="Reset font-weight" disabled><insufferable-icon name="restore"></insufferable-icon></button>
+        </div>
+        <div class="property">
+          <input type="checkbox" aria-label="Declare color" checked>
+          <label for="ink">color</label>
+          <input id="ink" type="color" value="#1c1a17">
+          <button type="button" class="plain" aria-label="Reset color"><insufferable-icon name="restore"></insufferable-icon></button>
+        </div>
+      </fieldset>
+    </div>
+    <div id="values">
+      <hgroup><h3>Values</h3><p>6</p></hgroup>
+    </div>
+  </aside>
+
+  <insufferable-splitter aria-controls="source"></insufferable-splitter>
+  <aside class="pane" id="source" aria-labelledby="source-title">
+    <header><h2 id="source-title">Source <data value="212">212</data></h2></header>
+    <pre><code>&lt;p class="name"&gt;Paola Esempio&lt;/p&gt;</code></pre>
+  </aside>
+
+  <insufferable-toolbar class="dock" aria-orientation="vertical" aria-label="Right panes">
+    <button aria-expanded="true" aria-controls="styles"><insufferable-icon name="stack-2"></insufferable-icon> Styles</button>
+    <button aria-expanded="false" aria-controls="source"><insufferable-icon name="code"></insufferable-icon> Source</button>
+  </insufferable-toolbar>
+</insufferable-shell>
+
+<script type="module">
+  // The app: one pane per side, and the conflict's two answers.
+  document.addEventListener('command', (event) => {
+    if (event.command === '--expand' && event.target.matches('insufferable-toolbar.dock')) {
+      if (event.source.getAttribute('aria-expanded') === 'true') return;
+      for (const other of event.target.querySelectorAll('button[aria-expanded="true"]')) other.setAttribute('aria-expanded', 'false');
+    }
+    if (event.target.id === 'amount' && (event.command === '--accept' || event.command === '--dismiss')) {
+      if (event.command === '--accept') event.target.value = document.querySelector('#amount-conflict data').textContent;
+      event.target.removeAttribute('aria-describedby');
+      document.getElementById('amount-conflict').remove();
+    }
+  }, { capture: true });
+</script>
+</html>

@@ -8,7 +8,8 @@
  * glyph of the icon font, turned down when its node is open and mirrored
  * right to left; an end node keeps its room, so the names line up. The
  * focus ring is drawn on the row, since the node holds its children too. A
- * row's last `<code>` sits at its end.
+ * row's last `<code>` sits at its end. A row is one line; a label held in an
+ * element of its own is cut short with an ellipsis, where bare text is clipped.
  */
 
 insufferable-tree {
@@ -35,6 +36,8 @@ insufferable-tree li[role=treeitem] {
   & > span {
     display: flex;
     align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
     outline-style: solid;
     cursor: default;
     @apply --ins-tree-row;
@@ -60,6 +63,13 @@ insufferable-tree li[role=treeitem] {
 
   &:dir(rtl) > span::before {
     scale: -1 1;
+  }
+
+  /* A label in an element of its own is cut short with an ellipsis, the tag and the code keep their room. */
+  & > span > span {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   & > span > code:last-of-type {

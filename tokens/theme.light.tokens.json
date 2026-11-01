@@ -87,6 +87,10 @@
         "$value": "{palette.red.25}",
         "$description": "A ground tinted with the danger: a callout that warns. Every text and link on it keeps 4.5:1"
       },
+      "warnTint": {
+        "$value": "{palette.amber.25}",
+        "$description": "A ground tinted with the warning: a callout that tells of a conflict. Every text and link on it keeps 4.5:1"
+      },
       "ok": {
         "$value": "{palette.green.500}",
         "$description": "A status that is in order: a file synced, a line that went well. 4.5:1 on the page"

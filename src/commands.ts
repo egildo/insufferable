@@ -19,6 +19,10 @@ export const commands = {
   expand: '--expand',
   /** Asks the app to remove the value the sending button names, by its `value`, from a chip list. No default. */
   remove: '--remove',
+  /** Asks the app to take the other value a notice offers, a conflict's: the one changed elsewhere. No default. */
+  accept: '--accept',
+  /** Asks the app to dismiss the sending notice, a toast or a conflict's: it keeps what it has. No default. */
+  dismiss: '--dismiss',
 } as const;
 
 export type Command = (typeof commands)[keyof typeof commands];

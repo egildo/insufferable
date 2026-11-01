@@ -1,7 +1,19 @@
 {
   "ins": {
     "callout": {
-      "$description": "A note set apart from the text: role=note, or role=alert when it must be announced. A tinted ground and a bar at the start in the accent; class=danger in the danger.",
+      "$description": "A note set apart from the text: role=note, or role=alert when it must be announced. A tinted ground and a bar at the start in the accent; class=danger in the danger, class=warn in the warning.",
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "parts": {
+              "variant": {
+                "warn": ".warn",
+                "danger": ".danger"
+              }
+            }
+          }
+        }
+      },
       "color": {
         "$type": "color",
         "$value": "{ins.color.text.1}"
@@ -34,6 +46,16 @@
         "borderInlineStartColor": {
           "$type": "color",
           "$value": "{ins.color.danger}"
+        }
+      },
+      "warn": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.warnTint}"
+        },
+        "borderInlineStartColor": {
+          "$type": "color",
+          "$value": "{ins.color.warn}"
         }
       }
     }
