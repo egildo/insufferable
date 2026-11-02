@@ -1048,3 +1048,10 @@ A date range and several chosen days; days of the neighbouring months drawn dimm
 - **Tokens.** `dialogHeader`, `dialogFooter`, `dialogSmall`, `dialogLarge`, `dialogAlert`, `dialogFloating` and two size roles. They are groups of their own, not parts of `dialog`: the first form, with `small`, `alert` and `floating` as parts, made the sync move `ins.dialog.inlineSize` into a `variant` collection and drop the old variable, which was refused as breaking.
 - **FigCraft.** Dialog is now a set of 12 (size, kind, modality) with a header, a body and a footer, an alert without its close button, and a floating one with the shadow. Replacing the old single Dialog needed `--allow-breaking`; nothing used it. No existing variable changed; eight were added. Not drawn: an alert's bar, which a stroke of one colour cannot draw.
 - **Checked** in the built-in browser, dark: the edit dialog with its header, close button and footer; `returnValue` heard (`save`); the alert with the red edge and no close button; small 322 px, large 610 px; not modal open with no `:modal` state and the shadow set. Typecheck and tests pass. Not checked: the light scheme, Firefox and Safari, a screen reader.
+
+## Four icons for a format toolbar
+
+> **Asked 2 November 2026:** the icons the BelType studio's toolbar draws.
+
+- **The icons** `bold`, `italic`, `arrow-back-up` and `arrow-forward-up` ship: Bold, Italic, Undo and Redo, by Tabler's names. The studio names them in its own taste; insufferable says nothing of what an icon means.
+- **Not done:** the FigCraft library's icon set does not have them yet.

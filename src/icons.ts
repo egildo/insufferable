@@ -5,8 +5,11 @@
  */
 export const icons = [
   'adjustments-horizontal',
+  'arrow-back-up',
   'arrow-down',
+  'arrow-forward-up',
   'arrow-up',
+  'bold',
   'check',
   'chevron-down',
   'chevron-left',
@@ -18,6 +21,7 @@ export const icons = [
   'home',
   'inbox',
   'info-circle',
+  'italic',
   'list-tree',
   'mail',
   'moon',
