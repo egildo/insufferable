@@ -10,7 +10,7 @@ insufferable is a lean design system of UI elements, used in Egildo's own tools.
 
 It ships elements, never a store. An app manages its state however it wants. What insufferable removes is the need for a framework.
 
-Fifteen elements are built: tabs, disclosure, icon, link, divider, table, callout, button, field, listbox, checkbox and radio and switch, segmented control, dialog, menu, and toolbar.
+Every element it ships is described under [Elements](#elements).
 
 ## Principles
 
@@ -66,7 +66,7 @@ insufferable/
 │   ├── type.tokens.json             the font primitives and the text styles
 │   ├── theme.light.tokens.json      the colour roles, light: the theme's default context
 │   ├── theme.dark.tokens.json       the colour roles, dark
-│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell, progress, spinner, meter, slider, breadcrumb, pagination, card, tooltip, toast, combobox .tokens.json   one per element
+│   └── page, link, divider, table, callout, tabs, disclosure, icon, button, field, listbox, choice, segmented, dialog, menu, toolbar, count, tag, chips, choices, properties, status, log, tree, shell, progress, spinner, meter, slider, breadcrumb, pagination, card, tooltip, toast, combobox, popover, avatar, skeleton, empty, drawer, calendar .tokens.json   one per element
 ├── src/
 │   ├── index.css                    the layers, the mixins and the imports
 │   ├── tokens.css                   the token layer
@@ -332,7 +332,33 @@ The native `<table>`, its cells and its caption, by element name.
 - **Cells start where the text starts,** in either direction, and sit at the top of their row.
 - **The caption** is quieter, in the label style, at the start.
 
-Not built: numbers aligned to the end, a row under the pointer, a sticky header, sorting.
+Not built: numbers aligned to the end, a row under the pointer. Sorting and selecting a row, and a header that stays at the top, are the table element's, below.
+
+#### Sort and select
+
+`<insufferable-table>` wraps a native `<table>`; without script it is a table whose sort buttons do nothing and whose boxes check.
+
+```html
+<insufferable-table>
+  <table>
+    <thead><tr>
+      <th scope="col"><input type="checkbox" aria-label="Select all"></th>
+      <th scope="col" aria-sort="none"><button>Variety</button></th>
+      <th scope="col" aria-sort="none"><button>Kilograms</button></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><input type="checkbox" aria-label="Select Champion"></td><td>Champion</td><td>12</td></tr>
+    </tbody>
+  </table>
+</insufferable-table>
+```
+
+- **A column sorts when its header cell has `aria-sort`** and a `<button>` holds its title, as the Authoring Practices' sortable table has it (https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/). The element writes `commandfor` and `command="--sort"` on the button.
+- **`--sort` sets `aria-sort`** on the header that sent it, `ascending` then `descending` at each press, and `none` on the others, and puts the rows of each `<tbody>` in that order. A cell is read as the `value` of a `<data>` or the `datetime` of a `<time>` it holds, else as its text; two numbers sort as numbers, and any other text in the page's language, digits by value, in any case. The sort is stable. An app that holds its rows elsewhere cancels the command, sorts, and writes `aria-sort`.
+- **The mark** after the title is a glyph of the icon font: two chevrons while unsorted, an arrow up, an arrow down. The sorted column's title is in the text colour, the others' in the header's quieter one.
+- **Selecting is the platform's.** A row is selected by a checkbox in it. The checkbox in the header checks and unchecks the others and shows, as a checkbox does, that only some are checked (`indeterminate`). A row with its box checked takes the accent's tint (`ins.tableRow`, by `:has(:checked)`). The element sends nothing: the checkboxes' own `change` is heard, and the app reads which are checked. `aria-selected` is not written on a row, since it is not allowed on a row of a table; the checkbox says it.
+- **The element is a box** that scrolls sideways when the table is wider than it is, and up when the app gives it a height; the header stays at the top of it (`position: sticky`).
+- **Not built:** a grid in the Authoring Practices' sense, with the arrows moving from cell to cell and cells that are edited; a column that is resized, moved or hidden; sorting by more than one column; virtual scrolling. Whether any of them is a table or another element is open.
 
 ### Callout
 
@@ -457,7 +483,7 @@ The native `<dialog>`. There is no custom element and no insufferable command: w
 - **An app that wants to know** listens for `close` in the capture phase, as it hears `toggle`, and reads `returnValue`: the value of the form's button that closed it.
 - **Open,** it lays out what it holds in one column, on the raised surface, `ins.size.measure` wide (32rem) unless the window is narrower. Modal, it lays `ins.color.shade` over the page (`::backdrop`).
 
-Not built: a row for the actions, which the demo page lays out itself; a drawer.
+Not built: a row for the actions, which the demo page lays out itself. A dialog pinned to an edge is the [drawer](#drawer).
 
 ### Menu
 
@@ -831,13 +857,121 @@ A text field with suggestions under it, for a value the person may also write th
 - **The words are the app's.** `results` is the phrase announced as the list changes, `{n}` for the number; `empty` is the line shown when nothing matches. The element ships no words, so an app in another language is never half in English. With none, nothing is announced and an empty list is not shown, which is a gap an app should not leave. One phrase has one form: a language with plural forms sets the attribute as the count changes.
 - **Not in this version:** option groups and rich options (a datalist cannot hold them), multi-select and a tag input (compose chips beside the field, in the app), creating an option, a strict mode that refuses a value that is not listed, and virtual scrolling. Whether the platform will grow an editable combobox of its own is open (Open UI's explainer, https://open-ui.org/components/combobox.explainer); when it does, this element becomes a stylesheet.
 
+### Popover
+
+The native `popover` attribute on a `<div>` or a `<section>`: a panel of any content, under the button that opens it. There is no custom element and no insufferable command.
+
+```html
+<button commandfor="share" command="toggle-popover">Share</button>
+<div id="share" popover aria-labelledby="share-title">
+  <h3 id="share-title">Share the recipe</h3>
+  <label>Send to <input type="email" name="to"></label>
+  <button class="solid">Send</button>
+</div>
+```
+
+- **Opened and closed by the platform:** `toggle-popover`, `show-popover` and `hide-popover` commands, light dismiss, Escape, and focus handed back to the button. An app that wants to know listens for `toggle`.
+- **The surface** is the menu's, wider and padded (`ins.popover`): raised, a hairline, the raised shadow, at most `ins.size.measure` wide. What it holds is laid out in one column, spaced by its gap, its children with no margin of their own.
+- **Placed by anchor positioning** under its button, at its start, flipping above when there is no room, as the menu is.
+- **A panel that must be answered is a dialog,** and a list of actions a menu; the popover is for what a person may glance at and leave: a form of two fields, a colour, a definition.
+- **An `aside` is left alone.** The shell makes its side panes popovers below a width and draws them itself.
+- **Named** by its heading, `aria-labelledby`, or by `aria-label`. It has no role of its own: an app that opens it as a dialog says `role="dialog"`.
+
+### Avatar
+
+A person or a thing, as a picture or as its initials: `<img class="avatar">`, or `<span class="avatar" role="img" aria-label="Paola Esempio">PE</span>`.
+
+```html
+<ul class="avatars" aria-label="Editors: Paola Esempio and Giulio Rossi">
+  <li><span class="avatar" role="img" aria-label="Paola Esempio">PE</span></li>
+  <li><img class="avatar" alt="Giulio Rossi" src="giulio.jpg"></li>
+</ul>
+```
+
+- **A circle the height of a control** (`ins.avatar`). A picture fills it, cropped to the middle; initials sit centred in the label style, on the accent's tint.
+- **Named once.** The picture by `alt`, the initials by `aria-label` on a `role="img"`, so a screen reader says the person, not the letters.
+- **A group** is a list, `ul.avatars`: each avatar overlaps the one before by `ins.space.2` and is set off by a ring of `ins.avatars`, in the page's colour. On a card or any other surface the app sets the ring's colour to that surface. A count of the ones left out, `+2`, is an avatar with `aria-hidden`, and the list's `aria-label` names them all.
+- **One size.** A smaller or a larger avatar is a size the app asks for; the kit has one control height.
+
+### Skeleton
+
+What stands where content will be while it loads: `<div class="skeleton" aria-hidden="true">`.
+
+```html
+<article class="card" aria-busy="true">
+  <div class="skeleton circle" aria-hidden="true"></div>
+  <div class="skeleton" aria-hidden="true"></div>
+  <div class="skeleton" aria-hidden="true" style="inline-size: 70%"></div>
+</article>
+```
+
+- **A quiet bar,** `ins.size.box` tall, as wide as the space it is given, in the line colour; `class="circle"` is a round one the size of an avatar. The app gives a bar the width of the line it stands for.
+- **It is decoration.** It is hidden from assistive technology; the region that loads says so with `aria-busy="true"`, and the app takes that off, with the skeletons, when the content is there. The element keeps no state.
+- **It pulses** once in `ins.motion.sweep` (1597 ms), the opacity down to half and back; where motion is reduced, it stands still.
+- **Not built:** a shimmer that travels, which is a gradient animated per element and costs more than a pulse does.
+
+### Empty state
+
+A place that has nothing in it yet: `<section class="empty">`, or a `<div class="empty">`.
+
+```html
+<section class="empty" aria-labelledby="none">
+  <insufferable-icon name="inbox"></insufferable-icon>
+  <h2 id="none">No recipes yet</h2>
+  <p>Write down the first one, or bring them in from a file.</p>
+  <button class="solid">New recipe</button>
+</section>
+```
+
+- **An icon, a heading, words and the action that fills the place,** each of them optional, centred in a dashed hairline (`ins.empty`). The words are quieter, the heading in the text colour. Its children are spaced by its gap and keep no margin of their own.
+- **The dashed line says the place is waiting,** where the card's solid one says it holds something.
+- **A place that stands for a region** is named by its heading, `aria-labelledby`.
+- **The words are the app's.** The element ships none.
+
+### Drawer
+
+The native `<dialog class="drawer">`, pinned to the end edge of the window and as tall as it. There is no custom element and no insufferable command: whether it is open is the platform's, as for any dialog.
+
+```html
+<button commandfor="filters" command="show-modal">Filters</button>
+<dialog id="filters" class="drawer" aria-labelledby="filters-title">
+  <h2 id="filters-title">Filters</h2>
+  <button class="plain" aria-label="Close" commandfor="filters" command="close"><insufferable-icon name="x"></insufferable-icon></button>
+</dialog>
+```
+
+- **`class="start"`** pins it to the other edge. Right to left turns both.
+- **The dialog's surface** (`ins.drawer`): raised, a hairline on the edge that faces the page, the raised shadow, `ins.size.side` wide (20 rem) or the window's width if that is less, the dialog's padding and gap. Modal, it lays `ins.color.shade` over the page.
+- **It scrolls** when what it holds is taller than the window.
+- **It slides in from its edge and out again,** and the shade fades with it, in `ins.motion.drawer` (377 ms), from `@starting-style` and with `transition-behavior: allow-discrete`, so the platform keeps it drawn until it has left. Where motion is reduced it simply appears.
+- **A drawer that is not modal** is opened by `show` and has no shade. The same markup holds, but focus is not kept inside it: use it for a panel the page can be read beside.
+- **Not built:** a drawer from the top or the bottom (a sheet: the shell draws one at a phone's width), a drawer that is resized, and one that is pushed in beside the page.
+
+### Calendar
+
+A month of days, one of them chosen: `<insufferable-calendar>`. The date picker grid of the Authoring Practices (https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/), drawn inline.
+
+```html
+<insufferable-calendar value="2026-11-02" previous="Previous month" next="Next month"></insufferable-calendar>
+```
+
+- **To pick a date in a form, use `<input type="date">`:** the platform draws and keeps it. The calendar is for a month that is on the page, to look at and to choose from; with a popover, an app composes a date picker from the two.
+- **The element draws it.** A heading with the month's name between two buttons, and a table of the weeks under the weekdays, a day to a cell, a button in each. Without script there is nothing to see, since the markup is the element's own, as the combobox's list is.
+- **Attributes in.** `value` is the chosen date, `YYYY-MM-DD`; `month` is the month shown, `YYYY-MM`, the value's when it is not set and today's when there is no value; `min` and `max` bound the days that can be chosen, a day outside them being `aria-disabled`; `firstday` is the first day of the week, 1 Monday to 7 Sunday, the language's when it is not set. The language is the nearest `lang`: the month, the weekdays and the numerals are written in it by `Intl`, and the weeks follow its week info.
+- **The words are the app's.** `previous` and `next` name the two buttons; the element ships none, and warns once in the console when they are missing.
+- **Commands out.** A day sends `--select`, with its date in its `value`; the two buttons send `--show`, with the month they lead to, `YYYY-MM`. Unless the app cancels the command, the element writes `value`, or `month`. An app that owns the state cancels and writes the attributes itself; the element draws again.
+- **The keyboard** follows the Authoring Practices: the arrows move a day or a week (Left and Right follow the reading direction), Home and End go to the week's ends, Page Up and Page Down a month, with Shift a year; Enter and Space choose. Only the focused day is in the tab order. A move into the neighbouring month goes through `--show` as the button's click does, so an app that owns the month hears it; a move by a year writes `month` itself. The rules are pure functions in `dates.ts`, tested.
+- **It writes:** `role="grid"` on the table and `aria-labelledby` naming the heading, `aria-selected` on each cell, `aria-current="date"` on today, the weekday's full name as `abbr` on its heading, and a full date as each day's `aria-label`, so a screen reader says the weekday and the month, not a bare number. The heading is a polite live region, so a change of month is announced.
+- **The look.** A day is a button the size of a control: the fill under the pointer, the accent for the chosen day, a ring in the accent for today, a quiet colour for a day out of range. The table's own cell rules, the line under a row and the padding, are taken off inside it.
+- **Not built:** a range, several chosen days, a week number, a day that carries something (a dot, a count), a year and a month list to jump by, other calendars than the Gregorian (`Intl` writes them, but the grid is Gregorian's), and a day outside the month drawn dimmed in the first and last week.
+
 ### Motion
 
-The system's first motion, kept to what a spinner and a busy bar cannot do without: `ins.motion.spin` (987 ms) and `ins.motion.sweep` (1597 ms), then a toast's entrance (`toast`, 233 ms) and a hint's two delays (`hintShow`, 377 ms, and `hintHide`, 144 ms): Fibonacci numbers in milliseconds, on the same ladder as the dimensions. They are `duration` tokens, which FigCraft has no variable for, so the library skips them. There are no other transitions: a state changes at once. Every animation stands still where the person asks for less motion.
+The system's first motion, kept to what a spinner and a busy bar cannot do without: `ins.motion.spin` (987 ms) and `ins.motion.sweep` (1597 ms), then a toast's entrance (`toast`, 233 ms), a drawer's slide (`drawer`, 377 ms) and a hint's two delays (`hintShow`, 377 ms, and `hintHide`, 144 ms): Fibonacci numbers in milliseconds, on the same ladder as the dimensions. They are `duration` tokens, which FigCraft has no variable for, so the library skips them. The skeleton's pulse takes the sweep's duration. There are no other transitions: a state changes at once. Every animation stands still where the person asks for less motion.
 
 ## Commands
 
-A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` gives `--expand` (a tree node's; not the menu's, since a popover's open state is the platform's), `aria-pressed` `--press`, `aria-checked` `--check`. A command that sets no state is named after what it asks for, and has no default: `--remove`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
+A command is named after the ARIA state it sets, as a verb: `aria-selected` gives `--select`, `aria-expanded` gives `--expand` (a tree node's; not the menu's, since a popover's open state is the platform's), `aria-pressed` `--press`, `aria-checked` `--check`. A command that sets no state is named after what it asks for, and has no default: `--remove`. One that changes what an element shows, with no ARIA state to name it, is named after that and has a default all the same: `--show` writes the calendar's `month`. No prefix: a command reaches one target, and the app tells the elements apart by `event.target`. Ruled 27 October 2026; see [decisions.md](./decisions.md#the-first-command-select).
 
 | Command | Sent by | Sets |
 |---|---|---|
@@ -847,6 +981,8 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 | `--remove` | a chip's button | nothing: it asks the app to remove the value, and has no default |
 | `--dismiss` | a toast's close button, a conflict's "Keep mine" | nothing: it asks the app to put the notice away, and has no default |
 | `--accept` | a notice's button, a conflict's "Take theirs" | nothing: it asks the app to take the value the notice offers, and has no default |
+| `--sort` | a sortable column's button | `aria-sort` on its header, `none` on the others, and the rows in that order |
+| `--show` | a calendar's month buttons | the calendar's `month`, from the button's `value` |
 
 `src/commands.ts` exports them as `commands`, so an app reads the names from one place.
 

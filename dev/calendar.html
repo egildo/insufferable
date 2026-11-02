@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · calendar</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<script type="module" src="../dist/components/calendar.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 2rem; align-items: start; }
+  pre { background: #f4f4f4; padding: 0.5rem; min-height: 3lh; max-inline-size: 100%; overflow: auto; }
+  @media (prefers-color-scheme: dark) { pre { background: #222; } }
+</style>
+
+<h1>Calendar</h1>
+<p>A month of days, one of them chosen. To pick a date in a form, use <code>&lt;input type="date"&gt;</code>; the calendar is for a month that is on the page.</p>
+
+<div class="row">
+  <insufferable-calendar id="main" value="2026-11-02" previous="Previous month" next="Next month"></insufferable-calendar>
+  <insufferable-calendar id="it" lang="it" value="2026-11-12" min="2026-10-20" max="2026-12-10" previous="Mese precedente" next="Mese successivo"></insufferable-calendar>
+  <insufferable-calendar id="ar" lang="ar" dir="rtl" value="2026-11-12" previous="الشهر السابق" next="الشهر التالي"></insufferable-calendar>
+</div>
+
+<h2>What the app hears</h2>
+<pre id="log"></pre>
+
+<script type="module">
+  // The app hears every command at the root, before the element does. Here it only reads them; cancel one to own the state.
+  const log = document.getElementById('log');
+  document.addEventListener('command', (event) => {
+    if (!event.target.matches('insufferable-calendar')) return;
+    log.textContent += event.target.id + ' ' + event.command + ' ' + event.source.value + '\n';
+  }, { capture: true });
+</script>
+</html>

@@ -1,0 +1,48 @@
+{
+  "ins": {
+    "skeleton": {
+      "$description": "What stands where content will be while it loads: a quiet bar the height of a line of text, that pulses; class=circle for a round one, the size of an avatar.",
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "parts": {
+              "variant": {
+                "circle": ".circle"
+              }
+            }
+          }
+        }
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.box}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "animationDuration": {
+        "$type": "duration",
+        "$value": "{ins.motion.sweep}"
+      },
+      "circle": {
+        "inlineSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.control}"
+        },
+        "blockSize": {
+          "$type": "dimension",
+          "$value": "{ins.size.control}"
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{ins.radius.round}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+// Skeleton: what stands where content will be while it loads. Source: ins.skeleton in tokens/skeleton.tokens.json.
+// Its axis, shape, is the bar or the circle, declared here, since the circle is a class and its size another group
+// of the tokens. A bar is as wide as the space it is given: 200 here. Not drawn: the pulse, which is an animation.
+component Skeleton
+description "What stands where content will be while it loads: a quiet bar, or a circle the size of an avatar."
+
+properties {
+    VARIANT shape bar circle
+}
+
+guard circle { is (input)shape circle }
+
+FRAME Skeleton layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width=(literal)200 height="{ins.skeleton.blockSize}" cornerRadius="{ins.skeleton.borderRadius}" {
+    fills "{ins.skeleton.backgroundColor}"
+    when circle width="{ins.skeleton.circle.inlineSize}"
+    when circle height="{ins.skeleton.circle.blockSize}"
+    when circle cornerRadius="{ins.skeleton.circle.borderRadius}"
+}

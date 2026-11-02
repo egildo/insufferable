@@ -1,0 +1,33 @@
+/*
+ * skeleton: `<div class="skeleton" aria-hidden="true">`, what stands where content will be while
+ * it loads. It is a quiet bar as wide as the space it is given and as tall as a line of text,
+ * that pulses once in `ins.motion.sweep`; `class="circle"` is a round one the size of an avatar.
+ * It is decoration: it is hidden from assistive technology, and the region that is loading says
+ * so with `aria-busy="true"`, which the app takes off when the content is there. Where motion is
+ * reduced it stands still.
+ */
+
+:is(div, span).skeleton {
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  animation-name: ins-pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  @apply --ins-skeleton;
+
+  &.circle {
+    flex: none;
+    @apply --ins-skeleton-circle;
+  }
+}
+
+@keyframes ins-pulse {
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(div, span).skeleton {
+    animation: none;
+  }
+}

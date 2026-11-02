@@ -1,0 +1,92 @@
+/*
+ * drawer: the native `<dialog class="drawer">`, pinned to the end edge of the window and as tall
+ * as it; `class="start"` pins it to the other. Whether it is open is the platform's, as for any
+ * dialog: `show-modal` and `close` commands, and Escape. Open, it lays out what it holds in one
+ * column and scrolls if that is too tall; modal, it lays the shade over the page. It slides in
+ * from its edge and out again, and the shade fades with it; where motion is reduced, it simply
+ * appears.
+ */
+
+dialog.drawer {
+  box-sizing: border-box;
+  inset-block: 0;
+  block-size: 100%;
+  max-block-size: 100%;
+  max-inline-size: 100%;
+  margin-block: 0;
+  margin-inline: auto 0;
+  overflow-y: auto;
+  border-style: solid;
+  border-width: 0;
+  border-radius: 0;
+  translate: 0 0;
+  transition-property: translate, display, overlay;
+  transition-behavior: allow-discrete;
+  @apply --ins-drawer;
+
+  &.start {
+    margin-inline: 0 auto;
+  }
+
+  &[open] {
+    display: grid;
+    align-content: start;
+  }
+
+  &:not([open]) {
+    translate: 100% 0;
+  }
+
+  &.start:not([open]) {
+    translate: -100% 0;
+  }
+
+  &:dir(rtl):not([open]) {
+    translate: -100% 0;
+  }
+
+  &.start:dir(rtl):not([open]) {
+    translate: 100% 0;
+  }
+
+  @starting-style {
+    &[open] {
+      translate: 100% 0;
+    }
+
+    &.start[open] {
+      translate: -100% 0;
+    }
+
+    &:dir(rtl)[open] {
+      translate: -100% 0;
+    }
+
+    &.start:dir(rtl)[open] {
+      translate: 100% 0;
+    }
+  }
+
+  &::backdrop {
+    transition-property: background-color, display, overlay;
+    transition-behavior: allow-discrete;
+    @apply --ins-drawer-backdrop;
+  }
+
+  &:not([open])::backdrop {
+    background-color: transparent;
+  }
+
+  @starting-style {
+    &[open]::backdrop {
+      background-color: transparent;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog.drawer,
+  dialog.drawer::backdrop {
+    transition: none;
+  }
+}

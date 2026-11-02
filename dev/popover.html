@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · popover</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between; }
+</style>
+
+<h1>Popover</h1>
+<p>The native <code>popover</code> attribute on a <code>div</code>: a panel of any content under the button that opens it. Light dismiss and Escape are the platform's, and so is whether it is open.</p>
+
+<p class="row">
+  <button commandfor="share" command="toggle-popover"><insufferable-icon name="mail"></insufferable-icon> Share</button>
+  <button commandfor="note" command="toggle-popover" class="plain">About this recipe</button>
+  <button commandfor="low" command="toggle-popover">Opens above, with no room below</button>
+</p>
+
+<div id="share" popover aria-labelledby="share-title">
+  <h3 id="share-title">Share the recipe</h3>
+  <label>Send to <input type="email" name="to" placeholder="name@example.com"></label>
+  <p class="row"><button class="plain" commandfor="share" command="hide-popover">Cancel</button> <button class="solid">Send</button></p>
+</div>
+
+<div id="note" popover aria-label="About this recipe">
+  <p>Quince paste keeps for a year in a cool, dark place. Cut it in squares and eat it with cheese.</p>
+</div>
+
+<div id="low" popover aria-label="Above">
+  <p>It flips above the button when the window has no room below.</p>
+</div>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · avatar</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+</style>
+
+<h1>Avatar</h1>
+<p>A person or a thing in a circle the height of a control: a picture, or the initials. The name is <code>alt</code> on the picture and <code>aria-label</code> on the initials.</p>
+
+<p class="row">
+  <span class="avatar" role="img" aria-label="Paola Esempio">PE</span>
+  <span class="avatar" role="img" aria-label="Giulio Rossi">GR</span>
+  <img class="avatar" alt="Quince" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23e8b923'/%3E%3Ccircle cx='20' cy='24' r='11' fill='%23c98a12'/%3E%3C/svg%3E">
+</p>
+
+<h2>A group</h2>
+<ul class="avatars" aria-label="Editors: Paola Esempio, Giulio Rossi, Anna Verdi and 2 more">
+  <li><span class="avatar" role="img" aria-label="Paola Esempio">PE</span></li>
+  <li><span class="avatar" role="img" aria-label="Giulio Rossi">GR</span></li>
+  <li><span class="avatar" role="img" aria-label="Anna Verdi">AV</span></li>
+  <li><span class="avatar" aria-hidden="true">+2</span></li>
+</ul>
+</html>

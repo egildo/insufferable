@@ -1,0 +1,77 @@
+{
+  "ins": {
+    "drawer": {
+      "$description": "A native dialog pinned to the end edge of the window, as tall as it, with the dialog's surface and the menu's shadow; class=start for the other edge. It slides in from its edge.",
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "parts": {
+              "variant": {
+                "start": ".start"
+              }
+            }
+          }
+        }
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.raised}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderInlineStartWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.5}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.side}"
+      },
+      "boxShadow": {
+        "$type": "shadow",
+        "$value": "{ins.shadow.raised}"
+      },
+      "transitionDuration": {
+        "$type": "duration",
+        "$value": "{ins.motion.drawer}"
+      },
+      "start": {
+        "borderInlineStartWidth": {
+          "$type": "dimension",
+          "$value": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        "borderInlineEndWidth": {
+          "$type": "dimension",
+          "$value": "{ins.border.1}"
+        }
+      },
+      "backdrop": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.shade}"
+        },
+        "transitionDuration": {
+          "$type": "duration",
+          "$value": "{ins.motion.drawer}"
+        }
+      }
+    }
+  }
+}

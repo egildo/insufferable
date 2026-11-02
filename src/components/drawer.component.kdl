@@ -1,0 +1,35 @@
+// Drawer: the native dialog pinned to the end edge of the window, open. Source: ins.drawer in
+// tokens/drawer.tokens.json. Its axis, variant, is rest or start, the other edge, which only moves the border to the
+// other side. The group binds the fill, the padding and the gap; the border is drawn on the edge that faces the
+// page, the width is the side size and the height is the design's. Not drawn: the shade, and the slide.
+component Drawer tokens="{ins.drawer}"
+description "A dialog pinned to the end edge of the window, as tall as it, on the raised surface."
+
+properties {
+    TEXT Title default="Filters"
+    TEXT Text default="Narrow the list by what you cook."
+}
+
+guard start { is (input)variant start }
+
+FRAME Drawer layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.drawer.inlineSize}" height=(literal)480 strokeTopWeight="{ins.space.0}" strokeRightWeight="{ins.space.0}" strokeBottomWeight="{ins.space.0}" strokeLeftWeight="{ins.drawer.borderInlineStartWidth}" strokeAlign=INSIDE {
+    effects "{ins.shadow.raised}"
+    strokes "{ins.drawer.borderColor}"
+    when start strokeLeftWeight="{ins.drawer.start.borderInlineStartWidth}"
+    when start strokeRightWeight="{ins.drawer.start.borderInlineEndWidth}"
+    FRAME Header layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG counterAxisAlignItems=CENTER primaryAxisAlignItems=SPACE_BETWEEN {
+        fills
+        TEXT Title characters=(property)Title textStyle="{ins.heading.h2.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.drawer.color}"
+        }
+        TEXT Close textStyle="{ins.icon.font}" characters="\u{eb55}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.drawer.color}"
+        }
+    }
+    TEXT Text characters=(property)Text textStyle="{ins.page.font}" textAutoResize=HEIGHT layoutSizingHorizontal=FILL {
+        fills "{ins.drawer.color}"
+    }
+    INSTANCE Action component=Button {
+        set variant=solid Label="Show 12 recipes"
+    }
+}

@@ -1,0 +1,14 @@
+// Avatar: a person as initials, in a circle the height of a control. Source: ins.avatar in tokens/avatar.tokens.json.
+// It has no parts, so one member. The group binds the fill, the radius and the text; the size is explicit, since the
+// group does not bind a width or a height. A picture is the app's: it fills the same circle.
+// Not drawn: the ring that sets a group's avatars apart.
+component Avatar tokens="{ins.avatar}"
+description "A person as initials, in a circle the height of a control, on the accent's tint."
+
+properties {
+    TEXT Initials default="PE"
+}
+
+FRAME Avatar layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.avatar.inlineSize}" height="{ins.avatar.blockSize}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER clipsContent=#true {
+    TEXT Initials tokens="{ins.avatar}" characters=(property)Initials textAutoResize=WIDTH_AND_HEIGHT
+}

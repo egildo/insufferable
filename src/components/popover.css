@@ -1,0 +1,34 @@
+/*
+ * popover: the native `popover` attribute on a `<div>` or a `<section>`: a panel of any
+ * content, opened by a button whose `command` is `toggle-popover` and whose `commandfor` names it.
+ * Whether it is open is `:popover-open`, the platform's, and light dismiss and Escape are too.
+ * It sits on a raised surface under the button that opens it: anchor positioning takes that button
+ * as its anchor, and flips the panel above when there is no room below. Without anchor
+ * positioning it opens where the browser puts a popover. What it holds is laid out in one column,
+ * its children spaced by its gap and keeping no margin of their own. An `<aside>` is left alone:
+ * the shell makes its side panes popovers, and draws them itself.
+ */
+
+:is(div, section)[popover] {
+  box-sizing: border-box;
+  margin: 0;
+  border-style: solid;
+  @apply --ins-popover;
+
+  & > * {
+    margin: 0;
+  }
+}
+
+:is(div, section)[popover]:popover-open {
+  display: grid;
+}
+
+@supports (position-area: block-end) {
+  :is(div, section)[popover] {
+    inset: auto;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block;
+    margin-inline: 0;
+  }
+}

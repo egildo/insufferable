@@ -3,7 +3,7 @@
  * prefix is declared once, in its resolver (`$extensions["dev.insufferable"].prefix`); the build renames the
  * elements from this list when an app chooses another, so a name is never guessed from the text around it.
  */
-export const elements = ['combobox', 'icon', 'menu', 'shell', 'splitter', 'tabs', 'toolbar', 'tooltip', 'tree'] as const;
+export const elements = ['calendar', 'combobox', 'icon', 'menu', 'shell', 'splitter', 'table', 'tabs', 'toolbar', 'tooltip', 'tree'] as const;
 
 /** A prefix a custom element name can start with: lower case, starting with a letter. */
 export const validPrefix = (prefix: string) => /^[a-z][a-z0-9]*$/.test(prefix);

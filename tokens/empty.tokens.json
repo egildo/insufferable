@@ -1,0 +1,38 @@
+{
+  "ins": {
+    "empty": {
+      "$description": "A place that has nothing in it yet: an icon, a heading, a line of words and the action that fills it, centred, in a dashed hairline.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.2}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.lineStrong}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.2}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.5}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      }
+    },
+    "emptyHeading": {
+      "$description": "The empty state's heading, in the text colour.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      }
+    }
+  }
+}

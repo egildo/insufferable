@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>insufferable · table</title>
 <link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/table.js"></script>
 <style>
   body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
 </style>
@@ -27,4 +28,27 @@
   <thead><tr><th scope="col">الصنف</th><th scope="col">الكمية</th></tr></thead>
   <tbody><tr><td>سفرجل</td><td>١٢</td></tr></tbody>
 </table>
+
+<h2>Sort and select</h2>
+<p>Wrapped in <code>&lt;insufferable-table&gt;</code>, a column with <code>aria-sort</code> and a button sorts its rows, and the box in the header checks them all.</p>
+<insufferable-table id="stock" lang="en">
+  <table>
+    <caption>Quinces in store</caption>
+    <thead>
+      <tr>
+        <th scope="col"><input type="checkbox" aria-label="Select all"></th>
+        <th scope="col" aria-sort="none"><button>Variety</button></th>
+        <th scope="col" aria-sort="none"><button>Origin</button></th>
+        <th scope="col" aria-sort="none"><button>Kilograms</button></th>
+        <th scope="col" aria-sort="none"><button>Picked</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><input type="checkbox" aria-label="Select Champion"></td><td>Champion</td><td>United States</td><td>12</td><td><time datetime="2026-10-04">4 Oct</time></td></tr>
+      <tr><td><input type="checkbox" aria-label="Select Vranja"></td><td>Vranja</td><td>Serbia</td><td>8</td><td><time datetime="2026-09-28">28 Sep</time></td></tr>
+      <tr><td><input type="checkbox" aria-label="Select Portugal"></td><td>Portugal</td><td>Portugal</td><td>105</td><td><time datetime="2026-10-12">12 Oct</time></td></tr>
+      <tr><td><input type="checkbox" aria-label="Select Bereczki"></td><td>Bereczki</td><td>Hungary</td><td>9</td><td><time datetime="2026-10-01">1 Oct</time></td></tr>
+    </tbody>
+  </table>
+</insufferable-table>
 </html>

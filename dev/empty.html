@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · empty state</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+</style>
+
+<h1>Empty state</h1>
+<p>A place that has nothing in it yet: an icon, a heading, a line of words and the action that fills it.</p>
+
+<section class="empty" aria-labelledby="none">
+  <insufferable-icon name="inbox"></insufferable-icon>
+  <h2 id="none">No recipes yet</h2>
+  <p>Write down the first one, or bring them in from a file.</p>
+  <p class="row"><button class="solid">New recipe</button> <button>Import</button></p>
+</section>
+
+<h2>Only words</h2>
+<div class="empty"><p>Nothing matches “marmalade”.</p></div>
+</html>

@@ -5,6 +5,8 @@
  */
 export const icons = [
   'adjustments-horizontal',
+  'arrow-down',
+  'arrow-up',
   'check',
   'chevron-down',
   'chevron-left',
@@ -14,6 +16,7 @@ export const icons = [
   'heart',
   'help-circle',
   'home',
+  'inbox',
   'info-circle',
   'list-tree',
   'mail',
@@ -21,6 +24,7 @@ export const icons = [
   'printer',
   'restore',
   'search',
+  'selector',
   'settings',
   'stack-2',
   'x',

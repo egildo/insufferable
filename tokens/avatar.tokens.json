@@ -1,0 +1,42 @@
+{
+  "ins": {
+    "avatar": {
+      "$description": "A person or a thing, as a picture or as its initials, in a circle the height of a control. Initials sit on the accent's tint.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.accentDeep}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.accentTint}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.round}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.label}"
+      }
+    },
+    "avatars": {
+      "$description": "Avatars side by side, each overlapping the one before by a ring in the page's colour, so the edges stay apart.",
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.surface}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      }
+    }
+  }
+}

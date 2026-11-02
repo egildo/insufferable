@@ -1,0 +1,28 @@
+/*
+ * empty: `<section class="empty">` or `<div class="empty">`, a place that has nothing in it yet.
+ * It holds, in this order and each of them optional, an icon, a heading, a line of words and the
+ * action that fills the place, centred in a dashed hairline. Its children are spaced by its gap
+ * and keep no margin of their own. A place that stands for a region of the page is named by its
+ * heading, `aria-labelledby`.
+ */
+
+:is(section, div).empty {
+  display: grid;
+  justify-items: center;
+  box-sizing: border-box;
+  border-style: dashed;
+  text-align: center;
+  @apply --ins-empty;
+
+  & > * {
+    margin: 0;
+  }
+
+  & > :is(h1, h2, h3, h4) {
+    @apply --ins-empty-heading;
+  }
+
+  & > insufferable-icon {
+    font-size: t(insufferable.ins.font.size.display);
+  }
+}

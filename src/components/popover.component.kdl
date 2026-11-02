@@ -1,0 +1,19 @@
+// Popover: the native popover attribute on a div, open, under the button that opens it. Source: ins.popover in
+// tokens/popover.tokens.json. It has no parts, so one member. The group binds the fill, the border, the radius, the
+// padding and the gap; the shadow is the raised one. A slot holds what the panel holds, under its heading.
+// Not drawn: the button that opens it, and the gap between them.
+component Popover tokens="{ins.popover}"
+description "A panel of any content on a raised surface, under the button that opens it."
+
+properties {
+    TEXT Heading default="Share the recipe"
+    SLOT Content description="What the panel holds." minChildren=0
+}
+
+FRAME Popover layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)280 strokeAlign=INSIDE {
+    effects "{ins.shadow.raised}"
+    TEXT Heading characters=(property)Heading textStyle="{ins.typography.heading}" textAutoResize=HEIGHT layoutSizingHorizontal=FILL {
+        fills "{ins.popover.color}"
+    }
+    SLOT Content layoutMode=VERTICAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG itemSpacing="{ins.popover.gap}"
+}

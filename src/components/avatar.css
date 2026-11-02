@@ -1,0 +1,42 @@
+/*
+ * avatar: `<img class="avatar">` for a picture, or `<span class="avatar" role="img" aria-label="Name">PE</span>`
+ * for initials, in a circle the height of a control. A picture fills it, cropped to the middle;
+ * initials sit centred on the accent's tint. The name is `alt` on the picture and `aria-label` on
+ * the initials, so a person is named once, not spelt letter by letter.
+ *
+ * `<ul class="avatars">` holds avatars side by side, each overlapping the one before and set off
+ * from it by a ring in the page's colour. A list on a card or any raised surface sets the ring's
+ * colour to that surface, in the app's own sheet.
+ */
+
+:is(img, span).avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  object-fit: cover;
+  vertical-align: middle;
+  @apply --ins-avatar;
+}
+
+ul.avatars {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & > li {
+    display: flex;
+  }
+
+  & > li + li {
+    margin-inline-start: calc(-1 * t(insufferable.ins.space.2));
+  }
+
+  & > li > .avatar {
+    border-style: solid;
+    @apply --ins-avatars;
+  }
+}

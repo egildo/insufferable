@@ -1,0 +1,47 @@
+{
+  "ins": {
+    "popover": {
+      "$description": "A popover: a panel of any content on a raised surface, under the control that opens it. The menu and the dialog's surface, wider and padded; it floats, so it has the shadow.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.raised}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.line}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.2}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "marginBlock": {
+        "$type": "dimension",
+        "$value": "{ins.space.1}"
+      },
+      "maxInlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.measure}"
+      },
+      "boxShadow": {
+        "$type": "shadow",
+        "$value": "{ins.shadow.raised}"
+      }
+    }
+  }
+}

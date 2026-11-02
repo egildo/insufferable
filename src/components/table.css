@@ -23,3 +23,59 @@ caption {
   text-align: start;
   @apply --ins-table-caption;
 }
+
+/*
+ * A table that sorts or selects is wrapped in `<insufferable-table>`, a box that scrolls sideways when
+ * the table is wider than it is, and up when the app gives it a height; the header stays at the top.
+ *
+ * A column that sorts has `aria-sort` on its header cell, and a button holding its title. The mark
+ * after the title shows the order: two chevrons while it is not sorted, an arrow up for ascending,
+ * an arrow down for descending. A row with a checked checkbox takes the accent's tint.
+ */
+
+insufferable-table {
+  display: block;
+  overflow: auto;
+
+  & table {
+    inline-size: 100%;
+  }
+
+  & thead th {
+    position: sticky;
+    inset-block-start: 0;
+    background-color: t(insufferable.ins.color.surface);
+  }
+
+  & th[aria-sort] > button {
+    display: inline-flex;
+    align-items: center;
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline-style: solid;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    @apply --ins-table-sort;
+
+    &::after {
+      content: '\eb1d';
+      font-family: t(insufferable.ins.font.family.icon);
+      line-height: 1;
+    }
+  }
+
+  & th[aria-sort=ascending] > button::after {
+    content: '\ea25';
+  }
+
+  & th[aria-sort=descending] > button::after {
+    content: '\ea16';
+  }
+
+  & tbody > tr {
+    @apply --ins-table-row;
+  }
+}

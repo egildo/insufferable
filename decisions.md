@@ -994,3 +994,46 @@ Typecheck and tests pass; the stylesheet is 127.3 KB. In the built-in browser, o
 Component files now exist for the elements built since the library was last synced: BreadcrumbItem, Card, Combobox and ComboboxOption, Meter (by zone), PaginationItem (24 members), Progress, Slider (8), Toast (rest and danger), Tooltip. TreeRow gained the count. The callout's warn variant is drawn, by the axis its tokens now declare. The sync was run into a scratch copy first and compared variable by variable: three existing variables changed, all intended (the callout's warn mode, bound where it held a placeholder, and the tree's indent), and the rest only gained modes (current, warn). Read back in a render: the options, the pagination states, the slider's thumb on its track, the breadcrumb's current page in the medium weight.
 
 Not drawn: the spinner and the progress sweep, which are animations; the property row's notice, which is a Callout instance inside the row and is not yet placed there. nothing of the toast now: its bar is a frame of its own on the edge, in the accent or the danger, since a stroke is one colour; its first form, per-side strokes, drew a full outline.
+
+## The rest of the common components, the third slice
+
+> **Ruled 2 November 2026:** "components unbuilt, do a large sweep": build what was left of the list, on the kit's own rules. Built the same day, seven at once: popover, avatar, skeleton, empty state, drawer, calendar, and a table that sorts and selects.
+
+### What was considered
+
+- **Native first, again.** Popover, drawer and avatar need no element: the popover is the platform's attribute on a `div`, the drawer is the dialog with a class, the avatar is an `img` or a `span` with a class. The skeleton and the empty state are a class on a `div` or a `section`. Only the calendar and the table need script, and each is an element that draws or wraps what the platform has no element for.
+- **The calendar as a form control.** `<input type="date">` is the platform's, and the specs now say to use it to pick a date in a form. The calendar is the month on the page, to look at and choose from. The date picker of the Authoring Practices is the model.
+- **A data grid.** The Authoring Practices distinguish a table, which a sortable and selectable one still is, from a grid, where the arrows move from cell to cell and cells are edited. The first is built, as `<insufferable-table>`, and named a table; the second is not, since a grid is another widget with its own keyboard and the kit has no use for it yet. Recorded as open in the specs.
+- **Row selection.** `aria-selected` is not allowed on a row of a plain table, so the row is selected by a checkbox in it, the platform's own control, and the stylesheet reads `:has(:checked)`. The header's checkbox is the only script: it checks the others and says `indeterminate`.
+- **Sorting where the data is the page's.** The element sorts the rows in the DOM, by the `value` of a `<data>` or the `datetime` of a `<time>`, else by text, with `Intl.Collator` in the page's language and digits by value. An app that holds its rows elsewhere cancels `--sort`, as it cancels any command.
+- **The calendar's two commands.** `--select` carries a date in the day button's `value`; it names the ARIA state it sets (`aria-selected` on the day) and has a default. `--show` carries a month in the button's `value` and sets no ARIA state, which the rule would give no default; it has one, since a calendar that cannot change month does nothing. The rule in the specs says so.
+- **A drawer as a dialog, not a popover.** A drawer is modal as the dialog is, with the shade, the focus kept and Escape: `<dialog class="drawer">`, slid in from its edge with `@starting-style` and `allow-discrete`, so the platform keeps the closing dialog drawn until it has left.
+
+### What was built
+
+The seven, with token groups of their own (`popover`, `avatar` and `avatars`, `skeleton`, `empty` and `emptyHeading`, `drawer`, `calendar`, `calendarTitle`, `calendarWeekday`, `calendarDay`, and `tableSort` and `tableRow` in the table's file), one duration (`ins.motion.drawer`, 377 ms), three icons (`arrow-up`, `arrow-down`, `selector`, for the sort mark) and `inbox` for the empty state's demo, two commands (`--sort`, `--show`), two elements (`calendar`, `table`), `dates.ts` with its rules as pure functions, eight new tests, and a demo page for each, the index page showing them all. The stylesheet is 147 KB.
+
+The button's scope now leaves out a sort header's title and a calendar's day, as it left out a tab and a menu item, so neither undoes the button's rules.
+
+### What the build found
+
+- **The shell's panes are popovers when narrow,** and a rule on `[popover]` would have drawn them as a panel with a shadow. The popover rule is on `div` and `section` only, and says why.
+- **The keyboard of the calendar can reach a month the buttons do.** A move into the next or the previous month goes through the heading button's `--show`, so an app that owns the month hears it; a move by a year (Shift with Page Up or Down) has no button and writes `month` itself. This is the one place the element writes where the app could not cancel.
+- **The Arabic calendar** starts on Saturday, as the language's week info says, reads right to left, and mirrors the two chevrons by CSS (`scale: -1 1`), as the tree's chevron does.
+- **A transition the browser pane throttles:** the first measure of the drawer, 700 ms after the click, found it still off the edge; it was the page's timers in a pane that is not in front, not the stylesheet, and a measure after a frame was drawn found it in place.
+
+### What was checked
+
+Typecheck and tests pass (38). In the built-in browser: the calendar chose a day, crossed from the 30th of November into December by the arrow key through `--show`, kept focus, and wrote one tab stop; the Italian one bounded by `min` and `max`; the Arabic one right to left. The table sorted a column of numbers as numbers (8, 9, 12, 105), a column of dates by `datetime`, and again descending, set `aria-sort` on one header and `none` on the others, and the header's checkbox went indeterminate with two rows checked, the two rows in the tint. The popover opened under its button; the drawer opened on the end edge, 322 px wide and the window's height, and the other on the start edge. Contrast, from the resolved colours: the avatar's initials 10.9:1 light and 8.5:1 dark, today's ring and the accent against the page 5.2:1 and 5.8:1. The skeleton is 1.3:1 and 1.7:1 against the page: it is decoration, and quiet on purpose.
+
+### The FigCraft library
+
+New component files: Popover, Avatar, Skeleton (bar or circle), Empty, Drawer (rest and start), CalendarDay (48 members from its parts) and Calendar (November 2026, from a Monday). The icon set gained its four glyphs. The sync added 83 variables and changed none that existed, compared by mode name before and after. Not drawn: today's ring on a day (the library has one stroke, and the focus ring takes it), the empty state's dashes, the avatar group's ring, the skeleton's pulse, the shade and slide of the drawer, a sort header and a selected row in the table.
+
+### Not checked
+
+Firefox and Safari: `position-area`, `@starting-style` with `allow-discrete` on a dialog, and `:has(:checked)` are written from the documentation. A screen reader: the calendar's live heading, the day's full name and the sort order are written, not heard. Touch. The light scheme of the calendar and the table in the browser, which were read from the resolved colours only.
+
+### Not done
+
+A date range and several chosen days; days of the neighbouring months drawn dimmed; a month and year jump. A grid in the Authoring Practices' sense, a resized or moved column, sorting by two columns, virtual scrolling. A sheet from the top or the bottom; a drawer that is resized. A shimmer for the skeleton. Sizes for the avatar. `package.json` does not export `calendar.js` and `table.js`, as it exports none of the elements since the shell.

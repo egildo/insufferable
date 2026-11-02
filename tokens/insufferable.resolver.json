@@ -120,6 +120,24 @@
           "$ref": "toast.tokens.json"
         },
         {
+          "$ref": "popover.tokens.json"
+        },
+        {
+          "$ref": "avatar.tokens.json"
+        },
+        {
+          "$ref": "skeleton.tokens.json"
+        },
+        {
+          "$ref": "empty.tokens.json"
+        },
+        {
+          "$ref": "drawer.tokens.json"
+        },
+        {
+          "$ref": "calendar.tokens.json"
+        },
+        {
           "$ref": "combobox.tokens.json"
         }
       ]

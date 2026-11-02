@@ -8,12 +8,12 @@
  * square, as wide as it is tall. Pressed, it takes the accent as any button
  * does, since a wash would fall under the 3:1 a state's mark wants.
  *
- * A tab and a menu item are buttons too, styled by their own element:
- * `@scope … to (insufferable-tabs, insufferable-menu)` keeps these rules out of both, so neither
- * element has to undo the other.
+ * A tab, a menu item, a sortable column's title and a calendar's day are buttons too, styled by
+ * their own element: `@scope … to (…)` keeps these rules out of all of them, so none has to undo
+ * the others.
  */
 
-@scope (:root) to (insufferable-tabs, insufferable-menu) {
+@scope (:root) to (insufferable-tabs, insufferable-menu, th[aria-sort], insufferable-calendar td) {
   button {
     display: inline-flex;
     align-items: center;

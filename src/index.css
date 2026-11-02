@@ -51,3 +51,9 @@
 @import './components/tooltip.css' layer(ins.components);
 @import './components/toast.css' layer(ins.components);
 @import './components/combobox.css' layer(ins.components);
+@import './components/popover.css' layer(ins.components);
+@import './components/avatar.css' layer(ins.components);
+@import './components/skeleton.css' layer(ins.components);
+@import './components/empty.css' layer(ins.components);
+@import './components/drawer.css' layer(ins.components);
+@import './components/calendar.css' layer(ins.components);

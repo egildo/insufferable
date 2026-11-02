@@ -1,0 +1,15 @@
+// CalendarDay: one day of a calendar, a button the size of a control, in its states. Source: ins.calendarDay in
+// tokens/calendar.tokens.json. Its axes come from the day's parts: pointer, focus, the chosen day, today and
+// availability. The focus ring is the day's own stroke, as a tab's is: clear at rest, the accent when focused.
+// Not drawn: today's ring, which the stylesheet draws as a border in the accent and the library has no second stroke for.
+component CalendarDay tokens="{ins.calendarDay}"
+description "One day of a calendar: the chosen one sits on the accent, a day out of range is quiet."
+
+properties {
+    TEXT Label default="12"
+}
+
+FRAME CalendarDay layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" primaryAxisAlignItems=CENTER counterAxisAlignItems=CENTER strokeWeight="{ins.calendarDay.outlineWidth}" strokeAlign=INSIDE {
+    strokes "{ins.calendarDay.outlineColor}"
+    TEXT Label tokens="{ins.calendarDay}" characters=(property)Label textStyle="{ins.calendarDay.font}" textAutoResize=WIDTH_AND_HEIGHT
+}

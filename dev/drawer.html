@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · drawer</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  dialog.drawer > * { margin: 0; }
+  dialog.drawer header { display: flex; align-items: center; justify-content: space-between; }
+  dialog.drawer menu { display: flex; justify-content: end; gap: 0.5rem; margin: 0; padding: 0; }
+</style>
+
+<h1>Drawer</h1>
+<p>The native <code>dialog</code> with <code>class="drawer"</code>, pinned to the end edge of the window and as tall as it. Opened and closed by the platform's own commands; Escape closes it.</p>
+
+<p class="row">
+  <button commandfor="filters" command="show-modal">Filters</button>
+  <button commandfor="notes" command="show-modal">Notes on the left</button>
+</p>
+
+<dialog id="filters" class="drawer" aria-labelledby="filters-title">
+  <header>
+    <h2 id="filters-title">Filters</h2>
+    <button class="plain" aria-label="Close" commandfor="filters" command="close"><insufferable-icon name="x"></insufferable-icon></button>
+  </header>
+  <label>Variety <select name="variety"><option>Any</option><option>Champion</option><option>Vranja</option></select></label>
+  <label><input type="checkbox" name="cooked"> Cooked only</label>
+  <menu>
+    <button class="plain" commandfor="filters" command="close">Reset</button>
+    <button class="solid" commandfor="filters" command="close">Show 12 recipes</button>
+  </menu>
+</dialog>
+
+<dialog id="notes" class="drawer start" aria-labelledby="notes-title">
+  <header>
+    <h2 id="notes-title">Notes</h2>
+    <button class="plain" aria-label="Close" commandfor="notes" command="close"><insufferable-icon name="x"></insufferable-icon></button>
+  </header>
+  <p>The other edge takes <code>class="start"</code>.</p>
+</dialog>
+
+<h2>Right to left</h2>
+<p class="row" dir="rtl"><button commandfor="rtl" command="show-modal">فتح</button></p>
+<dialog id="rtl" class="drawer" dir="rtl" aria-label="rtl">
+  <button class="plain" commandfor="rtl" command="close">إغلاق</button>
+  <p>يظهر عند الحافة الأخرى.</p>
+</dialog>
+</html>

@@ -1,0 +1,152 @@
+{
+  "ins": {
+    "calendar": {
+      "$description": "A month, one day to a cell, as the date picker grid of the Authoring Practices: a heading with the month's name between two buttons, and the weeks under the weekdays.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.body}"
+      }
+    },
+    "calendarTitle": {
+      "$description": "The month's name, between the buttons that change it.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.label}"
+      }
+    },
+    "calendarWeekday": {
+      "$description": "A weekday's heading above its column, quiet.",
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.2}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.small}"
+      }
+    },
+    "calendarDay": {
+      "$description": "One day: a button the size of a control. Under the pointer the fill; the chosen day takes the accent; today has a ring in the accent; a day out of range is quiet.",
+      "$extensions": {
+        "com.toghen": {
+          "css": {
+            "parts": {
+              "selection": {
+                "selected": "[aria-selected=true] > *"
+              },
+              "current": {
+                "today": "[aria-current=date]"
+              }
+            }
+          }
+        }
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{ins.color.text.1}"
+      },
+      "backgroundColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "borderColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.1}"
+      },
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "blockSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.control}"
+      },
+      "borderRadius": {
+        "$type": "dimension",
+        "$value": "{ins.radius.1}"
+      },
+      "outlineColor": {
+        "$type": "color",
+        "$value": "{ins.color.clear}"
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      },
+      "outlineOffset": {
+        "$type": "dimension",
+        "$value": "{ins.border.inset}"
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{ins.typography.body}"
+      },
+      "hover": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.fill}"
+        }
+      },
+      "active": {
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.line}"
+        }
+      },
+      "focus": {
+        "outlineColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "today": {
+        "borderColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        }
+      },
+      "selected": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.onAccent}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.accent}"
+        },
+        "hover": {
+          "backgroundColor": {
+            "$type": "color",
+            "$value": "{ins.color.accentStrong}"
+          }
+        }
+      },
+      "disabled": {
+        "color": {
+          "$type": "color",
+          "$value": "{ins.color.text.3}"
+        },
+        "backgroundColor": {
+          "$type": "color",
+          "$value": "{ins.color.clear}"
+        }
+      }
+    }
+  }
+}

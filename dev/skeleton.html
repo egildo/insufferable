@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>insufferable · skeleton</title>
+<link rel="stylesheet" href="../dist/insufferable.css">
+<style>
+  body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  .card .head { display: flex; gap: 0.75rem; align-items: center; }
+  .card .lines { display: grid; gap: 0.5rem; flex: 1; }
+</style>
+
+<h1>Skeleton</h1>
+<p>What stands where content will be while it loads. It is decoration, hidden from assistive technology; the region that loads says so with <code>aria-busy</code>.</p>
+
+<button id="toggle" aria-pressed="false">Load the card</button>
+
+<article class="card" id="region" aria-busy="true" aria-labelledby="who" style="margin-top: 1rem">
+  <div class="head">
+    <div class="skeleton circle" aria-hidden="true"></div>
+    <div class="lines">
+      <div class="skeleton" aria-hidden="true" style="inline-size: 40%"></div>
+      <div class="skeleton" aria-hidden="true" style="inline-size: 25%"></div>
+    </div>
+  </div>
+  <div class="skeleton" aria-hidden="true"></div>
+  <div class="skeleton" aria-hidden="true"></div>
+  <div class="skeleton" aria-hidden="true" style="inline-size: 70%"></div>
+</article>
+
+<script type="module">
+  // The app: it says when the region is loaded, and swaps the skeletons for what they stood for.
+  const region = document.getElementById('region');
+  const skeletons = region.innerHTML;
+  toggle.onclick = () => {
+    const loaded = region.getAttribute('aria-busy') === 'true';
+    region.setAttribute('aria-busy', String(!loaded));
+    toggle.textContent = loaded ? 'Show the skeleton' : 'Load the card';
+    region.innerHTML = loaded
+      ? '<h2 id="who">Paola Esempio</h2><p>Keeps the notebook, and the quince paste.</p><p>Last edited today.</p>'
+      : skeletons;
+  };
+</script>
+</html>

@@ -1,0 +1,60 @@
+/*
+ * calendar: `<insufferable-calendar>`, a month of days. The element draws it: a heading with the
+ * month's name between the buttons that change the month, and a table of weeks under the
+ * weekdays, a day to a cell. The chosen day takes the accent, today has a ring in the accent, a
+ * day out of range is quiet, and the day under the pointer has the fill. A day is a button the
+ * size of a control; the table's own cell rules, the line under a row and the padding, are taken
+ * off inside it.
+ */
+
+insufferable-calendar {
+  display: inline-grid;
+  @apply --ins-calendar;
+
+  & > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: t(insufferable.ins.space.2);
+  }
+
+  & > header > button > insufferable-icon:dir(rtl) {
+    scale: -1 1;
+  }
+
+  & > header > h2 {
+    margin: 0;
+    @apply --ins-calendar-title;
+  }
+
+  & table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    inline-size: 100%;
+  }
+
+  & :is(th, td) {
+    padding: 0;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  & th {
+    @apply --ins-calendar-weekday;
+  }
+
+  & td > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-style: solid;
+    outline-style: solid;
+    font-variant-numeric: tabular-nums;
+    cursor: default;
+    @apply --ins-calendar-day;
+  }
+}

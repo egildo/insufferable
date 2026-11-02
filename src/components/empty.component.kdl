@@ -1,0 +1,26 @@
+// Empty: a place that has nothing in it yet. Source: ins.empty and ins.emptyHeading in tokens/empty.tokens.json.
+// An icon, a heading, a line of words and the action that fills the place, centred. The group binds the border, the
+// radius, the padding and the gap. Not drawn: the border's dashes, which the library draws solid.
+component Empty tokens="{ins.empty}"
+description "A place that has nothing in it yet: an icon, a heading, words and the action that fills it."
+
+properties {
+    TEXT Heading default="No recipes yet"
+    TEXT Words default="Write down the first one, or bring them in from a file."
+}
+
+FRAME Empty layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)360 counterAxisAlignItems=CENTER strokeAlign=INSIDE {
+    fills
+    TEXT Icon textStyle="{ins.icon.font}" characters="\u{eac4}" textAutoResize=WIDTH_AND_HEIGHT {
+        fills "{ins.empty.color}"
+    }
+    TEXT Heading characters=(property)Heading textStyle="{ins.typography.heading}" textAutoResize=HEIGHT layoutSizingHorizontal=FILL textAlignHorizontal=CENTER {
+        fills "{ins.emptyHeading.color}"
+    }
+    TEXT Words characters=(property)Words textStyle="{ins.page.font}" textAutoResize=HEIGHT layoutSizingHorizontal=FILL textAlignHorizontal=CENTER {
+        fills "{ins.empty.color}"
+    }
+    INSTANCE Action component=Button {
+        set variant=solid Label="New recipe"
+    }
+}

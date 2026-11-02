@@ -359,6 +359,13 @@
           "value": 233,
           "unit": "ms"
         }
+      },
+      "drawer": {
+        "$type": "duration",
+        "$value": {
+          "value": 377,
+          "unit": "ms"
+        }
       }
     }
   }

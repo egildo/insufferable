@@ -1,0 +1,135 @@
+// Calendar: a month of days, November 2026 from a Monday, the 2nd chosen. Source: ins.calendar, ins.calendarTitle and
+// ins.calendarWeekday in tokens/calendar.tokens.json. The heading is the month's name between the buttons that change
+// it; the weeks are CalendarDay instances, and a cell with no day is empty. The weeks and the names are the design's
+// own: the element writes them from the language. Seven days of the control's width make it 238. Not drawn: the heading's buttons' states.
+component Calendar tokens="{ins.calendar}"
+description "A month of days, one of them chosen: a heading between two buttons, the weekdays and the weeks."
+
+FRAME Calendar layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width=(literal)238 itemSpacing="{ins.calendar.gap}" {
+    fills
+    FRAME Heading layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG counterAxisAlignItems=CENTER primaryAxisAlignItems=SPACE_BETWEEN {
+        fills
+        TEXT Previous textStyle="{ins.icon.font}" characters="\u{ea60}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.calendar.color}"
+        }
+        TEXT Title characters="November 2026" tokens="{ins.calendarTitle}" textAutoResize=WIDTH_AND_HEIGHT
+        TEXT Next textStyle="{ins.icon.font}" characters="\u{ea61}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.calendar.color}"
+        }
+    }
+    FRAME Weekdays layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        FRAME Weekday1 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.calendarDay.inlineSize}" primaryAxisAlignItems=CENTER {
+            fills
+            TEXT Name1 characters="M" tokens="{ins.calendarWeekday}" textAutoResize=WIDTH_AND_HEIGHT
+        }
+        FRAME Weekday2 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.calendarDay.inlineSize}" primaryAxisAlignItems=CENTER {
+            fills
+            TEXT Name2 characters="T" tokens="{ins.calendarWeekday}" textAutoResize=WIDTH_AND_HEIGHT
+        }
+        FRAME Weekday3 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.calendarDay.inlineSize}" primaryAxisAlignItems=CENTER {
+            fills
+            TEXT Name3 characters="W" tokens="{ins.calendarWeekday}" textAutoResize=WIDTH_AND_HEIGHT
+        }
+        FRAME Weekday4 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.calendarDay.inlineSize}" primaryAxisAlignItems=CENTER {
+            fills
+            TEXT Name4 characters="T" tokens="{ins.calendarWeekday}" textAutoResize=WIDTH_AND_HEIGHT
+        }
+        FRAME Weekday5 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.calendarDay.inlineSize}" primaryAxisAlignItems=CENTER {
+            fills
+            TEXT Name5 characters="F" tokens="{ins.calendarWeekday}" textAutoResize=WIDTH_AND_HEIGHT
+        }
+        FRAME Weekday6 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.calendarDay.inlineSize}" primaryAxisAlignItems=CENTER {
+            fills
+            TEXT Name6 characters="S" tokens="{ins.calendarWeekday}" textAutoResize=WIDTH_AND_HEIGHT
+        }
+        FRAME Weekday7 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.calendarDay.inlineSize}" primaryAxisAlignItems=CENTER {
+            fills
+            TEXT Name7 characters="S" tokens="{ins.calendarWeekday}" textAutoResize=WIDTH_AND_HEIGHT
+        }
+    }
+    FRAME Week1 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        FRAME Empty11 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty12 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty13 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty14 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty15 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty16 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        INSTANCE Day1 component=CalendarDay { set Label="1"; }
+    }
+    FRAME Week2 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE Day2 component=CalendarDay { set Label="2" selection=selected current=today; }
+        INSTANCE Day3 component=CalendarDay { set Label="3"; }
+        INSTANCE Day4 component=CalendarDay { set Label="4"; }
+        INSTANCE Day5 component=CalendarDay { set Label="5"; }
+        INSTANCE Day6 component=CalendarDay { set Label="6"; }
+        INSTANCE Day7 component=CalendarDay { set Label="7"; }
+        INSTANCE Day8 component=CalendarDay { set Label="8"; }
+    }
+    FRAME Week3 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE Day9 component=CalendarDay { set Label="9"; }
+        INSTANCE Day10 component=CalendarDay { set Label="10"; }
+        INSTANCE Day11 component=CalendarDay { set Label="11"; }
+        INSTANCE Day12 component=CalendarDay { set Label="12"; }
+        INSTANCE Day13 component=CalendarDay { set Label="13"; }
+        INSTANCE Day14 component=CalendarDay { set Label="14"; }
+        INSTANCE Day15 component=CalendarDay { set Label="15"; }
+    }
+    FRAME Week4 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE Day16 component=CalendarDay { set Label="16"; }
+        INSTANCE Day17 component=CalendarDay { set Label="17"; }
+        INSTANCE Day18 component=CalendarDay { set Label="18"; }
+        INSTANCE Day19 component=CalendarDay { set Label="19"; }
+        INSTANCE Day20 component=CalendarDay { set Label="20"; }
+        INSTANCE Day21 component=CalendarDay { set Label="21"; }
+        INSTANCE Day22 component=CalendarDay { set Label="22"; }
+    }
+    FRAME Week5 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE Day23 component=CalendarDay { set Label="23"; }
+        INSTANCE Day24 component=CalendarDay { set Label="24"; }
+        INSTANCE Day25 component=CalendarDay { set Label="25"; }
+        INSTANCE Day26 component=CalendarDay { set Label="26"; }
+        INSTANCE Day27 component=CalendarDay { set Label="27"; }
+        INSTANCE Day28 component=CalendarDay { set Label="28"; }
+        INSTANCE Day29 component=CalendarDay { set Label="29"; }
+    }
+    FRAME Week6 layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG {
+        fills
+        INSTANCE Day30 component=CalendarDay { set Label="30"; }
+        FRAME Empty62 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty63 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty64 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty65 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty66 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+        FRAME Empty67 layoutMode=HORIZONTAL layoutSizingHorizontal=FIXED layoutSizingVertical=FIXED width="{ins.calendarDay.inlineSize}" height="{ins.calendarDay.blockSize}" {
+            fills
+        }
+    }
+}
