@@ -1037,3 +1037,14 @@ Firefox and Safari: `position-area`, `@starting-style` with `allow-discrete` on 
 ### Not done
 
 A date range and several chosen days; days of the neighbouring months drawn dimmed; a month and year jump. A grid in the Authoring Practices' sense, a resized or moved column, sorting by two columns, virtual scrolling. A sheet from the top or the bottom; a drawer that is resized. A shimmer for the skeleton. Sizes for the avatar. `package.json` does not export `calendar.js` and `table.js`, as it exports none of the elements since the shell.
+
+## The general dialog
+
+> **Ruled 2 November 2026:** "a general dialog", on the proposal: one markup for every case, with no new element.
+
+- **Parts.** `header`, body and `footer`, laid out by the stylesheet, so the action row is no longer the demo page's. The footer may sit in a `form method="dialog"`.
+- **Widths** `small` and `large`, as classes; **an alert** by `role="alertdialog"`, with a bar at the start in the danger and, by the app's markup, no close button; **not modal** by `show`, floating on the shadow, read as `:not(:modal)`.
+- **The drawer shares the parts.** Its demo lost its own header and footer rules.
+- **Tokens.** `dialogHeader`, `dialogFooter`, `dialogSmall`, `dialogLarge`, `dialogAlert`, `dialogFloating` and two size roles. They are groups of their own, not parts of `dialog`: the first form, with `small`, `alert` and `floating` as parts, made the sync move `ins.dialog.inlineSize` into a `variant` collection and drop the old variable, which was refused as breaking.
+- **FigCraft.** Dialog is now a set of 12 (size, kind, modality) with a header, a body and a footer, an alert without its close button, and a floating one with the shadow. Replacing the old single Dialog needed `--allow-breaking`; nothing used it. No existing variable changed; eight were added. Not drawn: an alert's bar, which a stroke of one colour cannot draw.
+- **Checked** in the built-in browser, dark: the edit dialog with its header, close button and footer; `returnValue` heard (`save`); the alert with the red edge and no close button; small 322 px, large 610 px; not modal open with no `:modal` state and the shadow set. Typecheck and tests pass. Not checked: the light scheme, Firefox and Safari, a screen reader.

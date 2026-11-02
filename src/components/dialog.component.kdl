@@ -1,23 +1,46 @@
-// Dialog: the native dialog, open. Source: ins.dialog in tokens/dialog.tokens.json.
-// It has no parts, so one member. The group binds the fill, the border, the radius, the padding and the gap; its
-// width is the measure. Its title is an h2, in the title style; its text is in the body style.
-// Not drawn: the shade a modal dialog lays over the page.
+// Dialog: the native dialog, open. Source: ins.dialog, ins.dialogHeader, ins.dialogFooter, ins.dialogSmall,
+// ins.dialogLarge and ins.dialogFloating in tokens/dialog.tokens.json. Its axes are declared here, since each is a
+// class, a role or the mode of a group of its own: size (regular, small, large), kind (dialog, alert) and modality
+// (modal, floating). The group binds the fill, the border, the radius, the padding and the gap. An alert has no close
+// button; a floating one, not modal, has the raised shadow. Its title is an h2, in the title style; its text is in the
+// body style. Not drawn: the shade a modal dialog lays over the page, and an alert's bar at the start in the danger,
+// which a stroke of one colour all round cannot draw.
 component Dialog tokens="{ins.dialog}"
-description "A native dialog: opened by a button's command, closed by a button or Escape."
+description "A native dialog: a header, a body and a footer; small or large; an alert; modal or floating."
 
 properties {
+    VARIANT size regular small large
+    VARIANT kind dialog alert
+    VARIANT modality modal floating
     TEXT Title default="Discard the draft?"
     TEXT Text default="The quince recipe you are writing will be lost."
 }
 
-FRAME Dialog layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.size.measure}" strokeAlign=INSIDE {
-    TEXT Title characters=(property)Title textStyle="{ins.heading.h2.font}" layoutSizingHorizontal=FILL textAutoResize=HEIGHT {
-        fills "{ins.dialog.color}"
+guard small { is (input)size small }
+guard large { is (input)size large }
+guard alert { is (input)kind alert }
+guard floating { is (input)modality floating }
+
+FRAME Dialog layoutMode=VERTICAL layoutSizingHorizontal=FIXED layoutSizingVertical=HUG width="{ins.dialog.inlineSize}" strokeAlign=INSIDE {
+    when small width="{ins.dialogSmall.inlineSize}"
+    when large width="{ins.dialogLarge.inlineSize}"
+    when floating {
+        effects "{ins.shadow.raised}"
+    }
+    FRAME Header layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG counterAxisAlignItems=CENTER primaryAxisAlignItems=SPACE_BETWEEN itemSpacing="{ins.dialogHeader.gap}" {
+        fills
+        TEXT Title characters=(property)Title textStyle="{ins.heading.h2.font}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.dialog.color}"
+        }
+        TEXT Close textStyle="{ins.icon.font}" characters="\u{eb55}" textAutoResize=WIDTH_AND_HEIGHT {
+            fills "{ins.dialog.color}"
+            when alert visible=#false
+        }
     }
     TEXT Text characters=(property)Text textStyle="{ins.page.font}" layoutSizingHorizontal=FILL textAutoResize=HEIGHT {
         fills "{ins.dialog.color}"
     }
-    FRAME Actions layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG primaryAxisAlignItems=MAX itemSpacing="{ins.space.2}" {
+    FRAME Footer layoutMode=HORIZONTAL layoutSizingHorizontal=FILL layoutSizingVertical=HUG primaryAxisAlignItems=MAX itemSpacing="{ins.dialogFooter.gap}" {
         fills
         INSTANCE Keep component=Button {
             set variant=plain Label="Keep it"

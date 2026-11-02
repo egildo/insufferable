@@ -466,24 +466,35 @@ A native radio group drawn as joined segments: `<fieldset class="segmented">` ho
 
 ### Dialog
 
-The native `<dialog>`. There is no custom element and no insufferable command: whether a dialog is open is the platform's.
+The native `<dialog>`, with a header, a body and a footer. There is no custom element and no insufferable command: whether a dialog is open is the platform's.
 
 ```html
-<button commandfor="discard" command="show-modal">Discard the draft</button>
-<dialog id="discard" aria-labelledby="discard-title">
-  <h2 id="discard-title">Discard the draft?</h2>
+<button commandfor="edit" command="show-modal">Edit the recipe</button>
+<dialog id="edit" aria-labelledby="edit-title">
+  <header>
+    <h2 id="edit-title">Edit the recipe</h2>
+    <button class="plain" aria-label="Close" commandfor="edit" command="close"><insufferable-icon name="x"></insufferable-icon></button>
+  </header>
+  <label>Title <input name="title"></label>
   <form method="dialog">
-    <button value="keep" class="plain">Keep it</button>
-    <button value="discard" class="solid">Discard</button>
+    <footer>
+      <button value="cancel" class="plain">Cancel</button>
+      <button value="save" class="solid">Save</button>
+    </footer>
   </form>
 </dialog>
 ```
 
-- **Opened and closed by the platform's own commands:** `show-modal`, `close`, `request-close`. Escape closes a modal one.
+- **Opened and closed by the platform's own commands:** `show-modal`, `show` for one that is not modal, `close`, `request-close`. Escape closes a modal one.
 - **An app that wants to know** listens for `close` in the capture phase, as it hears `toggle`, and reads `returnValue`: the value of the form's button that closed it.
-- **Open,** it lays out what it holds in one column, on the raised surface, `ins.size.measure` wide (32rem) unless the window is narrower. Modal, it lays `ins.color.shade` over the page (`::backdrop`).
+- **Open,** it lays out what it holds in one column, on the raised surface, `ins.size.measure` wide (32rem) unless the window is narrower, its children spaced by its gap and keeping no margin of their own; it scrolls when it is too tall. Modal, it lays `ins.color.shade` over the page (`::backdrop`).
+- **The parts.** A `<header>` holds the title and, at the end, the button that closes it (`ins.dialogHeader`). The body is whatever else is in it. A `<footer>` holds the actions at the end, the main one last (`ins.dialogFooter`); it may sit in a `<form method="dialog">`, whose buttons close the dialog with their `value`.
+- **Widths.** `class="small"` is `ins.size.dialogSmall` (20 rem), `class="large"` `ins.size.dialogLarge` (38 rem).
+- **An alert,** `role="alertdialog"`: one that must be answered, a confirmation. It takes a bar at the start in the danger (`ins.dialogAlert`), and its header has no close button, so Escape and the footer's buttons are the ways out. It is named by `aria-labelledby` and described by `aria-describedby`.
+- **Not modal,** opened by `show`: no shade, the page stays usable behind it, and it floats on the raised shadow (`ins.dialogFloating`, the `:not(:modal)` state).
+- **The drawer** is this dialog pinned to an edge, and shares its header, body and footer.
 
-Not built: a row for the actions, which the demo page lays out itself. A dialog pinned to an edge is the [drawer](#drawer).
+Not built: dialogs stacked one over another, a wizard with steps, a dialog that is dragged or resized.
 
 ### Menu
 
@@ -941,7 +952,7 @@ The native `<dialog class="drawer">`, pinned to the end edge of the window and a
 ```
 
 - **`class="start"`** pins it to the other edge. Right to left turns both.
-- **The dialog's surface** (`ins.drawer`): raised, a hairline on the edge that faces the page, the raised shadow, `ins.size.side` wide (20 rem) or the window's width if that is less, the dialog's padding and gap. Modal, it lays `ins.color.shade` over the page.
+- **The dialog's surface** (`ins.drawer`, with the dialog's header, body and footer): raised, a hairline on the edge that faces the page, the raised shadow, `ins.size.side` wide (20 rem) or the window's width if that is less, the dialog's padding and gap. Modal, it lays `ins.color.shade` over the page.
 - **It scrolls** when what it holds is taller than the window.
 - **It slides in from its edge and out again,** and the shade fades with it, in `ins.motion.drawer` (377 ms), from `@starting-style` and with `transition-behavior: allow-discrete`, so the platform keeps it drawn until it has left. Where motion is reduced it simply appears.
 - **A drawer that is not modal** is opened by `show` and has no shade. The same markup holds, but focus is not kept inside it: use it for a panel the page can be read beside.

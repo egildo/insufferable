@@ -1,7 +1,7 @@
 {
   "ins": {
     "dialog": {
-      "$description": "A native dialog. Modal, it lays the shade over the page.",
+      "$description": "A native dialog, on the raised surface: a header, a body and a footer. Modal, it lays the shade over the page; not modal, it floats (dialogFloating). class=small or large for the other widths; role=alertdialog for one that must be answered (dialogAlert).",
       "color": {
         "$type": "color",
         "$value": "{ins.color.text.1}"
@@ -39,6 +39,52 @@
           "$type": "color",
           "$value": "{ins.color.shade}"
         }
+      }
+    },
+    "dialogHeader": {
+      "$description": "The dialog's header: its title and, at the end, the button that closes it.",
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.3}"
+      }
+    },
+    "dialogFooter": {
+      "$description": "The dialog's footer: its actions, at the end, the main one last.",
+      "gap": {
+        "$type": "dimension",
+        "$value": "{ins.space.2}"
+      }
+    },
+    "dialogSmall": {
+      "$description": "The width of class=small.",
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.dialogSmall}"
+      }
+    },
+    "dialogLarge": {
+      "$description": "The width of class=large.",
+      "inlineSize": {
+        "$type": "dimension",
+        "$value": "{ins.size.dialogLarge}"
+      }
+    },
+    "dialogAlert": {
+      "$description": "A dialog that must be answered, role=alertdialog: a bar at the start in the danger.",
+      "borderInlineStartColor": {
+        "$type": "color",
+        "$value": "{ins.color.danger}"
+      },
+      "borderInlineStartWidth": {
+        "$type": "dimension",
+        "$value": "{ins.border.2}"
+      }
+    },
+    "dialogFloating": {
+      "$description": "A dialog that is not modal floats on the shadow.",
+      "boxShadow": {
+        "$type": "shadow",
+        "$value": "{ins.shadow.raised}"
       }
     }
   }

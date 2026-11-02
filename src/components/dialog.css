@@ -1,17 +1,72 @@
 /*
  * dialog: the native `<dialog>`. Whether it is open is the platform's: a button
- * opens it with `command="show-modal"` and closes it with `command="close"`,
- * both naming it in `commandfor`, and Escape closes it. Open, it lays out what
- * it holds in one column; modal, it lays the shade over the page.
+ * opens it with `command="show-modal"` (or `show`, for one that is not modal) and closes it with
+ * `command="close"`, both naming it in `commandfor`, and Escape closes it. Open, it lays out what
+ * it holds in one column, its children spaced by its gap and keeping no margin of their own, and
+ * scrolls if that is too tall; modal, it lays the shade over the page, and not modal, it floats on
+ * the shadow.
+ *
+ * It holds a `<header>` with its title and, at the end, a button that closes it; a body, whatever
+ * else is in it; and a `<footer>` with the actions, at the end, the main one last. The footer may
+ * sit in a `<form method="dialog">`, whose buttons close the dialog with their `value`.
+ * `class="small"` and `class="large"` are the other two widths. `role="alertdialog"` is one that
+ * must be answered: a bar at the start in the danger, and no close button in its header.
  */
 
 dialog {
+  box-sizing: border-box;
   border-style: solid;
+  overflow-y: auto;
   @apply --ins-dialog;
+
+  & > *,
+  & > form > * {
+    margin: 0;
+  }
+
+  & > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @apply --ins-dialog-header;
+
+    & > :is(h1, h2, h3, h4) {
+      margin: 0;
+    }
+  }
+
+  & > footer,
+  & > form > footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    @apply --ins-dialog-footer;
+  }
+}
+
+dialog.small {
+  @apply --ins-dialog-small;
+}
+
+dialog.large {
+  @apply --ins-dialog-large;
+}
+
+dialog[role=alertdialog] {
+  @apply --ins-dialog-alert;
+}
+
+dialog:not(:modal) {
+  @apply --ins-dialog-floating;
 }
 
 dialog[open] {
   display: grid;
+}
+
+dialog > form {
+  display: grid;
+  gap: inherit;
 }
 
 dialog::backdrop {

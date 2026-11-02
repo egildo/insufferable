@@ -4,26 +4,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>insufferable · dialog</title>
 <link rel="stylesheet" href="../dist/insufferable.css">
+<script type="module" src="../dist/components/icon.js"></script>
 <style>
   body { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
-  menu { display: flex; justify-content: end; gap: 0.5rem; margin: 0; padding: 0; }
-  dialog > * { margin: 0; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
   pre { background: #f4f4f4; padding: 0.5rem; min-height: 3lh; }
+  @media (prefers-color-scheme: dark) { pre { background: #222; } }
 </style>
 
 <h1>Dialogs</h1>
+<p>The native <code>dialog</code>, with a header, a body and a footer. Opened by a button's command, closed by a button or Escape.</p>
 
-<button commandfor="discard" command="show-modal">Discard the draft</button>
+<p class="row">
+  <button commandfor="edit" command="show-modal">Edit the recipe</button>
+  <button commandfor="discard" command="show-modal">Discard the draft</button>
+  <button commandfor="small" command="show-modal">Small</button>
+  <button commandfor="large" command="show-modal">Large</button>
+  <button commandfor="floating" command="show">Not modal</button>
+</p>
 
-<dialog id="discard" aria-labelledby="discard-title">
-  <h2 id="discard-title">Discard the draft?</h2>
-  <p>The quince recipe you are writing will be lost.</p>
+<dialog id="edit" aria-labelledby="edit-title">
+  <header>
+    <h2 id="edit-title">Edit the recipe</h2>
+    <button class="plain" aria-label="Close" commandfor="edit" command="close"><insufferable-icon name="x"></insufferable-icon></button>
+  </header>
+  <label>Title <input name="title" value="Quince paste"></label>
+  <label>Notes <textarea name="notes" rows="3">Cook it long.</textarea></label>
   <form method="dialog">
-    <menu>
+    <footer>
+      <button value="cancel" class="plain">Cancel</button>
+      <button value="save" class="solid">Save</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog id="discard" role="alertdialog" aria-labelledby="discard-title" aria-describedby="discard-text">
+  <header><h2 id="discard-title">Discard the draft?</h2></header>
+  <p id="discard-text">The quince recipe you are writing will be lost.</p>
+  <form method="dialog">
+    <footer>
       <button value="keep" class="plain">Keep it</button>
       <button value="discard" class="solid">Discard</button>
-    </menu>
+    </footer>
   </form>
+</dialog>
+
+<dialog id="small" class="small" aria-labelledby="small-title">
+  <header><h2 id="small-title">Small</h2><button class="plain" aria-label="Close" commandfor="small" command="close"><insufferable-icon name="x"></insufferable-icon></button></header>
+  <p>For a question of one line.</p>
+</dialog>
+
+<dialog id="large" class="large" aria-labelledby="large-title">
+  <header><h2 id="large-title">Large</h2><button class="plain" aria-label="Close" commandfor="large" command="close"><insufferable-icon name="x"></insufferable-icon></button></header>
+  <p>For a form of many fields, or a preview.</p>
+</dialog>
+
+<dialog id="floating" aria-labelledby="floating-title">
+  <header><h2 id="floating-title">Not modal</h2><button class="plain" aria-label="Close" commandfor="floating" command="close"><insufferable-icon name="x"></insufferable-icon></button></header>
+  <p>No shade, and the page stays usable behind it. It floats on the shadow.</p>
 </dialog>
 
 <h2>How it closed, heard at the root</h2>

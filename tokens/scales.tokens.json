@@ -287,6 +287,14 @@
       "list": {
         "$type": "dimension",
         "$value": "{ins.quanta.lu.322}"
+      },
+      "dialogSmall": {
+        "$type": "dimension",
+        "$value": "{ins.quanta.lu.322}"
+      },
+      "dialogLarge": {
+        "$type": "dimension",
+        "$value": "{ins.quanta.fi.610}"
       }
     },
     "shadow": {
