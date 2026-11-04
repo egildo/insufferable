@@ -1055,3 +1055,15 @@ A date range and several chosen days; days of the neighbouring months drawn dimm
 
 - **The icons** `bold`, `italic`, `arrow-back-up` and `arrow-forward-up` ship: Bold, Italic, Undo and Redo, by Tabler's names. The studio names them in its own taste; insufferable says nothing of what an icon means.
 - **Not done:** the FigCraft library's icon set does not have them yet.
+
+## A round on the dimensions and weights
+
+Looked at the demo, the field and the studio pages, and changed what read as cramped or heavy. All of it is token values; no stylesheet changed.
+
+- **The serif is lighter and closer.** Display and title go from semibold to medium, with a new `letterSpacing.tight` of -0.5px. At 47px and 29px, semibold Fraunces looked chunky; medium keeps the shape and reads as a quieter, more professional title. Headings in the sans stay semibold.
+- **Line height opens.** Running text goes from 1.375 to 1.5 and the snug height from 1.17 to 1.2. Table rows and lists breathe; no control changed height, since controls are set by their minimum block size.
+- **Fields are roomier.** Inline padding goes from the second space step (8px) to the third (13px), so text no longer sits against the border.
+- **A callout is less squat.** Block padding goes from the second step to the third.
+- **A card has more padding.** From the third step to the fourth (21px).
+
+Considered and left: the radii (8px and 13px read well on 34px controls), the control height (34px), and the 13px label size (the ladder has no 14px, and a size off the ladder would break the rule that every size is cut from it). Not checked: the light scheme, and the FigCraft library, since `pnpm figcraft` currently fails against figcraft-cli 0.14.0 ("unknown parameter `depth`" in `node.get`), with or without this change.

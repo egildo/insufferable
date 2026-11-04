@@ -82,10 +82,10 @@
           "$value": 1
         },
         "snug": {
-          "$value": 1.17
+          "$value": 1.2
         },
         "normal": {
-          "$value": 1.375
+          "$value": 1.5
         }
       },
       "letterSpacing": {
@@ -102,6 +102,13 @@
             "unit": "px"
           },
           "$description": "Capitals set small"
+        },
+        "tight": {
+          "$value": {
+            "value": -0.5,
+            "unit": "px"
+          },
+          "$description": "Large serif type, drawn closer"
         }
       }
     },
@@ -142,8 +149,8 @@
         "$value": {
           "fontFamily": "{ins.font.family.serif}",
           "fontSize": "{ins.font.size.display}",
-          "fontWeight": "{ins.font.weight.semibold}",
-          "letterSpacing": "{ins.font.letterSpacing.normal}",
+          "fontWeight": "{ins.font.weight.medium}",
+          "letterSpacing": "{ins.font.letterSpacing.tight}",
           "lineHeight": "{ins.font.lineHeight.snug}"
         },
         "$description": "A page title, in the house serif"
@@ -152,8 +159,8 @@
         "$value": {
           "fontFamily": "{ins.font.family.serif}",
           "fontSize": "{ins.font.size.xxl}",
-          "fontWeight": "{ins.font.weight.semibold}",
-          "letterSpacing": "{ins.font.letterSpacing.normal}",
+          "fontWeight": "{ins.font.weight.medium}",
+          "letterSpacing": "{ins.font.letterSpacing.tight}",
           "lineHeight": "{ins.font.lineHeight.snug}"
         },
         "$description": "A section's title, in the house serif"

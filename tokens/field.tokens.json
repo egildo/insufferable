@@ -47,7 +47,7 @@
       },
       "paddingInline": {
         "$type": "dimension",
-        "$value": "{ins.space.2}"
+        "$value": "{ins.space.3}"
       },
       "outlineColor": {
         "$type": "color",
