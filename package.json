@@ -128,6 +128,17 @@
     "prepack": "rm -rf dist && pnpm build"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egildo/insufferable.git"
+  },
+  "homepage": "https://codeberg.org/egildo/insufferable",
+  "bugs": {
+    "url": "https://codeberg.org/egildo/insufferable/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Egildo Tagliareni <egildo@tagliareni.it>",
   "engines": {
     "node": ">=24"
