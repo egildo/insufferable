@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 — 2026-11-07
+
+- **Released by tag.** A tag `vX.Y.Z` publishes to npm from the GitHub mirror, with provenance; `scripts/release.sh` checks that `package.json`, the tag and this file name one version, then pushes. Codeberg is the source and one push reaches both remotes.
+- **A licence, MIT**, and `package.json` names the repository, the homepage and where to file a bug.
+
 ## 0.1.0 — 2026-11-07
 
 Published by hand, the first version.
