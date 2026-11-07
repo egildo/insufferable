@@ -134,7 +134,7 @@
   },
   "packageManager": "pnpm@10.29.3",
   "devDependencies": {
-    "@toghen/figma": "^0.1.15",
+    "@toghen/figma": "^0.1.16",
     "typescript": "^7.0.2"
   },
   "dependencies": {

@@ -46,8 +46,8 @@ importers:
         version: 1.0.0
     devDependencies:
       '@toghen/figma':
-        specifier: ^0.1.15
-        version: 0.1.15
+        specifier: ^0.1.16
+        version: 0.1.16
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -276,8 +276,8 @@ packages:
   '@tabler/icons@3.50.0':
     resolution: {integrity: sha512-HflLxyrH1cqC7s7jzQGSjpsTAVIoaf7+/yHjbdM59rJQBMjliibp+LYhDPFxOMcwa1M8DNpOk6ENzQiWn9a1Dg==}
 
-  '@toghen/figma@0.1.15':
-    resolution: {integrity: sha512-dPTPcm8IBuWEjSdJ0b6lchRH8ZCSe9+FdgriRBXWi0GLxSrx/AEKms40eAkjwCRkFei/X2xrhTvepWnjPUnbMw==}
+  '@toghen/figma@0.1.16':
+    resolution: {integrity: sha512-pGEer/OvgGhjt0b2k4C4EvL5ais0m9zpkNAiCf8xl1dehPDM81eEYwQNjaIgrSVN4FP1bV9E3T12VEyT6hm9GQ==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -1018,7 +1018,7 @@ snapshots:
 
   '@tabler/icons@3.50.0': {}
 
-  '@toghen/figma@0.1.15':
+  '@toghen/figma@0.1.16':
     dependencies:
       '@bgotink/kdl': 0.4.1
       '@toghen/lib': 0.1.1
