@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 — 2026-11-07
+
+- **The workflow takes its pnpm from `packageManager`.** The 0.1.1 run stopped at the pnpm setup, which refused a second version named in the workflow, so 0.1.1 is a tag with no package behind it. Nothing else changed.
+
 ## 0.1.1 — 2026-11-07
 
 - **Released by tag.** A tag `vX.Y.Z` publishes to npm from the GitHub mirror, with provenance; `scripts/release.sh` checks that `package.json`, the tag and this file name one version, then pushes. Codeberg is the source and one push reaches both remotes.

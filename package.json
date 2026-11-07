@@ -1,6 +1,6 @@
 {
   "name": "insufferable",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A lean design system of UI elements: W3C tokens resolved by Toghen, ARIA states as selectors, Invoker commands out",
   "type": "module",
   "exports": {
