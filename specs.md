@@ -163,31 +163,56 @@ An app themes insufferable with its own CSS after the stylesheet. The stylesheet
 
 `light-dark()` is the platform's way to give one colour for each scheme in one declaration; it reads the page's `color-scheme`, which the base sets to `light dark`. An app's own `light-dark()` colours follow `color-scheme` set on `:root` or on one container, as the stock roles do. `dev/theme.html` is the demo page restyled this way: a terracotta accent in both schemes, with square corners, in ten lines.
 
-What an app may set: any role under `ins.color`, `ins.radius`, `ins.space`, `ins.size` and `ins.font`, by its custom property. What it should set together: a role and its companions (the accent with its strong, deep, tint and the text on it), since the system names them apart so that each pair can be measured. This route does not measure for the app, and it does not regenerate a palette: a brand colour is chosen by hand, and its contrast checked by hand. A derived theme, from a hue and a warmth, with the contrast gate, is `insufferable theme`, below.
+What an app may set: any role under `ins.color`, `ins.radius`, `ins.space`, `ins.size` and `ins.font`, by its custom property. What it should set together: a role and its companions (the accent with its strong, deep, tint and the text on it), since the system names them apart so that each pair can be measured. This route does not measure for the app, and it does not regenerate a palette: a brand colour is chosen by hand, and its contrast checked by hand. A derived theme, from a hue and a warmth, with the contrast gate, is the config's `theme`, below.
 
 #### Building an app's own stylesheet
 
-The deeper route: the app rebuilds the stylesheet from its own tokens, with `insufferable build app.resolver.json`. The app's resolver is a W3C Resolver document that lists the system's base set, then token files of its own, which win by coming later; and the theme modifier, whose two contexts list the system's theme file, then the app's partial one. A partial file names only the roles it changes, so an app need not restate the rest. It may change anything a role names: the radii, the ladder, the fonts, the palette; the build writes `insufferable.css` and its `fonts/` beside the resolver.
+The deeper route: the app rebuilds the stylesheet from its own tokens. It writes one file, `insufferable.config.json`, and runs `insufferable build`; `insufferable init` writes a starter, with a folder for icons and a page to look at.
 
-The resolver keeps the name `insufferable`. The stylesheet refers to every token, and its two directives, by that name, and the build stops with a message when an app's resolver has another. `examples/app` is the example: the demo page, square, with a terracotta accent and Georgia for the headings, from one resolver and three small token files.
+```json
+{
+  "prefix": "quince",
+  "icons": ["check", "chevron-down", "quince-mark", "search", "settings", "x"],
+  "theme": {
+    "brand": { "hue": 38, "lock": "#9a3d12" },
+    "neutral": { "hue": 80, "chroma": 0.005 },
+    "fonts": { "serif": "Georgia" }
+  },
+  "tokens": ["shape.tokens.json"]
+}
+```
 
-An app may also choose the prefix of the elements: `"$extensions": { "dev.insufferable": { "prefix": "quince" } }` in its resolver. The build then writes `quince-tabs` for `insufferable-tabs`, in the stylesheet and in the element scripts, which it writes into `components/` beside the stylesheet so that the app imports them as before. The rename is made from the list in `src/elements.ts`, the nine elements, and touches only a whole element name: not `--ins-icon-button`, nor the ids the elements generate. A prefix is lower case letters and digits starting with a letter, so that `prefix-name` is a valid custom element name. Custom properties, the token group, commands and classes keep their names; the prefix is for elements.
+The config holds the app's choices and nothing of the system's: no path inside the package, no file of ours by name, no modifier. It has eight keys, `prefix`, `icons`, `theme`, `tokens`, `light`, `dark`, `resolver` and `out`, and every path in it is read from its own folder. The package ships its shape as a JSON Schema, `contracts/config.schema.json`. A config that names nothing builds the system's own look in the app's folder. `examples/app` is the example: the demo page, square, with a terracotta accent and Georgia for the headings, from this config and one small token file. The ruling is [in the archive](./decisions.md#an-apps-wiring-from-one-config).
+
+**The generated resolver.** From the config the build composes a plain W3C Resolver document and writes it as `insufferable.resolver.json` beside the stylesheet, its description saying that the build wrote it. The composing is ours because the standard leaves it to us. An overlay may borrow a base's named sets and modifiers, but it cannot add a source inside a borrowed modifier's context, so an app that changes one role in one scheme would have to redeclare the whole theme modifier: the paths into `node_modules`, both contexts, Toghen's `lightDark`. The standard's `$extends` is not yet read by `@toghen/lib`. An extension of Toghen's own would leave the standard, and composing in memory would leave the FigCraft sync and the other Toghen tools nothing to read. A document on disk is read by all of them as it stands. When `$extends` lands the document may shrink, and the config stays as it is.
+
+**The order.** The document's resolution order is the system's base set, a set of the app's called `app`, then the theme modifier. The `app` set lists the generated theme's palette and fonts, the app's token files, and the icon font's name, so the app's values win. A later source in the base set would win as well, but `@toghen/lib` reports each such pair as a collision; a set of its own is Toghen's overlay pattern and reports nothing. A modifier's context has no such split, so each context lists in order the system's theme file, the generated theme's and the app's partial files, named by `light` and `dark`. A partial file names only the roles it changes, so an app need not restate the rest. An app may change anything a role names: the radii, the ladder, the fonts, the palette.
+
+The document keeps the name `insufferable`. The stylesheet refers to every token, and its two directives, by that name, and the build stops with a message when a resolver has another. The component files for FigCraft refer to tokens by the same names, so an app overrides tokens and does not rename them.
+
+**The checks.** A mistake stops the build, and the message names it. A typo in an override would otherwise become a custom property nothing reads, and a page that looks wrong without a word. The config is read first, and a mistake in it stops the build before anything is written: an unknown key, with the keys accepted; a value of the wrong type; a prefix that cannot start a custom element name or an icon name that cannot be a ligature, with the rule; a file that is not there, by its resolved path; an icon that is neither Tabler's nor the app's, by its name; a `resolver` beside any key but `out`; an `out` that is the system's own `dist`. The theme's gate comes next, below. Once the tokens are read, and before the stylesheet is written, every path an app's file defines under `ins` must also be defined by a system file, or the build stops naming the path and the file. The group is the system's to name: a path outside `ins` is the app's own, and comes out as a custom property.
+
+**The layout.** Every app gets one layout, beside the config or in `out`: `insufferable.resolver.json`, `insufferable.css`, `fonts/`, every element's script and types under `components/`, the helpers' scripts and types, and `icons.js` holding the icons the app ships. A page once imported from the package until it chose a prefix or its own icons, and from beside the stylesheet afterwards; one place, always, is what makes the wiring plain. `theme/` stays beside the config, wherever `out` points. Only the system's own build writes `dist/`.
+
+**The prefix.** An app chooses the prefix of the elements with `prefix`. The build then writes `quince-tabs` for `insufferable-tabs`, in the stylesheet and in the element scripts. The rename is made from the list in `src/elements.ts`, and touches only a whole element name: not `--ins-icon-button`, nor the ids the elements generate. A prefix is lower case letters and digits starting with a letter, so that `prefix-name` is a valid custom element name. Custom properties, the token group, commands and classes keep their names; the prefix is for elements.
+
+**The icon font's name** is `<prefix>-icons`, the system's being `insufferable-icons`: the face, the files and the token `ins.font.family.icon`. A design tool draws whichever installed font answers to the name, and with Tabler's stock font on this Mac, under the family `tabler-icons`, a FigCraft layer in ours drew the word and not the icon; two apps built by the system would clash the same way. The generated resolver sets the token in the `app` set, so FigCraft reads the same name as the stylesheet. The build writes the font twice, as woff2 for a browser and as TTF for macOS and the design tools to install.
+
+**An app's own resolver** is the way out, when the config cannot say what is needed: `{ "resolver": "my.resolver.json" }`, with nothing beside it but `out`. The build reads that document as it is, composes nothing and generates no theme. The document keeps the name, carries the prefix and the icons in `$extensions["dev.insufferable"]` as the system's own does, and sets `ins.font.family.icon` to `<prefix>-icons` itself, since a token that disagrees with the prefix stops the build. The check on token paths holds here too.
 
 #### Generating a theme
 
-An app need not write its palette and roles. `insufferable theme theme.config.json` writes them from a small config:
+An app need not write its palette and roles. The config's `theme` key generates them:
 
 ```json
 { "brand": { "hue": 38, "lock": "#9a3d12" }, "neutral": { "hue": 80, "chroma": 0.005 }, "fonts": { "serif": "Georgia" } }
 ```
 
-The brand is a hue, and optionally a colour pinned to the `600` step, as the system pins its own blue. The neutral is the hue and chroma of the grey. The fonts are family names, each with the system's fallbacks after it; the app loads the faces. The command writes four files into `theme/` beside the config, which the app's resolver lists: `palette.tokens.json`, `fonts.tokens.json`, and `light.tokens.json` and `dark.tokens.json`, the partial role files.
+The brand is a hue, and optionally a colour pinned to the `600` step, as the system pins its own blue. The neutral is the hue and chroma of the grey. The fonts are family names, each with the system's fallbacks after it; the app loads the faces. On every build, four files are written into `theme/` beside the config, which the generated resolver lists: `palette.tokens.json`, `fonts.tokens.json`, and `light.tokens.json` and `dark.tokens.json`, the partial role files. Generating is deterministic and takes well under a second, so there is no cache to go stale.
 
 The palette is gosfuig's: the system's own families with the neutral changed and a `brand` family in place of the blue. The roles are not a second table. They are the system's own theme files with every reference to the blue pointed at the brand, so a change to the system's roles reaches every generated theme. Three roles are written values tied to the neutral, and are computed from it in OKLCH: the paper and the raised surface in light, and the desk in dark.
 
-**The gate.** The generator measures every pair of roles the elements use, in both themes: text on surface, raised and fill; the edge of a control, 3:1; the accent on surface, fill and its tint; the text on the accent; danger, ok and warn. The pairs and the ratios they owe are in `scripts/color.ts`. A brand role that falls short moves along the ramp, darker in light and lighter in dark, a step at a time, and the generator says how far; a theme that cannot hold is refused, with every pair named, and nothing is written. The stock system passes unmoved.
-
-The component files for FigCraft refer to tokens by the same names, so an app overrides tokens and does not rename them.
+**The gate.** The generator measures every pair of roles the elements use, in both themes: text on surface, raised and fill; the edge of a control, 3:1; the accent on surface, fill and its tint; the text on the accent; danger, ok and warn. The pairs and the ratios they owe are in `scripts/color.ts`. A brand role that falls short moves along the ramp, darker in light and lighter in dark, a step at a time, and the generator says how far; a theme that cannot hold is refused, with every pair named, nothing is written, and the build stops. The stock system passes unmoved.
 
 ### Typography
 
@@ -203,7 +228,7 @@ A text style is a W3C `typography` token: font family, size, weight, letter spac
 | `ins.typography.heading` | Archivo | 21 | 600 | 1.17 | a heading within a section (`h3`) |
 | `ins.typography.title` | Fraunces | 29 | 600 | 1.17 | a section's heading (`h2`), a dialog's title |
 | `ins.typography.display` | Fraunces | 47 | 600 | 1.17 | the top heading (`h1`) |
-| `ins.typography.icon` | tabler-icons | 21 | 400 | 1 | an icon |
+| `ins.typography.icon` | insufferable-icons | 21 | 400 | 1 | an icon |
 
 The sizes are quanta, in pixels at the default size: `ins.font.size.xs` to `xxl` are 11, 13, 16, 18, 21 and 29, and `display` is 47. Body keeps 1rem, which is on no ladder: it is the browser's own ground, and the user's setting. The smallest is for a tag and a word under an icon; 18 is for a lead and is read by no style yet. `h4` to `h6` take no style of their own: the body style in bold (600). Code takes `ins.font.family.mono`, the platform's `ui-monospace` then `monospace`, and keeps the size of the text around it: a W3C dimension cannot say "the size around it", so code has a family and no style.
 
@@ -272,12 +297,16 @@ Not built: manual activation, a vertical tab list.
 - **It reads:** `name`, and `aria-label` or `aria-labelledby`. With a label it is an image with that name (`role="img"`); without one it is decoration (`aria-hidden="true"`).
 - **It sends:** nothing.
 - **The stylesheet draws it,** with one rule per shipped icon from its name to its character in the icon font. The build draws that font from SVG at the weight of `ins.border.icon`: an icon's SVG is Tabler's outline, or ours in `icons/` when there is one. The icon draws without script; the script only says what it means, and warns in the console about a name that is not shipped, which draws an empty box.
+- **Its name is a ligature.** The font holds every letter, digit and hyphen the names use as an empty glyph, and the name typed in the font, `home`, draws the icon, under the default script and under Latin. A design tool that reads no stylesheet, Figma or FigCraft, names an icon this way, as Material Symbols are named. The longest names are registered first, so `check-circle` is never read as `check`.
+- **Its font's name** is `insufferable-icons`, and an app's is `<prefix>-icons`, so that an installed font never answers for another's. The build writes it as woff2 for a browser and as TTF to install: see [the icon font's name](#building-an-apps-own-stylesheet).
 - **Its colour** is the text colour around it; its size is the icon style's, 1.25rem.
 - **Its box** is one em square and clips, and sits on the middle of the text around it.
 
 ### The shipped icons
 
-`src/icons.ts` lists the icons insufferable ships, by Tabler's names. The build reads each one's character from Tabler's own stylesheet, fails on a name Tabler does not have, subsets Tabler's font to those characters alone with `subset-font` (HarfBuzz, as WebAssembly), and writes the rules. Ten icons make a font of 1.8 KB; the whole font is 495 KB. To ship an icon, add its name to the list. The list also exports the type `IconName`.
+`src/icons.ts` lists the icons insufferable ships, by name. A name Tabler has takes Tabler's outline SVG and Tabler's own character, read from Tabler's stylesheet, since our stylesheets name some of those characters; any other name is `icons/<name>.svg`, a stroke drawing on the 24px grid, on a private-use character from U+F0000 on, a plane clear of Tabler's own. The build turns every stroke into one filled outline with [unstroke](https://github.com/tabler/unstroke), Tabler's own converter, writes the glyphs with opentype.js, and the rules. Twenty-eight icons make a font of 4.8 KB. To ship an icon, add its name to the list, and its SVG when it is not Tabler's. The list also exports the type `IconName`. A name is lower case letters and digits with single hyphens between them: what a file, a CSS attribute and a ligature can all carry.
+
+**An app names its own icons** in its config, beside the prefix: `"icons": ["home", "search", "acme-mark"]`. The same rule holds: a Tabler name is Tabler's icon, any other is `icons/<name>.svg` beside the config, and a file of the app's wins over a Tabler icon of the same name. The build draws the font at the app's weight, names it `<prefix>-icons`, and writes the rules under the app's prefix and, in the app's layout, an `icons.js` holding the app's list, so the icon element warns against the app's icons and not ours. Without the list, the app ships ours.
 
 ### Disclosure
 
@@ -999,5 +1028,5 @@ A command is named after the ARIA state it sets, as a verb: `aria-selected` give
 
 ## Open questions
 
-- **Tabler's other cuts.** Tabler ships its icons in stroke weights 200 and 300 and filled, each a font of its own. Only the regular cut ships; the others could be faces of the same family at their weights.
+- **Other icon sets.** The build reads any folder of stroke SVGs on the 24px grid, and the weight is a token, so Tabler's weights are no longer a question. Tabler's filled cut, or another set entirely, would be a folder named in the config in place of Tabler's outlines; nothing asks for it yet.
 - **The house fonts' other axes.** Archivo's width and Fraunces' softness and wonk are not tokens; the W3C typography type has no member for them.

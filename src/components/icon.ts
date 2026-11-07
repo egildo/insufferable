@@ -1,7 +1,8 @@
 /**
- * `<insufferable-icon name="home">`: a glyph of the icon font, Tabler Icons. The name
- * is Tabler's; the stylesheet draws it, so the icon draws without script.
- * The script only says what it means.
+ * `<insufferable-icon name="home">`: a glyph of the icon font. The name is Tabler's,
+ * or one of our own SVGs; the stylesheet draws it, so the icon draws without
+ * script. The script only says what it means, and warns about a name that is
+ * not in `icons.ts`: ours, or the app's own list that its build writes there.
  *
  * Attributes in: `name` picks the icon. `aria-label` or `aria-labelledby` makes
  * it an image with that name. Without one it is decoration, hidden from

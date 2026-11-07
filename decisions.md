@@ -1079,3 +1079,65 @@ Considered and left: the radii (8px and 13px read well on 34px controls), the co
 - **Size back to 21px.** The stopgap of 18px for lighter icons is undone: the weight is now a token of its own.
 - **Checked.** All 25 shipped glyphs drawn beside Tabler's own at 48px, in the built-in browser: same shapes, same place, thinner. Tests: the font builds at two weights and differs, and a name with no SVG fails by name. Not checked: other weights beyond 1.25 and 2 in the browser; Firefox and Safari; the FigCraft library (its sync is broken against figcraft-cli 0.14.0, and its Icon glyphs would need a re-sync, since the font changed).
 - **Found on the way:** Tabler ships its own 200 and 300 weight fonts (`tabler-icons-200`, `-300`). They would have given two fixed lighter weights for no build; the SVG route gives any weight and our own icons.
+
+## An app's own icons, and the icon's name as a ligature
+
+> **Ruled 7 November 2026:** "icons, prior art?" then go, with "make sure to use ligatures for icon names so they work in Figma."
+
+- **Prior art, checked.** The font side is the fontello chain, `svgicons2svgfont`, `svg2ttf`, `ttf2woff2`, which fantasticon wraps; all take fills only. The stroke side is the gap every set hits: Tabler wrote [unstroke](https://github.com/tabler/unstroke) for it, a geometric stroke-to-fill with a true union on clipper-lib, and its own webfont build runs it at three weights over the whole set, then the fontello chain. `oslllo-svg-fixer` traces a raster; Inkscape and FontForge do it right but are an application. Nothing left to invent, so no tool of our own and no new repository.
+- **Swapped the outliner.** unstroke in place of paper.js and paperjs-offset; opentype.js stays for the font, reading unstroke's single path with `Path.fromSVG`. Checked: all 28 glyphs built both ways and overlaid at 96px in the built-in browser, coincident, a sub-pixel fringe on two circles from the curve fit. The font is 4.8 KB with the ligatures, from 4.1 KB without.
+- **Each name is a ligature.** The font holds every letter, digit and hyphen the names use as an empty, zero-width glyph, and a `liga` substitution from the name to the icon, under `DFLT` and `latn`. Typed in the font, `home` is the house: a design tool that reads no stylesheet names the icon that way, as Material Symbols are named. Longest names are registered first, since opentype.js keeps the ligature sets in the order given and a shaper takes the first match; a single-letter name, `x`, is a ligature of one component, which HarfBuzz applies as a plain substitution. Checked in the built-in browser: `home`, `arrow-back-up`, `x` and a sentence of names draw as glyphs, and `homer` is the house and nothing. Tested: `check` against `checkbox`, and a zero-width letter. opentype.js's own shaper breaks a word at a hyphen, so the hyphenated names are the browser's check, not the test's. Not checked: Figma and FigCraft themselves.
+- **An app names its icons in its resolver,** `"icons": [...]` in the `dev.insufferable` extension beside the prefix, the one place an app already configures the build. A Tabler name takes Tabler's SVG and character; any other is `icons/<name>.svg` beside the resolver. The build then writes the element scripts beside the stylesheet, as the prefix already does, and among them an `icons.js` holding the app's list, so the icon element warns against the right icons. `examples/app` ships a `quince-mark` of its own, in its heading.
+- **Own icons move to plane 15.** A non-Tabler icon took the next character from U+F000; Tabler's own characters fill the basic plane's private area and run on past U+10000, so ours start at U+F0000, which Tabler will not reach.
+- **A name is `[a-z0-9]+(-[a-z0-9]+)*`:** what a file name, a CSS attribute selector and a ligature can all carry. The build refuses another, by name.
+- **The FigCraft sync, mended the same evening** by a session on Opus: `@toghen/figma` sent `node.get` a `depth` it never honoured and that figcraft-cli (0.15.1 installed, not 0.14.0) now refuses. Fixed in the neighbour, `cli/figcraft.ts`, its fake made as strict as the real one, 1569 tests pass; insufferable reaches the fix through a `pnpm link` for now, so `pnpm-workspace.yaml` and the lockfile's `@toghen/figma` lines are not to be committed: the lasting fix is a published 0.1.16. The library is re-synced, 28 icons in the Icon set. The ligature holds in FigCraft with our font loaded: `home` is the house, `homer` and `a home b` only the house. With this Mac's installed Tabler font, of the same family name, `home` is the word: a layer stores the character, and the stock font wins. The build writes only woff2; a TTF was cut for the test. Figma itself unchecked.
+- **Not done:** another icon set in place of Tabler's outlines, Tabler's filled cut among them, which would be a folder named in the resolver.
+
+## An app's wiring, from one config
+
+> **Ruled 7 November 2026:** "What is most important is to make this usable in other projects: plan what we need to render the tokens wiring very robust and straightforward." Planned with Spec Kit as the feature in `specs/001-app-wiring`.
+
+Until now an app wrote a W3C resolver by hand, about forty-five lines that mirrored the system's internals: the paths of its token files inside `node_modules`, its name, its theme modifier with both contexts and Toghen's `lightDark`, the generated theme's files in the right slots. It ran two commands, `theme` and `build`, and found the element scripts in one of two places, depending on whether it had chosen a prefix or its own icons.
+
+### The proposal, five moves
+
+1. **One config and no resolver.** An app names its choices in `insufferable.config.json`, and the build composes the resolver. `theme` is no longer a command: the build generates the theme.
+2. **One layout, always.** Stylesheet, fonts, element and helper scripts with their types, the list of icons, beside the config, prefix or no prefix.
+3. **Fail loud, by name.** Every mistake stops the build and says which key, value, file or token path.
+4. **Publish.** To npm, under the name `insufferable`, which is free, at version 0.1.0. The author publishes; the work prepares.
+5. **Later,** and not in this feature: the app's own FigCraft library, and an app's own stylesheets through the build's PostCSS pass. The config has room for a `sheets` key and does not accept one yet.
+
+### The Toghen finding
+
+`@toghen/lib`'s guide, under its overlays, gives two limits that come from the standard. An overlay cannot add a source inside a borrowed modifier's context, and only named sets and modifiers can be borrowed. So an app that changes a role in a scheme must redeclare the whole theme modifier, which is the boilerplate this feature removes. The standard's `$extends` is listed as future work in the lib's specs. The wiring therefore belongs in insufferable's own command.
+
+### What was considered
+
+- **Where the composing goes.** In our command, writing a plain resolver beside the output. Composing in memory and writing nothing was rejected: the FigCraft sync and any Toghen tool need the file, and a written document can be read by a person. An extension of Toghen's own was rejected: `$extends` is coming to the standard's own lib.
+- **How an app's override is arranged.** Its files form a set of their own, `app`, after the base set. Measured against `@toghen/lib` with the example's old resolver: a later source in the same set does win, but `load` reports every such pair under `collisions`, and the generated palette repeated the system's whole. A set of its own is Toghen's overlay pattern and reports nothing. A modifier's context has no such split, so the partial files stay in the context, in order, and their collisions are only information. Merging a context's files into one generated file per scheme was rejected: a second generated thing for no behaviour.
+- **Which token paths an app may define.** A path under `ins` must exist in the system; any other is the app's. A JSON Schema of every token was rejected: it would be generated from the tokens and say nothing the loader does not already know.
+- **Generating the theme on every build,** with no hash to skip it: the generator is deterministic, a palette takes well under a second, and a refused theme stopping the build is the behaviour wanted.
+- **The icon font's name follows the prefix.** Found the same day: Tabler's stock font, installed under the family `tabler-icons`, won over ours in FigCraft. One fixed name, `insufferable-icons`, for every app was rejected: two apps would still clash. The generated resolver sets the token in the `app` set, inline, so FigCraft reads the same name.
+- **A TTF beside the woff2.** A browser wants woff2; macOS and the design tools install a TTF. The check of the ligature in FigCraft had needed one cut by hand.
+- **One layout.** Never copying, and rewriting the prefix at run time, was rejected: the stylesheet is static and must name the elements.
+- **Publication.** A git URL install was rejected: pnpm refuses to build a git dependency without an allow line, as Toghen's own guide documents, and a registry package builds nothing on install.
+
+### What changed
+
+Five sessions worked at once in one checkout, each on its own files, meeting at the signatures in the feature's contracts.
+
+- **Config and composition.** `scripts/config.mjs` is new: it reads and checks the config, composes and writes the resolver, and runs the whole build. `scripts/cli.mjs` takes `build [config]` and `init [dir]`, and has lost `theme`. `generateTheme` takes the theme object as well as a path.
+- **The layout and the font.** `scripts/build.mjs` writes the layout for every app, with the types and the TTF, and stops when the icon token and the prefix disagree. `scripts/icons.mjs` takes the family as a parameter. The token `ins.font.family.icon` is `insufferable-icons`, and the face in the stylesheet follows it.
+- **The package.** The export map names every element, helper and the stylesheet, with a test that fails when a script has no export. The version is 0.1.0, the schema ships as `contracts/config.schema.json`, and the package builds itself when packed. The `pnpm link` to `@toghen/figma` is not removed: the author first publishes 0.1.16 there.
+- **The checks and the starter.** `scripts/check.mjs` holds the check on token paths, `scripts/init.mjs` the starter's config, `icons/` folder and page.
+- **The example and the documents.** `examples/app` is now a config, one token file, one icon and a page; its resolver and its theme config are gone. `guide.md` and `specs.md` describe the config, the layout, the checks and the font's name, and `CLAUDE.md` the commands. `.gitignore` lists the generated resolver and the helpers' types beside the other outputs of the example.
+
+These rulings replace, for what an app does, the earlier ones here that name its icons and prefix in its resolver, the `theme` command, and a build that writes only woff2. An app's own resolver remains as the way out, with `resolver` in the config.
+
+### Checked
+
+By the integration pass, the same evening. `pnpm build`, `pnpm typecheck` and `pnpm test` pass, 76 tests, up from 42. The example app builds from its config: the generated resolver, `theme/`, the stylesheet naming `quince-icons` and never `tabler-icons`, `fonts/quince-icons.woff2` and `.ttf`, every element and helper with its types, `icons.js` with the six names; its page in the built-in browser is the Quince notebook as before, quince mark in the heading, no console message. Each mistake of the spec stops the build with its name: the unknown key with the accepted keys, the missing file with its resolved path, the capitalised prefix and the icon name with a space with their rules, `ins.radius.3` with its file and the rule, `resolver` beside `theme`; `acme.card.padding` builds and is a custom property. The package packs at 1.2 MB, 219 files, none from `examples/`, `dev/`, `specs/`, `test/` or `figcraft/`; installed from the tarball into an empty folder, `npx insufferable init` then `npx insufferable build` write the starter and its layout, `app-icons.woff2` and `.ttf` among them, and the page draws: a serif heading, a solid button in the brand, a tabs element, in the dark scheme.
+
+### Not checked
+
+Figma itself; the TTF installed and typed in FigCraft for an app's font (the system's own was checked earlier in the day); the publish, which is the author's; the `@toghen/figma` link's removal, which waits on 0.1.16; the light scheme of the starter page; Firefox and Safari.

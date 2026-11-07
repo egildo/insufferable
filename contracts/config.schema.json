@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://insufferable.dev/config.schema.json",
+  "title": "insufferable.config.json",
+  "description": "An app's choices for insufferable build. Every path is relative to this file's folder.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "prefix": { "type": "string", "pattern": "^[a-z][a-z0-9]*$", "description": "The prefix of the elements: quince-tabs for insufferable-tabs. Lower case letters and digits, starting with a letter." },
+    "icons": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }, "description": "The icons the app ships, by name: Tabler's, or icons/<name>.svg beside this file." },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["brand", "neutral"],
+      "properties": {
+        "brand": { "type": "object", "additionalProperties": false, "required": ["hue"], "properties": { "hue": { "type": "number" }, "lock": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" } } },
+        "neutral": { "type": "object", "additionalProperties": false, "required": ["hue", "chroma"], "properties": { "hue": { "type": "number" }, "chroma": { "type": "number" } } },
+        "fonts": { "type": "object", "additionalProperties": false, "properties": { "sans": { "type": "string" }, "serif": { "type": "string" }, "mono": { "type": "string" } } }
+      },
+      "description": "A theme generated from a brand hue, a neutral and the fonts, under the contrast gate."
+    },
+    "tokens": { "type": "array", "items": { "type": "string" }, "description": "Token files of the app's own, which win over the system's." },
+    "light": { "type": "array", "items": { "type": "string" }, "description": "Partial role files for the light scheme." },
+    "dark": { "type": "array", "items": { "type": "string" }, "description": "Partial role files for the dark scheme." },
+    "resolver": { "type": "string", "description": "An app's own resolver document, used as it is. Only out may accompany it." },
+    "out": { "type": "string", "description": "Where the stylesheet, fonts and scripts are written. This file's folder by default." }
+  },
+  "dependentSchemas": {
+    "resolver": {
+      "properties": { "prefix": false, "icons": false, "theme": false, "tokens": false, "light": false, "dark": false }
+    }
+  }
+}

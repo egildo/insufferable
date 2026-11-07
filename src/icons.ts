@@ -1,7 +1,8 @@
 /**
- * The icons insufferable ships: Tabler Icons' own names (https://tabler.io/icons).
- * The build subsets the icon font to these alone and writes one rule for each,
- * so a name missing here draws nothing. Add a name here to ship its icon.
+ * The icons insufferable ships, by name: Tabler Icons' own (https://tabler.io/icons), or an SVG of ours in
+ * `icons/`. The build draws the icon font from these alone and writes one rule for each, so a name missing here
+ * draws nothing. Add a name here to ship its icon, and its SVG when it is not Tabler's. An app's own build may
+ * replace this list from its resolver; the build then writes the app's `icons.js` beside its scripts.
  */
 export const icons = [
   'adjustments-horizontal',

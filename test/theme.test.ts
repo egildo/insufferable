@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
@@ -34,4 +34,10 @@ test('the generator writes a theme that holds its contrast, and moves a brand ro
   assert.deepEqual(generateTheme(config({ hue: 250, lock: '#0a6fb8' })).moved, []);
   assert.ok(generateTheme(config({ hue: 95, lock: '#ffe066' })).moved.some((line) => line.startsWith('light')));
   assert.ok(generateTheme(config({ hue: 38, lock: '#9a3d12' })).moved.length > 0);
+});
+
+test('the generator takes the theme object as well as a path, and writes the four files into the folder it is given', () => {
+  const out = join(mkdtempSync(join(tmpdir(), 'ins-test-')), 'theme');
+  assert.deepEqual(generateTheme({ brand: { hue: 250, lock: '#0a6fb8' }, neutral: { hue: 80, chroma: 0.005 } }, out), { out, moved: [] });
+  for (const file of ['palette', 'fonts', 'light', 'dark']) assert.ok(existsSync(join(out, `${file}.tokens.json`)), file);
 });

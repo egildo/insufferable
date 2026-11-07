@@ -1,30 +1,122 @@
 {
   "name": "insufferable",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
   "description": "A lean design system of UI elements: W3C tokens resolved by Toghen, ARIA states as selectors, Invoker commands out",
   "type": "module",
   "exports": {
+    "./styles.css": "./dist/insufferable.css",
     "./resolver.json": "./tokens/insufferable.resolver.json",
     "./tokens/*": "./tokens/*",
-    "./styles.css": "./dist/insufferable.css",
-    "./commands.js": "./dist/commands.js",
-    "./tabs.js": "./dist/components/tabs.js",
-    "./icon.js": "./dist/components/icon.js",
-    "./menu.js": "./dist/components/menu.js",
-    "./toolbar.js": "./dist/components/toolbar.js",
-    "./tree.js": "./dist/components/tree.js",
-    "./splitter.js": "./dist/components/splitter.js",
-    "./shell.js": "./dist/components/shell.js"
+    "./config.schema.json": "./contracts/config.schema.json",
+    "./color.js": {
+      "types": "./dist/color.d.ts",
+      "default": "./dist/color.js"
+    },
+    "./commands.js": {
+      "types": "./dist/commands.d.ts",
+      "default": "./dist/commands.js"
+    },
+    "./dates.js": {
+      "types": "./dist/dates.d.ts",
+      "default": "./dist/dates.js"
+    },
+    "./elements.js": {
+      "types": "./dist/elements.d.ts",
+      "default": "./dist/elements.js"
+    },
+    "./icons.js": {
+      "types": "./dist/icons.d.ts",
+      "default": "./dist/icons.js"
+    },
+    "./keys.js": {
+      "types": "./dist/keys.d.ts",
+      "default": "./dist/keys.js"
+    },
+    "./components/calendar.js": {
+      "types": "./dist/components/calendar.d.ts",
+      "default": "./dist/components/calendar.js"
+    },
+    "./components/combobox.js": {
+      "types": "./dist/components/combobox.d.ts",
+      "default": "./dist/components/combobox.js"
+    },
+    "./components/icon.js": {
+      "types": "./dist/components/icon.d.ts",
+      "default": "./dist/components/icon.js"
+    },
+    "./components/menu.js": {
+      "types": "./dist/components/menu.d.ts",
+      "default": "./dist/components/menu.js"
+    },
+    "./components/shell.js": {
+      "types": "./dist/components/shell.d.ts",
+      "default": "./dist/components/shell.js"
+    },
+    "./components/splitter.js": {
+      "types": "./dist/components/splitter.d.ts",
+      "default": "./dist/components/splitter.js"
+    },
+    "./components/table.js": {
+      "types": "./dist/components/table.d.ts",
+      "default": "./dist/components/table.js"
+    },
+    "./components/tabs.js": {
+      "types": "./dist/components/tabs.d.ts",
+      "default": "./dist/components/tabs.js"
+    },
+    "./components/toolbar.js": {
+      "types": "./dist/components/toolbar.d.ts",
+      "default": "./dist/components/toolbar.js"
+    },
+    "./components/tooltip.js": {
+      "types": "./dist/components/tooltip.d.ts",
+      "default": "./dist/components/tooltip.js"
+    },
+    "./components/tree.js": {
+      "types": "./dist/components/tree.d.ts",
+      "default": "./dist/components/tree.js"
+    },
+    "./icon.js": {
+      "types": "./dist/components/icon.d.ts",
+      "default": "./dist/components/icon.js"
+    },
+    "./menu.js": {
+      "types": "./dist/components/menu.d.ts",
+      "default": "./dist/components/menu.js"
+    },
+    "./shell.js": {
+      "types": "./dist/components/shell.d.ts",
+      "default": "./dist/components/shell.js"
+    },
+    "./splitter.js": {
+      "types": "./dist/components/splitter.d.ts",
+      "default": "./dist/components/splitter.js"
+    },
+    "./tabs.js": {
+      "types": "./dist/components/tabs.d.ts",
+      "default": "./dist/components/tabs.js"
+    },
+    "./toolbar.js": {
+      "types": "./dist/components/toolbar.d.ts",
+      "default": "./dist/components/toolbar.js"
+    },
+    "./tree.js": {
+      "types": "./dist/components/tree.d.ts",
+      "default": "./dist/components/tree.js"
+    }
   },
   "files": [
     "tokens/",
     "dist/",
     "src/",
     "icons/",
+    "contracts/config.schema.json",
     "scripts/build.mjs",
-    "scripts/icons.mjs",
+    "scripts/check.mjs",
     "scripts/cli.mjs",
+    "scripts/config.mjs",
+    "scripts/icons.mjs",
+    "scripts/init.mjs",
     "scripts/theme.mjs"
   ],
   "scripts": {
@@ -33,7 +125,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test 'test/**/*.test.ts'",
     "figcraft": "node scripts/figcraft.mjs",
-    "prepack": "pnpm build"
+    "prepack": "rm -rf dist && pnpm build"
   },
   "license": "MIT",
   "author": "Egildo Tagliareni <egildo@tagliareni.it>",
@@ -55,12 +147,11 @@
     "@toghen/postcss": "^0.1.1",
     "gosfuig": "^0.2.0",
     "opentype.js": "^2.0.0",
-    "paper": "^0.17.0",
-    "paperjs-offset": "^2.2.2",
     "postcss": "^8.5.32",
-    "ttf2woff2": "^8.0.1"
+    "ttf2woff2": "^8.0.1",
+    "unstroke": "^1.0.0"
   },
   "bin": {
-    "insufferable": "./scripts/cli.mjs"
+    "insufferable": "scripts/cli.mjs"
   }
 }

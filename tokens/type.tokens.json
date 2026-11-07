@@ -21,9 +21,9 @@
         },
         "icon": {
           "$value": [
-            "tabler-icons"
+            "insufferable-icons"
           ],
-          "$description": "The icon font: Tabler Icons, subset by the build to the icons in src/icons.ts"
+          "$description": "The icon font, drawn by the build from the SVGs of the icons in src/icons.ts and named after the prefix: an app's font is <prefix>-icons, and its resolver sets this token to that name"
         },
         "mono": {
           "$value": [

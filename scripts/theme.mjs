@@ -1,8 +1,7 @@
 /**
  * The theme generator. From a small config, a brand hue, the neutrals' warmth and the fonts, it writes the token
  * files an app's resolver lists after the system's own: a palette, the roles that name the brand, and the fonts.
- *
- *   insufferable theme <theme.config.json> [--out <dir>]
+ * `insufferable build` runs it from the `theme` key of an app's config; see `config.mjs`.
  *
  * The palette is gosfuig's, the system's own families with the neutral's hue and chroma changed and a `brand`
  * family added. The roles are not a second table: they are the system's own theme files with every reference to
@@ -65,8 +64,9 @@ function resolveRoles(file, palette) {
   return roles;
 }
 
-export function generateTheme(configPath, out = resolve(dirname(configPath), 'theme')) {
-  const config = read(configPath);
+/** Writes the theme into `out`. The config is the theme object itself, or the path of a file holding it. */
+export function generateTheme(configOrPath, out = resolve(dirname(configOrPath), 'theme')) {
+  const config = typeof configOrPath === 'string' ? read(configOrPath) : configOrPath;
   const work = mkdtempSync(resolve(tmpdir(), 'insufferable-theme-'));
   try {
     write(resolve(work, 'palette.config.json'), paletteConfig(config));
@@ -131,15 +131,4 @@ export function generateTheme(configPath, out = resolve(dirname(configPath), 'th
   } finally {
     rmSync(work, { recursive: true, force: true });
   }
-}
-
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const [config, ...rest] = process.argv.slice(2);
-  if (!config) {
-    console.error('usage: insufferable theme <theme.config.json> [--out <dir>]');
-    process.exit(2);
-  }
-  const flag = rest.indexOf('--out');
-  const { out, moved } = generateTheme(resolve(config), flag >= 0 ? resolve(rest[flag + 1]) : undefined);
-  console.log([`Wrote the theme into ${out}`, ...moved].join('\n'));
 }

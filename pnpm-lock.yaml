@@ -35,18 +35,15 @@ importers:
       opentype.js:
         specifier: ^2.0.0
         version: 2.0.0
-      paper:
-        specifier: ^0.17.0
-        version: 0.17.0
-      paperjs-offset:
-        specifier: ^2.2.2
-        version: 2.2.2
       postcss:
         specifier: ^8.5.32
         version: 8.5.32
       ttf2woff2:
         specifier: ^8.0.1
         version: 8.0.1
+      unstroke:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@toghen/figma':
         specifier: ^0.1.15
@@ -463,6 +460,9 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
+  clipper-lib@6.4.2:
+    resolution: {integrity: sha512-knglhjQX5ihNj/XCIs6zCHrTemdvHY3LPZP9XB2nq2/3igyYMFueFXtfp84baJvEE+f8pO1ZS4UVeEgmLnAprQ==}
+
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
@@ -689,13 +689,6 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
-  paper@0.17.0:
-    resolution: {integrity: sha512-AWHQVUNScPN/swbCg0wwb2bTerMieraol76Fpn1s+7Zw7R6mMyI0QltMkj/XOS3Jv+9785q0p4eLsYggn63ZQw==}
-    engines: {node: '>=8.0.0'}
-
-  paperjs-offset@2.2.2:
-    resolution: {integrity: sha512-GCiPvZ83eKXqNM+RAOpg1wZiCPBw5FWEOIDs6fNGEVPWSiWULsWWzPeN1IT/BaQ9FkdsOqNWtbPWaiWLHTX2yg==}
-
   path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
@@ -824,6 +817,16 @@ packages:
     resolution: {integrity: sha512-9OdaqO5kwqR+1kVgHAhsp5vPNU0hnxRa26rBFNfNgM7M6pNtgzeBn3s/xbyCQL3dcjzOatcef6UUHpB/6MaETg==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
+  unstroke@1.0.0:
+    resolution: {integrity: sha512-qBzoukEUyCIxERdOeUhZFYu2Zui5I561MUDiyfhp6n8A2vkmzc9AmhWnOxKZC1AaiuaUeEmQhZV6+srKsDxHEg==}
+    engines: {node: '>=20'}
+    hasBin: true
+    peerDependencies:
+      svgo: ^4.0.0
+    peerDependenciesMeta:
+      svgo:
+        optional: true
+
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
@@ -845,8 +848,8 @@ packages:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
     engines: {node: '>=12'}
 
-  ws@8.22.0:
-    resolution: {integrity: sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg==}
+  ws@8.22.1:
+    resolution: {integrity: sha512-oyL6OPYme/CmiFvNuGzeoxCJ4nOrZE2O1FwM9MWM1AsGri6nLXB2pg+lNA8aLeXMSav0J6eIVS1j6vUPzUtK9g==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -1022,7 +1025,7 @@ snapshots:
       kdlet: 0.1.1
       kdlet-guards: 0.1.1
       tsx: 4.23.15
-      ws: 8.22.0
+      ws: 8.22.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -1146,6 +1149,8 @@ snapshots:
       unique-filename: 4.0.0
 
   chownr@3.0.0: {}
+
+  clipper-lib@6.4.2: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -1392,10 +1397,6 @@ snapshots:
 
   package-json-from-dist@1.0.1: {}
 
-  paper@0.17.0: {}
-
-  paperjs-offset@2.2.2: {}
-
   path-key@3.1.1: {}
 
   path-scurry@1.11.1:
@@ -1549,6 +1550,10 @@ snapshots:
     dependencies:
       imurmurhash: 0.1.4
 
+  unstroke@1.0.0:
+    dependencies:
+      clipper-lib: 6.4.2
+
   util-deprecate@1.0.2: {}
 
   which@2.0.2:
@@ -1571,7 +1576,7 @@ snapshots:
       string-width: 5.1.2
       strip-ansi: 7.2.0
 
-  ws@8.22.0: {}
+  ws@8.22.1: {}
 
   yallist@4.0.0: {}
 

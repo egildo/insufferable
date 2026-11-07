@@ -1,9 +1,11 @@
 /*
- * icon: `<insufferable-icon name="…">`, drawn from Tabler Icons' font. The build
- * subsets the font to the icons in `src/icons.ts` and writes, in place of the
- * marker below, the face and one rule per icon, from the icon's name to its
- * character. A box that clips takes its bottom edge as its baseline, so the
- * icon is set on the middle of the text around it.
+ * icon: `<insufferable-icon name="…">`, drawn from the icon font. The build
+ * draws the font from the SVGs of the icons in `src/icons.ts`, or an app's own
+ * list, and writes, in place of the marker below, the face and one rule per
+ * icon, from the icon's name to its character. The face is named after the
+ * prefix, as the `ins.font.family.icon` token is, so this file names no family.
+ * A box that clips takes its bottom edge as its baseline, so the icon is set on
+ * the middle of the text around it.
  */
 
 /*ICONS*/
