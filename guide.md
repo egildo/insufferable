@@ -97,6 +97,7 @@ The build writes `acme-tabs` into the stylesheet and into the scripts in `compon
 
 - **Any role or primitive** by its token: the colours under `ins.color`, `ins.space`, `ins.radius`, `ins.size`, `ins.font`, `ins.shadow`.
 - **The ladder.** Every dimension is cut from `ins.quanta`, the Fibonacci and Lucas numbers in rem. Change what a role names, not the numbers.
+- **The weight of the icons,** `ins.border.icon`, the stroke on their 24px grid (1.5 by default). The build draws the icon font from the icons' SVGs at that weight, so an app's own build gets the weight it chose.
 - **The prefix of the elements.**
 
 What you should keep: a role with its companions (the accent with its strong, deep and tint, and the text on it), since they are named apart so that each pair can be measured, and the names of tokens, for the FigCraft files.

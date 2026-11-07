@@ -271,7 +271,7 @@ Not built: manual activation, a vertical tab list.
 
 - **It reads:** `name`, and `aria-label` or `aria-labelledby`. With a label it is an image with that name (`role="img"`); without one it is decoration (`aria-hidden="true"`).
 - **It sends:** nothing.
-- **The stylesheet draws it,** with one rule per shipped icon from its name to its character in Tabler's font. The icon draws without script; the script only says what it means, and warns in the console about a name that is not shipped, which draws an empty box.
+- **The stylesheet draws it,** with one rule per shipped icon from its name to its character in the icon font. The build draws that font from SVG at the weight of `ins.border.icon`: an icon's SVG is Tabler's outline, or ours in `icons/` when there is one. The icon draws without script; the script only says what it means, and warns in the console about a name that is not shipped, which draws an empty box.
 - **Its colour** is the text colour around it; its size is the icon style's, 1.25rem.
 - **Its box** is one em square and clips, and sits on the middle of the text around it.
 

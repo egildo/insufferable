@@ -209,6 +209,13 @@
           "unit": "px"
         },
         "$description": "An outline drawn outside its element, clear of its edge"
+      },
+      "icon": {
+        "$value": {
+          "value": 1.5,
+          "unit": "px"
+        },
+        "$description": "The stroke of an icon, on its 24px grid: the build draws every glyph of the icon font with it"
       }
     },
     "radius": {

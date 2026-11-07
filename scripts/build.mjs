@@ -9,7 +9,7 @@
  *   node scripts/build.mjs
  */
 
-import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { basename, dirname, join, resolve } from 'node:path';
@@ -18,9 +18,9 @@ import postcssMixins from '@csstools/postcss-mixins';
 import { load, Resolver } from '@toghen/lib';
 import toghenPostcss from '@toghen/postcss';
 import postcss from 'postcss';
-import subsetFont from 'subset-font';
 import { validPrefix, withPrefix } from '../dist/elements.js';
 import { icons } from '../dist/icons.js';
+import { buildIconFont } from './icons.mjs';
 
 /** The folder of an installed package, found as Node finds it, so the build runs from `node_modules` as well as from a checkout. */
 const pkg = (name) => dirname(createRequire(import.meta.url).resolve(`${name}/package.json`));
@@ -58,27 +58,30 @@ const SYSTEM_PREFIX = JSON.parse(readFileSync(at('tokens/insufferable.resolver.j
 
 const TABLER = join(pkg('@tabler/icons-webfont'), 'dist');
 
-/** Each icon in `src/icons.ts` with its character in Tabler's font, as hex, read from Tabler's own stylesheet. */
+/**
+ * Each icon in `src/icons.ts` with its character, as hex. A Tabler icon keeps Tabler's own character, read from
+ * Tabler's own stylesheet, since the stylesheets name some of them; an icon of ours, an SVG in `icons/` that Tabler
+ * does not have, takes the next free private-use character from U+F000 on, in the order of the list.
+ */
 export function iconCharacters() {
   const tabler = readFileSync(at(TABLER, 'tabler-icons.css'), 'utf8');
+  let next = 0xf000;
   return icons.map((name) => {
     const match = tabler.match(new RegExp(`\\.ti-${name}:before\\s*\\{\\s*content:\\s*"\\\\([0-9a-f]+)"`));
-    if (!match) throw new Error(`Tabler has no icon named "${name}" (named in src/icons.ts)`);
-    return { name, code: match[1] };
+    if (match) return { name, code: match[1] };
+    if (!existsSync(at('icons', `${name}.svg`))) throw new Error(`Neither Tabler nor icons/ has an icon named "${name}" (named in src/icons.ts)`);
+    return { name, code: (next++).toString(16) };
   });
 }
 
 /**
- * The icon font, subset to the icons in `src/icons.ts`, and its rules: the face, and one rule per icon from its name
- * to its character, read from Tabler's own stylesheet. A name Tabler does not have fails the build.
+ * The icon font, drawn from the icons' SVGs at the weight of the `ins.border.icon` token and written as woff2, and
+ * its rules: the face, and one rule per icon from its name to its character.
  */
-async function iconFont() {
+function iconFont(system) {
   const characters = iconCharacters();
-  const font = await subsetFont(
-    readFileSync(at(TABLER, 'fonts/tabler-icons.woff2')),
-    characters.map(({ code }) => String.fromCodePoint(Number.parseInt(code, 16))).join(''),
-    { targetFormat: 'woff2' },
-  );
+  const weight = system.collections.get('insufferable').tokens.ins.border.icon.get('light').$value.value;
+  const font = buildIconFont(characters.map(({ name, code }) => ({ name, code: Number.parseInt(code, 16) })), weight);
   const css = [
     `@font-face {\n  font-family: "tabler-icons";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url("./fonts/tabler-icons.woff2") format("woff2");\n}`,
     ...characters.map(({ name, code }) => `${SYSTEM_PREFIX}-icon[name='${name}']::before { content: "\\${code}"; }`),
@@ -111,7 +114,7 @@ function inlineImports(entry) {
 export async function buildCss(resolver) {
   const { system, name, prefix } = await loadSystem(resolver);
   if (name !== 'insufferable') throw new Error(`The resolver is named "${name}": an app's resolver keeps the name "insufferable", which the stylesheet refers to its tokens by.`);
-  const icon = await iconFont();
+  const icon = iconFont(system);
   const input = inlineImports(at('src/index.css'))
     .replace('/*HOUSE_FONTS*/', () => houseFonts().css)
     .replace('/*ICONS*/', () => icon.css);

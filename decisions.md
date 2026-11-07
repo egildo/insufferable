@@ -1067,3 +1067,15 @@ Looked at the demo, the field and the studio pages, and changed what read as cra
 - **A card has more padding.** From the third step to the fourth (21px).
 
 Considered and left: the radii (8px and 13px read well on 34px controls), the control height (34px), and the 13px label size (the ladder has no 14px, and a size off the ladder would break the rule that every size is cut from it). Not checked: the light scheme, and the FigCraft library, since `pnpm figcraft` currently fails against figcraft-cli 0.14.0 ("unknown parameter `depth`" in `node.get`), with or without this change.
+
+## The icon font, built from SVG
+
+> **Ruled 7 November 2026:** "why don't we make a system that stores svg and builds them as iconfont so we do what we want?" Go, on the proposal: SVG sources, a weight token, a build that writes the font.
+
+- **Why.** Tabler's webfont is baked at one stroke weight, so a lighter icon meant a smaller one. Tabler's SVGs are strokes on a 24px grid, and the stroke is free there.
+- **Sources.** `icons/<name>.svg` when the repo has one, otherwise Tabler's outline SVG from `@tabler/icons`. An icon of ours takes a private-use character from U+F000 on; a Tabler icon keeps Tabler's own character, since the stylesheets name some (the tree chevron, the sort marks).
+- **The weight is a token,** `ins.border.icon` (1.5px on the 24px grid, against Tabler's 2). The build reads it from the resolved system, so an app's own build can choose another.
+- **The build** (`scripts/icons.mjs`) offsets every stroke to an outline by half the weight, with round ends and corners as Tabler draws them, unites each icon into one shape, and writes a font on Tabler's own metrics (1000 units to the em, 900 above the baseline) as woff2. It replaces the subset of Tabler's font. New dependencies: paper and paperjs-offset (the outline), opentype.js (the font), ttf2woff2; `subset-font` goes.
+- **Size back to 21px.** The stopgap of 18px for lighter icons is undone: the weight is now a token of its own.
+- **Checked.** All 25 shipped glyphs drawn beside Tabler's own at 48px, in the built-in browser: same shapes, same place, thinner. Tests: the font builds at two weights and differs, and a name with no SVG fails by name. Not checked: other weights beyond 1.25 and 2 in the browser; Firefox and Safari; the FigCraft library (its sync is broken against figcraft-cli 0.14.0, and its Icon glyphs would need a re-sync, since the font changed).
+- **Found on the way:** Tabler ships its own 200 and 300 weight fonts (`tabler-icons-200`, `-300`). They would have given two fixed lighter weights for no build; the SVG route gives any weight and our own icons.
